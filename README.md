@@ -8,7 +8,7 @@
 ## 요구 사항
 1. 다음 테스트코드를 통과하도록 모듈을 작성하시오. [dart coding test](DART_TEST.md) 
 2. 다음 flutter example 을 refactoring 하시오. [flutter_switch example](lib/main.dart)
-3. 위 과제 2종 작성 완료 후, Pull Request 작성 및 링크 첨부하여 담당자 메일(jhsong@rsupport.com)로 회신합니다.
+3. 위 과제 2종 작성 완료 후, Pull Request 작성 및 링크 첨부하여 담당자 메일(recruit@rsupport.com)로 회신합니다.
 4. 질문은 kimss@rsupport.com 으로 메일 보내주십시오.
 
 
@@ -23,4 +23,4 @@
 2. git clone
 3. 작업 완료 후, git push
 4. fork된 github의 Pull Requests 로 이동하여 PR 을 작성합니다.
-5. 생성된 PR 링크를 메일(jhsong@rsupport.com) 에 첨부합니다.
+5. 생성된 PR 링크를 메일(recruit@rsupport.com) 에 첨부합니다.
