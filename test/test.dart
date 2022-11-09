@@ -6,6 +6,35 @@ void main() {
   group('SpaceAge', ageOnPlanetTests);
 }
 
+class SpaceAge{
+  final num yearSec = 31557600; //365.25 지구일
+
+  num age({String planet = '', seconds}){
+    num planetCycle = getPlanetCycle(planet); //행성별 공전주기 가져오기
+    num value = seconds / yearSec / planetCycle;
+    value = double.parse(value.toStringAsFixed(2));
+
+    //print('$seconds초 / $planet / $value 세');
+    return value;
+  }
+
+  //각 행성별 공전주기를 가져옵니다. 지구 기준(1.0)
+  num getPlanetCycle(String planetName){
+    num cycle;
+    switch( planetName ){
+      case 'Mercury': cycle = 0.2408467; break;
+      case 'Venus': cycle = 0.61519726; break;
+      case 'earth': cycle = 1.0; break;
+      case 'Mars': cycle = 1.8808158; break;
+      case 'Jupiter': cycle = 11.862615; break;
+      case 'Saturn': cycle = 29.447498; break;
+      case 'Uranus': cycle = 84.016846; break;
+      case 'Neptune': cycle = 164.79132; break;
+      default: cycle = 1.0; break;
+    }
+    return cycle;
+  }
+}
 void ageOnPlanetTests() {
   test('age on Earth', () {
     expect(spaceAge.age(planet: 'Earth', seconds: 1000000000), equals(31.69));
