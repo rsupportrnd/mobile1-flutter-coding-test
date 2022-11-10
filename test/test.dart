@@ -43,3 +43,38 @@ void ageOnPlanetTests() {
     expect(spaceAge.age(planet: 'Neptune', seconds: 727637162), equals(0.14));
   }, skip: false);
 }
+
+enum Planet { Earth, Mars, Mercury, Venus, Jupiter, Saturn, Uranus, Neptune }
+
+class SpaceAge {
+  static const _earthRevolSeconds = 31557600;
+
+  double age({planet = '', seconds = 0}) {
+    double age =
+        seconds / (getRevolPeriod(Planet.values.byName(planet)) * _earthRevolSeconds);
+    return double.parse(age.toStringAsFixed(2));
+  }
+
+  double getRevolPeriod(Planet planet) {
+    switch (planet) {
+      case Planet.Earth:
+        return 1;
+      case Planet.Mars:
+        return 1.8808158;
+      case Planet.Mercury:
+        return 0.2408467;
+      case Planet.Venus:
+        return 0.61519726;
+      case Planet.Jupiter:
+        return 11.862615;
+      case Planet.Saturn:
+        return 29.447498;
+      case Planet.Uranus:
+        return 84.016846;
+      case Planet.Neptune:
+        return 164.79132;
+      default:
+        return 0;
+    }
+  }
+}
