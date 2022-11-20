@@ -1,3 +1,4 @@
+import 'package:rs_flutter_test/planet_age/space_age.dart';
 import 'package:test/test.dart';
 
 final spaceAge = SpaceAge();
@@ -41,5 +42,9 @@ void ageOnPlanetTests() {
 
   test('age on Neptune', () {
     expect(spaceAge.age(planet: 'Neptune', seconds: 727637162), equals(0.14));
+  }, skip: false);
+
+  test('age on 아무거나', () {
+    expect(spaceAge.age(planet: '행성', seconds: 727637162), isNot(equals(0.14)));
   }, skip: false);
 }
