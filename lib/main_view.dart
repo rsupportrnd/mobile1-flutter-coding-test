@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:rs_flutter_test/util/images.dart';
 import 'package:rs_flutter_test/util/r_color.dart';
 
 Widget titleView(String title, {String? secondTitle}) {
@@ -28,11 +29,12 @@ Widget buttonValueView(bool value) {
   );
 }
 
-Widget defaultView(bool switchValue, Function(bool) callback) {
+Widget defaultView(
+    String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Default"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -48,11 +50,12 @@ Widget defaultView(bool switchValue, Function(bool) callback) {
   );
 }
 
-Widget customColorBorderView(bool switchValue, Function(bool) callback) {
+Widget customColorBorderView(
+    String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Custom Colors and Borders"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -84,11 +87,12 @@ Widget customColorBorderView(bool switchValue, Function(bool) callback) {
   );
 }
 
-Widget customTextColorView(bool switchValue, Function(bool) callback) {
+Widget customTextColorView(
+    String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("With 'On' and 'Off' text and custom text colors"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -106,11 +110,11 @@ Widget customTextColorView(bool switchValue, Function(bool) callback) {
   );
 }
 
-Widget customSizeView(bool switchValue, Function(bool) callback) {
+Widget customSizeView(String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Custom size"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -131,11 +135,11 @@ Widget customSizeView(bool switchValue, Function(bool) callback) {
 }
 
 Widget customBorderRadiusPaddingView(
-    bool switchValue, Function(bool) callback) {
+    String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Custom border radius and padding"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -158,11 +162,11 @@ Widget customBorderRadiusPaddingView(
   );
 }
 
-Widget customTextView(bool switchValue, Function(bool) callback) {
+Widget customTextView(String title, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Custom text"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -184,13 +188,12 @@ Widget customTextView(bool switchValue, Function(bool) callback) {
   );
 }
 
-Widget iconToggleButtonView(bool switchValue, Function(bool) callback) {
-  debugPrint(">> iconToggleButtonView : $switchValue");
+Widget iconToggleButtonView(
+    String title, String subTitle, bool switchValue, Function(bool) callback) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Icon in toggle",
-          secondTitle: "Inspired by the colors from Github Dark Mode switch"),
+      titleView(title, secondTitle: subTitle),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -231,11 +234,15 @@ Widget iconToggleButtonView(bool switchValue, Function(bool) callback) {
   );
 }
 
-Widget iconToggleImageButtonView(bool switchValue, Function(bool) callback) {
+Widget iconToggleImageButtonView(String title, bool switchValue,
+    String activeIconUrl, String inActiveIconUrl, Function(bool) callback) {
+  var activeIcon = imageIcon(activeIconUrl);
+  var inActiveIcon = imageIcon(inActiveIconUrl);
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      titleView("Image as toggle icon"),
+      titleView(title),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -258,17 +265,22 @@ Widget iconToggleImageButtonView(bool switchValue, Function(bool) callback) {
             ),
             activeColor: RsupportColor.blue_07,
             inactiveColor: RsupportColor.blue_08,
-            activeIcon: Image.network(
-              "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
-            ),
-            inactiveIcon: Image.network(
-              "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
-            ),
+            activeIcon: activeIcon,
+            inactiveIcon: inActiveIcon,
             onToggle: callback,
           ),
           buttonValueView(switchValue)
         ],
       ),
     ],
+  );
+}
+
+Widget imageIcon(String path) {
+  return Image.network(
+    path,
+    errorBuilder: (context, exception, stackTrace) {
+      return Image.asset(Images.flutterIcon);
+    },
   );
 }

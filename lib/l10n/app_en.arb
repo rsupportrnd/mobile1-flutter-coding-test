@@ -1,0 +1,16 @@
+{
+  "language": "English",
+  "@language": {
+    "description": "The current Language"
+  },
+  "title" : "FlutterSwitch Demo",
+  "defaultTitle": "Default",
+  "customTitle01":"Custom Colors and Borders",
+  "customTitle02":"With 'On' and 'Off' text and custom text colors",
+  "customTitle03":"Custom size",
+  "customTitle04" : "Custom border radius and padding",
+  "customTitle05" : "Custom text",
+  "customToggleTitle01" : "Icon in toggle",
+  "customToggleTitle01Sub" : "Inspired by the colors from Github Dark Mode switch",
+  "customToggleTitle02" :"Image as toggle icon"
+}
