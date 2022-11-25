@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class RsupportColor {
@@ -13,6 +11,14 @@ class RsupportColor {
   static Color white_02 = const Color.fromRGBO(225, 225, 225, 1);
   static Color white_03 = const Color(0xFFD1D5DA);
 
+  static Color dartThemeText = white_01;
+  static Color dartThemeAppBar = black_02;
+  static Color dartThemeBg = black_04;
+
+  static Color lightThemeText = black_01;
+  static Color lightThemeAppBar = black_03;
+  static Color lightThemeBg = white_01;
+
   static Color purple_01 = const Color(0xFF6E40C9);
   static Color purple_02 = const Color(0xFF3C1E70);
   static Color purple_03 = const Color(0xFF271052);
@@ -20,8 +26,6 @@ class RsupportColor {
   static Color yellow_01 = const Color(0xFFFFDF5D);
   static Color yellow_02 = const Color(0xFFF8E3A1);
 
-
-  
   static Color blue_01 = const Color.fromRGBO(2, 107, 206, 1);
   static Color blue_02 = const Color.fromRGBO(51, 226, 255, 1);
   static Color blue_03 = const Color(0xFF2F363D);

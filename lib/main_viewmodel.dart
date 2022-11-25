@@ -3,7 +3,7 @@ import 'package:rs_flutter_test/util/r_color.dart';
 
 class MainViewModel with ChangeNotifier {
   bool _status1 = false;
-  bool _status2 = true;
+  bool _status2 = false;
   bool _status3 = false;
   bool _status4 = false;
   bool _status5 = false;
@@ -11,6 +11,7 @@ class MainViewModel with ChangeNotifier {
   bool _status7 = false;
   bool _status8 = false;
   bool _isSwitchOn = false;
+
   Color _textColor = RsupportColor.black_01;
   Color _appBarColor = RsupportColor.black_02;
   Color _bgColor = RsupportColor.white_01;
@@ -92,8 +93,8 @@ class MainViewModel with ChangeNotifier {
   }
 
   _changeThemeColor(bool isChecked) {
-    _textColor = isChecked ? RsupportColor.white_01 : RsupportColor.black_01;
-    _appBarColor = isChecked ? RsupportColor.black_02 : RsupportColor.black_03;
-    _bgColor = isChecked ? RsupportColor.black_04 : RsupportColor.white_01;
+    _textColor = isChecked ? RsupportColor.dartThemeText : RsupportColor.lightThemeText;
+    _appBarColor = isChecked ? RsupportColor.dartThemeAppBar : RsupportColor.lightThemeAppBar;
+    _bgColor = isChecked ? RsupportColor.dartThemeBg : RsupportColor.lightThemeBg;
   }
 }
