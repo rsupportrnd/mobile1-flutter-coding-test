@@ -21,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //기본 state
   bool status1 = false;
   bool status2 = true;
   bool status3 = false;
@@ -31,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool status8 = false;
   bool isSwitchOn = false;
 
+  //color default
   Color _textColor = Colors.black;
   Color _appBarColor = Color.fromRGBO(36, 41, 46, 1);
   Color _scaffoldBgcolor = Colors.white;
@@ -71,6 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Text("Default"),
                 SizedBox(height: 10.0),
+
+                //Button1
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -90,9 +94,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20.0),
                 Text("Custom Colors and Borders"),
                 SizedBox(height: 10.0),
+
+                //Button2
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -128,9 +135,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20.0),
                 Text("With 'On' and 'Off' text and custom text colors"),
                 SizedBox(height: 10.0),
+
+                //Button3
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -153,6 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20.0),
                 Text("Custom size"),
                 SizedBox(height: 10.0),
@@ -182,6 +193,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 20.0),
                 Text("Custom border radius and padding"),
                 SizedBox(height: 10.0),
+
+                //Button4
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -211,6 +224,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 20.0),
                 Text("Custom text"),
                 SizedBox(height: 10.0),
+
+                //Button5
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -246,6 +261,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 SizedBox(height: 10.0),
+
+                //Button6
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -298,9 +315,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20.0),
                 Text("Image as toggle icon"),
                 SizedBox(height: 10.0),
+
+                //Button7
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
