@@ -106,31 +106,31 @@ class _CustomSwitchState extends State<CustomSwitch> {
       },
     );
 
-    if (widget.title.isNotEmpty || widget.subTitle.isNotEmpty) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.title.isNotEmpty) Text(widget.title),
-          if (widget.subTitle.isNotEmpty)
-            Text(
-              widget.subTitle,
-              style: const TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic),
-            ),
-          const SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              flutterSwitch,
-              Container(
-                alignment: Alignment.centerRight,
-                child: Text("Value: $status"),
-              ),
-            ],
-          ),
-        ],
-      );
-    } else {
-      return flutterSwitch;
-    }
+    return RepaintBoundary(
+      child: widget.title.isNotEmpty || widget.subTitle.isNotEmpty
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (widget.title.isNotEmpty) Text(widget.title),
+                if (widget.subTitle.isNotEmpty)
+                  Text(
+                    widget.subTitle,
+                    style: const TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic),
+                  ),
+                const SizedBox(height: 10.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    flutterSwitch,
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text("Value: $status"),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          : flutterSwitch,
+    );
   }
 }
