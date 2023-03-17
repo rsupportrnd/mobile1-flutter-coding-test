@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:rs_flutter_test/page/my_home_page.dart';
+import 'package:rs_flutter_test/theme/theme.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() => runApp(const MyApp());
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+  List<bool> switchinitials = [false, true, false, false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: _themeMode,
+      home: MyHomePage(
+        switchinitials: switchinitials,
+        onChangeTheme: (value) => setState(() {
+          _themeMode = value;
+        }),
       ),
-      home: const MyHomePage(),
     );
   }
 }
