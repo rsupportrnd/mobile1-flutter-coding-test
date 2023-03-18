@@ -58,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                //Button1
                 SwitchButton(type: AvatarType.TYPE1),
 
                 SizedBox(height: 20.0),
