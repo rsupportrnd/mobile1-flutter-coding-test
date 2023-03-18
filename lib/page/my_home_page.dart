@@ -22,14 +22,17 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const CustomSwitch(title: "Default", initialStatus: false),
+              CustomSwitch(
+                title: "Default",
+                initialStatus: switchinitials[0],
+              ),
               const SizedBox(height: 20.0),
               CustomSwitch(
                 title: "Custom Colors and Borders",
                 width: 100.0,
                 height: 55.0,
                 toggleSize: 45.0,
-                initialStatus: true,
+                initialStatus: switchinitials[1],
                 borderRadius: 30.0,
                 padding: 2.0,
                 toggleColor: firstToggleColor,
@@ -47,24 +50,24 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 20.0),
               CustomSwitch(
                 title: "With 'On' and 'Off' text and custom text colors",
-                initialStatus: false,
+                initialStatus: switchinitials[2],
                 showOnOff: true,
                 activeTextColor: firstActiveTextColor,
                 inactiveTextColor: firstInactiveTextColor,
               ),
               const SizedBox(height: 20.0),
-              const CustomSwitch(
+              CustomSwitch(
                 title: "Custom size",
-                initialStatus: false,
+                initialStatus: switchinitials[3],
                 width: 55.0,
                 height: 25.0,
                 toggleSize: 18.0,
                 valueFontSize: 12.0,
               ),
               const SizedBox(height: 20.0),
-              const CustomSwitch(
+              CustomSwitch(
                 title: "Custom border radius and padding",
-                initialStatus: false,
+                initialStatus: switchinitials[4],
                 width: 125.0,
                 height: 55.0,
                 valueFontSize: 25.0,
@@ -74,9 +77,9 @@ class MyHomePage extends StatelessWidget {
                 showOnOff: true,
               ),
               const SizedBox(height: 20.0),
-              const CustomSwitch(
+              CustomSwitch(
                 title: "Custom text",
-                initialStatus: false,
+                initialStatus: switchinitials[5],
                 activeText: "All Good. Negative.",
                 inactiveText: "Under Quarantine.",
                 valueFontSize: 10.0,
@@ -88,7 +91,7 @@ class MyHomePage extends StatelessWidget {
               CustomSwitch(
                 title: "Icon in toggle",
                 subTitle: "Inspired by the colors from Github Dark Mode switch",
-                initialStatus: false,
+                initialStatus: switchinitials[6],
                 width: 100.0,
                 height: 55.0,
                 toggleSize: 45.0,
@@ -121,7 +124,7 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 20.0),
               CustomSwitch(
                 title: "Image as toggle icon",
-                initialStatus: false,
+                initialStatus: switchinitials[7],
                 width: 100.0,
                 height: 55.0,
                 toggleSize: 45.0,
