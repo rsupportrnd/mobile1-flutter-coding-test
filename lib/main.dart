@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rs_flutter_test/page/my_home_page.dart';
-import 'package:rs_flutter_test/theme/theme.dart';
+import 'package:rs_flutter_test/styles/theme.dart';
 
 void main() => runApp(const MyApp());
 

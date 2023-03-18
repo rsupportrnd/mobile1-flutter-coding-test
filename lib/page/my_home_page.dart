@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rs_flutter_test/page/local_widget/custom_switch.dart';
-import 'package:rs_flutter_test/theme/colors.dart';
+import 'package:rs_flutter_test/page/local_widget/default_sized_box.dart';
+import 'package:rs_flutter_test/styles/custom_colors.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.onChangeTheme, required this.switchinitials});
 
   final ValueChanged<ThemeMode> onChangeTheme;
   final List<bool> switchinitials;
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text("FlutterSwitch Demo"),
@@ -26,7 +29,7 @@ class MyHomePage extends StatelessWidget {
                 title: "Default",
                 initialStatus: switchinitials[0],
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Custom Colors and Borders",
                 width: 100.0,
@@ -35,27 +38,27 @@ class MyHomePage extends StatelessWidget {
                 initialStatus: switchinitials[1],
                 borderRadius: 30.0,
                 padding: 2.0,
-                toggleColor: firstToggleColor,
+                toggleColor: CustomColors.firstToggleColor,
                 switchBorder: Border.all(
-                  color: firstBorderColor,
+                  color: CustomColors.firstBorderColor,
                   width: 6.0,
                 ),
                 toggleBorder: Border.all(
-                  color: firstBorderColor,
+                  color: CustomColors.firstBorderColor,
                   width: 5.0,
                 ),
-                activeColor: firstActiveColor,
-                inactiveColor: firstInactiveColor,
+                activeColor: CustomColors.firstActiveColor,
+                inactiveColor: CustomColors.firstInactiveColor,
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "With 'On' and 'Off' text and custom text colors",
                 initialStatus: switchinitials[2],
                 showOnOff: true,
-                activeTextColor: firstActiveTextColor,
-                inactiveTextColor: firstInactiveTextColor,
+                activeTextColor: CustomColors.firstActiveTextColor,
+                inactiveTextColor: CustomColors.firstInactiveTextColor,
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Custom size",
                 initialStatus: switchinitials[3],
@@ -64,7 +67,7 @@ class MyHomePage extends StatelessWidget {
                 toggleSize: 18.0,
                 valueFontSize: 12.0,
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Custom border radius and padding",
                 initialStatus: switchinitials[4],
@@ -76,7 +79,7 @@ class MyHomePage extends StatelessWidget {
                 padding: 8.0,
                 showOnOff: true,
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Custom text",
                 initialStatus: switchinitials[5],
@@ -87,7 +90,7 @@ class MyHomePage extends StatelessWidget {
                 borderRadius: 30.0,
                 showOnOff: true,
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Icon in toggle",
                 subTitle: "Inspired by the colors from Github Dark Mode switch",
@@ -97,31 +100,31 @@ class MyHomePage extends StatelessWidget {
                 toggleSize: 45.0,
                 borderRadius: 30.0,
                 padding: 2.0,
-                activeToggleColor: firstActiveToggleColor,
-                inactiveToggleColor: firstInactiveToggleColor,
+                activeToggleColor: CustomColors.firstActiveToggleColor,
+                inactiveToggleColor: CustomColors.firstInactiveToggleColor,
                 activeSwitchBorder: Border.all(
-                  color: firstActiveBorderColor,
+                  color: CustomColors.firstActiveBorderColor,
                   width: 6.0,
                 ),
                 inactiveSwitchBorder: Border.all(
-                  color: firstInactiveBorderColor,
+                  color: CustomColors.firstInactiveBorderColor,
                   width: 6.0,
                 ),
-                activeColor: secondActiveColor,
-                inactiveColor: secondInactiveColor,
+                activeColor: CustomColors.secondActiveColor,
+                inactiveColor: CustomColors.secondInactiveColor,
                 activeIcon: const Icon(
                   Icons.nightlight_round,
-                  color: moonIconColor,
+                  color: CustomColors.moonIconColor,
                 ),
                 inactiveIcon: const Icon(
                   Icons.wb_sunny,
-                  color: sunIconColor,
+                  color: CustomColors.sunIconColor,
                 ),
                 onToggle: (val) {
                   onChangeTheme(val ? ThemeMode.dark : ThemeMode.light);
                 },
               ),
-              const SizedBox(height: 20.0),
+              defaultHeightSizedBox,
               CustomSwitch(
                 title: "Image as toggle icon",
                 initialStatus: switchinitials[7],
@@ -130,18 +133,18 @@ class MyHomePage extends StatelessWidget {
                 toggleSize: 45.0,
                 borderRadius: 30.0,
                 padding: 2.0,
-                activeToggleColor: secondActiveToggleColor,
-                inactiveToggleColor: secondInactiveToggleColor,
+                activeToggleColor: CustomColors.secondActiveToggleColor,
+                inactiveToggleColor: CustomColors.secondInactiveToggleColor,
                 activeSwitchBorder: Border.all(
-                  color: secondActiveBorderColor,
+                  color: CustomColors.secondActiveBorderColor,
                   width: 6.0,
                 ),
                 inactiveSwitchBorder: Border.all(
-                  color: secondInactiveBorderColor,
+                  color: CustomColors.secondInactiveBorderColor,
                   width: 6.0,
                 ),
-                activeColor: thirdActiveColor,
-                inactiveColor: thirdInactiveColor,
+                activeColor: CustomColors.thirdActiveColor,
+                inactiveColor: CustomColors.thirdInactiveColor,
                 activeIcon: Image.network(
                   "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
                 ),
