@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rs_flutter_test/page/local_widget/custom_switch.dart';
+import 'package:rs_flutter_test/theme/colors.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.onChangeTheme, required this.switchinitials});
@@ -31,25 +32,25 @@ class MyHomePage extends StatelessWidget {
                 initialStatus: true,
                 borderRadius: 30.0,
                 padding: 2.0,
-                toggleColor: const Color.fromRGBO(225, 225, 225, 1),
+                toggleColor: firstToggleColor,
                 switchBorder: Border.all(
-                  color: const Color.fromRGBO(2, 107, 206, 1),
+                  color: firstBorderColor,
                   width: 6.0,
                 ),
                 toggleBorder: Border.all(
-                  color: const Color.fromRGBO(2, 107, 206, 1),
+                  color: firstBorderColor,
                   width: 5.0,
                 ),
-                activeColor: const Color.fromRGBO(51, 226, 255, 1),
-                inactiveColor: Colors.black38,
+                activeColor: firstActiveColor,
+                inactiveColor: firstInactiveColor,
               ),
               const SizedBox(height: 20.0),
               CustomSwitch(
                 title: "With 'On' and 'Off' text and custom text colors",
                 initialStatus: false,
                 showOnOff: true,
-                activeTextColor: Colors.black,
-                inactiveTextColor: Colors.blue[50]!,
+                activeTextColor: firstActiveTextColor,
+                inactiveTextColor: firstInactiveTextColor,
               ),
               const SizedBox(height: 20.0),
               const CustomSwitch(
@@ -93,25 +94,25 @@ class MyHomePage extends StatelessWidget {
                 toggleSize: 45.0,
                 borderRadius: 30.0,
                 padding: 2.0,
-                activeToggleColor: const Color(0xFF6E40C9),
-                inactiveToggleColor: const Color(0xFF2F363D),
+                activeToggleColor: firstActiveToggleColor,
+                inactiveToggleColor: firstInactiveToggleColor,
                 activeSwitchBorder: Border.all(
-                  color: const Color(0xFF3C1E70),
+                  color: firstActiveBorderColor,
                   width: 6.0,
                 ),
                 inactiveSwitchBorder: Border.all(
-                  color: const Color(0xFFD1D5DA),
+                  color: firstInactiveBorderColor,
                   width: 6.0,
                 ),
-                activeColor: const Color(0xFF271052),
-                inactiveColor: Colors.white,
+                activeColor: secondActiveColor,
+                inactiveColor: secondInactiveColor,
                 activeIcon: const Icon(
                   Icons.nightlight_round,
-                  color: Color(0xFFF8E3A1),
+                  color: moonIconColor,
                 ),
                 inactiveIcon: const Icon(
                   Icons.wb_sunny,
-                  color: Color(0xFFFFDF5D),
+                  color: sunIconColor,
                 ),
                 onToggle: (val) {
                   onChangeTheme(val ? ThemeMode.dark : ThemeMode.light);
@@ -126,18 +127,18 @@ class MyHomePage extends StatelessWidget {
                 toggleSize: 45.0,
                 borderRadius: 30.0,
                 padding: 2.0,
-                activeToggleColor: const Color(0xFF0082C8),
-                inactiveToggleColor: const Color(0xFF01579B),
+                activeToggleColor: secondActiveToggleColor,
+                inactiveToggleColor: secondInactiveToggleColor,
                 activeSwitchBorder: Border.all(
-                  color: const Color(0xFF00D2B8),
+                  color: secondActiveBorderColor,
                   width: 6.0,
                 ),
                 inactiveSwitchBorder: Border.all(
-                  color: const Color(0xFF29B6F6),
+                  color: secondInactiveBorderColor,
                   width: 6.0,
                 ),
-                activeColor: const Color(0xFF55DDCA),
-                inactiveColor: const Color(0xFF54C5F8),
+                activeColor: thirdActiveColor,
+                inactiveColor: thirdInactiveColor,
                 activeIcon: Image.network(
                   "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
                 ),
