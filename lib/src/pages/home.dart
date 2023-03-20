@@ -18,10 +18,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //wrong ImageLink
-  var imageLink =
-      "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     inactiveSwitchBorder: Border.all(
                       color: Color(0xFFD1D5DA),
-                      width: defaultBorderWidth,
+                      width: 5.0,
                     ),
                     activeColor: Color(0xFF271052),
                     inactiveColor: Colors.white,
@@ -260,11 +256,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     activeColor: Color(0xFF55DDCA),
                     inactiveColor: Color(0xFF54C5F8),
-                    activeIcon: Image.network(
-                      "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
+                    activeIcon: Image.asset(
+                      "assets/images/flutter-logo.png",
+                      height: imageHeight,
                     ),
                     inactiveIcon: Image.network(
                       "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
+                      height: imageHeight,
                     ),
                     onToggle: (val) {
                       setState(() {

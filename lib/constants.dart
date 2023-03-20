@@ -13,3 +13,7 @@ bool isSwitchOn = false;
 Color toggleColor = Color.fromRGBO(225, 225, 225, 1);
 Color borderColor = Color.fromRGBO(2, 107, 206, 1);
 double defaultBorderWidth = 6.0;
+double imageHeight = 1024;
+//wrong ImageLink
+var imageLink =
+    "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png";
