@@ -14,7 +14,7 @@ class ButtonTitle extends StatelessWidget {
     return Column(
       children: [
         Text(buttonTitle),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
       ],
     );
   }
@@ -22,7 +22,7 @@ class ButtonTitle extends StatelessWidget {
   Widget defaultButton() {
     return Column(
       children: [
-        SizedBox(height: 20.0),
+        const SizedBox(height: 20.0),
         firstButton(),
       ],
     );
@@ -32,16 +32,16 @@ class ButtonTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20.0),
+        const SizedBox(height: 20.0),
         Text(buttonTitle),
         Text(
           subTitle!,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12.0,
             fontStyle: FontStyle.italic,
           ),
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
       ],
     );
   }
