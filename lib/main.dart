@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:rs_flutter_test/src/pages/home.dart';
+import 'package:rs_flutter_test/app.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: App(),
     );
   }
 }
