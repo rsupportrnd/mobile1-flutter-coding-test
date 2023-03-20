@@ -26,8 +26,10 @@ class SwitchProvider with ChangeNotifier {
   }
 
   void toggleSwitch(String key) async {
-    _switches[key]?.value = !(_switches[key]?.value ?? false);
-    await _switchUsecase.saveStatus(_switches[key]!);
+    final status = _switches[key];
+    status?.value = !status.value;
+    await _switchUsecase
+        .saveStatus(_switches[key] ?? SwitchStatus(key: key, value: true));
     notifyListeners();
   }
 }

@@ -10,17 +10,14 @@ class SwitchUsecase {
     final map = <String, SwitchStatus>{};
     await Future.wait(
       ids.map(
-        (id) => _switchRepository.getStatus(id).then((value) {
-          if (value != null) {
-            map[id] = value;
-          }
-        }),
+        (id) =>
+            _switchRepository.getStatus(id).then((value) => map[id] = value),
       ),
     );
     return map;
   }
 
-  Future<SwitchStatus?> getStatus(String key) {
+  Future<SwitchStatus> getStatus(String key) {
     return _switchRepository.getStatus(key);
   }
 

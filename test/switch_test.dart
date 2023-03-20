@@ -38,15 +38,16 @@ void main() {
       final result =
           await sharedPreferencesSwitchRepository.getStatus('testKey');
 
-      expect(result?.key, 'testKey');
-      expect(result?.value, true);
+      expect(result.key, 'testKey');
+      expect(result.value, true);
     });
 
-    test('getStatus returns a null value if key is not found', () async {
+    test('getStatus returns a status false value if key is not found',
+        () async {
       final result =
           await sharedPreferencesSwitchRepository.getStatus('testKey');
 
-      expect(result, null);
+      expect(result.value, false);
     });
 
     test('saveStatus saves a SwitchStatus to SharedPreferences', () async {
@@ -86,13 +87,13 @@ void main() {
 
       final result = await switchUsecase.getStatus('testKey');
 
-      expect(result?.key, 'testKey');
-      expect(result?.value, true);
+      expect(result.key, 'testKey');
+      expect(result.value, true);
     });
 
-    test('getStatus returns null if key is not found', () async {
+    test('getStatus status false value if key is not found', () async {
       final result = await switchUsecase.getStatus('testKey');
-      expect(result, null);
+      expect(result.value, false);
     });
 
     test('saveStatus saves a SwitchStatus to SwitchRepository', () async {

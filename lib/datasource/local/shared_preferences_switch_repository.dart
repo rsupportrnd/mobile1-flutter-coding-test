@@ -9,14 +9,10 @@ class SharedPreferencesSwitchRepository implements SwitchRepository {
   static const String prefix = 'switch_status_v1_';
 
   @override
-  Future<SwitchStatus?> getStatus(String key) async {
+  Future<SwitchStatus> getStatus(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getBool('$prefix$key');
-    if (value != null) {
-      return SwitchStatus(key: key, value: value);
-    } else {
-      return null;
-    }
+    final value = prefs.getBool('$prefix$key') ?? false;
+    return SwitchStatus(key: key, value: value);
   }
 
   @override
