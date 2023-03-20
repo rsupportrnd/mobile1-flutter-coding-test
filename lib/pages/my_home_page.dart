@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:rs_flutter_test/page/local_widget/custom_switch.dart';
-import 'package:rs_flutter_test/page/local_widget/default_sized_box.dart';
+import 'package:rs_flutter_test/pages/local_widget/custom_switch.dart';
+import 'package:rs_flutter_test/pages/local_widget/default_sized_box.dart';
 import 'package:rs_flutter_test/styles/custom_colors.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -25,11 +25,14 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              // Switch 1
               CustomSwitch(
                 title: tr("switch1"),
                 initialStatus: switchinitials[0],
               ),
               defaultHeightSizedBox,
+
+              // Switch 2
               CustomSwitch(
                 title: tr("switch2"),
                 width: 100.0,
@@ -51,6 +54,8 @@ class MyHomePage extends StatelessWidget {
                 inactiveColor: CustomColors.firstInactiveColor,
               ),
               defaultHeightSizedBox,
+
+              // Switch 3
               CustomSwitch(
                 title: tr("switch3"),
                 initialStatus: switchinitials[2],
@@ -59,6 +64,8 @@ class MyHomePage extends StatelessWidget {
                 inactiveTextColor: CustomColors.firstInactiveTextColor,
               ),
               defaultHeightSizedBox,
+
+              // Switch 4
               CustomSwitch(
                 title: tr("switch4"),
                 initialStatus: switchinitials[3],
@@ -68,6 +75,8 @@ class MyHomePage extends StatelessWidget {
                 valueFontSize: 12.0,
               ),
               defaultHeightSizedBox,
+
+              // Switch 5
               CustomSwitch(
                 title: tr("switch5"),
                 initialStatus: switchinitials[4],
@@ -80,6 +89,8 @@ class MyHomePage extends StatelessWidget {
                 showOnOff: true,
               ),
               defaultHeightSizedBox,
+
+              // Switch 6
               CustomSwitch(
                 title: tr("switch6.title"),
                 initialStatus: switchinitials[5],
@@ -91,6 +102,8 @@ class MyHomePage extends StatelessWidget {
                 showOnOff: true,
               ),
               defaultHeightSizedBox,
+
+              // Switch 7
               CustomSwitch(
                 title: tr("switch7.title"),
                 subTitle: tr("switch7.subTitle"),
@@ -125,6 +138,8 @@ class MyHomePage extends StatelessWidget {
                 },
               ),
               defaultHeightSizedBox,
+
+              // Switch 8
               CustomSwitch(
                 title: tr("switch8"),
                 initialStatus: switchinitials[7],

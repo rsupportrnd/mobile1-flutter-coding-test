@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:rs_flutter_test/page/my_home_page.dart';
+import 'package:rs_flutter_test/blocs/theme_cubit.dart';
+import 'package:rs_flutter_test/pages/my_home_page.dart';
 import 'package:rs_flutter_test/styles/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,31 +18,30 @@ void main() async {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.light;
-  List<bool> switchinitials = [false, true, false, false, false, false, false, false];
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: _themeMode,
-      home: MyHomePage(
-        switchinitials: switchinitials,
-        onChangeTheme: (value) => setState(() {
-          _themeMode = value;
-        }),
+    List<bool> switchinitials = [false, true, false, false, false, false, false, false];
+
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, state) {
+          return MaterialApp(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: state,
+            home: MyHomePage(
+              switchinitials: switchinitials,
+              onChangeTheme: BlocProvider.of<ThemeCubit>(context).switchThemeMode,
+            ),
+          );
+        },
       ),
     );
   }
