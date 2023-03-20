@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:rs_flutter_test/constants.dart';
+import 'package:rs_flutter_test/src/components/button_title.dart';
 import 'package:rs_flutter_test/src/components/show_value.dart';
 import 'package:rs_flutter_test/src/components/theme_mode.dart';
 
@@ -29,8 +30,10 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               //Button1
-              const Text("Default"),
-              const SizedBox(height: 10.0),
+              ButtonTitle(
+                buttonTitle: "Default",
+                isFirstButton: true,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -46,11 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
 
-              const SizedBox(height: 20.0),
-
               //Button2
-              const Text("Custom Colors and Borders"),
-              const SizedBox(height: 10.0),
+              ButtonTitle(buttonTitle: "Custom Colors and Borders"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -82,11 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
 
-              const SizedBox(height: 20.0),
-
               //Button3
-              Text("With 'On' and 'Off' text and custom text colors"),
-              SizedBox(height: 10.0),
+              ButtonTitle(
+                  buttonTitle:
+                      "With 'On' and 'Off' text and custom text colors"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -105,9 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
 
-              SizedBox(height: 20.0),
-              Text("Custom size"),
-              SizedBox(height: 10.0),
+              //Button4
+              ButtonTitle(buttonTitle: "Custom size"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -126,11 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ShowButtonValue(statas: status4),
                 ],
               ),
-              SizedBox(height: 20.0),
-              Text("Custom border radius and padding"),
-              SizedBox(height: 10.0),
 
-              //Button4
+              //Button5
+              ButtonTitle(buttonTitle: "Custom border radius and padding"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -152,10 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ShowButtonValue(statas: status5),
                 ],
               ),
-              SizedBox(height: 20.0),
-              Text("Custom text"),
-              SizedBox(height: 10.0),
 
+              ButtonTitle(buttonTitle: "Custom text"),
               //Button5
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,18 +171,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ShowButtonValue(statas: status6),
                 ],
               ),
-              SizedBox(height: 20.0),
-              Text("Icon in toggle"),
-              Text(
-                "Inspired by the colors from Github Dark Mode switch",
-                style: TextStyle(
-                  fontSize: 12.0,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              SizedBox(height: 10.0),
 
               //Button6
+              ButtonTitle(
+                buttonTitle: "Icon in toggle",
+                subTitle: "Inspired by the colors from Github Dark Mode switch",
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
