@@ -10,7 +10,6 @@ void main() {
   late SharedPreferences sharedPreferences;
 
   setUp(() async {
-    // Initialize the shared preferences with an empty store.
     SharedPreferences.setMockInitialValues({});
     sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferencesSwitchRepository = SharedPreferencesSwitchRepository();
