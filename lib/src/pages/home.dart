@@ -4,6 +4,7 @@ import 'package:rs_flutter_test/constants.dart';
 import 'package:rs_flutter_test/src/components/button_title.dart';
 import 'package:rs_flutter_test/src/components/show_value.dart';
 import 'package:rs_flutter_test/src/components/theme_mode.dart';
+import 'package:rs_flutter_test/src/repository/button_status.dart';
 
 class MyHomePage extends StatefulWidget {
   ThemeColor themeColor;
@@ -19,15 +20,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool status1 = false;
-  bool status2 = true;
-  bool status3 = false;
-  bool status4 = false;
-  bool status5 = false;
-  bool status6 = false;
-  bool status7 = false;
-  bool status8 = false;
-  bool isSwitchOn = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
