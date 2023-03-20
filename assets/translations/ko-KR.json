@@ -15,5 +15,7 @@
         "subTitle": "Inspired by the colors from Github Dark Mode switch"
     },
     "switch8": "Image as toggle icon",
-    "currentValueText": "Value: {}"
+    "currentValueText": "Value: {}",
+    "assetPath": "assets/images/flutter_icon.png",
+    "urlPath": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png"
 }

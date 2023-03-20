@@ -145,12 +145,8 @@ class MyHomePage extends StatelessWidget {
                 ),
                 activeColor: CustomColors.thirdActiveColor,
                 inactiveColor: CustomColors.thirdInactiveColor,
-                activeIcon: Image.asset(
-                  'assets/images/flutter_icon.png',
-                ),
-                inactiveIcon: Image.network(
-                  "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
-                ),
+                activeIcon: Image.asset(tr("assetPath")),
+                inactiveIcon: Image.network(tr("urlPath")),
               ),
             ],
           ),
