@@ -1,5 +1,7 @@
 import 'package:test/test.dart';
 
+import 'space_age.dart';
+
 final spaceAge = SpaceAge();
 
 void main() {
@@ -36,10 +38,15 @@ void ageOnPlanetTests() {
   }, skip: false);
 
   test('age on Uranus', () {
-    expect(spaceAge.age(planet: 'Uranus', seconds: 127387982374), equals(48.05));
+    expect(
+        spaceAge.age(planet: 'Uranus', seconds: 127387982374), equals(48.05));
   }, skip: false);
 
   test('age on Neptune', () {
     expect(spaceAge.age(planet: 'Neptune', seconds: 727637162), equals(0.14));
+  }, skip: false);
+
+  test('age on Unknown', () {
+    expect(spaceAge.age(planet: '', seconds: 727637162), equals(0));
   }, skip: false);
 }
