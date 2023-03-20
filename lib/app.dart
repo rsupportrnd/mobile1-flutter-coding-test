@@ -31,7 +31,7 @@ class _AppState extends State<App> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: themeColor.appBarColor,
-          title: Text(
+          title: const Text(
             "FlutterSwitch Demo",
             style: TextStyle(color: Colors.white),
           ),
