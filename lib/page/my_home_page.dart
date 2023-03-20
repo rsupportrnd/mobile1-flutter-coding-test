@@ -11,7 +11,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text("FlutterSwitch Demo"),
@@ -145,8 +144,8 @@ class MyHomePage extends StatelessWidget {
                 ),
                 activeColor: CustomColors.thirdActiveColor,
                 inactiveColor: CustomColors.thirdInactiveColor,
-                activeIcon: Image.network(
-                  "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
+                activeIcon: Image.asset(
+                  'assets/images/flutter_icon.png',
                 ),
                 inactiveIcon: Image.network(
                   "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
