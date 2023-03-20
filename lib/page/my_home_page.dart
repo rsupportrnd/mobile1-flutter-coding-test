@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rs_flutter_test/page/local_widget/custom_switch.dart';
 import 'package:rs_flutter_test/page/local_widget/default_sized_box.dart';
@@ -13,7 +14,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("FlutterSwitch Demo"),
+        title: Text(tr("appBarTitle")),
         actions: const [
           CustomSwitch(initialStatus: false),
         ],
@@ -25,12 +26,12 @@ class MyHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CustomSwitch(
-                title: "Default",
+                title: tr("switch1"),
                 initialStatus: switchinitials[0],
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Custom Colors and Borders",
+                title: tr("switch2"),
                 width: 100.0,
                 height: 55.0,
                 toggleSize: 45.0,
@@ -51,7 +52,7 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "With 'On' and 'Off' text and custom text colors",
+                title: tr("switch3"),
                 initialStatus: switchinitials[2],
                 showOnOff: true,
                 activeTextColor: CustomColors.firstActiveTextColor,
@@ -59,7 +60,7 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Custom size",
+                title: tr("switch4"),
                 initialStatus: switchinitials[3],
                 width: 55.0,
                 height: 25.0,
@@ -68,7 +69,7 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Custom border radius and padding",
+                title: tr("switch5"),
                 initialStatus: switchinitials[4],
                 width: 125.0,
                 height: 55.0,
@@ -80,10 +81,10 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Custom text",
+                title: tr("switch6.title"),
                 initialStatus: switchinitials[5],
-                activeText: "All Good. Negative.",
-                inactiveText: "Under Quarantine.",
+                activeText: tr("switch6.activeText"),
+                inactiveText: tr("switch6.inactiveText"),
                 valueFontSize: 10.0,
                 width: 110,
                 borderRadius: 30.0,
@@ -91,8 +92,8 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Icon in toggle",
-                subTitle: "Inspired by the colors from Github Dark Mode switch",
+                title: tr("switch7.title"),
+                subTitle: tr("switch7.subTitle"),
                 initialStatus: switchinitials[6],
                 width: 100.0,
                 height: 55.0,
@@ -125,7 +126,7 @@ class MyHomePage extends StatelessWidget {
               ),
               defaultHeightSizedBox,
               CustomSwitch(
-                title: "Image as toggle icon",
+                title: tr("switch8"),
                 initialStatus: switchinitials[7],
                 width: 100.0,
                 height: 55.0,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -190,7 +191,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
                     flutterSwitch,
                     Container(
                       alignment: Alignment.centerRight,
-                      child: Text("Value: $status"),
+                      child: Text(tr("currentValueText", args: ["$status"])),
                     ),
                   ],
                 ),
