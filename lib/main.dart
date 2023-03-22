@@ -12,7 +12,7 @@ void main() async {
     EasyLocalization(
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
-      supportedLocales: const [Locale('en', 'US'), Locale('ko', 'KR')],
+      supportedLocales: const [Locale('en', 'US')],
       child: const MyApp(),
     ),
   );

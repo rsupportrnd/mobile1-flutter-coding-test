@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:rs_flutter_test/blocs/custom_switch_cubit.dart';
 
 /// ## CustomSwitch
 ///
@@ -16,7 +18,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 /// ),
 /// /* ...some code... */
 /// ```
-class CustomSwitch extends StatefulWidget {
+class CustomSwitch extends StatelessWidget {
   const CustomSwitch({
     super.key,
     this.title = '',
@@ -127,77 +129,72 @@ class CustomSwitch extends StatefulWidget {
   final ValueChanged<bool>? onToggle;
 
   @override
-  State<CustomSwitch> createState() => _CustomSwitchState();
-}
-
-class _CustomSwitchState extends State<CustomSwitch> {
-  late bool status;
-
-  @override
-  void initState() {
-    status = widget.initialStatus;
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CustomSwitchCubit(initialStatus),
+      child: BlocBuilder<CustomSwitchCubit, bool>(
+        // bloc: cubit,
+        builder: (context, state) {
+          return RepaintBoundary(
+            child: title.isNotEmpty || subTitle.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (title.isNotEmpty) Text(title),
+                      if (subTitle.isNotEmpty)
+                        Text(
+                          subTitle,
+                          style: const TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic),
+                        ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          getFlutterSwitchWidget(context, state),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: Text(tr("currentValueText", args: ["$state"])),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                : getFlutterSwitchWidget(context, state),
+          );
+        },
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Widget flutterSwitch = FlutterSwitch(
-      value: status,
-      width: widget.width,
-      height: widget.height,
-      toggleSize: widget.toggleSize,
-      borderRadius: widget.borderRadius,
-      padding: widget.padding,
-      toggleColor: widget.toggleColor,
-      switchBorder: widget.switchBorder,
-      toggleBorder: widget.toggleBorder,
-      activeColor: widget.activeColor,
-      inactiveColor: widget.inactiveColor,
-      showOnOff: widget.showOnOff,
-      activeTextColor: widget.activeTextColor,
-      inactiveTextColor: widget.inactiveTextColor,
-      valueFontSize: widget.valueFontSize,
-      activeText: widget.activeText,
-      inactiveText: widget.inactiveText,
-      activeToggleColor: widget.activeToggleColor,
-      inactiveToggleColor: widget.inactiveToggleColor,
-      activeSwitchBorder: widget.activeSwitchBorder,
-      inactiveSwitchBorder: widget.inactiveSwitchBorder,
-      activeIcon: widget.activeIcon,
-      inactiveIcon: widget.inactiveIcon,
+  Widget getFlutterSwitchWidget(BuildContext context, bool state) {
+    return FlutterSwitch(
+      value: state,
+      width: width,
+      height: height,
+      toggleSize: toggleSize,
+      borderRadius: borderRadius,
+      padding: padding,
+      toggleColor: toggleColor,
+      switchBorder: switchBorder,
+      toggleBorder: toggleBorder,
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      showOnOff: showOnOff,
+      activeTextColor: activeTextColor,
+      inactiveTextColor: inactiveTextColor,
+      valueFontSize: valueFontSize,
+      activeText: activeText,
+      inactiveText: inactiveText,
+      activeToggleColor: activeToggleColor,
+      inactiveToggleColor: inactiveToggleColor,
+      activeSwitchBorder: activeSwitchBorder,
+      inactiveSwitchBorder: inactiveSwitchBorder,
+      activeIcon: activeIcon,
+      inactiveIcon: inactiveIcon,
       onToggle: (val) {
-        setState(() {
-          status = val;
-        });
-        if (widget.onToggle != null) widget.onToggle!(val);
+        BlocProvider.of<CustomSwitchCubit>(context).updateState(val);
+        if (onToggle != null) onToggle!(val);
       },
-    );
-
-    return RepaintBoundary(
-      child: widget.title.isNotEmpty || widget.subTitle.isNotEmpty
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (widget.title.isNotEmpty) Text(widget.title),
-                if (widget.subTitle.isNotEmpty)
-                  Text(
-                    widget.subTitle,
-                    style: const TextStyle(fontSize: 12.0, fontStyle: FontStyle.italic),
-                  ),
-                const SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    flutterSwitch,
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(tr("currentValueText", args: ["$status"])),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          : flutterSwitch,
     );
   }
 }
