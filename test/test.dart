@@ -2,6 +2,48 @@ import 'package:test/test.dart';
 
 final spaceAge = SpaceAge();
 
+class SpaceAge {
+  age({required String planet, required num seconds}) {
+    num expectAge = 0.0;
+    num conversionIndicator = 0.0;
+
+    double benchmarkAge(num seconds) {
+      return seconds / (60.0 * 60.0 * 24.0 * 365.25);
+    }
+
+    switch(planet) {
+      case 'Earth':
+        conversionIndicator = 1.0;
+        break;
+      case 'Mars' :
+        conversionIndicator = 1.8808158;
+        break;
+      case 'Mercury' :
+        conversionIndicator = 0.2408467;
+        break;
+      case 'Venus' :
+        conversionIndicator = 0.61519726;
+        break;
+      case 'Jupiter' :
+        conversionIndicator = 11.862615;
+        break;
+      case 'Saturn' :
+        conversionIndicator = 29.447498;
+        break;
+      case 'Uranus' :
+        conversionIndicator = 84.016846;
+        break;
+      case 'Neptune' :
+        conversionIndicator = 164.79132;
+        break;
+    }
+
+    expectAge = double.parse((benchmarkAge(seconds) / conversionIndicator).toStringAsFixed(2));
+
+    return expectAge;
+  }
+}
+
 void main() {
   group('SpaceAge', ageOnPlanetTests);
 }
