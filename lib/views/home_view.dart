@@ -42,10 +42,6 @@ class _AppbarSectionState extends State<AppbarSection> {
       ],
     );
   }
-
-  void changeTheme(bool? state) {
-    context.read<ThemeProvider>().changeTheme(state!);
-  }
 }
 
 class SwitchSection extends StatefulWidget {
@@ -145,9 +141,15 @@ class _SwitchSectionState extends State<SwitchSection> {
       inactiveColor: StaticColors.eighthInactiveColor,
       activeIcon: Image.network(
         "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
+        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+          return Text(stackTrace.toString());
+        },
       ),
       inactiveIcon: Image.network(
         "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
+        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+          return Text(stackTrace.toString());
+        },
       ),
     );
 
