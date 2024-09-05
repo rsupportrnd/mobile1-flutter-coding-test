@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:rs_flutter_test/domain/space/exception/unknown_planet_exception.dart';
+import 'package:rs_flutter_test/domain/space/utils/extensions.dart';
 
 class SpaceAge{
   final _singleYearSecondByEarth = 31557600;
@@ -23,9 +22,11 @@ class SpaceAge{
       throw UnknownPlanetException();
     }
 
-    return  (((seconds/_singleYearSecondByEarth / ratio)*100).roundToDouble())/100;
+    return (seconds/_singleYearSecondByEarth / ratio).roundToDecimalPlaces(2);
   }
 
-  ///    expect(spaceAge.age(planet: 'Earth', seconds: 1000000000), equals(31.69));
 }
+
+
+
 
