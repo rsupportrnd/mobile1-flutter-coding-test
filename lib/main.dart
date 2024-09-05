@@ -40,8 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Theme(
       data: ThemeData(
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: _textColor),
-          bodyText2: TextStyle(color: _textColor),
+          bodySmall: TextStyle(color: _textColor),
+          bodyMedium: TextStyle(color: _textColor),
+          bodyLarge: TextStyle(color: _textColor),
         ),
       ),
       child: Scaffold(
