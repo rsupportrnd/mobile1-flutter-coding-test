@@ -1,3 +1,4 @@
+import 'package:rs_flutter_test/domain/space/exception/unknown_planet_exception.dart';
 import 'package:rs_flutter_test/domain/space/space_age.dart';
 import 'package:test/test.dart';
 
@@ -43,4 +44,8 @@ void ageOnPlanetTests() {
   test('age on Neptune', () {
     expect(spaceAge.age(planet: 'Neptune', seconds: 727637162), equals(0.14));
   }, skip: false);
+  
+  test('age on unknown', () {
+    expect(()=>spaceAge.age(planet: 'hades', seconds: 1000000), throwsA(isA<UnknownPlanetException>()));
+  });
 }

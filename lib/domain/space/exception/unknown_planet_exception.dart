@@ -1,0 +1,1 @@
+class UnknownPlanetException implements Exception{}
