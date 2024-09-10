@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:rs_flutter_test/domain/option/view/component/custom_button_field.dart';
 
 void main() => runApp(MyApp());
 
@@ -66,76 +67,51 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Default"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                CustomButtonField(
+                  title: "Default",
+                  flutterSwitch: FlutterSwitch(
                       value: status1,
                       onToggle: (val) {
                         setState(() {
                           status1 = val;
                         });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status1",
-                      ),
-                    ),
-                  ],
+                      }),
                 ),
-                SizedBox(height: 20.0),
-                Text("Custom Colors and Borders"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                const SizedBox(height: 20.0),
+                CustomButtonField(
+                    title: "Custom Colors and Borders",
+                    flutterSwitch: FlutterSwitch(
                       width: 100.0,
                       height: 55.0,
                       toggleSize: 45.0,
                       value: status2,
                       borderRadius: 30.0,
                       padding: 2.0,
-                      toggleColor: Color.fromRGBO(225, 225, 225, 1),
+                      toggleColor: const Color.fromRGBO(225, 225, 225, 1),
                       switchBorder: Border.all(
-                        color: Color.fromRGBO(2, 107, 206, 1),
+                        color: const Color.fromRGBO(2, 107, 206, 1),
                         width: 6.0,
                       ),
                       toggleBorder: Border.all(
-                        color: Color.fromRGBO(2, 107, 206, 1),
+                        color: const Color.fromRGBO(2, 107, 206, 1),
                         width: 5.0,
                       ),
-                      activeColor: Color.fromRGBO(51, 226, 255, 1),
+                      activeColor: const Color.fromRGBO(51, 226, 255, 1),
                       inactiveColor: Colors.black38,
                       onToggle: (val) {
                         setState(() {
                           status2 = val;
                         });
                       },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status2",
-                      ),
-                    ),
-                  ],
-                ),
+                    )),
                 SizedBox(height: 20.0),
-                Text("With 'On' and 'Off' text and custom text colors"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                CustomButtonField(
+                    title: "With 'On' and 'Off' text and custom text colors",
+                    flutterSwitch: FlutterSwitch(
                       showOnOff: true,
                       activeTextColor: Colors.black,
                       inactiveTextColor: Colors.blue[50]!,
@@ -145,48 +121,27 @@ class _MyHomePageState extends State<MyHomePage> {
                           status3 = val;
                         });
                       },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status3",
-                      ),
-                    ),
-                  ],
+                    )),
+                const SizedBox(height: 20.0),
+                CustomButtonField(
+                  title: "Custom size",
+                  flutterSwitch: FlutterSwitch(
+                    width: 55.0,
+                    height: 25.0,
+                    valueFontSize: 12.0,
+                    toggleSize: 18.0,
+                    value: status4,
+                    onToggle: (val) {
+                      setState(() {
+                        status4 = val;
+                      });
+                    },
+                  ),
                 ),
                 SizedBox(height: 20.0),
-                Text("Custom size"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 55.0,
-                      height: 25.0,
-                      valueFontSize: 12.0,
-                      toggleSize: 18.0,
-                      value: status4,
-                      onToggle: (val) {
-                        setState(() {
-                          status4 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status4",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Custom border radius and padding"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                CustomButtonField(
+                    title: "Custom border radius and padding",
+                    flutterSwitch: FlutterSwitch(
                       width: 125.0,
                       height: 55.0,
                       valueFontSize: 25.0,
@@ -200,22 +155,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           status5 = val;
                         });
                       },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status5",
-                      ),
-                    ),
-                  ],
-                ),
+                    )),
                 SizedBox(height: 20.0),
-                Text("Custom text"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                CustomButtonField(
+                    title: "Custom text",
+                    flutterSwitch: FlutterSwitch(
                       activeText: "All Good. Negative.",
                       inactiveText: "Under Quarantine.",
                       value: status6,
@@ -228,84 +172,65 @@ class _MyHomePageState extends State<MyHomePage> {
                           status6 = val;
                         });
                       },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status6",
-                      ),
-                    ),
-                  ],
-                ),
+                    )),
                 SizedBox(height: 20.0),
-                Text("Icon in toggle"),
-                Text(
-                  "Inspired by the colors from Github Dark Mode switch",
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontStyle: FontStyle.italic,
+                CustomButtonField(
+                  title: "Icon in toggle",
+                  subTitle: Text(
+                    "Inspired by the colors from Github Dark Mode switch",
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  flutterSwitch: FlutterSwitch(
+                    width: 100.0,
+                    height: 55.0,
+                    toggleSize: 45.0,
+                    value: status7,
+                    borderRadius: 30.0,
+                    padding: 2.0,
+                    activeToggleColor: Color(0xFF6E40C9),
+                    inactiveToggleColor: Color(0xFF2F363D),
+                    activeSwitchBorder: Border.all(
+                      color: Color(0xFF3C1E70),
+                      width: 6.0,
+                    ),
+                    inactiveSwitchBorder: Border.all(
+                      color: Color(0xFFD1D5DA),
+                      width: 6.0,
+                    ),
+                    activeColor: Color(0xFF271052),
+                    inactiveColor: Colors.white,
+                    activeIcon: Icon(
+                      Icons.nightlight_round,
+                      color: Color(0xFFF8E3A1),
+                    ),
+                    inactiveIcon: Icon(
+                      Icons.wb_sunny,
+                      color: Color(0xFFFFDF5D),
+                    ),
+                    onToggle: (val) {
+                      setState(() {
+                        status7 = val;
+
+                        if (val) {
+                          _textColor = Colors.white;
+                          _appBarColor = Color.fromRGBO(22, 27, 34, 1);
+                          _scaffoldBgcolor = Color(0xFF0D1117);
+                        } else {
+                          _textColor = Colors.black;
+                          _appBarColor = Color.fromRGBO(36, 41, 46, 1);
+                          _scaffoldBgcolor = Colors.white;
+                        }
+                      });
+                    },
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 100.0,
-                      height: 55.0,
-                      toggleSize: 45.0,
-                      value: status7,
-                      borderRadius: 30.0,
-                      padding: 2.0,
-                      activeToggleColor: Color(0xFF6E40C9),
-                      inactiveToggleColor: Color(0xFF2F363D),
-                      activeSwitchBorder: Border.all(
-                        color: Color(0xFF3C1E70),
-                        width: 6.0,
-                      ),
-                      inactiveSwitchBorder: Border.all(
-                        color: Color(0xFFD1D5DA),
-                        width: 6.0,
-                      ),
-                      activeColor: Color(0xFF271052),
-                      inactiveColor: Colors.white,
-                      activeIcon: Icon(
-                        Icons.nightlight_round,
-                        color: Color(0xFFF8E3A1),
-                      ),
-                      inactiveIcon: Icon(
-                        Icons.wb_sunny,
-                        color: Color(0xFFFFDF5D),
-                      ),
-                      onToggle: (val) {
-                        setState(() {
-                          status7 = val;
-
-                          if (val) {
-                            _textColor = Colors.white;
-                            _appBarColor = Color.fromRGBO(22, 27, 34, 1);
-                            _scaffoldBgcolor = Color(0xFF0D1117);
-                          } else {
-                            _textColor = Colors.black;
-                            _appBarColor = Color.fromRGBO(36, 41, 46, 1);
-                            _scaffoldBgcolor = Colors.white;
-                          }
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text("Value: $status7"),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 20.0),
-                Text("Image as toggle icon"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
+                CustomButtonField(
+                    title: "Image as toggle icon",
+                    flutterSwitch: FlutterSwitch(
                       width: 100.0,
                       height: 55.0,
                       toggleSize: 45.0,
@@ -325,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       activeColor: Color(0xFF55DDCA),
                       inactiveColor: Color(0xFF54C5F8),
                       activeIcon: Image.network(
-                        "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
                       ),
                       inactiveIcon: Image.network(
                         "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
@@ -335,13 +260,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           status8 = val;
                         });
                       },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text("Value: $status8"),
-                    ),
-                  ],
-                ),
+                    )),
+                SizedBox(height: 10.0),
               ],
             ),
           ),
