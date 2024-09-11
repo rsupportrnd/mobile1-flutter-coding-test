@@ -18,9 +18,9 @@ class DefaultOptionConsumer extends ConsumerWidget {
     final optionState = ref.watch(optionStateListNotifierProvider.select(
       (value) => value[_optionIndex],
     ));
-    print(optionState);
-    print("toggle optionState");
+
     return CustomButtonField(
+      status: optionState,
       title: "Default",
       flutterSwitch: FlutterSwitch(
           value: optionState,

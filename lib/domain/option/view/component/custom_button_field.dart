@@ -5,17 +5,20 @@ class CustomButtonField extends StatefulWidget {
   final String title;
   final FlutterSwitch flutterSwitch;
   final Text? subTitle;
+  final bool status;
 
   const CustomButtonField(
-      {super.key, required this.title, required this.flutterSwitch, this.subTitle});
+      {super.key,
+      required this.title,
+      required this.flutterSwitch,
+      this.subTitle,
+      required this.status});
 
   @override
   State<CustomButtonField> createState() => _CustomButtonFieldState();
 }
 
 class _CustomButtonFieldState extends State<CustomButtonField> {
-  bool _state = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +34,7 @@ class _CustomButtonFieldState extends State<CustomButtonField> {
             Container(
               alignment: Alignment.centerRight,
               child: Text(
-                "Value: $_state",
+                "Value: ${widget.status}",
               ),
             ),
           ],

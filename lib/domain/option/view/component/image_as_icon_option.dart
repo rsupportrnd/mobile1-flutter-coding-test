@@ -20,6 +20,7 @@ class ImageAsIconOptionConsumer extends ConsumerWidget {
     ));
 
     return CustomButtonField(
+        status: optionState,
         title: "Image as toggle icon",
         flutterSwitch: FlutterSwitch(
           width: 100.0,

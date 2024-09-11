@@ -20,6 +20,7 @@ class CustomTextOptionConsumer extends ConsumerWidget {
     ));
 
     return CustomButtonField(
+        status: optionState,
         title: "Custom text",
         flutterSwitch: FlutterSwitch(
           activeText: "All Good. Negative.",

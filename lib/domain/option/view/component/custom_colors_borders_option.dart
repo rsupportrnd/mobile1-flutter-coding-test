@@ -20,6 +20,7 @@ class CustomColorsBordersOptionConsumer extends ConsumerWidget {
       (value) => value[_optionIndex],
     ));
     return CustomButtonField(
+        status: optionState,
         title: "Custom Colors and Borders",
         flutterSwitch: FlutterSwitch(
           width: 100.0,

@@ -19,6 +19,7 @@ class ThemeToggleFieldConsumer extends ConsumerWidget {
     final optionState =
         ref.watch(optionStateListNotifierProvider.select((options) => options[_optionIndex]));
     return CustomButtonField(
+      status: optionState,
       title: "Icon in toggle",
       subTitle: const Text(
         "Inspired by the colors from Github Dark Mode switch",

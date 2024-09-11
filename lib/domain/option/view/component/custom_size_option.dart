@@ -20,6 +20,7 @@ class CustomSizeOptionConsumer extends ConsumerWidget {
     ));
 
     return CustomButtonField(
+      status: optionState,
       title: "Custom size",
       flutterSwitch: FlutterSwitch(
         width: 55.0,

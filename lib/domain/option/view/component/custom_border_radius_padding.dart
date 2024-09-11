@@ -20,6 +20,7 @@ class CustomBorderRadiusPaddingConsumer extends ConsumerWidget {
     ));
 
     return CustomButtonField(
+        status: optionState,
         title: "Custom border radius and padding",
         flutterSwitch: FlutterSwitch(
           width: 125.0,

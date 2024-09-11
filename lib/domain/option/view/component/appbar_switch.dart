@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:rs_flutter_test/domain/option/provider/switch_notifier.dart';
-import 'package:rs_flutter_test/main.dart';
 
 import '../../../../core/const/custom_callback.dart';
 
 class AppbarSwitch extends ConsumerWidget {
-  BooleanCallback onToggle;
+  final BooleanCallback onToggle;
 
-  AppbarSwitch({super.key, required this.onToggle});
+  const AppbarSwitch({super.key, required this.onToggle});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

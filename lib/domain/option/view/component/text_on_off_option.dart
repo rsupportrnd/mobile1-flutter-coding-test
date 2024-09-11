@@ -20,6 +20,7 @@ class TextOnOffOptionConsumer extends ConsumerWidget {
       (value) => value[_optionIndex],
     ));
     return CustomButtonField(
+        status: optionState,
         title: "With 'On' and 'Off' text and custom text colors",
         flutterSwitch: FlutterSwitch(
           showOnOff: true,
