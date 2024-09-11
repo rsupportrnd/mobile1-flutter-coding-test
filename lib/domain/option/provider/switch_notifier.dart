@@ -5,11 +5,11 @@ part 'switch_notifier.g.dart';
 @riverpod
 class SwitchNotifier extends _$SwitchNotifier {
   @override
-   bool build() {
+  bool build() {
     return false;
   }
 
-  toggleSwitch() {
-    state = !state;
+  setSwitch(bool value) {
+    state = value;
   }
 }

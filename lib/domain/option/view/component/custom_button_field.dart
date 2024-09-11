@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-typedef BooleanCallback = Function(bool value);
-
 class CustomButtonField extends StatefulWidget {
   final String title;
   final FlutterSwitch flutterSwitch;

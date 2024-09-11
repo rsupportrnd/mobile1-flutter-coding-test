@@ -1,19 +1,20 @@
-
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'option_list_notifier_provider.g.dart';
 
 @riverpod
-class OptionStateListNotifierProvider extends _$OptionStateListNotifierProvider {
-  List<bool> _stateList = [false, true, false, false, false, false, false, false];
+class OptionStateListNotifier extends _$OptionStateListNotifier {
   @override
   List<bool> build() {
-    return _stateList;
+    /// init state
+    return [false, true, false, false, false, false, false, false];
   }
 
-  void toggleAtIndex(int index) {
-    _stateList[index] = !_stateList[index];
-    state = _stateList;
+  void setOptionAtIndex(int index, value) {
+    final tempList = <bool>[];
+    tempList.addAll(state);
+
+    tempList[index] = value;
+    state = tempList;
   }
 }
