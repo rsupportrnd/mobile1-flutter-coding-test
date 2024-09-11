@@ -14,6 +14,7 @@ import 'package:rs_flutter_test/domain/option/view/component/text_on_off_option.
 
 import 'domain/option/view/component/image_as_icon_option.dart';
 import 'domain/option/view/component/theme_option.dart';
+import 'domain/option/view/option_layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,68 +33,22 @@ class ThemeBuilder extends ConsumerWidget {
     final theme = ref.watch(themeNotifierProvider);
     return MaterialApp(
       theme: theme,
-      home: MyHomePage(),
+      home: const HomeBuilder(),
     );
     ;
   }
 }
 
-class MyHomePage extends ConsumerStatefulWidget {
+class HomeBuilder extends ConsumerStatefulWidget {
+  const HomeBuilder({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends ConsumerState<MyHomePage> {
-  bool status1 = false;
-  bool status2 = true;
-  bool status3 = false;
-  bool status4 = false;
-  bool status5 = false;
-  bool status6 = false;
-  bool status7 = false;
-  bool status8 = false;
-  bool isSwitchOn = false;
-
+class _MyHomePageState extends ConsumerState<HomeBuilder> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "FlutterSwitch Demo",
-          style: TextStyle(color: Colors.white),
-        ),
-        actions: [
-          AppbarSwitch(
-            onToggle: (value) {},
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              DefaultOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              CustomColorsBordersOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              TextOnOffOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              CustomSizeOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              CustomBorderRadiusPaddingConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              CustomTextOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              ThemeToggleFieldConsumer(onToggle: (val) {}),
-              const SizedBox(height: 20.0),
-              ImageAsIconOptionConsumer(onToggle: (val) {}),
-              const SizedBox(height: 10.0),
-            ],
-          ),
-        ),
-      ),
-    );
+    return const OptionLayout();
   }
 }
