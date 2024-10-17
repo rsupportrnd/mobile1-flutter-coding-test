@@ -4,20 +4,24 @@ import 'package:flutter_switch/flutter_switch.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -40,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Theme(
       data: ThemeData(
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: _textColor),
-          bodyText2: TextStyle(color: _textColor),
+          bodyLarge: TextStyle(color: _textColor),
+          bodyMedium: TextStyle(color: _textColor),
         ),
       ),
       child: Scaffold(
