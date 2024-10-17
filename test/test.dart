@@ -1,5 +1,5 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:rs_flutter_test/space_age.dart';
-import 'package:test/test.dart';
 
 final spaceAge = SpaceAge();
 
@@ -8,6 +8,14 @@ void main() {
 }
 
 void ageOnPlanetTests() {
+  test('should_ThrowException_When_WrongPlanetName', () {
+    expect(() => spaceAge.age(planet: 'Eart', seconds: 1000000000), throwsArgumentError);
+  }, skip: false);
+
+  test('should_ThrowException_When_NegativeSeconds', () {
+    expect(() => spaceAge.age(planet: 'Earth', seconds: -100000000), throwsAssertionError);
+  }, skip: false);
+
   test('age on Earth', () {
     expect(spaceAge.age(planet: 'Earth', seconds: 1000000000), equals(31.69));
   }, skip: false);

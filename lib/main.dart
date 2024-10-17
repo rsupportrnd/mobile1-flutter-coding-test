@@ -73,103 +73,105 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ColumnWithSpace(
-              space: 20.0,
-              children: [
-                FlutterSwitchDemoItem(
-                    title: "Default",
-                    value: status1,
-                    flutterSwitch: CustomFlutterSwitch.defaultSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status1 = val;
-                          });
-                        },
-                        value: status1)),
-                FlutterSwitchDemoItem(
-                    title: "Custom Colors and Borders",
-                    value: status2,
-                    flutterSwitch: CustomFlutterSwitch.blueBorderSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status2 = val;
-                          });
-                        },
-                        value: status2)),
-                FlutterSwitchDemoItem(
-                    title: "With 'On' and 'Off' text and custom text colors",
-                    value: status3,
-                    flutterSwitch: CustomFlutterSwitch.onOffSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status3 = val;
-                          });
-                        },
-                        value: status3)),
-                FlutterSwitchDemoItem(
-                    title: "With 'On' and 'Off' text and custom text colors",
-                    value: status4,
-                    flutterSwitch: CustomFlutterSwitch.miniSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status4 = val;
-                          });
-                        },
-                        value: status4)),
-                FlutterSwitchDemoItem(
-                    title: "Custom border radius and padding",
-                    value: status5,
-                    flutterSwitch: CustomFlutterSwitch.bigSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status5 = val;
-                          });
-                        },
-                        value: status5)),
-                FlutterSwitchDemoItem(
-                    title: "Custom text",
-                    value: status6,
-                    flutterSwitch: CustomFlutterSwitch.testSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status6 = val;
-                          });
-                        },
-                        value: status6)),
-                FlutterSwitchDemoItem(
-                    title: "Icon in toggle",
-                    description: "Inspired by the colors from Github Dark Mode switch",
-                    value: status7,
-                    flutterSwitch: CustomFlutterSwitch.darkModeSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status7 = val;
-                            if (val) {
-                              _textColor = Colors.white;
-                              _appBarColor = const Color.fromRGBO(22, 27, 34, 1);
-                              _scaffoldBgColor = const Color(0xFF0D1117);
-                            } else {
-                              _textColor = Colors.black;
-                              _appBarColor = const Color.fromRGBO(36, 41, 46, 1);
-                              _scaffoldBgColor = Colors.white;
-                            }
-                          });
-                        },
-                        value: status7)),
-                FlutterSwitchDemoItem(
-                    title: "Image as toggle icon",
-                    value: status8,
-                    flutterSwitch: CustomFlutterSwitch.imageSwitch(
-                        onToggle: (val) {
-                          setState(() {
-                            status8 = val;
-                          });
-                        },
-                        value: status8)),
-              ],
-            )
-          ),
+              padding: const EdgeInsets.all(10.0),
+              child: ColumnWithSpace(
+                space: 20.0,
+                children: [
+                  FlutterSwitchDemoItem(
+                      title: "Default",
+                      value: status1,
+                      flutterSwitch: CustomFlutterSwitch.defaultSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status1 = val;
+                            });
+                          },
+                          value: status1)),
+                  FlutterSwitchDemoItem(
+                      title: "Custom Colors and Borders",
+                      value: status2,
+                      flutterSwitch: CustomFlutterSwitch.blueBorderSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status2 = val;
+                            });
+                          },
+                          value: status2)),
+                  FlutterSwitchDemoItem(
+                      title: "With 'On' and 'Off' text and custom text colors",
+                      value: status3,
+                      flutterSwitch: CustomFlutterSwitch.onOffSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status3 = val;
+                            });
+                          },
+                          value: status3)),
+                  FlutterSwitchDemoItem(
+                      title: "With 'On' and 'Off' text and custom text colors",
+                      value: status4,
+                      flutterSwitch: CustomFlutterSwitch.miniSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status4 = val;
+                            });
+                          },
+                          value: status4)),
+                  FlutterSwitchDemoItem(
+                      title: "Custom border radius and padding",
+                      value: status5,
+                      flutterSwitch: CustomFlutterSwitch.bigSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status5 = val;
+                            });
+                          },
+                          value: status5)),
+                  FlutterSwitchDemoItem(
+                      title: "Custom text",
+                      value: status6,
+                      flutterSwitch: CustomFlutterSwitch.testSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status6 = val;
+                            });
+                          },
+                          value: status6)),
+                  FlutterSwitchDemoItem(
+                      title: "Icon in toggle",
+                      description:
+                          "Inspired by the colors from Github Dark Mode switch",
+                      value: status7,
+                      flutterSwitch: CustomFlutterSwitch.darkModeSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status7 = val;
+                              if (val) {
+                                _textColor = Colors.white;
+                                _appBarColor =
+                                    const Color.fromRGBO(22, 27, 34, 1);
+                                _scaffoldBgColor = const Color(0xFF0D1117);
+                              } else {
+                                _textColor = Colors.black;
+                                _appBarColor =
+                                    const Color.fromRGBO(36, 41, 46, 1);
+                                _scaffoldBgColor = Colors.white;
+                              }
+                            });
+                          },
+                          value: status7)),
+                  FlutterSwitchDemoItem(
+                      title: "Image as toggle icon",
+                      value: status8,
+                      flutterSwitch: CustomFlutterSwitch.imageSwitch(
+                          onToggle: (val) {
+                            setState(() {
+                              status8 = val;
+                            });
+                          },
+                          value: status8)),
+                ],
+              )),
         ),
       ),
     );

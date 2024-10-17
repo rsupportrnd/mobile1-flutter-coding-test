@@ -13,10 +13,6 @@ enum Planets {
   final double revolutionPeriod;
 
   factory Planets.from(String planet) {
-    try {
-      return Planets.values.firstWhere((e) => e.name == planet.toLowerCase());
-    } catch (e) {
-      throw ArgumentError('Invalid planet');
-    }
+    return Planets.values.firstWhere((e) => e.name == planet.toLowerCase(), orElse: () => throw ArgumentError('Invalid planet $planet'));
   }
 }
