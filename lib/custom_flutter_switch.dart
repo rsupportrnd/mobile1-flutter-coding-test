@@ -43,7 +43,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.blueBorderSwitch({
+  factory CustomFlutterSwitch.customColorsAndBorders({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -69,7 +69,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.onOffSwitch({
+  factory CustomFlutterSwitch.withOnAndOffTextAndCustomTextColors({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -82,7 +82,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.miniSwitch({
+  factory CustomFlutterSwitch.customSize({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -96,7 +96,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.bigSwitch({
+  factory CustomFlutterSwitch.customBorderRadiusAndPadding({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -113,7 +113,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.testSwitch({
+  factory CustomFlutterSwitch.customText({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -130,7 +130,7 @@ class CustomFlutterSwitch extends StatelessWidget {
   }
 
 
-  factory CustomFlutterSwitch.darkModeSwitch({
+  factory CustomFlutterSwitch.iconInToggle({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
@@ -167,7 +167,7 @@ class CustomFlutterSwitch extends StatelessWidget {
 
 
 
-  factory CustomFlutterSwitch.imageSwitch({
+  factory CustomFlutterSwitch.imageAsToggleIcon({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {

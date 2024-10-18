@@ -5,7 +5,7 @@ import 'package:rs_flutter_test/flutter_switch_demo_item.dart';
 
 import 'colum_with_space.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   FlutterSwitchDemoItem(
                       title: "Custom Colors and Borders",
                       value: status2,
-                      flutterSwitch: CustomFlutterSwitch.blueBorderSwitch(
+                      flutterSwitch: CustomFlutterSwitch.customColorsAndBorders(
                           onToggle: (val) {
                             setState(() {
                               status2 = val;
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   FlutterSwitchDemoItem(
                       title: "With 'On' and 'Off' text and custom text colors",
                       value: status3,
-                      flutterSwitch: CustomFlutterSwitch.onOffSwitch(
+                      flutterSwitch: CustomFlutterSwitch.withOnAndOffTextAndCustomTextColors(
                           onToggle: (val) {
                             setState(() {
                               status3 = val;
@@ -108,9 +108,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           value: status3)),
                   FlutterSwitchDemoItem(
-                      title: "With 'On' and 'Off' text and custom text colors",
+                      title: "Custom size",
                       value: status4,
-                      flutterSwitch: CustomFlutterSwitch.miniSwitch(
+                      flutterSwitch: CustomFlutterSwitch.customSize(
                           onToggle: (val) {
                             setState(() {
                               status4 = val;
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   FlutterSwitchDemoItem(
                       title: "Custom border radius and padding",
                       value: status5,
-                      flutterSwitch: CustomFlutterSwitch.bigSwitch(
+                      flutterSwitch: CustomFlutterSwitch.customBorderRadiusAndPadding(
                           onToggle: (val) {
                             setState(() {
                               status5 = val;
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   FlutterSwitchDemoItem(
                       title: "Custom text",
                       value: status6,
-                      flutterSwitch: CustomFlutterSwitch.testSwitch(
+                      flutterSwitch: CustomFlutterSwitch.customText(
                           onToggle: (val) {
                             setState(() {
                               status6 = val;
@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       description:
                           "Inspired by the colors from Github Dark Mode switch",
                       value: status7,
-                      flutterSwitch: CustomFlutterSwitch.darkModeSwitch(
+                      flutterSwitch: CustomFlutterSwitch.iconInToggle(
                           onToggle: (val) {
                             setState(() {
                               status7 = val;
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   FlutterSwitchDemoItem(
                       title: "Image as toggle icon",
                       value: status8,
-                      flutterSwitch: CustomFlutterSwitch.imageSwitch(
+                      flutterSwitch: CustomFlutterSwitch.imageAsToggleIcon(
                           onToggle: (val) {
                             setState(() {
                               status8 = val;
