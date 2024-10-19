@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rs_flutter_test/space_age.dart';
+import 'package:rs_flutter_test/features/space_age/space_age.dart';
 
 final spaceAge = SpaceAge();
 

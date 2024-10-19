@@ -15,14 +15,11 @@ final Widget flutterSwitch;
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(title),
-          Visibility(
-            visible: description != null,
-            child: Text(
-              description ?? "",
-              style: const TextStyle(
-                fontSize: 12.0,
-                fontStyle: FontStyle.italic,
-              ),
+          if (description != null) Text(
+            description ?? "",
+            style: const TextStyle(
+              fontSize: 12.0,
+              fontStyle: FontStyle.italic,
             ),
           ),
           const SizedBox(height: 10.0),
