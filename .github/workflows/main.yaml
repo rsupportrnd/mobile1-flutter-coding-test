@@ -2,7 +2,7 @@ name: github_actions
 on:
   push:
     branches:
-      - codingtest
+      - master
   pull_request:
 jobs:
   build:
