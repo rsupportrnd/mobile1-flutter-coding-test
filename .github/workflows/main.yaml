@@ -4,6 +4,7 @@ on:
     branches:
       - master
   pull_request:
+    types: [opened, reopened]
 jobs:
   build:
     name: running tests
