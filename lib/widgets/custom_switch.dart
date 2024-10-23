@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-class CustomFlutterSwitch extends StatelessWidget {
+class CustomSwitch extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onToggle;
   final bool showOnOff;
@@ -33,21 +33,21 @@ class CustomFlutterSwitch extends StatelessWidget {
   final Duration duration;
   final bool disabled;
 
-  factory CustomFlutterSwitch.defaultSwitch({
+  factory CustomSwitch.defaultSwitch({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       value: value,
       onToggle: onToggle,
     );
   }
 
-  factory CustomFlutterSwitch.customColorsAndBorders({
+  factory CustomSwitch.customColorsAndBorders({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       width: 100.0,
       height: 55.0,
       toggleSize: 45.0,
@@ -69,11 +69,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.withOnAndOffTextAndCustomTextColors({
+  factory CustomSwitch.withOnAndOffTextAndCustomTextColors({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       showOnOff: true,
       activeTextColor: Colors.black,
       inactiveTextColor: Colors.blue[50]!,
@@ -82,11 +82,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.customSize({
+  factory CustomSwitch.customSize({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       width: 55.0,
       height: 25.0,
       valueFontSize: 12.0,
@@ -96,11 +96,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.customBorderRadiusAndPadding({
+  factory CustomSwitch.customBorderRadiusAndPadding({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       width: 125.0,
       height: 55.0,
       valueFontSize: 25.0,
@@ -113,11 +113,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-  factory CustomFlutterSwitch.customText({
+  factory CustomSwitch.customText({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       activeText: "All Good. Negative.",
       inactiveText: "Under Quarantine.",
       valueFontSize: 10.0,
@@ -129,12 +129,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-
-  factory CustomFlutterSwitch.iconInToggle({
+  factory CustomSwitch.iconInToggle({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       width: 100.0,
       height: 55.0,
       toggleSize: 45.0,
@@ -165,13 +164,11 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-
-
-  factory CustomFlutterSwitch.imageAsToggleIcon({
+  factory CustomSwitch.imageAsToggleIcon({
     required ValueChanged<bool> onToggle,
     required bool value,
   }) {
-    return CustomFlutterSwitch._(
+    return CustomSwitch._(
       width: 100.0,
       height: 55.0,
       toggleSize: 45.0,
@@ -200,8 +197,7 @@ class CustomFlutterSwitch extends StatelessWidget {
     );
   }
 
-
-  const CustomFlutterSwitch._({
+  const CustomSwitch._({
     Key? key,
     required this.value,
     required this.onToggle,

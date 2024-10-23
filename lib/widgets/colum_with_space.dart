@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 class ColumnWithSpace extends StatelessWidget {
   final List<Widget> children;
@@ -11,17 +12,17 @@ class ColumnWithSpace extends StatelessWidget {
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
 
-  const ColumnWithSpace({
-    super.key,
-    this.direction = Axis.vertical,
-    this.mainAxisAlignment = MainAxisAlignment.start,
-    this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
-    this.textDirection,
-    this.verticalDirection = VerticalDirection.down,
-    this.textBaseline,
-    required this.children,
-    required this.space});
+  const ColumnWithSpace(
+      {super.key,
+      this.direction = Axis.vertical,
+      this.mainAxisAlignment = MainAxisAlignment.start,
+      this.mainAxisSize = MainAxisSize.max,
+      this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.textDirection,
+      this.verticalDirection = VerticalDirection.down,
+      this.textBaseline,
+      required this.children,
+      required this.space});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +34,7 @@ class ColumnWithSpace extends StatelessWidget {
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
-      children: children.map((child) {
-        final index = children.indexOf(child);
+      children: children.mapIndexed((index, child) {
         return Padding(
           padding:
               EdgeInsets.only(bottom: index == children.length - 1 ? 0 : space),
