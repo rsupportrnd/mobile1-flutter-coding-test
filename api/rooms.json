@@ -1,0 +1,40 @@
+{
+  "chatRooms": [
+    {
+      "roomId": "room1",
+      "roomName": "프로젝트 A 회의",
+      "creator": "user1",
+      "participants": ["user1", "user2", "user3"],
+      "createdAt": "2024-11-01T09:00:00Z",
+      "lastMessage": {
+        "sender": "user2",
+        "content": "다음 회의는 언제로 할까요?",
+        "timestamp": "2024-11-07T15:30:00Z"
+      }
+    },
+    {
+      "roomId": "room2",
+      "roomName": "개발자 채팅방",
+      "creator": "user4",
+      "participants": ["user4", "user5", "user2"],
+      "createdAt": "2024-10-25T14:30:00Z",
+      "lastMessage": {
+        "sender": "user5",
+        "content": "코드 리뷰 부탁드립니다.",
+        "timestamp": "2024-11-07T14:45:00Z"
+      }
+    },
+    {
+      "roomId": "room3",
+      "roomName": "디자인 팀 토론",
+      "creator": "user3",
+      "participants": ["user3", "user1", "user4"],
+      "createdAt": "2024-11-05T11:15:00Z",
+      "lastMessage": {
+        "sender": "user1",
+        "content": "새로운 디자인 시안 확인 부탁드려요.",
+        "timestamp": "2024-11-07T13:20:00Z"
+      }
+    }
+  ]
+}
