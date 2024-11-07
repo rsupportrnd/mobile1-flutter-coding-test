@@ -39,6 +39,46 @@
       "profilePicture": "https://picsum.photos/id/1015/200/200",
       "status": "do_not_disturb",
       "role": "admin"
+    },
+    {
+      "userId": "user6",
+      "name": "Fiona Jung",
+      "email": "fiona.jung@example.com",
+      "profilePicture": "https://picsum.photos/id/1016/200/200",
+      "status": "online",
+      "role": "member"
+    },
+    {
+      "userId": "user7",
+      "name": "George Han",
+      "email": "george.han@example.com",
+      "profilePicture": "https://picsum.photos/id/1017/200/200",
+      "status": "offline",
+      "role": "member"
+    },
+    {
+      "userId": "user8",
+      "name": "Hannah Lim",
+      "email": "hannah.lim@example.com",
+      "profilePicture": "https://picsum.photos/id/1018/200/200",
+      "status": "away",
+      "role": "member"
+    },
+    {
+      "userId": "user9",
+      "name": "Ian Kwon",
+      "email": "ian.kwon@example.com",
+      "profilePicture": "https://picsum.photos/id/1019/200/200",
+      "status": "online",
+      "role": "member"
+    },
+    {
+      "userId": "user10",
+      "name": "Julia Oh",
+      "email": "julia.oh@example.com",
+      "profilePicture": "https://picsum.photos/id/1020/200/200",
+      "status": "do_not_disturb",
+      "role": "admin"
     }
   ]
 }
