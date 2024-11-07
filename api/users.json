@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "userId": "user1",
+      "name": "Alice Kim",
+      "email": "alice.kim@example.com",
+      "profilePicture": "https://picsum.photos/id/1011/200/200",
+      "status": "online",
+      "role": "admin"
+    },
+    {
+      "userId": "user2",
+      "name": "Bob Lee",
+      "email": "bob.lee@example.com",
+      "profilePicture": "https://picsum.photos/id/1012/200/200",
+      "status": "offline",
+      "role": "member"
+    },
+    {
+      "userId": "user3",
+      "name": "Charlie Park",
+      "email": "charlie.park@example.com",
+      "profilePicture": "https://picsum.photos/id/1013/200/200",
+      "status": "away",
+      "role": "member"
+    },
+    {
+      "userId": "user4",
+      "name": "Dana Choi",
+      "email": "dana.choi@example.com",
+      "profilePicture": "https://picsum.photos/id/1014/200/200",
+      "status": "online",
+      "role": "member"
+    },
+    {
+      "userId": "user5",
+      "name": "Ethan Kim",
+      "email": "ethan.kim@example.com",
+      "profilePicture": "https://picsum.photos/id/1015/200/200",
+      "status": "do_not_disturb",
+      "role": "admin"
+    }
+  ]
+}
