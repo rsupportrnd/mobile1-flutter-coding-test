@@ -1,351 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool status1 = false;
-  bool status2 = true;
-  bool status3 = false;
-  bool status4 = false;
-  bool status5 = false;
-  bool status6 = false;
-  bool status7 = false;
-  bool status8 = false;
-  bool isSwitchOn = false;
+  int _counter = 0;
 
-  Color _textColor = Colors.black;
-  Color _appBarColor = Color.fromRGBO(36, 41, 46, 1);
-  Color _scaffoldBgcolor = Colors.white;
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: _textColor),
-          bodyText2: TextStyle(color: _textColor),
-        ),
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // TRY THIS: Try changing the color here to a specific color (to
+        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+        // change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
       ),
-      child: Scaffold(
-        backgroundColor: _scaffoldBgcolor,
-        appBar: AppBar(
-          backgroundColor: _appBarColor,
-          title: Text(
-            "FlutterSwitch Demo",
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            FlutterSwitch(
-              value: isSwitchOn,
-              onToggle: (value) {
-                setState(() {
-                  isSwitchOn = value;
-                });
-              },
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          //
+          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+          // action in the IDE, or press "p" in the console), to see the
+          // wireframe for each widget.
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("Default"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      value: status1,
-                      onToggle: (val) {
-                        setState(() {
-                          status1 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status1",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Custom Colors and Borders"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 100.0,
-                      height: 55.0,
-                      toggleSize: 45.0,
-                      value: status2,
-                      borderRadius: 30.0,
-                      padding: 2.0,
-                      toggleColor: Color.fromRGBO(225, 225, 225, 1),
-                      switchBorder: Border.all(
-                        color: Color.fromRGBO(2, 107, 206, 1),
-                        width: 6.0,
-                      ),
-                      toggleBorder: Border.all(
-                        color: Color.fromRGBO(2, 107, 206, 1),
-                        width: 5.0,
-                      ),
-                      activeColor: Color.fromRGBO(51, 226, 255, 1),
-                      inactiveColor: Colors.black38,
-                      onToggle: (val) {
-                        setState(() {
-                          status2 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status2",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("With 'On' and 'Off' text and custom text colors"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      showOnOff: true,
-                      activeTextColor: Colors.black,
-                      inactiveTextColor: Colors.blue[50]!,
-                      value: status3,
-                      onToggle: (val) {
-                        setState(() {
-                          status3 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status3",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Custom size"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 55.0,
-                      height: 25.0,
-                      valueFontSize: 12.0,
-                      toggleSize: 18.0,
-                      value: status4,
-                      onToggle: (val) {
-                        setState(() {
-                          status4 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status4",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Custom border radius and padding"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 125.0,
-                      height: 55.0,
-                      valueFontSize: 25.0,
-                      toggleSize: 45.0,
-                      value: status5,
-                      borderRadius: 30.0,
-                      padding: 8.0,
-                      showOnOff: true,
-                      onToggle: (val) {
-                        setState(() {
-                          status5 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status5",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Custom text"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      activeText: "All Good. Negative.",
-                      inactiveText: "Under Quarantine.",
-                      value: status6,
-                      valueFontSize: 10.0,
-                      width: 110,
-                      borderRadius: 30.0,
-                      showOnOff: true,
-                      onToggle: (val) {
-                        setState(() {
-                          status6 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Value: $status6",
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Icon in toggle"),
-                Text(
-                  "Inspired by the colors from Github Dark Mode switch",
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 100.0,
-                      height: 55.0,
-                      toggleSize: 45.0,
-                      value: status7,
-                      borderRadius: 30.0,
-                      padding: 2.0,
-                      activeToggleColor: Color(0xFF6E40C9),
-                      inactiveToggleColor: Color(0xFF2F363D),
-                      activeSwitchBorder: Border.all(
-                        color: Color(0xFF3C1E70),
-                        width: 6.0,
-                      ),
-                      inactiveSwitchBorder: Border.all(
-                        color: Color(0xFFD1D5DA),
-                        width: 6.0,
-                      ),
-                      activeColor: Color(0xFF271052),
-                      inactiveColor: Colors.white,
-                      activeIcon: Icon(
-                        Icons.nightlight_round,
-                        color: Color(0xFFF8E3A1),
-                      ),
-                      inactiveIcon: Icon(
-                        Icons.wb_sunny,
-                        color: Color(0xFFFFDF5D),
-                      ),
-                      onToggle: (val) {
-                        setState(() {
-                          status7 = val;
-
-                          if (val) {
-                            _textColor = Colors.white;
-                            _appBarColor = Color.fromRGBO(22, 27, 34, 1);
-                            _scaffoldBgcolor = Color(0xFF0D1117);
-                          } else {
-                            _textColor = Colors.black;
-                            _appBarColor = Color.fromRGBO(36, 41, 46, 1);
-                            _scaffoldBgcolor = Colors.white;
-                          }
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text("Value: $status7"),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text("Image as toggle icon"),
-                SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlutterSwitch(
-                      width: 100.0,
-                      height: 55.0,
-                      toggleSize: 45.0,
-                      value: status8,
-                      borderRadius: 30.0,
-                      padding: 2.0,
-                      activeToggleColor: Color(0xFF0082C8),
-                      inactiveToggleColor: Color(0xFF01579B),
-                      activeSwitchBorder: Border.all(
-                        color: Color(0xFF00D2B8),
-                        width: 6.0,
-                      ),
-                      inactiveSwitchBorder: Border.all(
-                        color: Color(0xFF29B6F6),
-                        width: 6.0,
-                      ),
-                      activeColor: Color(0xFF55DDCA),
-                      inactiveColor: Color(0xFF54C5F8),
-                      activeIcon: Image.network(
-                        "https://img2.pngio.com/functional-bits-in-flutter-flutter-community-medium-flutter-png-1000_1000.png",
-                      ),
-                      inactiveIcon: Image.network(
-                        "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
-                      ),
-                      onToggle: (val) {
-                        setState(() {
-                          status8 = val;
-                        });
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text("Value: $status8"),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
