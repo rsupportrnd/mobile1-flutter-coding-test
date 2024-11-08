@@ -21,9 +21,9 @@
 
 ### 제공되는 가상 API
 
-- 사용자 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/api/api/users.json
-- 회의실 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/api/api/rooms.json
-- 메시지 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/api/api/messages.json
+- 사용자 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/users.json
+- 회의실 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/rooms.json
+- 메시지 목록 - https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/messages.json
 
 # 참고 사항
 
