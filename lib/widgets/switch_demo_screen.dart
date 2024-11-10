@@ -1,53 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:provider/provider.dart';
+import 'package:rs_flutter_test/notifiers/switch_demo_screen_notifier.dart';
 
-class SwitchDemoScreen extends StatefulWidget {
+const Color _kTextColor = Colors.black;
+const Color _kAppBarColor = Color.fromRGBO(36, 41, 46, 1);
+const Color _kScaffoldBgColor = Colors.white;
+
+const Color _kDarkTextColor = Colors.white;
+const Color _kDarkAppBarColor = Color.fromRGBO(22, 27, 34, 1);
+const Color _kDarkScaffoldBgColor = Color(0xFF0D1117);
+
+class SwitchDemoScreen extends StatelessWidget {
   const SwitchDemoScreen({super.key});
 
   @override
-  State<SwitchDemoScreen> createState() => _SwitchDemoScreenState();
-}
-
-class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
-  bool status1 = false;
-  bool status2 = true;
-  bool status3 = false;
-  bool status4 = false;
-  bool status5 = false;
-  bool status6 = false;
-  bool status7 = false;
-  bool status8 = false;
-  bool isSwitchOn = false;
-
-  Color _textColor = Colors.black;
-  Color _appBarColor = Color.fromRGBO(36, 41, 46, 1);
-  Color _scaffoldBgcolor = Colors.white;
-
-  @override
   Widget build(BuildContext context) {
+    var notifier = context.watch<SwitchDemoScreenNotifier>();
+    var isDarkMode = notifier.status7;
     return Theme(
       data: ThemeData(
         textTheme: TextTheme(
-          bodyLarge: TextStyle(color: _textColor),
-          bodyMedium: TextStyle(color: _textColor),
+          bodyLarge:
+              TextStyle(color: isDarkMode ? _kDarkTextColor : _kTextColor),
+          bodyMedium:
+              TextStyle(color: isDarkMode ? _kDarkTextColor : _kTextColor),
         ),
       ),
       child: Scaffold(
-        backgroundColor: _scaffoldBgcolor,
+        backgroundColor: isDarkMode ? _kDarkScaffoldBgColor : _kScaffoldBgColor,
         appBar: AppBar(
-          backgroundColor: _appBarColor,
+          backgroundColor: isDarkMode ? _kDarkAppBarColor : _kAppBarColor,
           title: Text(
             "FlutterSwitch Demo",
             style: TextStyle(color: Colors.white),
           ),
           actions: [
             FlutterSwitch(
-              value: isSwitchOn,
-              onToggle: (value) {
-                setState(() {
-                  isSwitchOn = value;
-                });
-              },
+              value: notifier.isSwitchOn,
+              onToggle: (value) => notifier.isSwitchOn = value,
             ),
           ],
         ),
@@ -63,17 +54,13 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     FlutterSwitch(
-                      value: status1,
-                      onToggle: (val) {
-                        setState(() {
-                          status1 = val;
-                        });
-                      },
+                      value: notifier.status1,
+                      onToggle: (value) => notifier.status1 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status1",
+                        "Value: ${notifier.status1}",
                       ),
                     ),
                   ],
@@ -88,7 +75,7 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       width: 100.0,
                       height: 55.0,
                       toggleSize: 45.0,
-                      value: status2,
+                      value: notifier.status2,
                       borderRadius: 30.0,
                       padding: 2.0,
                       toggleColor: Color.fromRGBO(225, 225, 225, 1),
@@ -102,16 +89,12 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       ),
                       activeColor: Color.fromRGBO(51, 226, 255, 1),
                       inactiveColor: Colors.black38,
-                      onToggle: (val) {
-                        setState(() {
-                          status2 = val;
-                        });
-                      },
+                      onToggle: (value) => notifier.status2 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status2",
+                        "Value: ${notifier.status2}",
                       ),
                     ),
                   ],
@@ -126,17 +109,13 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       showOnOff: true,
                       activeTextColor: Colors.black,
                       inactiveTextColor: Colors.blue[50]!,
-                      value: status3,
-                      onToggle: (val) {
-                        setState(() {
-                          status3 = val;
-                        });
-                      },
+                      value: notifier.status3,
+                      onToggle: (value) => notifier.status3 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status3",
+                        "Value: ${notifier.status3}",
                       ),
                     ),
                   ],
@@ -152,17 +131,13 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       height: 25.0,
                       valueFontSize: 12.0,
                       toggleSize: 18.0,
-                      value: status4,
-                      onToggle: (val) {
-                        setState(() {
-                          status4 = val;
-                        });
-                      },
+                      value: notifier.status4,
+                      onToggle: (value) => notifier.status4 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status4",
+                        "Value: ${notifier.status4}",
                       ),
                     ),
                   ],
@@ -178,20 +153,16 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       height: 55.0,
                       valueFontSize: 25.0,
                       toggleSize: 45.0,
-                      value: status5,
+                      value: notifier.status5,
                       borderRadius: 30.0,
                       padding: 8.0,
                       showOnOff: true,
-                      onToggle: (val) {
-                        setState(() {
-                          status5 = val;
-                        });
-                      },
+                      onToggle: (value) => notifier.status5 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status5",
+                        "Value: ${notifier.status5}",
                       ),
                     ),
                   ],
@@ -205,21 +176,17 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                     FlutterSwitch(
                       activeText: "All Good. Negative.",
                       inactiveText: "Under Quarantine.",
-                      value: status6,
+                      value: notifier.status6,
                       valueFontSize: 10.0,
                       width: 110,
                       borderRadius: 30.0,
                       showOnOff: true,
-                      onToggle: (val) {
-                        setState(() {
-                          status6 = val;
-                        });
-                      },
+                      onToggle: (value) => notifier.status6 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "Value: $status6",
+                        "Value: ${notifier.status6}",
                       ),
                     ),
                   ],
@@ -241,7 +208,7 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       width: 100.0,
                       height: 55.0,
                       toggleSize: 45.0,
-                      value: status7,
+                      value: notifier.status7,
                       borderRadius: 30.0,
                       padding: 2.0,
                       activeToggleColor: Color(0xFF6E40C9),
@@ -264,25 +231,11 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                         Icons.wb_sunny,
                         color: Color(0xFFFFDF5D),
                       ),
-                      onToggle: (val) {
-                        setState(() {
-                          status7 = val;
-
-                          if (val) {
-                            _textColor = Colors.white;
-                            _appBarColor = Color.fromRGBO(22, 27, 34, 1);
-                            _scaffoldBgcolor = Color(0xFF0D1117);
-                          } else {
-                            _textColor = Colors.black;
-                            _appBarColor = Color.fromRGBO(36, 41, 46, 1);
-                            _scaffoldBgcolor = Colors.white;
-                          }
-                        });
-                      },
+                      onToggle: (value) => notifier.status7 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
-                      child: Text("Value: $status7"),
+                      child: Text("Value: ${notifier.status7}"),
                     ),
                   ],
                 ),
@@ -296,7 +249,7 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       width: 100.0,
                       height: 55.0,
                       toggleSize: 45.0,
-                      value: status8,
+                      value: notifier.status8,
                       borderRadius: 30.0,
                       padding: 2.0,
                       activeToggleColor: Color(0xFF0082C8),
@@ -317,15 +270,11 @@ class _SwitchDemoScreenState extends State<SwitchDemoScreen> {
                       inactiveIcon: Image.network(
                         "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
                       ),
-                      onToggle: (val) {
-                        setState(() {
-                          status8 = val;
-                        });
-                      },
+                      onToggle: (value) => notifier.status8 = value,
                     ),
                     Container(
                       alignment: Alignment.centerRight,
-                      child: Text("Value: $status8"),
+                      child: Text("Value: ${notifier.status8}"),
                     ),
                   ],
                 ),
