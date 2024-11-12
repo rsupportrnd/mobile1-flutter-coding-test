@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'common/common.dart';
 import 'layers/presentation/main/main_frame_view.dart';
+import 'layers/presentation/main/main_frame_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,7 @@ void main() async {
   runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (_)=> MainFrameViewModel()),
         ],
         child: const App(),
   ));
