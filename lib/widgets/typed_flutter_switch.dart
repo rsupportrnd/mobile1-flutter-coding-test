@@ -17,9 +17,6 @@ class TypedFlutterSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (type) {
-      case SwitchType.normal:
-        // TODO: Handle this case.
-        break;
       case SwitchType.colorsAndBorders:
         return FlutterSwitch(
           width: 100.0,
@@ -83,6 +80,34 @@ class TypedFlutterSwitch extends StatelessWidget {
         );
       case SwitchType.iconInToggle:
         return FlutterSwitch(
+          borderRadius: 30.0,
+          padding: 2.0,
+          activeToggleColor: const Color(0xFF6E40C9),
+          inactiveToggleColor: const Color(0xFF2F363D),
+          activeSwitchBorder: Border.all(
+            color: const Color(0xFF3C1E70),
+            width: 6.0,
+          ),
+          inactiveSwitchBorder: Border.all(
+            color: const Color(0xFFD1D5DA),
+            width: 6.0,
+          ),
+          activeColor: const Color(0xFF271052),
+          inactiveColor: Colors.white,
+          activeIcon: const Icon(
+            Icons.nightlight_round,
+            color: Color(0xFFF8E3A1),
+          ),
+          inactiveIcon: const Icon(
+            Icons.wb_sunny,
+            color: Color(0xFFFFDF5D),
+          ),
+          value: value,
+          onToggle: onToggle,
+        );
+
+      case SwitchType.imageAsToggleIcon:
+        return FlutterSwitch(
           width: 100.0,
           height: 55.0,
           toggleSize: 45.0,
@@ -109,13 +134,12 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.imageAsToggleIcon:
-        // TODO: Handle this case.
-        break;
+      case SwitchType.normal:
+      default:
+        return FlutterSwitch(
+          value: value,
+          onToggle: onToggle,
+        );
     }
-    return FlutterSwitch(
-      value: value,
-      onToggle: onToggle,
-    );
   }
 }
