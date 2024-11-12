@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:rs_flutter_test/models/enums/switch_type.dart';
 import 'package:rs_flutter_test/notifiers/switch_demo_screen_notifier.dart';
 import 'package:rs_flutter_test/widgets/switch_section.dart';
-import 'package:rs_flutter_test/widgets/typed_flutter_switch.dart';
 
 const Color _kTextColor = Colors.black;
 const Color _kAppBarColor = Color.fromRGBO(36, 41, 46, 1);
@@ -39,8 +38,7 @@ class SwitchDemoScreen extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           actions: [
-            TypedFlutterSwitch(
-              type: SwitchType.normal,
+            FlutterSwitch(
               value: notifier.isSwitchOn,
               onToggle: (value) => notifier.isSwitchOn = value,
             ),
@@ -53,78 +51,44 @@ class SwitchDemoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SwitchSection(
-                  title: 'Default',
-                  tail: 'Value: ${notifier.status1}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.normal,
-                    value: notifier.status1,
-                    onToggle: (value) => notifier.status1 = value,
-                  ),
+                  type: SwitchType.normal,
+                  value: notifier.status1,
+                  onToggle: (value) => notifier.status1 = value,
                 ),
                 SwitchSection(
-                  title: 'Custom Colors and Borders',
-                  tail: 'Value: ${notifier.status2}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.colorsAndBorders,
-                    value: notifier.status2,
-                    onToggle: (value) => notifier.status2 = value,
-                  ),
+                  type: SwitchType.colorsAndBorders,
+                  value: notifier.status2,
+                  onToggle: (value) => notifier.status2 = value,
                 ),
                 SwitchSection(
-                  title: "With 'On' and 'Off' text and custom text colors",
-                  tail: 'Value: ${notifier.status3}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.onAndOff,
-                    value: notifier.status3,
-                    onToggle: (value) => notifier.status3 = value,
-                  ),
+                  type: SwitchType.onAndOff,
+                  value: notifier.status3,
+                  onToggle: (value) => notifier.status3 = value,
                 ),
                 SwitchSection(
-                  title: 'Custom size',
-                  tail: 'Value: ${notifier.status4}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.customSize,
-                    value: notifier.status4,
-                    onToggle: (value) => notifier.status4 = value,
-                  ),
+                  type: SwitchType.customSize,
+                  value: notifier.status4,
+                  onToggle: (value) => notifier.status4 = value,
                 ),
                 SwitchSection(
-                  title: 'Custom border radius and padding',
-                  tail: 'Value: ${notifier.status5}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.borderRadiusAndPadding,
-                    value: notifier.status5,
-                    onToggle: (value) => notifier.status5 = value,
-                  ),
+                  type: SwitchType.borderRadiusAndPadding,
+                  value: notifier.status5,
+                  onToggle: (value) => notifier.status5 = value,
                 ),
                 SwitchSection(
-                  title: 'Custom text',
-                  tail: 'Value: ${notifier.status6}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.customText,
-                    value: notifier.status6,
-                    onToggle: (value) => notifier.status6 = value,
-                  ),
+                  type: SwitchType.customText,
+                  value: notifier.status6,
+                  onToggle: (value) => notifier.status6 = value,
                 ),
                 SwitchSection(
-                  title: 'Icon in toggle',
-                  subtitle:
-                      'Inspired by the colors from Github Dark Mode switch',
-                  tail: 'Value: ${notifier.status7}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.iconInToggle,
-                    value: notifier.status7,
-                    onToggle: (value) => notifier.status7 = value,
-                  ),
+                  type: SwitchType.iconInToggle,
+                  value: notifier.status7,
+                  onToggle: (value) => notifier.status7 = value,
                 ),
                 SwitchSection(
-                  title: 'Image as toggle icon',
-                  tail: 'Value: ${notifier.status8}',
-                  switchBuilder: (_) => TypedFlutterSwitch(
-                    type: SwitchType.imageAsToggleIcon,
-                    value: notifier.status8,
-                    onToggle: (value) => notifier.status8 = value,
-                  ),
+                  type: SwitchType.imageAsToggleIcon,
+                  value: notifier.status8,
+                  onToggle: (value) => notifier.status8 = value,
                 ),
               ],
             ),

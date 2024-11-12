@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:rs_flutter_test/models/enums/switch_type.dart';
+import 'package:rs_flutter_test/widgets/typed_flutter_switch.dart';
 
 class SwitchSection extends StatelessWidget {
   const SwitchSection({
     super.key,
-    required this.title,
-    this.subtitle,
-    required this.tail,
-    required this.switchBuilder,
+    required this.type,
+    required this.value,
+    required this.onToggle,
   });
 
-  final String title;
-  final String? subtitle;
-  final String tail;
-  final Widget Function(BuildContext) switchBuilder;
+  final SwitchType type;
+  final bool value;
+  final ValueChanged<bool> onToggle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
-        if (subtitle != null)
+        Text(type.title),
+        if (type.subtitle != null)
           Text(
-            subtitle!,
+            type.subtitle!,
             style: const TextStyle(
               fontSize: 12.0,
               fontStyle: FontStyle.italic,
@@ -32,10 +32,14 @@ class SwitchSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            switchBuilder.call(context),
+            TypedFlutterSwitch(
+              type: type,
+              value: value,
+              onToggle: onToggle,
+            ),
             Container(
               alignment: Alignment.centerRight,
-              child: Text(tail),
+              child: Text('Value: $value'),
             ),
           ],
         ),
