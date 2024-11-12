@@ -1,4 +1,4 @@
-enum SwitchType {
+enum SectionSwitchType {
   normal('Default'),
   colorsAndBorders('Custom Colors and Borders'),
   onAndOff("With 'On' and 'Off' text and custom text colors"),
@@ -11,7 +11,7 @@ enum SwitchType {
   ),
   imageAsToggleIcon('Image as toggle icon');
 
-  const SwitchType(
+  const SectionSwitchType(
     this.title, {
     this.subtitle,
   });

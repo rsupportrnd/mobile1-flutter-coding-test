@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
-import 'package:rs_flutter_test/models/enums/switch_type.dart';
+import 'package:rs_flutter_test/models/enums/section_switch_type.dart';
 import 'package:rs_flutter_test/notifiers/switch_demo_screen_notifier.dart';
-import 'package:rs_flutter_test/widgets/switch_section.dart';
+import 'package:rs_flutter_test/widgets/typed_switch_section.dart';
 
 const Color _kTextColor = Colors.black;
 const Color _kAppBarColor = Color.fromRGBO(36, 41, 46, 1);
@@ -50,43 +50,43 @@ class SwitchDemoScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SwitchSection(
-                  type: SwitchType.normal,
+                TypedSwitchSection(
+                  type: SectionSwitchType.normal,
                   value: notifier.status1,
                   onToggle: (value) => notifier.status1 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.colorsAndBorders,
+                TypedSwitchSection(
+                  type: SectionSwitchType.colorsAndBorders,
                   value: notifier.status2,
                   onToggle: (value) => notifier.status2 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.onAndOff,
+                TypedSwitchSection(
+                  type: SectionSwitchType.onAndOff,
                   value: notifier.status3,
                   onToggle: (value) => notifier.status3 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.customSize,
+                TypedSwitchSection(
+                  type: SectionSwitchType.customSize,
                   value: notifier.status4,
                   onToggle: (value) => notifier.status4 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.borderRadiusAndPadding,
+                TypedSwitchSection(
+                  type: SectionSwitchType.borderRadiusAndPadding,
                   value: notifier.status5,
                   onToggle: (value) => notifier.status5 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.customText,
+                TypedSwitchSection(
+                  type: SectionSwitchType.customText,
                   value: notifier.status6,
                   onToggle: (value) => notifier.status6 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.iconInToggle,
+                TypedSwitchSection(
+                  type: SectionSwitchType.iconInToggle,
                   value: notifier.status7,
                   onToggle: (value) => notifier.status7 = value,
                 ),
-                SwitchSection(
-                  type: SwitchType.imageAsToggleIcon,
+                TypedSwitchSection(
+                  type: SectionSwitchType.imageAsToggleIcon,
                   value: notifier.status8,
                   onToggle: (value) => notifier.status8 = value,
                 ),

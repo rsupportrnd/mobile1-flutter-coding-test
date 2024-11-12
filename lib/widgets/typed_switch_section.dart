@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:rs_flutter_test/models/enums/switch_type.dart';
-import 'package:rs_flutter_test/widgets/typed_flutter_switch.dart';
+import 'package:rs_flutter_test/models/enums/section_switch_type.dart';
+import 'package:rs_flutter_test/widgets/typed_switch.dart';
 
-class SwitchSection extends StatelessWidget {
-  const SwitchSection({
+class TypedSwitchSection extends StatelessWidget {
+  const TypedSwitchSection({
     super.key,
     required this.type,
     required this.value,
     required this.onToggle,
   });
 
-  final SwitchType type;
+  final SectionSwitchType type;
   final bool value;
   final ValueChanged<bool> onToggle;
 
@@ -32,7 +32,7 @@ class SwitchSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            TypedFlutterSwitch(
+            TypedSwitch(
               type: type,
               value: value,
               onToggle: onToggle,

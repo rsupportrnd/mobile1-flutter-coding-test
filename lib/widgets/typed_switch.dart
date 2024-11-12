@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:rs_flutter_test/models/enums/switch_type.dart';
+import 'package:rs_flutter_test/models/enums/section_switch_type.dart';
 
-class TypedFlutterSwitch extends StatelessWidget {
-  const TypedFlutterSwitch({
+class TypedSwitch extends StatelessWidget {
+  const TypedSwitch({
     super.key,
     required this.type,
     required this.value,
     required this.onToggle,
   });
 
-  final SwitchType type;
+  final SectionSwitchType type;
   final bool value;
   final ValueChanged<bool> onToggle;
 
   @override
   Widget build(BuildContext context) {
     switch (type) {
-      case SwitchType.colorsAndBorders:
+      case SectionSwitchType.colorsAndBorders:
         return FlutterSwitch(
           width: 100.0,
           height: 55.0,
@@ -38,7 +38,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.onAndOff:
+      case SectionSwitchType.onAndOff:
         return FlutterSwitch(
           showOnOff: true,
           activeTextColor: Colors.black,
@@ -46,7 +46,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.customSize:
+      case SectionSwitchType.customSize:
         return FlutterSwitch(
           width: 55.0,
           height: 25.0,
@@ -55,7 +55,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.borderRadiusAndPadding:
+      case SectionSwitchType.borderRadiusAndPadding:
         return FlutterSwitch(
           width: 125.0,
           height: 55.0,
@@ -67,7 +67,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.customText:
+      case SectionSwitchType.customText:
         return FlutterSwitch(
           activeText: 'All Good. Negative.',
           inactiveText: 'Under Quarantine.',
@@ -78,8 +78,11 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.iconInToggle:
+      case SectionSwitchType.iconInToggle:
         return FlutterSwitch(
+          width: 100.0,
+          height: 55.0,
+          toggleSize: 45.0,
           borderRadius: 30.0,
           padding: 2.0,
           activeToggleColor: const Color(0xFF6E40C9),
@@ -106,7 +109,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           onToggle: onToggle,
         );
 
-      case SwitchType.imageAsToggleIcon:
+      case SectionSwitchType.imageAsToggleIcon:
         return FlutterSwitch(
           width: 100.0,
           height: 55.0,
@@ -134,7 +137,7 @@ class TypedFlutterSwitch extends StatelessWidget {
           value: value,
           onToggle: onToggle,
         );
-      case SwitchType.normal:
+      case SectionSwitchType.normal:
       default:
         return FlutterSwitch(
           value: value,
