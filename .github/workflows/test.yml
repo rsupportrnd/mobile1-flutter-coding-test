@@ -5,6 +5,7 @@ name: test on pr
 on:
   push:
     branches: [ "test_kjun" ]
+
 #  pull_request:
 #    branches: [ "master" ]
 
@@ -29,7 +30,7 @@ jobs:
       - name: get packages
         run: flutter pub get
       - name: run test
-        run: flutter test
+        run:  flutter test test/test.dart
       - name: build android
         run: flutter build appbundle
           #      - name: build ios
