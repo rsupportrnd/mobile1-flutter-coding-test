@@ -19,7 +19,7 @@ class SwitchDemoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var notifier = context.watch<SwitchDemoScreenNotifier>();
-    var isDarkMode = notifier.status7;
+    var isDarkMode = notifier.isCheckedType(SectionSwitchType.iconInToggle);
     return Theme(
       data: ThemeData(
         textTheme: TextTheme(
@@ -49,48 +49,15 @@ class SwitchDemoScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TypedSwitchSection(
-                  type: SectionSwitchType.normal,
-                  value: notifier.status1,
-                  onToggle: (value) => notifier.status1 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.colorsAndBorders,
-                  value: notifier.status2,
-                  onToggle: (value) => notifier.status2 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.onAndOff,
-                  value: notifier.status3,
-                  onToggle: (value) => notifier.status3 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.customSize,
-                  value: notifier.status4,
-                  onToggle: (value) => notifier.status4 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.borderRadiusAndPadding,
-                  value: notifier.status5,
-                  onToggle: (value) => notifier.status5 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.customText,
-                  value: notifier.status6,
-                  onToggle: (value) => notifier.status6 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.iconInToggle,
-                  value: notifier.status7,
-                  onToggle: (value) => notifier.status7 = value,
-                ),
-                TypedSwitchSection(
-                  type: SectionSwitchType.imageAsToggleIcon,
-                  value: notifier.status8,
-                  onToggle: (value) => notifier.status8 = value,
-                ),
-              ],
+              children: SectionSwitchType.values
+                  .map(
+                    (type) => TypedSwitchSection(
+                      type: type,
+                      value: notifier.isCheckedType(type),
+                      onToggle: (value) => notifier.toggleSwitchType(type),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         ),
