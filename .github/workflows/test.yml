@@ -1,13 +1,10 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# master 브랜치로 pr이 생성되면 테스트 및 빌드가 실행됩니다.
 
 name: test on pr
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "test_kjun" ]
 #  pull_request:
 #    branches: [ "master" ]
 
