@@ -1,0 +1,1 @@
+export 'package:mobile1_flutter_coding_test/layers/domain/model/user.dart';
