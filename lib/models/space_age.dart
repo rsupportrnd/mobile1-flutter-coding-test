@@ -7,6 +7,9 @@ class SpaceAge {
     required int seconds,
   }) {
     try {
+      if (seconds < 0) {
+        return null;
+      }
       final earthYear = (seconds / secondsOfYear);
       final planetYear = Planet.fromName(planet).year;
 

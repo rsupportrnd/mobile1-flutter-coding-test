@@ -44,4 +44,25 @@ void ageOnPlanetTests() {
   test('age on Neptune', () {
     expect(spaceAge.age(planet: 'Neptune', seconds: 727637162), equals(0.14));
   }, skip: false);
+
+  test('unknown planet', () {
+    expect(spaceAge.age(planet: 'Pluto', seconds: 888888888), equals(null));
+  }, skip: false);
+
+  test('upper case', () {
+    expect(spaceAge.age(planet: 'JUPITER', seconds: 781273864), equals(2.09));
+  }, skip: false);
+
+  test('max integer', () {
+    expect(spaceAge.age(planet: 'Earth', seconds: 0x7FFFFFFFFFFFFFFF),
+        equals(292271023045.31));
+  }, skip: false);
+
+  test('zero seconds', () {
+    expect(spaceAge.age(planet: 'Mars', seconds: 0), equals(0.0));
+  }, skip: false);
+
+  test('negative seconds', () {
+    expect(spaceAge.age(planet: 'Uranus', seconds: -100), equals(null));
+  }, skip: false);
 }
