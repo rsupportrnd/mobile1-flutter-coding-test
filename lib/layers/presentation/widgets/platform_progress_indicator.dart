@@ -12,14 +12,14 @@ class PlatformProgressIndicator extends StatelessWidget {
     return Platform.isAndroid
         ? const Center(
         child: SizedBox(
-            height: 40.0,
-            width: 40.0,
+            height: 30.0,
+            width: 30.0,
             child: CircularProgressIndicator(strokeWidth: 2)))
         : const Center(
       child: SizedBox(
-          height: 40.0,
-          width: 40.0,
-          child: CupertinoActivityIndicator(radius: 15)),
+          height: 30.0,
+          width: 30.0,
+          child: CupertinoActivityIndicator(radius: 10)),
     );
   }
 }

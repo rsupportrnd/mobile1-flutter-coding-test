@@ -11,7 +11,20 @@ class AppDim {
   static const  double xLarge = 40;
   static const  double xXLarge = 50;
 
+  // height
+  static const  heightXSmall = SizedBox(height: xSmall);
+  static const  heightSmall = SizedBox(height: small);
+  static const  heightMedium = SizedBox(height: medium);
+  static const  heightMediumLarge = SizedBox(height: mediumLarge);
+
+  // width
+  static const  widthXSmall = SizedBox(width: xSmall);
+  static const  widthSmall = SizedBox(width: small);
+  static const  widthMedium = SizedBox(width: medium);
+  static const  widthMediumLarge = SizedBox(width: mediumLarge);
+
   // padding
+  static const  paddingXxSmall = EdgeInsets.all(2);
   static const  paddingXSmall = EdgeInsets.all(5);
   static const  paddingSmall  = EdgeInsets.all(10);
   static const  paddingMedium = EdgeInsets.all(15);
@@ -50,12 +63,12 @@ class AppDim {
   static const double iconXLarge = 48.0;
 
   // 이미지 크기
-  static const double imageXxSmall = 25;
-  static const double imageXSmall = 50;
-  static const double imageSmall  = 75;
-  static const double imageSmallMedium  = 100;
-  static const double imageMedium = 150;
-  static const double imageMediumLarge = 175;
+  static const double imageXxSmall = 30;
+  static const double imageXSmall = 40;
+  static const double imageSmall  = 50;
+  static const double imageSmallMedium  = 60;
+  static const double imageMedium = 70;
+  static const double imageMediumLarge = 100;
   static const double imageLarge  = 200;
   static const double imageXlarge = 250;
 }

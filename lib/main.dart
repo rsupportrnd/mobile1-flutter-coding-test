@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'common/common.dart';
@@ -8,10 +9,14 @@ import 'layers/presentation/main/main_frame_viewmodel.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  /// Initialize the locator
+  initLocator();
+
   runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_)=> MainFrameViewModel()),
+          ChangeNotifierProvider(create: (_)=> UserListViewModel()),
         ],
         child: const App(),
   ));

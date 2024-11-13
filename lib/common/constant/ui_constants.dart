@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class UIConstants {
   static double elevation = 2.0;
 
-  static double boxItemHeight50 = 50;
-  static double boxItemHeight60 = 60;
+  static double tileHeight50 = 50;
+  static double tileHeight90 = 90;
 
   static double textFieldHeight50 = 50;
   static double textFieldHeight55 = 55;
@@ -18,22 +18,22 @@ class UIConstants {
   static double borderMediumWidth = 2;
   static double borderBordWidth = 3;
 
-  static BorderRadiusGeometry borderRadius = BorderRadius.circular(30);
-  static BorderRadiusGeometry borderMediumRadius = BorderRadius.circular(20);
+  // elevation
+  static double elevation1 = 1;
+  static double elevation2 = 2;
+  static double elevation3 = 3;
+  static double elevation4 = 4;
+
+  // border radius
   static BorderRadiusGeometry borderLightRadius = BorderRadius.circular(6);
+  static BorderRadiusGeometry borderMediumRadius = BorderRadius.circular(20);
+  static BorderRadiusGeometry borderRadius = BorderRadius.circular(30);
+  static BorderRadiusGeometry borderCircle = BorderRadius.circular(50);
 
-  static Radius radius = const Radius.circular(30);
-  static Radius mediumRadius = const Radius.circular(20);
+  // radius
   static Radius lightRadius = const Radius.circular(12);
-
-  static const double radiusValue30 = 30;
-  static const double radiusValue20 = 20;
-  static const double radiusValue10 = 10;
-
-  static EdgeInsets viewPadding = const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0);
-
-  static double progressIndicatorSize = 35.0;
-
+  static Radius mediumRadius = const Radius.circular(20);
+  static Radius radius = const Radius.circular(30);
 
   /// font size fixation
   static MediaQueryData getScaleFontSize(BuildContext context,

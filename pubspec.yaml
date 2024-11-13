@@ -53,6 +53,7 @@ dependencies:
   json_serializable: ^6.8.0
   json_annotation: ^4.9.0
   extended_image: ^9.0.7
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
 
   assets:
     - assets/api/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
