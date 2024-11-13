@@ -13,38 +13,40 @@ class MainFrameView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<MainFrameViewModel>(context, listen: false);
-
-    return FrameScaffold(
-      appBarTitle: '',
-      body: IndexedStack(
-        index: provider.selectedIndex,
-        children: provider.widgetOptions,
-      ),
-      bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.grey,
-                blurRadius: 0.1,
-              ),
-            ],
+    return Consumer<MainFrameViewModel>(
+      builder: (context, provider, child) {
+        return FrameScaffold(
+          appBarTitle: '',
+          body: IndexedStack(
+            index: provider.selectedIndex,
+            children: provider.widgetOptions,
           ),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: AppColors.background,
-            showUnselectedLabels: true,
-            items: <BottomNavigationBarItem>[
-              _barItem(TabItemType.user),
-              _barItem(TabItemType.meeting),
-            ],
-            currentIndex: provider.selectedIndex,
-            selectedItemColor: AppColors.primary,
-            selectedFontSize: 12,
-            unselectedFontSize: 12,
-            unselectedItemColor: AppColors.darkGrey,
-            onTap: (index) => provider.onItemTapped(index),
-          )),
+          bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.grey,
+                    blurRadius: 0.1,
+                  ),
+                ],
+              ),
+              child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: AppColors.background,
+                showUnselectedLabels: true,
+                items: <BottomNavigationBarItem>[
+                  _barItem(TabItemType.user),
+                  _barItem(TabItemType.meeting),
+                ],
+                currentIndex: provider.selectedIndex,
+                selectedItemColor: AppColors.primary,
+                selectedFontSize: 12,
+                unselectedFontSize: 12,
+                unselectedItemColor: AppColors.darkGrey,
+                onTap: (index) => provider.onItemTapped(index),
+              )),
+        );
+      }
     );
   }
 

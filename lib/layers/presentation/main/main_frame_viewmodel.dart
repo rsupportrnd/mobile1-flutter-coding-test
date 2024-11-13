@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/layers/presentation/meeting/meeting_room_list_view.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_view.dart';
 
 /// ChangeNotifier를 사용하여 BottomNavigationBar의
@@ -10,12 +11,14 @@ class MainFrameViewModel extends ChangeNotifier {
   int get selectedIndex => _selectedIndex;
 
   /// BottomNavigationBar 아이템 구성
-  final List<Widget> _widgetOptions = [];
+  List<Widget> _widgetOptions = [];
   List<Widget> get widgetOptions => _widgetOptions;
 
   MainFrameViewModel() {
-    _widgetOptions.add(const UserListView());
-    _widgetOptions.add(const UserListView());
+    _widgetOptions = [
+      const UserListView(),
+      const MeetingRoomListView(),
+    ];
   }
 
   /// Handles item selection in the bottom navigation bar.
