@@ -68,7 +68,7 @@ class AppDim {
   static const double imageSmall  = 50;
   static const double imageSmallMedium  = 60;
   static const double imageMedium = 70;
-  static const double imageMediumLarge = 100;
-  static const double imageLarge  = 200;
-  static const double imageXlarge = 250;
+  static const double imageMediumLarge = 90;
+  static const double imageLarge  = 150;
+  static const double imageXlarge = 200;
 }
