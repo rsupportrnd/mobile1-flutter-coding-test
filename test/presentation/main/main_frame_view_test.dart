@@ -10,35 +10,28 @@ import 'package:provider/provider.dart';
 
 void main() {
   group('MainFrameView Tests', () {
-    testWidgets('MainFrameView에 BottomNavigationBar가 표시되는지 확인합니다.', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => MainFrameViewModel()),
-            ChangeNotifierProvider(create: (context) => UserListViewModel()),
-          ],
-          child: const MaterialApp(
-            home: MainFrameView(),
-          ),
+
+    Widget createTestableWidget() {
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => MainFrameViewModel()),
+          ChangeNotifierProvider(create: (context) => UserListViewModel()),
+        ],
+        child: const MaterialApp(
+          home: MainFrameView(),
         ),
       );
+    }
+
+    testWidgets('MainFrameView에 BottomNavigationBar가 표시되는지 확인합니다.', (WidgetTester tester) async {
+      await tester.pumpWidget(createTestableWidget());
 
       // BottomNavigationBar가 한 개 존재하는지 확인 한다
       expect(find.byType(BottomNavigationBar), findsOneWidget);
     });
 
     testWidgets('MainFrameView에 BottomNavigationBar 탭 했을 때 화면이 전환되는지 확인합니다. ', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => MainFrameViewModel()),
-            ChangeNotifierProvider(create: (context) => UserListViewModel()),
-          ],
-          child: const MaterialApp(
-            home: MainFrameView(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestableWidget());
 
       final context = tester.element(find.byType(MainFrameView));
       final mainFrameViewModel = Provider.of<MainFrameViewModel>(context, listen: false);
