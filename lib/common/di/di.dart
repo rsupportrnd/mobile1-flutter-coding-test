@@ -9,4 +9,5 @@ final locator = GetIt.instance;
 initLocator() {
   locator.registerLazySingleton<RemoteDataSource>(() => RemoteDataSource());
   locator.registerLazySingleton<UserRepository>(() => UserRepositoryImp(locator<RemoteDataSource>()));
+  locator.registerLazySingleton<FetchUsersUseCase>(() => FetchUsersUseCase());
 }

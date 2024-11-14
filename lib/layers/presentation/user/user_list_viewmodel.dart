@@ -19,14 +19,16 @@ class UserListViewModel extends ChangeNotifier {
   List<User> _userList = [];
   List<User> get userList => _userList;
 
-  UserListViewModel() {
-    fetchUserList();
-  }
+  /// 사용자 리스트를 가져오기 위한 UseCase
+  final FetchUsersUseCase _useCase;
+
+  UserListViewModel([FetchUsersUseCase? useCase]) : _useCase = useCase ?? locator();
+
 
   /// 서버로부터 사용자 리스트를 가져옵니다.
   Future<void> fetchUserList() async {
     try {
-      final users = await FetchUsersUseCase().execute();
+      final users = await _useCase.execute();
       _userList = List.from(users);
     }
     /// DioException이 발생하면 DioExceptions 클래스를 사용하여 오류를 처리 제외
