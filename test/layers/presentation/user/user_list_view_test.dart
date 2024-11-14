@@ -7,12 +7,11 @@ import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_view.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/widget/user_tile.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import '../../../mock/presentation/mock_user_list_viewmodel.dart';
 
-@GenerateMocks([UserListViewModel])
+//@GenerateMocks([UserListViewModel])
 void main() {
   late MockUserListViewModel mockViewModel;
 

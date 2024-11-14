@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../../entity/user_dto.dart';
 
-class RemoteDataSource {
+class RemoteDataSources {
   Future<List<UserDTO>> fetchUsers() async {
     try {
       // JSON 파일을 읽고 데이터를 디코딩합니다.

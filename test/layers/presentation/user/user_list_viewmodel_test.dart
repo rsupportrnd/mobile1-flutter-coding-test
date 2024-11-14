@@ -8,7 +8,7 @@ import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import '../../../mock/domain/usecase/mock_fetch_users_usecase.dart';
 
 
-@GenerateMocks([FetchUsersUseCase])
+//@GenerateMocks([FetchUsersUseCase])
 void main() {
   late UserListViewModel viewModel;
   late MockFetchUsersUseCase mockFetchUsersUseCase;

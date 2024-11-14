@@ -6,9 +6,9 @@ import '../../domain/repository/user_repository.dart';
 import '../source/source.dart';
 
 class UserRepositoryImp implements UserRepository {
-  final RemoteDataSource _remoteDataSource;
+  final RemoteDataSources _remoteDataSource;
 
-  UserRepositoryImp([RemoteDataSource? dataSource])
+  UserRepositoryImp([RemoteDataSources? dataSource])
       : _remoteDataSource = dataSource ?? locator();
 
   @override

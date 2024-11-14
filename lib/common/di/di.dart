@@ -7,7 +7,7 @@ import '../../layers/domain/domain.dart';
 final locator = GetIt.instance;
 
 initLocator() {
-  locator.registerLazySingleton<RemoteDataSource>(() => RemoteDataSource());
-  locator.registerLazySingleton<UserRepository>(() => UserRepositoryImp(locator<RemoteDataSource>()));
+  locator.registerLazySingleton<RemoteDataSources>(() => RemoteDataSources());
+  locator.registerLazySingleton<UserRepository>(() => UserRepositoryImp(locator<RemoteDataSources>()));
   locator.registerLazySingleton<FetchUsersUseCase>(() => FetchUsersUseCase());
 }

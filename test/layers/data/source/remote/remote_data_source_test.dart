@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/layers/data/data.dart';
-import 'package:mockito/annotations.dart';
+
 import 'package:mockito/mockito.dart';
 
 import '../../../../mock/utils/mocks_asset_bundle.dart';
 
-@GenerateMocks([AssetBundle])
+//@GenerateMocks([AssetBundle])
 void main() {
   // 테스트를 위한 Flutter Binding 초기화
   TestWidgetsFlutterBinding.ensureInitialized();

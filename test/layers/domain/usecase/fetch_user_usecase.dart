@@ -1,13 +1,12 @@
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 
 import '../../../mock/domain/repository/mock_user_repository.dart';
 
 
-@GenerateMocks([UserRepository])
+//@GenerateMocks([UserRepository])
 void main() {
   late FetchUsersUseCase fetchUsersUseCase;
   late MockUserRepository mockUserRepository;
