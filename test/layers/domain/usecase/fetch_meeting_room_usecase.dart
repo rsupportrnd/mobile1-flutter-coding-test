@@ -16,7 +16,7 @@ void main() {
     mockMeetingRepository = MockMeetingRepository();
     fetchMeetingRoomUseCase = FetchMeetingRoomUseCase(mockMeetingRepository);
 
-    // 테스트용 사용자 목록 생성
+    // 테스트용 회의 목록 생성
     mockMeetingRoom = [
       MeetingRoom(
         roomId: "room6",
@@ -49,7 +49,6 @@ void main() {
     test('fetchMeetingRoom가 성공하면 회의 목록을 반환을 확인한다.', () async {
       when(mockMeetingRepository.fetchMeetingRoom()).thenAnswer((_) async => mockMeetingRoom);
 
-      // 유스케이스 실행
       final result = await fetchMeetingRoomUseCase.execute();
 
       // 결과 확인
@@ -57,7 +56,7 @@ void main() {
       verify(mockMeetingRepository.fetchMeetingRoom()).called(1);
     });
 
-    test('fetchMeetingRoom 가  예외를 적용할 때 오류를 확인한다.', () async {
+    test('fetchMeetingRoom가 예외를 적용할 때 오류를 확인한다.', () async {
       when(mockMeetingRepository.fetchMeetingRoom()).thenThrow(Exception("Failed to fetch meeting room"));
 
       // 예외 발생 여부 검증

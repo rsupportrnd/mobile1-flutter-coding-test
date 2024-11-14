@@ -7,7 +7,6 @@ import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 
 import 'meeting_room_list_viewmodel_test.mocks.dart';
 
-
 @GenerateMocks([FetchMeetingRoomUseCase])
 void main() {
   late MeetingRoomListViewModel viewModel;
@@ -56,7 +55,7 @@ void main() {
       expect(viewModel.meetingRoomList, []);
 
       await viewModel.fetchMeetingRoomList();
-      // fetchUserList 호출 시 상태가 올바르게 변하는지 확인
+      // fetchMeetingRoomList 호출 시 상태가 올바르게 변하는지 확인
       expect(viewModel.isLoading, false);
       expect(viewModel.isError, false);
       expect(viewModel.errorMessage, '');
