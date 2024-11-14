@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'common/common.dart';
 import 'layers/presentation/main/main_frame_view.dart';
 import 'layers/presentation/main/main_frame_viewmodel.dart';
+import 'layers/presentation/meeting/meeting_room_list_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,11 +14,15 @@ void main() async {
   /// Initialize the locator
   initLocator();
 
+  /// Initialize
+  await initializeDateFormatting();
+
   runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_)=> MainFrameViewModel()),
           ChangeNotifierProvider(create: (_)=> UserListViewModel()),
+          ChangeNotifierProvider(create: (_)=> MeetingRoomListViewModel()),
         ],
         child: const App(),
   ));
