@@ -7,7 +7,6 @@ import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart' as _i4;
-import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
