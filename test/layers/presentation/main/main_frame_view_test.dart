@@ -5,11 +5,13 @@ import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/main/main_frame_view.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/main/main_frame_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/meeting/meeting_room_list_view.dart';
+import 'package:mobile1_flutter_coding_test/layers/presentation/meeting/meeting_room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_view.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../../mock/domain/usecase/mock_fetch_users_usecase.dart';
+import '../meeting/meeting_room_list_viewmodel_test.mocks.dart';
 
 
 void main() {
@@ -17,6 +19,7 @@ void main() {
 
   setUp(() {
     getIt.registerSingleton<FetchUsersUseCase>(MockFetchUsersUseCase());
+    getIt.registerSingleton<FetchMeetingRoomUseCase>(MockFetchMeetingRoomUseCase());
   });
 
   tearDown(() {
@@ -28,8 +31,9 @@ void main() {
     Widget createTestableWidget() {
       return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => MainFrameViewModel()),
-          ChangeNotifierProvider(create: (context) => UserListViewModel()),
+          ChangeNotifierProvider(create: (_)=> MainFrameViewModel()),
+          ChangeNotifierProvider(create: (_)=> UserListViewModel()),
+          ChangeNotifierProvider(create: (_)=> MeetingRoomListViewModel()),
         ],
         child: const MaterialApp(
           home: MainFrameView(),
