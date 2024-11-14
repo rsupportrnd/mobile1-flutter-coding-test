@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/common/common.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/widget/user_tile.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/widgets/future_handler.dart';
 import 'package:provider/provider.dart';
 
-import '../../domain/usecase/user_usecase.dart';
 
 /// 유저 리스트 화면
 class UserListView extends StatefulWidget {

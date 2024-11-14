@@ -37,7 +37,6 @@ class MeetingRoomListViewModel extends ChangeNotifier {
     //notifyError(msg);
     //}
     catch(e) {
-      print(e);
       notifyError(AppStrings.unexpectedError);
     }
     finally {
