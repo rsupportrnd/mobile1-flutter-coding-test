@@ -25,6 +25,8 @@ class _UserListViewState extends State<UserListView> {
     });
   }
 
+  /// Issue: user.json user7의 profilePicture 404 에러 발생
+  /// HttpException: Invalid statusCode: 404, uri = https://picsum.photos/id/1017/200/200
   @override
   Widget build(BuildContext context) {
     return Consumer<UserListViewModel>(
