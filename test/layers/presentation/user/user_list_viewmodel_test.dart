@@ -18,19 +18,19 @@ void main() {
     viewModel = UserListViewModel(mockFetchUsersUseCase);
     mockUsers = [
       User(
-        id: '1',
-        name: 'Test User',
-        email: 'admin@admin.com',
-        profilePictureUrl: 'https://test.com1',
+        id: 'user1',
+        name: 'Alice Kim',
+        email: 'alice.kim@example.com',
+        profilePictureUrl: 'https://picsum.photos/id/1011/200/200',
         status: UserStatus.online,
         role: UserRole.admin,
       ),
       User(
-        id: '2',
-        name: 'Test User2',
-        email: 'member@member.com',
-        profilePictureUrl: 'https://test.com2',
-        status: UserStatus.online,
+        id: 'user2',
+        name: 'Bob Lee',
+        email: 'bob.lee@example.com',
+        profilePictureUrl: 'https://picsum.photos/id/1012/200/200',
+        status: UserStatus.offline,
         role: UserRole.member,
       )
     ];
