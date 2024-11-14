@@ -7,7 +7,6 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../mock/utils/mocks_asset_bundle.dart';
 
-//@GenerateMocks([AssetBundle])
 void main() {
   // 테스트를 위한 Flutter Binding 초기화
   TestWidgetsFlutterBinding.ensureInitialized();
