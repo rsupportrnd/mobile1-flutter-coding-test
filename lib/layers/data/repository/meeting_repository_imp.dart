@@ -15,7 +15,7 @@ class MeetingRepositoryImp implements MeetingRepository {
         final response = await _remoteDataSource.fetchMeetingRoom();
         return MeetingMapper.toDomainList(response);
       } catch (e) {
-        throw Exception('Failed to load users : $e');
+        throw Exception('Failed to load meeting room : $e');
       }
   }
 }
