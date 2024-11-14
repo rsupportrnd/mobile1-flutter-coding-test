@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/main/main_frame_view.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/main/main_frame_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/meeting/meeting_room_list_view.dart';
@@ -7,8 +9,20 @@ import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_v
 import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../mock/domain/usecase/mock_fetch_users_usecase.dart';
+
 
 void main() {
+  final getIt = GetIt.instance;
+
+  setUp(() {
+    getIt.registerSingleton<FetchUsersUseCase>(MockFetchUsersUseCase());
+  });
+
+  tearDown(() {
+    getIt.reset();
+  });
+
   group('MainFrameView Tests', () {
 
     Widget createTestableWidget() {
