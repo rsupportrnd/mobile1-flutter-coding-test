@@ -89,7 +89,7 @@ class MessageItem extends StatelessWidget {
         radius: 18,
         backgroundColor: Colors.blueGrey.shade100,
         child: StyleText(
-          text: '${chatMessage.sender[0]}${chatMessage.sender[4] ?? ''}',
+          text: '${chatMessage.sender[0]}${chatMessage.sender[chatMessage.sender.length-1]}',
           color: Colors.black87,
           size: AppDim.fontSizeSmall,
           fontWeight: AppDim.weightBold,

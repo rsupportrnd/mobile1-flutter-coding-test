@@ -1,67 +1,110 @@
-
-
 import 'package:flutter/material.dart';
-
 import '../../../common/common.dart';
+import '../../domain/authorization.dart';
 import '../../domain/domain.dart';
 
 class ChatViewModel extends ChangeNotifier {
-
-  /// state variables
+  /// 상태 변수
   bool _isLoading = true;
   bool _isError = false;
   String _errorMessage = '';
 
-  /// state getter
+  String _roomId = '';
+  List<ChatMessage> _chatMessageList = [];
+  final TextEditingController _chatComposerController = TextEditingController();
+
+  // 상태 getter
   bool get isLoading => _isLoading;
   bool get isError => _isError;
   String get errorMessage => _errorMessage;
-
-  List<ChatMessage> _chatMessageList = [];
   List<ChatMessage> get chatMessageList => _chatMessageList;
+  TextEditingController get chatComposerController => _chatComposerController;
 
+  /// UseCase 인스턴스
+  final FetchChatMessageUseCase _fetchChatMessageUseCase;
+  final AddChatMessageUseCase _addChatMessageUseCase;
+  final GetAllChatMessageUseCase _getAllChatMessageUseCase;
 
-  /// 회의목록 리스트를 가져오기 위한 UseCase
-  final FetchChatMessageUseCase _useCase;
+  ChatViewModel({
+    FetchChatMessageUseCase? fetchChatMessageUseCase,
+    AddChatMessageUseCase? addChatMessageUseCase,
+    GetAllChatMessageUseCase? getAllChatMessageUseCase,
+  })  : _fetchChatMessageUseCase = fetchChatMessageUseCase ?? locator(),
+        _addChatMessageUseCase = addChatMessageUseCase ?? locator(),
+        _getAllChatMessageUseCase = getAllChatMessageUseCase ?? locator();
 
-  ChatViewModel([FetchChatMessageUseCase? useCase]) : _useCase = useCase ?? locator();
+  /// 방 ID 초기화
+  void initRoomId(String roomId) {
+    _roomId = roomId;
+  }
 
+  /// 채팅 메시지 목록을 가져오는 함수
   Future<void> fetchChatMessageList() async {
-    print('fetchChatMessageList 실행');
     try {
-      final users = await _useCase.execute();
-      _chatMessageList = List.from(users);
-
-      for(var i  in _chatMessageList){
-        print(i.messageId);
+      // 로컬 메시지 로드
+      final localMessages = _getAllChatMessageUseCase.execute();
+      if (localMessages.isNotEmpty) {
+        _chatMessageList = List.from(localMessages.reversed);
+      } else {
+        // 로컬에 데이터가 없다면 API 호출
+        await _fetchAndStoreChatMessages();
       }
-
-    }
-    /// DioException이 발생하면 DioExceptions 클래스를 사용하여 오류를 처리 제외
-    //on DioException catch (e) {
-    //final msg = DioExceptions.fromDioError(e).toString();
-    //notifyError(msg);
-    //}
-    catch(e) {
-      print(e);
-      notifyError(AppStrings.unexpectedError);
-    }
-    finally {
+    } catch (e) {
+      _notifyError(AppStrings.unexpectedError);
+    } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  void onChangedTextComposer(String value) {
+  /// 외부 API 호출하여 메시지 가져오고 로컬에 저장하는 함수
+  Future<void> _fetchAndStoreChatMessages() async {
+    final chatMessages = await _fetchChatMessageUseCase.execute();
+    _chatMessageList = List.from(chatMessages.reversed);
+    if (_chatMessageList.isNotEmpty) {
+      await _addChatMessageUseCase.execute(_chatMessageList);
+    }
+  }
+
+  /// 메시지 전송 함수
+  void sendMessage() async {
+    final inputMessage = _createChatMessage();
+    await _addChatMessageUseCase.execute([inputMessage]); // 로컬 DB에 메시지 저장
+
+    // 로컬 메시지 로드
+    final localMessages = _getAllChatMessageUseCase.execute();
+    _chatMessageList.insert(0, inputMessage); // 새로운 메시지를 리스트에 추가
     notifyListeners();
+
+    _logLocalMessages(localMessages); // 로컬 DB에서 메시지 출력
+
+    chatComposerController.clear(); // 메시지 입력창 초기화
   }
 
-  void sendMessage() {
+  /// 새로운 채팅 메시지를 생성하는 함수
+  ChatMessage _createChatMessage() {
+    return ChatMessage(
+      roomId: _roomId,
+      messageId: 'msg${_chatMessageList.length + 1}',
+      sender: Authorization().userId,
+      content: chatComposerController.text,
+      timestamp: DateTime.now(),
+    );
   }
 
+  /// 로컬 DB에서 가져온 메시지 로그 출력
+  void _logLocalMessages(List<ChatMessage> localMessages) {
+    if (localMessages.isNotEmpty) {
+      for (var message in localMessages) {
+        print('LocalDB에서 가져온: ${message.messageId}');
+      }
+    } else {
+      print('로컬 DB에서 메시지 없음');
+    }
+  }
 
-  /// 회의 리스트를 다시 가져오기 위해 호출됩니다.
-  onRetry() {
+  /// 실패 시 재시도 함수
+  void onRetry() {
     _isLoading = true;
     _isError = false;
     _chatMessageList.clear();
@@ -70,8 +113,8 @@ class ChatViewModel extends ChangeNotifier {
     fetchChatMessageList();
   }
 
-  /// 오류 발생 시 오류 상태와 메시지를 업데이트합니다.
-  notifyError(String errorMsg) {
+  /// 오류 발생 시 오류 상태 및 메시지 업데이트
+  void _notifyError(String errorMsg) {
     _isLoading = false;
     _isError = true;
     _errorMessage = errorMsg;

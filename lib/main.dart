@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Initialize the locator
-  initLocator();
+  await initLocator();
 
   /// Initialize
   await initializeDateFormatting();

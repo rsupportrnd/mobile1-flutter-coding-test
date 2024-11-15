@@ -31,6 +31,12 @@ class Etc {
   /// font size fixation
   static MediaQueryData getScaleFontSize(BuildContext context, {double fontSize = 1.0}){
     final mqData = MediaQuery.of(context);
-    return mqData.copyWith(textScaleFactor: fontSize);
+    return mqData.copyWith(textScaler: TextScaler.linear(fontSize));
+  }
+
+  // ISO 8601 형식으로 변환
+  static String timestampFormatDate(DateTime dateTime) {
+    final DateFormat formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    return formatter.format(dateTime.toUtc()); // UTC 시간으로 변환하여 'Z'를 붙임
   }
 }

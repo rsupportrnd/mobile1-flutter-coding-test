@@ -9,10 +9,12 @@ import 'widget/text_composer.dart';
 
 class ChatView extends StatefulWidget {
   final String title;
+  final String roomId;
 
   const ChatView({
     super.key,
     required this.title,
+    required this.roomId,
   });
 
   @override
@@ -25,7 +27,9 @@ class _ChatViewState extends State<ChatView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ChatViewModel>(context, listen: false).fetchChatMessageList();
+      final provider = Provider.of<ChatViewModel>(context, listen: false);
+      provider.initRoomId(widget.roomId); // 방 아이디 초기화
+      provider.fetchChatMessageList(); // 채팅 메시지 목록 가져오기
     });
   }
 
@@ -35,7 +39,8 @@ class _ChatViewState extends State<ChatView> {
         appBarTitle: widget.title,
         isDefaultPadding: false,
         isKeyboardHide: true,
-        body: Consumer<ChatViewModel>(builder: (context, provider, child) {
+        body: Consumer<ChatViewModel>
+          (builder: (context, provider, child) {
           return FutureHandler(
             isLoading: provider.isLoading,
             isError: provider.isError,
@@ -43,13 +48,13 @@ class _ChatViewState extends State<ChatView> {
             onRetry: provider.onRetry,
             child: Column(
               children: [
-                /// 문자 리스트(말풍선 리스트) Widget
+                /// 문자 리스트(말풍선 리스트)
                 MessageList(
                   chatMessages: provider.chatMessageList,
                 ),
 
                 /// 메시지 입력란
-                const TextComposer()
+                const TextComposer(),
               ],
             ),
           );

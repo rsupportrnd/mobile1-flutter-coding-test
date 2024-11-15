@@ -18,7 +18,10 @@ class MeetingRoomTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Nav.doPush(context, ChatView(title: meetingRoom.roomName));
+        Nav.doPush(context, ChatView(
+            title: meetingRoom.roomName,
+            roomId: meetingRoom.roomId,
+        ));
       },
       child: Container(
         height: UIConstants.tileHeight90,

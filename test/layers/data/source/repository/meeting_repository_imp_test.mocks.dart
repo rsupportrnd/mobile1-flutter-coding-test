@@ -5,6 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:mobile1_flutter_coding_test/layers/data/entity/chat_message_dto.dart'
+    as _i6;
 import 'package:mobile1_flutter_coding_test/layers/data/entity/meeting_room_dto.dart'
     as _i5;
 import 'package:mobile1_flutter_coding_test/layers/data/entity/user_dto.dart'
@@ -53,4 +55,15 @@ class MockRemoteDataSources extends _i1.Mock implements _i2.RemoteDataSources {
         returnValue:
             _i3.Future<List<_i5.MeetingRoomDTO>>.value(<_i5.MeetingRoomDTO>[]),
       ) as _i3.Future<List<_i5.MeetingRoomDTO>>);
+
+  @override
+  _i3.Future<List<_i6.ChatMessageDTO>> fetchChatMessage() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchChatMessage,
+          [],
+        ),
+        returnValue:
+            _i3.Future<List<_i6.ChatMessageDTO>>.value(<_i6.ChatMessageDTO>[]),
+      ) as _i3.Future<List<_i6.ChatMessageDTO>>);
 }
