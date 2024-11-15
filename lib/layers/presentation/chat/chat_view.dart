@@ -36,11 +36,11 @@ class _ChatViewState extends State<ChatView> {
   @override
   Widget build(BuildContext context) {
     return FrameScaffold(
-        appBarTitle: widget.title,
-        isDefaultPadding: false,
-        isKeyboardHide: true,
-        body: Consumer<ChatViewModel>
-          (builder: (context, provider, child) {
+      appBarTitle: widget.title,
+      isDefaultPadding: false,
+      isKeyboardHide: true,
+      body: Consumer<ChatViewModel>(
+        builder: (context, provider, child) {
           return FutureHandler(
             isLoading: provider.isLoading,
             isError: provider.isError,
@@ -58,6 +58,8 @@ class _ChatViewState extends State<ChatView> {
               ],
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }

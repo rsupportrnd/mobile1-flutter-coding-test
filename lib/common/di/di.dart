@@ -11,14 +11,14 @@ initLocator() async {
   await Hive.initFlutter(); // Hive 초기화
   Hive.registerAdapter(ChatMessageDAOAdapter()); // Message 모델 어댑터 등록
   var chatBox = await Hive.openBox<ChatMessageDAO>('chat'); // Hive Box 열기
-  locator.registerSingleton<ChatLocalDataSource>(ChatLocalDataSource(chatBox));
+  locator.registerSingleton<LocalDataSource>(LocalDataSource(chatBox));
 
   locator.registerLazySingleton<RemoteDataSources>(() => RemoteDataSources());
 
   locator.registerLazySingleton<UserRepository>(() => UserRepositoryImp(locator<RemoteDataSources>()));
   locator.registerLazySingleton<MeetingRepository>(() => MeetingRepositoryImp(locator<RemoteDataSources>()));
   locator.registerLazySingleton<ChatRepository>(() => ChatRemoteRepositoryImp(locator<RemoteDataSources>()));
-  locator.registerLazySingleton<ChatLocalRepository>(() => ChatLocalRepositoryImp(locator<ChatLocalDataSource>()));
+  locator.registerLazySingleton<ChatLocalRepository>(() => ChatLocalRepositoryImp(locator<LocalDataSource>()));
 
   locator.registerLazySingleton<FetchUsersUseCase>(() => FetchUsersUseCase());
   locator.registerLazySingleton<FetchMeetingRoomUseCase>(() => FetchMeetingRoomUseCase());

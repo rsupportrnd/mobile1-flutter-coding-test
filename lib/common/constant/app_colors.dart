@@ -17,4 +17,6 @@ class AppColors {
 
   static Color background = const Color(0xFFFAFAFA);
   static Color textFieldBg = const Color(0xffededed);
+
+  static Color blueGrey = Colors.blueGrey.shade100;
 }

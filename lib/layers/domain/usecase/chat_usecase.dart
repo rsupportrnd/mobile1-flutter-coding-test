@@ -15,7 +15,7 @@ class FetchChatMessageUseCase implements UseCase<List<ChatMessage>, void> {
   }
 }
 
-/// local 채팅 메시지 저장 유스케이스
+/// Local 채팅 메시지 저장하는 유스케이스
 class AddChatMessageUseCase implements ParamUseCase<void, List<ChatMessage>> {
   final ChatLocalRepository _chatRepository;
 
@@ -28,7 +28,7 @@ class AddChatMessageUseCase implements ParamUseCase<void, List<ChatMessage>> {
   }
 }
 
-/// local 채팅 메시지 모두 불러오기 유스케이스
+/// Local 채팅 메시지 모두 불러오는 유스케이스
 class GetAllChatMessageUseCase implements SyncUseCase<List<ChatMessage>, void> {
   final ChatLocalRepository _chatRepository;
 

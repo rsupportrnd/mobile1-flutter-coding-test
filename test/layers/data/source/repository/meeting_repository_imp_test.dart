@@ -1,14 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/layers/data/data.dart';
-import 'package:mobile1_flutter_coding_test/layers/data/entity/meeting_room_dto.dart';
-import 'package:mobile1_flutter_coding_test/layers/data/repository/meeting_repository_imp.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'meeting_repository_imp_test.mocks.dart';
-
-
 
 @GenerateMocks([RemoteDataSources])
 void main() {

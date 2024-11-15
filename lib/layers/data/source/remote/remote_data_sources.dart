@@ -22,13 +22,12 @@ class RemoteDataSources {
     }
   }
 
-
   Future<List<MeetingRoomDTO>> fetchMeetingRoom() async {
     try {
       // JSON 파일을 읽고 데이터를 디코딩합니다.
       final response = await rootBundle.loadString('assets/api/rooms.json');
 
-      // JSON 문자열을 디코딩하여 'users' 키에서 리스트를 추출
+      // JSON 문자열을 디코딩하여 'chatRooms' 키에서 리스트를 추출
       List<dynamic> jsonList = json.decode(response)['chatRooms'];
 
       return MeetingRoomDTO.jsonList(jsonList);
@@ -36,7 +35,6 @@ class RemoteDataSources {
       throw Exception('$e');
     }
   }
-
 
   Future<List<ChatMessageDTO>> fetchChatMessage() async {
     try {

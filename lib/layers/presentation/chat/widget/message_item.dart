@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/authorization.dart';
 
 import '../../../../common/common.dart';
@@ -33,13 +32,13 @@ class MessageItem extends StatelessWidget {
   _buildTimestamp(DateTime timestamp, bool isMe) {
     return Padding(
       padding: isMe
-          ? const EdgeInsets.only(right: 5)
-          : const EdgeInsets.only(left: 5),
+          ? const EdgeInsets.only(right: AppDim.xSmall)
+          : const EdgeInsets.only(left: AppDim.xSmall),
       child: StyleText(
-        text: DateFormat('yyyy.MM.dd\na hh:mm', 'ko_KR').format(timestamp),
+        text: Etc.timestampToDateString(timestamp),
         size: AppDim.fontSizeXxSmall,
         maxLinesCount: 2,
-        color: Colors.black,
+        color: AppColors.black,
       ),
     );
   }
@@ -52,19 +51,24 @@ class MessageItem extends StatelessWidget {
       children: [
         Visibility(
             visible: !isMe,
-            child: StyleText(text: chatMessage.sender, size: AppDim.fontSizeXSmall,)),
+            child: StyleText(
+              text: chatMessage.sender,
+              size: AppDim.fontSizeXSmall,
+            )),
         AppDim.heightXSmall,
 
         Row(
           children: [
-            if(isMe) _buildTimestamp(chatMessage.timestamp, isMe),
+            if (isMe) _buildTimestamp(chatMessage.timestamp, isMe),
             ChatBubble(
               elevation: UIConstants.elevation2,
               clipper: ChatBubbleClipper5(
                   type: isMe ? BubbleType.sendBubble : BubbleType.receiverBubble),
               alignment: isMe ? Alignment.topRight : Alignment.topLeft,
-              margin: EdgeInsets.only(right: isMe ? 5 : 0, bottom: 15),
-              backGroundColor: isMe ? AppColors.bubbleColor : Colors.grey.shade100,
+              margin: EdgeInsets.only(
+                  right: isMe ? AppDim.xSmall : 0, bottom: AppDim.medium),
+              backGroundColor:
+                  isMe ? AppColors.bubbleColor : Colors.grey.shade100,
               child: Container(
                 constraints: BoxConstraints(maxWidth: maxWidth),
                 child: StyleText(
@@ -75,27 +79,26 @@ class MessageItem extends StatelessWidget {
                 ),
               ),
             ),
-            if(!isMe)_buildTimestamp(chatMessage.timestamp, isMe),
+            if (!isMe) _buildTimestamp(chatMessage.timestamp, isMe),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildSenderAvatar() {
+  _buildSenderAvatar() {
     return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
+      padding: const EdgeInsets.only(right: AppDim.xSmall),
       child: CircleAvatar(
-        radius: 18,
-        backgroundColor: Colors.blueGrey.shade100,
+        radius: AppDim.mediumLarge,
+        backgroundColor: AppColors.blueGrey,
         child: StyleText(
-          text: '${chatMessage.sender[0]}${chatMessage.sender[chatMessage.sender.length-1]}',
-          color: Colors.black87,
+          text: '${chatMessage.sender[0]}${chatMessage.sender[chatMessage.sender.length - 1]}',
+          color: AppColors.black,
           size: AppDim.fontSizeSmall,
           fontWeight: AppDim.weightBold,
         ),
       ),
     );
   }
-
 }

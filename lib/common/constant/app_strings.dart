@@ -19,10 +19,7 @@ class AppStrings {
   static const String admin = '관리자';
   static const String member = '팀원';
 
-
-
-
-
+  static const String sendMessageHint = '메시지를 입력하세요.';
   // Error messages
   static const String unexpectedError = '죄송합니다.\n예기치 않은 문제가 발생했습니다.';
 

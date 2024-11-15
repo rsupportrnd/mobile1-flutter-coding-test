@@ -27,7 +27,6 @@ class MeetingRoomListViewModel extends ChangeNotifier {
 
   /// 서버로부터 회의 목록을 가져옵니다.
   Future<void> fetchMeetingRoomList() async {
-    print('fetchMeetingRoomList 호출');
     try {
       final users = await _useCase.execute();
       _meetingRoomList = List.from(users);

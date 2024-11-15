@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/layers/data/data.dart';
-import 'package:mobile1_flutter_coding_test/layers/data/entity/meeting_room_dto.dart';
 
 import 'package:mockito/mockito.dart';
 
@@ -123,7 +122,5 @@ void main() {
       // 예외가 발생하는지 확인
       expect(() => mockAssetBundle.loadString('assets/api/rooms.json'), throwsException);
     });
-
-
   });
 }

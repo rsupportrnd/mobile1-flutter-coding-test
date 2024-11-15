@@ -11,7 +11,6 @@ class ChatRemoteRepositoryImp implements ChatRepository {
 
   @override
   Future<List<ChatMessage>> fetchChatMessage() async {
-    print('fetchChatMessage 호출');
     try {
       final response = await _remoteDataSource.fetchChatMessage();
       return ChatMapper.romteToDomainList(response);
@@ -23,16 +22,13 @@ class ChatRemoteRepositoryImp implements ChatRepository {
 
 
 class ChatLocalRepositoryImp implements ChatLocalRepository{
-  final ChatLocalDataSource _localDataSource;
+  final LocalDataSource _localDataSource;
 
-  ChatLocalRepositoryImp([ChatLocalDataSource? dataSource])
+  ChatLocalRepositoryImp([LocalDataSource? dataSource])
       : _localDataSource = dataSource ?? locator();
 
   @override
   Future<void> addMessage(List<ChatMessage> messages) async {
-    print('addMessage 호출');
-
-    ///TODO: return message가 필요!
     try {
       await _localDataSource.addMessages(messages);
     } catch (e) {
@@ -42,7 +38,6 @@ class ChatLocalRepositoryImp implements ChatLocalRepository{
 
   @override
   List<ChatMessage> getAllMessages() {
-    print('getAllMessages 호출');
     try {
       final response = _localDataSource.getAllMessages();
       return ChatMapper.localToDomainList(response);

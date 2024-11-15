@@ -5,7 +5,6 @@ import '../../../domain/model/chat_message.dart';
 import 'message_item.dart';
 
 class MessageList extends StatelessWidget {
-
   final List<ChatMessage> chatMessages;
 
   const MessageList({
