@@ -40,6 +40,7 @@ class AppDim {
 
   // 폰트 크기
   static const double scaleFontSize = 1.0;
+  static const double fontSizeXxSmall = 10.0;
   static const double fontSizeXSmall = 12.0;
   static const double fontSizeSmall = 14.0;
   static const double fontSizeMedium = 16.0;

@@ -9,6 +9,7 @@ class FrameScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final bool isKeyboardHide;
   final bool isDefaultPadding;
+  final Color backgroundColor;
 
   const FrameScaffold({
     super.key,
@@ -17,6 +18,7 @@ class FrameScaffold extends StatelessWidget {
     required this.body,
     this.bottomNavigationBar,
     this.isDefaultPadding = true,
+    this.backgroundColor = Colors.white,
   });
 
   @override
@@ -24,7 +26,7 @@ class FrameScaffold extends StatelessWidget {
     return GestureDetector(
       onTap: () => {if (isKeyboardHide) FocusScope.of(context).unfocus()},
       child: Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: backgroundColor,
         appBar: appBarTitle == ''
             ? null
             : AppBar(

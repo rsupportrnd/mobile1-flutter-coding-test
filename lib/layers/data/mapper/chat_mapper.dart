@@ -1,5 +1,3 @@
-import 'package:mobile1_flutter_coding_test/layers/data/entity/meeting_room_dto.dart';
-
 import '../../domain/model/model.dart';
 import '../data.dart';
 

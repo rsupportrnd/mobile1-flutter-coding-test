@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 
@@ -25,5 +26,11 @@ class Etc {
     } else {
       return DateFormat('yyyy. MM. dd.').format(targetDate?? now);
     }
+  }
+
+  /// font size fixation
+  static MediaQueryData getScaleFontSize(BuildContext context, {double fontSize = 1.0}){
+    final mqData = MediaQuery.of(context);
+    return mqData.copyWith(textScaleFactor: fontSize);
   }
 }

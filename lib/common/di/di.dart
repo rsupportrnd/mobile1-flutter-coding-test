@@ -1,8 +1,5 @@
 import 'package:get_it/get_it.dart';
-
 import '../../layers/data/data.dart';
-import '../../layers/data/repository/chat_repository_imp.dart';
-import '../../layers/data/repository/meeting_repository_imp.dart';
 import '../../layers/domain/domain.dart';
 
 /// getIt, inject, locator

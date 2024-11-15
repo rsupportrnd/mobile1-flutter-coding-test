@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/layers/presentation/chat/chat_view.dart';
 
 import '../../../../common/common.dart';
 import '../../../domain/domain.dart';
@@ -15,23 +16,28 @@ class MeetingRoomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: UIConstants.tileHeight90,
-      padding: AppDim.paddingXSmall,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildThumbnailImage(),
-              AppDim.widthSmall,
-              _buildMeetingRoomSummary(),
-            ],
-          ),
-          _buildTimestamp(),
-        ],
+    return InkWell(
+      onTap: () {
+        Nav.doPush(context, ChatView(title: meetingRoom.roomName));
+      },
+      child: Container(
+        height: UIConstants.tileHeight90,
+        padding: AppDim.paddingXSmall,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildThumbnailImage(),
+                AppDim.widthSmall,
+                _buildMeetingRoomSummary(),
+              ],
+            ),
+            _buildTimestamp(),
+          ],
+        ),
       ),
     );
   }
