@@ -11,7 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import 'meeting_room_list_view_test.mocks.dart';
+import '../../../mock/presentation/mock_meeting_room_list_viewmodel.dart';
 
 
 @GenerateMocks([MeetingRoomListViewModel])

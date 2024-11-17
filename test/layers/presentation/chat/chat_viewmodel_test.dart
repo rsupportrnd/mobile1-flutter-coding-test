@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/common/common.dart';
-import 'package:mobile1_flutter_coding_test/layers/domain/authorization.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/chat/chat_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
@@ -11,7 +9,7 @@ import '../../../mock/domain/usecase/mock_fetch_chat_message_usecase.dart';
 import '../../../mock/domain/usecase/mock_get_all_chat_message_usecase.dart';
 import '../../../mock/utils/mock_authorization.dart';
 
-@GenerateMocks([Authorization])
+//@GenerateMocks([Authorization])
 void main() {
   late ChatViewModel viewModel;
   late MockFetchChatMessageUseCase mockFetchChatMessageUseCase;

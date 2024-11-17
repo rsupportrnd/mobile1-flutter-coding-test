@@ -71,18 +71,17 @@ class ChatViewModel extends ChangeNotifier {
   }
 
   /// 메시지 전송 함수
-  void sendMessage() async {
-    final inputMessage = createChatMessage();
+  Future<void> sendMessage() async {
+    try {
+      final inputMessage = createChatMessage();
 
-    await _addChatMessageUseCase.execute([inputMessage]); // 로컬 DB에 메시지 저장
-    _chatMessageList.insert(0, inputMessage); // 새로운 메시지를 리스트에 추가
+      await _addChatMessageUseCase.execute([inputMessage]); // 로컬 DB에 메시지 저장
+      _chatMessageList.insert(0, inputMessage); // 새로운 메시지를 리스트에 추가
 
-    chatComposerController.clear(); // 메시지 입력창 초기화
-    notifyListeners();
-
-    final response = _getAllChatMessageUseCase.execute();
-    for(var i in response) {
-      print(i.messageId);
+      chatComposerController.clear(); // 메시지 입력창 초기화
+      notifyListeners();
+    } catch (e) {
+      _notifyError(AppStrings.unexpectedError);
     }
   }
 
@@ -113,5 +112,11 @@ class ChatViewModel extends ChangeNotifier {
     _isError = true;
     _errorMessage = errorMsg;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _chatComposerController.dispose();
+    super.dispose();
   }
 }

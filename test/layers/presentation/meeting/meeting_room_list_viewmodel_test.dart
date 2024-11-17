@@ -1,13 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/common/common.dart';
 import 'package:mobile1_flutter_coding_test/layers/presentation/meeting/meeting_room_list_viewmodel.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 
-import 'meeting_room_list_viewmodel_test.mocks.dart';
+import '../../../mock/domain/usecase/mock_fetch_meeting_room_usecase.dart';
 
-@GenerateMocks([FetchMeetingRoomUseCase])
+//@GenerateMocks([FetchMeetingRoomUseCase])
 void main() {
   late MeetingRoomListViewModel viewModel;
   late MockFetchMeetingRoomUseCase mockFetchMeetingRoomUseCase;

@@ -104,18 +104,28 @@ class MockChatViewModel extends _i1.Mock implements _i3.ChatViewModel {
       ) as _i6.Future<void>);
 
   @override
-  void sendMessage() => super.noSuchMethod(
+  _i6.Future<void> sendMessage() => (super.noSuchMethod(
         Invocation.method(
           #sendMessage,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  void onRetry() => super.noSuchMethod(
+        Invocation.method(
+          #onRetry,
           [],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onRetry() => super.noSuchMethod(
+  void dispose() => super.noSuchMethod(
         Invocation.method(
-          #onRetry,
+          #dispose,
           [],
         ),
         returnValueForMissingStub: null,
@@ -135,15 +145,6 @@ class MockChatViewModel extends _i1.Mock implements _i3.ChatViewModel {
         Invocation.method(
           #removeListener,
           [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
         ),
         returnValueForMissingStub: null,
       );

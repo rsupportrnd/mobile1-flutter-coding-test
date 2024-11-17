@@ -1,13 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobile1_flutter_coding_test/layers/data/data.dart';
 
 import '../../../../mock/utils/mock_box.dart';
 
-@GenerateMocks([Box<ChatMessageDAO>])
+//@GenerateMocks([Box<ChatMessageDAO>])
 void main() async {
 
   late LocalDataSource localDataSource;

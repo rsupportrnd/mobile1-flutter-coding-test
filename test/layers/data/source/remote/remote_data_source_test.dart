@@ -16,10 +16,8 @@ void main() {
   late String mockMeetingRoomJson;
 
   setUp(() {
-    // Mock AssetBundle 객체 생성
     mockAssetBundle = MockAssetBundle();
 
-    // Mock User JSON 데이터 설정
     mockUserJson = jsonEncode({
       "users": [
         {
@@ -41,7 +39,6 @@ void main() {
       ]
     });
 
-    // Mock MeetingRoom JSON 데이터 설정
     mockMeetingRoomJson = jsonEncode({
       "chatRooms": [
         {
@@ -72,12 +69,9 @@ void main() {
         },
       ]
     });
-
-
   });
 
   group('RemoteDataSource - loadString Tests', () {
-
     test('Users JSON 데이터를 성공적으로 가져오고 파싱하여 jsonString 반환을 확인한다.', () async {
       when(mockAssetBundle.loadString('assets/api/users.json')).thenAnswer((_) async => mockUserJson);
 

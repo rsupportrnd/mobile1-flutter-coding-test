@@ -11,7 +11,7 @@ import 'package:mobile1_flutter_coding_test/layers/presentation/user/user_list_v
 import 'package:provider/provider.dart';
 
 import '../../../mock/domain/usecase/mock_fetch_users_usecase.dart';
-import '../meeting/meeting_room_list_viewmodel_test.mocks.dart';
+import '../../../mock/domain/usecase/mock_fetch_meeting_room_usecase.dart';
 
 
 void main() {
