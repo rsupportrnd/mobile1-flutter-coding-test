@@ -5,8 +5,6 @@ import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 
 import '../../../mock/domain/repository/mock_user_repository.dart';
 
-
-//@GenerateMocks([UserRepository])
 void main() {
   late FetchUsersUseCase fetchUsersUseCase;
   late MockUserRepository mockUserRepository;
@@ -16,7 +14,6 @@ void main() {
     mockUserRepository = MockUserRepository();
     fetchUsersUseCase = FetchUsersUseCase(mockUserRepository);
 
-    // 테스트용 사용자 목록 생성
     mockUsers = [
       User(
         id: '1',

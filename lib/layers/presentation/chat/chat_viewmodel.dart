@@ -10,6 +10,7 @@ class ChatViewModel extends ChangeNotifier {
   String _errorMessage = '';
   String _roomId = '';
   List<ChatMessage> _chatMessageList = [];
+  List<ChatMessage> _rawMessageList = [];
   final _chatComposerController = TextEditingController();
 
   /// 상태 getter
@@ -41,6 +42,8 @@ class ChatViewModel extends ChangeNotifier {
   Future<void> fetchChatMessageList() async {
     try {
       final localMessages = _getAllChatMessageUseCase.execute(); // 로컬 메시지 로드
+      _rawMessageList = List.from(localMessages);
+
       if (localMessages.isNotEmpty) {
         _chatMessageList = List.from(
             Etc.filterMessagesByRoomId(localMessages, _roomId).reversed);
@@ -58,6 +61,7 @@ class ChatViewModel extends ChangeNotifier {
   /// 외부 API 호출하여 메시지 가져오고 로컬에 저장하는 함수
   Future<void> _fetchAndStoreChatMessages() async {
     final chatMessages = await _fetchChatMessageUseCase.execute();
+    _rawMessageList = List.from(chatMessages);
     _chatMessageList =
         List.from(Etc.filterMessagesByRoomId(chatMessages, _roomId).reversed);
 
@@ -68,20 +72,25 @@ class ChatViewModel extends ChangeNotifier {
 
   /// 메시지 전송 함수
   void sendMessage() async {
-    final inputMessage = _createChatMessage();
+    final inputMessage = createChatMessage();
 
     await _addChatMessageUseCase.execute([inputMessage]); // 로컬 DB에 메시지 저장
     _chatMessageList.insert(0, inputMessage); // 새로운 메시지를 리스트에 추가
 
     chatComposerController.clear(); // 메시지 입력창 초기화
     notifyListeners();
+
+    final response = _getAllChatMessageUseCase.execute();
+    for(var i in response) {
+      print(i.messageId);
+    }
   }
 
   /// 새로운 채팅 메시지를 생성하는 함수
-  ChatMessage _createChatMessage() {
+  createChatMessage() {
     return ChatMessage(
       roomId: _roomId,
-      messageId: 'msg${_chatMessageList.length + 1}',
+      messageId: 'msg${_rawMessageList.length + 1}',
       sender: Authorization().userId,
       content: chatComposerController.text,
       timestamp: DateTime.now(),

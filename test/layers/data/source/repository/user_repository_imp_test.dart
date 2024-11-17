@@ -3,7 +3,8 @@ import 'package:mobile1_flutter_coding_test/layers/data/data.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../mock/data/source/remote/mock_remote_data_sources.dart';
+import '../../../../mock/data/source/remote/mock_remote_data_source.dart';
+
 
 void main() {
   late MockRemoteDataSources mockRemoteDataSource;

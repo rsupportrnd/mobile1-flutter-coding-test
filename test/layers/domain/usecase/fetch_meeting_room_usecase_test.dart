@@ -4,7 +4,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mobile1_flutter_coding_test/layers/domain/domain.dart';
 
-import 'fetch_meeting_room_usecase.mocks.dart';
+import '../../../mock/domain/repository/mock_meeting_repository.dart';
+
 
 @GenerateMocks([MeetingRepository])
 void main() {
