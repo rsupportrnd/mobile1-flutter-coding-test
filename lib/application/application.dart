@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+
+class Application extends StatelessWidget {
+  const Application({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      theme: ThemeData(
+        useMaterial3: false,
+        canvasColor: Colors.white,
+        highlightColor: Colors.white,
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      routerConfig: null,
+    );
+  }
+}
