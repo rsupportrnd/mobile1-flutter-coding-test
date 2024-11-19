@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/index.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -14,7 +14,7 @@ class Application extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
       ),
-      routerConfig: null,
+      routerConfig: router,
     );
   }
 }
