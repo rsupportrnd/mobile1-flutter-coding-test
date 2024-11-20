@@ -2,6 +2,7 @@ import 'package:mobile1_flutter_coding_test/index.dart';
 
 class UserCardWidget extends StatelessWidget {
   final UserModel user;
+
   const UserCardWidget({super.key, required this.user});
 
   @override
@@ -54,7 +55,7 @@ class UserCardWidget extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Text(email)
+              Expanded(child: Text(email, maxLines: 2, )),
             ],
           ),
         ],
@@ -74,13 +75,29 @@ class UserCardWidget extends StatelessWidget {
               url,
               width: 100,
               height: 100,
-              errorBuilder: (context, e, s) => const SizedBox(
+              errorBuilder: (context, e, s) => Container(
                 width: 100,
                 height: 100,
-                child: Icon(
-                  Icons.error,
-                  size: 40,
-                  color: Colors.red,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade400,
+                    ),
+                    borderRadius: BorderRadius.circular(12)),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error,
+                      size: 40,
+                      color: Colors.red,
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      'Failed to load image',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ),
