@@ -14,20 +14,30 @@ final GoRouter router = GoRouter(
       ShellRoute(
           navigatorKey: _shellNavigatorKey,
           builder: (context, state, child) {
-            return MainPage(child:child);
+            return BlocProvider(
+              create: (_) => NavigationCubit(),
+              child: MainPage(child: child),
+            );
           },
           routes: [
             GoRoute(
               path: AppPath.userList.toPath,
               name: AppPath.userList.toName,
               parentNavigatorKey: _shellNavigatorKey,
-              builder: (context, state) => const UserListPage(),
+              pageBuilder: (_, state) => NoTransitionPage(
+                  key: state.pageKey,
+                  child: BlocProvider<UserListCubit>(
+                      create: (_) => getIt<UserListCubit>(),
+                      child: const UserListPage())),
+              // builder: (context, state) => const UserListPage(),
             ),
             GoRoute(
               path: AppPath.roomList.toPath,
               name: AppPath.roomList.toName,
               parentNavigatorKey: _shellNavigatorKey,
-              builder: (context, state) => const RoomListPage(),
+              pageBuilder: (_, state) => NoTransitionPage(
+                  key: state.pageKey, child: const RoomListPage()),
+              // builder: (context, state) => const RoomListPage(),
             ),
           ]),
       GoRoute(
