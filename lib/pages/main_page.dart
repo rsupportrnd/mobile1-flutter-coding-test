@@ -8,9 +8,10 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonWidgets.getAppBar(context, titleString: 'MainPage', isLeadingIcon: false),
+      appBar: CommonWidgets.getAppBar(context,
+          titleString: 'MainPage', isLeadingIcon: false),
       bottomSheet: buildBottomSheet(context),
-      body: child,
+      body: SafeArea(child: child),
     );
   }
 
@@ -20,7 +21,7 @@ class MainPage extends StatelessWidget {
       selectedItemColor: Colors.blue,
       onTap: (index) {
         context.read<NavigationCubit>().changePage(index);
-        switch(index){
+        switch (index) {
           case 0:
             GoRouter.of(context).go(AppPath.userList.toPath);
             break;
@@ -36,12 +37,24 @@ class MainPage extends StatelessWidget {
       selectedFontSize: 15.0,
       unselectedFontSize: 15.0,
       type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "User", ),
+      items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.door_front_door_sharp), label: "Room"),
+          icon: Container(
+            width: 40,
+            height: 40,
+            alignment: Alignment.center,
+            child: const Icon(Icons.person, size: 40,),
+          ),
+          label: "User",
+        ),
+        BottomNavigationBarItem(
+            icon: Container(
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              child: Icon(Icons.meeting_room_rounded, size: 40,),
+            ), label: "Room"),
       ],
     );
   }
-
 }

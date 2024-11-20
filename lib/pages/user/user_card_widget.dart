@@ -1,26 +1,27 @@
-// import 'package:mobile1_flutter_coding_test/index.dart';
-import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/constants/enums.dart';
+import 'package:mobile1_flutter_coding_test/index.dart';
 
 class UserCardWidget extends StatelessWidget {
-  const UserCardWidget({super.key});
+  final UserModel user;
+  const UserCardWidget({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: double.infinity,
       height: 140,
       decoration: BoxDecoration(
+          color: Colors.grey.shade200,
           border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(12.0)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          buildPhoto(
-              'https://i.namu.wiki/i/J1f1LJ21yWHGgARNPjNlOe6fXqQcyJbuge7HedriooZ3sTSw0VMnw-9gfp67uu5gcDXkcvMGPyim5jQDPb7jlrcY_2HlCyQULABkgHLKeQsGUey-uvwtbN6fquEGToyQzp1FpIPK3VyR4GXTFJAg2w.webp'),
+          buildPhoto(user.profilePicture, user.status),
           buildInfo(context,
-              name: 'Dana Choi', email: 'aaa@aaa.com', role: 'MANAGER'),
+              name: user.name, email: user.email, role: user.role),
+          const SizedBox(width: 20),
         ],
       ),
     );
@@ -31,25 +32,29 @@ class UserCardWidget extends StatelessWidget {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text('Dana Choi',
-                  style: Theme.of(context).textTheme.headlineSmall),
-              buildRoleTag('MANAGER'),
-            ],
+          Text(
+            name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 3),
+          Text(
+            role,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 3),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Icons.email_outlined),
+              const Icon(Icons.email_outlined),
               const SizedBox(
-                width: 10,
+                width: 5,
               ),
-              Text('sdkfjdkfj@dkfjdkfj.com')
+              Text(email)
             ],
           ),
         ],
@@ -57,23 +62,38 @@ class UserCardWidget extends StatelessWidget {
     );
   }
 
-  Container buildPhoto(String url) {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      width: 100,
-      height: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        image: DecorationImage(
-          image: NetworkImage(url),
-          fit: BoxFit.cover,
-        ),
+  Widget buildPhoto(String url, String userStatusString) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              url,
+              width: 100,
+              height: 100,
+              errorBuilder: (context, e, s) => const SizedBox(
+                width: 100,
+                height: 100,
+                child: Icon(
+                  Icons.error,
+                  size: 40,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ),
+          buildStatus(userStatusString),
+        ],
       ),
-      child: buildStatus(UserStatus.away),
     );
   }
 
-  Center buildStatus(UserStatus userStatus) {
+  Center buildStatus(String userStatusString) {
+    UserStatus userStatus = UserStatus.values
+        .firstWhere((element) => element.name == userStatusString);
     return Center(
       child: Align(
         alignment: Alignment.bottomRight,
@@ -87,20 +107,6 @@ class UserCardWidget extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Container buildRoleTag(String roleName) {
-    return Container(
-      width: 100,
-      height: 30,
-      margin: const EdgeInsets.only(left: 10),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Colors.grey.withOpacity(0.5),
-      ),
-      child: Text(roleName),
     );
   }
 }

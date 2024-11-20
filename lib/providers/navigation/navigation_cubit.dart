@@ -1,4 +1,5 @@
-import 'package:mobile1_flutter_coding_test/index.dart';
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'navigation_state.dart';
 part 'navigation_cubit.freezed.dart';
