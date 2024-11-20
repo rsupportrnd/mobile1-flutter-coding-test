@@ -1,6 +1,8 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
 import 'package:http/http.dart' as http;
 
+
+@Injectable(as: UserRepository)
 class UserRepositoryImpl implements UserRepository {
   @override
   Future<List<UserModel>> fetchUsers() async{

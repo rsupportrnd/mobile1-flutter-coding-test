@@ -1,5 +1,4 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
-import 'package:mobile1_flutter_coding_test/providers/user/user_list_cubit.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -27,8 +26,8 @@ final GoRouter router = GoRouter(
               parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (_, state) => NoTransitionPage(
                   key: state.pageKey,
-                  child: BlocProvider(
-                      create: (_) => UserListCubit(),
+                  child: BlocProvider<UserListCubit>(
+                      create: (_) => getIt<UserListCubit>(),
                       child: const UserListPage())),
               // builder: (context, state) => const UserListPage(),
             ),

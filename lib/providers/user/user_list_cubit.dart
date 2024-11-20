@@ -1,25 +1,21 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
-
+import 'package:mobile1_flutter_coding_test/services/user/user_service.dart';
 
 part 'user_list_state.dart';
+
 part 'user_list_cubit.freezed.dart';
 
+@injectable
 class UserListCubit extends Cubit<UserListState> {
-  // final UserRepository _userRepository;
-  // UserListCubit(this._userRepository) : super(const UserListState.initial());
-  UserListCubit() : super(const UserListState.initial());
+  final UserService _userService;
 
-  UserRepository _userRepository = UserRepositoryImpl();
-  set userRepository(UserRepository userRepository) {
-    _userRepository = userRepository;
-  }
+  UserListCubit(this._userService) : super(const UserListState.initial());
 
   Future<void> fetchUsers() async {
     emit(const UserListState.loading());
     try {
-      _userRepository.fetchUsers().then((users) {
-        emit(UserListState.loaded(users));
-      });
+      List<UserModel> response = await _userService.fetUsers();
+      emit(UserListState.loaded(response));
     } catch (e) {
       emit(UserListState.error(e.toString()));
     }
