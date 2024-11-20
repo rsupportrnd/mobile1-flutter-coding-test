@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonWidgets.getAppBar(context,
-          titleString: 'MainPage', isLeadingIcon: false),
+          titleString: 'coding-test', isLeadingIcon: false),
       bottomSheet: buildBottomSheet(context),
       body: SafeArea(child: child),
     );
@@ -29,8 +29,6 @@ class MainPage extends StatelessWidget {
             GoRouter.of(context).go(AppPath.roomList.toPath);
             break;
         }
-        // context.read<BottomNaviCubit>().changePage(index);
-        // _pageController.jumpToPage(index);
       },
       currentIndex: context.watch<NavigationCubit>().currentIndex,
       elevation: 0.0,
