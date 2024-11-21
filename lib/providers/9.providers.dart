@@ -3,3 +3,4 @@ export 'package:freezed_annotation/freezed_annotation.dart';
 export 'navigation/navigation_cubit.dart';
 export 'user/user_list_cubit.dart';
 export 'room/room_list_cubit.dart';
+export 'chatting/message_list_cubit.dart';

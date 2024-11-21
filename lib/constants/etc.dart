@@ -1,0 +1,1 @@
+const INPUT_BOX_HEIGHT = 65.0;
