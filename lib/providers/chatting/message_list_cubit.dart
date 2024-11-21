@@ -2,18 +2,27 @@ import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/index.dart';
 
 part 'message_list_state.dart';
+
 part 'message_list_cubit.freezed.dart';
 
 @injectable
 class MessageListCubit extends Cubit<MessageListState> {
   final MessageService _messageService;
-  MessageListCubit(this._messageService) : super(const MessageListState.initial());
+
+  MessageListCubit(this._messageService)
+      : super(const MessageListState.initial());
 
   Future<void> fetchMessagesByRoomNumber({required String roomId}) async {
     emit(const MessageListState.loading());
     try {
-      List<MessageModel> roomMessages = await _messageService.fetchMessagesByRoomNumber(roomId: roomId);
-      emit(MessageListState.loaded(roomMessages));
+      List<MessageModel> dbMessages =
+          await _messageService.fetchMessageFromLocalDatabase(roomId: roomId);
+      List<MessageModel> roomMessages =
+          await _messageService.fetchMessagesByRoomNumber(roomId: roomId);
+
+      List<MessageModel> mergedMessages = [...dbMessages, ...roomMessages];
+      emit(MessageListState.loaded(
+          _messageService.compareToListOrderByAsc(list: mergedMessages)));
     } catch (e) {
       emit(MessageListState.error(e.toString()));
     }
@@ -57,5 +66,4 @@ class MessageListCubit extends Cubit<MessageListState> {
   void scrollToEnd(ScrollController scrollController) {
     _messageService.scrollToEnd(scrollController);
   }
-
 }

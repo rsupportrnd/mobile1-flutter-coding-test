@@ -1,4 +1,5 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
+import 'package:mobile1_flutter_coding_test/local_database/objectbox.dart';
 
 class BottomInputWidget extends StatefulWidget {
   final String roomId;
@@ -30,7 +31,7 @@ class _BottomInputWidgetState extends State<BottomInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: INPUT_BOX_HEIGHT,
+      height: kBottomNavigationBarHeight,
       padding: const EdgeInsets.all(8),
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
       width: double.infinity,
@@ -49,7 +50,7 @@ class _BottomInputWidgetState extends State<BottomInputWidget> {
                       content: _messageInputController.text);
               if (inputMessageModel != null) {
                 context.read<MessageListCubit>().addMessage(inputMessageModel);
-                // objectBox.saveMessage(inputMessageModel);
+                getIt<ObjectBox>().saveMessage(inputMessageModel);
               }
               _messageInputController.clear();
             },

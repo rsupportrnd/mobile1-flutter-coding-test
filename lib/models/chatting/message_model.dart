@@ -16,7 +16,15 @@ abstract class MessageModel with _$MessageModel {
   }) = _MessageModel;
 
 
-
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);
+
+  factory MessageModel.fromMessageEntity(messageEntity) =>
+      MessageModel(
+        roomId: messageEntity.roomId,
+        messageId: messageEntity.messageId,
+        sender: messageEntity.sender,
+        content: messageEntity.content,
+        timestamp: messageEntity.timestamp.toString(),
+      );
 }
