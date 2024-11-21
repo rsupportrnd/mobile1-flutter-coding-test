@@ -45,7 +45,7 @@ class _UserListPageState extends State<UserListPage> {
 
   Widget buildListViewContent(List<UserModel> users) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+      padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight + kTextTabBarHeight),
       child: ListView.builder(
           shrinkWrap: true,
           itemBuilder: (_, index) => UserCardWidget(user: users[index]),
@@ -58,8 +58,8 @@ class _UserListPageState extends State<UserListPage> {
       isScrollable: true,
       padding: EdgeInsets.zero,
       tabAlignment: TabAlignment.start,
-      labelColor: Colors.grey,
-      unselectedLabelColor: Colors.grey.shade300,
+      labelColor: Colors.black,
+      unselectedLabelColor: Colors.grey,
       splashFactory: NoSplash.splashFactory,
       overlayColor: WidgetStateProperty.all<Color>(Colors.transparent),
       indicatorColor: Colors.cyan,
