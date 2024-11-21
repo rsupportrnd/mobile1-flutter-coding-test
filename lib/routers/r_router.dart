@@ -36,7 +36,10 @@ final GoRouter router = GoRouter(
               name: AppPath.roomList.toName,
               parentNavigatorKey: _shellNavigatorKey,
               pageBuilder: (_, state) => NoTransitionPage(
-                  key: state.pageKey, child: const RoomListPage()),
+                  key: state.pageKey,
+                  child: BlocProvider(
+                      create: (_) => getIt<RoomListCubit>(),
+                      child: const RoomListPage())),
               // builder: (context, state) => const RoomListPage(),
             ),
           ]),

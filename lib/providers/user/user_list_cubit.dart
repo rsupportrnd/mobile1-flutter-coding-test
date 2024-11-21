@@ -1,5 +1,4 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
-import 'package:mobile1_flutter_coding_test/services/user/user_service.dart';
 
 part 'user_list_state.dart';
 
