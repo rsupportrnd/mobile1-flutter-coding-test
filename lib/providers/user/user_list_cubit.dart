@@ -13,8 +13,10 @@ class UserListCubit extends Cubit<UserListState> {
   Future<void> fetchUsers() async {
     emit(const UserListState.loading());
     try {
-      List<UserModel> response = await _userService.fetUsers();
-      emit(UserListState.loaded(response));
+      List<UserModel> users = await _userService.fetUsers();
+      if(!isClosed) {
+        emit(UserListState.loaded(users));
+      }
     } catch (e) {
       emit(UserListState.error(e.toString()));
     }

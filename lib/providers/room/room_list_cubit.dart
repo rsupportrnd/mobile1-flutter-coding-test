@@ -14,7 +14,9 @@ class RoomListCubit extends Cubit<RoomListState> {
     emit(const RoomListState.loading());
     try {
       List<RoomModel> response = await _roomService.fetchRooms();
-      emit(RoomListState.loaded(response));
+      if(!isClosed) {
+        emit(RoomListState.loaded(response));
+      }
     } catch (e) {
       emit(RoomListState.error(e.toString()));
     }
