@@ -8,6 +8,7 @@ class UserPhotoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double photoSize = 60.0;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Stack(
@@ -17,31 +18,19 @@ class UserPhotoWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
               photoUrl,
-              width: 100,
-              height: 100,
+              width: photoSize,
               errorBuilder: (context, e, s) => Container(
-                width: 100,
-                height: 100,
+                width: photoSize,
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.grey.shade400,
                     ),
                     borderRadius: BorderRadius.circular(12)),
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error,
-                      size: 40,
-                      color: Colors.red,
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      'Failed to load image',
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                child: const Icon(
+                  Icons.error,
+                  size: 40,
+                  color: Colors.red,
                 ),
               ),
             ),

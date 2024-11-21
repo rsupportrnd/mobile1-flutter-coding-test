@@ -3,6 +3,7 @@ import 'package:mobile1_flutter_coding_test/local_database/objectbox.dart';
 
 class BottomInputWidget extends StatefulWidget {
   final String roomId;
+
   const BottomInputWidget({super.key, required this.roomId});
 
   @override
@@ -10,8 +11,6 @@ class BottomInputWidget extends StatefulWidget {
 }
 
 class _BottomInputWidgetState extends State<BottomInputWidget> {
-
-
   late TextEditingController _messageInputController;
 
   @override
@@ -20,18 +19,17 @@ class _BottomInputWidgetState extends State<BottomInputWidget> {
     _messageInputController = TextEditingController();
   }
 
-
   @override
   void dispose() {
     _messageInputController.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kBottomNavigationBarHeight,
+      color: Colors.yellow,
+      height: INPUTBOX_HEIGHT,
       padding: const EdgeInsets.all(8),
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
       width: double.infinity,

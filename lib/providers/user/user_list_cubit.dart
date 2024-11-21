@@ -10,10 +10,10 @@ class UserListCubit extends Cubit<UserListState> {
 
   UserListCubit(this._userService) : super(const UserListState.initial());
 
-  Future<void> fetchUsers() async {
+  Future<void> fetchUsers(UserStatus userStatus) async {
     emit(const UserListState.loading());
     try {
-      List<UserModel> users = await _userService.fetUsers();
+      List<UserModel> users = await _userService.fetUsers(userStatus);
       if(!isClosed) {
         emit(UserListState.loaded(users));
       }

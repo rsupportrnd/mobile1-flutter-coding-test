@@ -55,7 +55,7 @@ class _ChattingPageState extends State<ChattingPage> {
     }
     context.read<MessageListCubit>().scrollToEnd(_scrollController);
     return Padding(
-      padding: const EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+      padding: const EdgeInsets.only(bottom:INPUTBOX_HEIGHT),
       child: ListView.builder(
           controller: _scrollController,
           itemBuilder: (_, index) =>

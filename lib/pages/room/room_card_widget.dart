@@ -8,9 +8,21 @@ class RoomCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double imageSize= 50;
     return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(room.thumbnailImage),
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(imageSize),
+        child: Image.network(
+          room.thumbnailImage,
+          width: imageSize,
+          errorBuilder: (_, object, stacktrace) =>  Icon(
+            Icons.error,
+            size: imageSize,
+            color: Colors.red,
+
+
+          ),
+        ),
       ),
       title: Text(room.roomName),
       subtitle: Text(
