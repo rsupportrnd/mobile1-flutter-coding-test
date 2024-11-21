@@ -20,6 +20,9 @@ class RoomCardWidget extends StatelessWidget {
       isThreeLine: false,
       trailing: Text(
           '⏱️${context.read<RoomListCubit>().convertFormatTimeDiff(room.lastMessage.timestamp)}'),
+      onTap: () {
+        GoRouter.of(context).push('${AppPath.chatting.toPath}/${room.roomId}');
+      },
     );
   }
 }

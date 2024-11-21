@@ -46,7 +46,7 @@ final GoRouter router = GoRouter(
       GoRoute(
         path: '${AppPath.chatting.toPath}/:roomId',
         name: AppPath.chatting.toName,
-        parentNavigatorKey: _shellNavigatorKey,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (_, state) =>
             ChattingPage(roomId: state.pathParameters['roomId'].toString()),
       ),
