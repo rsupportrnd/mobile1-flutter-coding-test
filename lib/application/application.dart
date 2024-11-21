@@ -7,7 +7,8 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
-        useMaterial3: false,
+        useMaterial3: true,
+        appBarTheme: AppBarTheme(color: Colors.grey),
         canvasColor: Colors.white,
         highlightColor: Colors.white,
         brightness: Brightness.light,

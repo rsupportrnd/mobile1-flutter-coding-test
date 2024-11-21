@@ -2,7 +2,7 @@ import 'package:mobile1_flutter_coding_test/index.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
-    GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
@@ -24,27 +24,36 @@ final GoRouter router = GoRouter(
               path: AppPath.userList.toPath,
               name: AppPath.userList.toName,
               parentNavigatorKey: _shellNavigatorKey,
-              pageBuilder: (_, state) => NoTransitionPage(
-                  key: state.pageKey,
-                  child: BlocProvider<UserListCubit>(
-                      create: (_) => getIt<UserListCubit>(),
-                      child: const UserListPage())),
+              pageBuilder: (_, state) =>
+                  NoTransitionPage(
+                      key: state.pageKey,
+                      child: BlocProvider<UserListCubit>(
+                          create: (_) => getIt<UserListCubit>(),
+                          child: const UserListPage())),
               // builder: (context, state) => const UserListPage(),
             ),
             GoRoute(
               path: AppPath.roomList.toPath,
               name: AppPath.roomList.toName,
               parentNavigatorKey: _shellNavigatorKey,
-              pageBuilder: (_, state) => NoTransitionPage(
-                  key: state.pageKey, child: const RoomListPage()),
+              pageBuilder: (_, state) =>
+                  NoTransitionPage(
+                      key: state.pageKey,
+                      child: BlocProvider(
+                          create: (_) => getIt<RoomListCubit>(),
+                          child: const RoomListPage())),
               // builder: (context, state) => const RoomListPage(),
             ),
           ]),
       GoRoute(
         path: '${AppPath.chatting.toPath}/:roomId',
         name: AppPath.chatting.toName,
-        parentNavigatorKey: _shellNavigatorKey,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (_, state) =>
-            ChattingPage(roomId: state.pathParameters['roomId'].toString()),
+            BlocProvider(
+              create: (context) => getIt<MessageListCubit>(),
+              child: ChattingPage(
+                  roomId: state.pathParameters['roomId'].toString()),
+            ),
       ),
     ]);

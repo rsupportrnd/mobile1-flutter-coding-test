@@ -1,5 +1,4 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
-import 'package:mobile1_flutter_coding_test/services/user/user_service.dart';
 
 part 'user_list_state.dart';
 
@@ -11,11 +10,13 @@ class UserListCubit extends Cubit<UserListState> {
 
   UserListCubit(this._userService) : super(const UserListState.initial());
 
-  Future<void> fetchUsers() async {
+  Future<void> fetchUsers(UserStatus userStatus) async {
     emit(const UserListState.loading());
     try {
-      List<UserModel> response = await _userService.fetUsers();
-      emit(UserListState.loaded(response));
+      List<UserModel> users = await _userService.fetUsers(userStatus);
+      if(!isClosed) {
+        emit(UserListState.loaded(users));
+      }
     } catch (e) {
       emit(UserListState.error(e.toString()));
     }

@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:mobile1_flutter_coding_test/constants/9.constants.dart';
 import 'package:mobile1_flutter_coding_test/models/user/user_model.dart';
 import 'package:mobile1_flutter_coding_test/providers/user/user_list_cubit.dart';
 import 'package:mobile1_flutter_coding_test/repositories/user/user_repository_impl.dart';
@@ -37,7 +38,7 @@ void main() {
         when(() => mockUserRepository.fetchUsers()).thenAnswer((_) async => users);
         return userListCubit;
       },
-      act: (cubit) => cubit.fetchUsers(),
+      act: (cubit) => cubit.fetchUsers(UserStatus.all),
       expect: () => [
         const UserListState.loading(),
         UserListState.loaded(users),
@@ -50,7 +51,7 @@ void main() {
         when(() => mockUserRepository.fetchUsers()).thenThrow(Exception('Failed to fetch users'));
         return userListCubit;
       },
-      act: (cubit) => cubit.fetchUsers(),
+      act: (cubit) => cubit.fetchUsers(UserStatus.all),
       expect: () => [
         const UserListState.loading(),
         const UserListState.error('Exception: Failed to fetch users'),
