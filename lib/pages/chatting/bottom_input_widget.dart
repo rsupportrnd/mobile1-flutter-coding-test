@@ -1,7 +1,8 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
 
 class BottomInputWidget extends StatefulWidget {
-  const BottomInputWidget({super.key});
+  final String roomId;
+  const BottomInputWidget({super.key, required this.roomId});
 
   @override
   State<BottomInputWidget> createState() => _BottomInputWidgetState();
@@ -41,16 +42,16 @@ class _BottomInputWidgetState extends State<BottomInputWidget> {
           suffixIcon: IconButton(
             icon: const Icon(Icons.send),
             onPressed: () {
-              // MessageModel? inputMessageModel = context
-              //     .read<MessageListCubit>()
-              //     .createMessage(
-              //         roomId: widget.roomId,
-              //         content: _contentEditingController.text);
-              // if (inputMessageModel != null) {
-              //   context.read<MessageListCubit>().addMessage(inputMessageModel);
-              //   objectBox.saveMessage(inputMessageModel);
-              // }
-              // _contentEditingController.clear();
+              MessageModel? inputMessageModel = context
+                  .read<MessageListCubit>()
+                  .createMessage(
+                      roomId: widget.roomId,
+                      content: _messageInputController.text);
+              if (inputMessageModel != null) {
+                context.read<MessageListCubit>().addMessage(inputMessageModel);
+                // objectBox.saveMessage(inputMessageModel);
+              }
+              _messageInputController.clear();
             },
           ),
         ),
