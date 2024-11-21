@@ -1,6 +1,5 @@
 import 'package:mobile1_flutter_coding_test/index.dart';
 import 'package:mobile1_flutter_coding_test/models/entity/message_entity.dart';
-import 'package:objectbox/objectbox.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 

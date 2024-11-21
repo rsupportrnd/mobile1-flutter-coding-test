@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/index.dart';
 import 'package:mobile1_flutter_coding_test/local_database/objectbox.dart';
 import 'package:mobile1_flutter_coding_test/models/entity/message_entity.dart';

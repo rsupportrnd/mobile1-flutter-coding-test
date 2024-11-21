@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/index.dart';
 
 class RoomCardWidget extends StatelessWidget {
