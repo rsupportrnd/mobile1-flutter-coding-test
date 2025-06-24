@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/src/core/util/provider_logger.dart';
 import 'package:mobile1_flutter_coding_test/src/environment/app_build_setting.dart';
 import 'package:mobile1_flutter_coding_test/src/router/router.dart';
 
 Future<void> main() async {
   await AppBuildSetting.init();
 
-  runApp(const App());
+  runApp(
+    ProviderScope(
+      observers: [ProviderLogger()],
+      child: const App(),
+    ),
+  );
 }
 
 class App extends ConsumerWidget {

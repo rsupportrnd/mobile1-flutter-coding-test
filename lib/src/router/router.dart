@@ -14,7 +14,15 @@ GoRouter router(RouterRef ref) {
     navigatorKey: navigatorKey,
     initialLocation: '/${HomeScreen.route}',
     observers: [RouterObserver()],
-    routes: <RouteBase>[],
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/${HomeScreen.route}',
+        name: HomeScreen.route,
+        builder: (BuildContext context, GoRouterState state) {
+          return const HomeScreen();
+        },
+      ),
+    ],
   );
   return goRouter;
 }
