@@ -1,0 +1,158 @@
+{
+  "messages": [
+    {
+      "roomId": "room1",
+      "messageId": "msg1",
+      "sender": "user1",
+      "content": "안녕하세요, 오늘 회의 시작할까요?",
+      "timestamp": "2024-11-07T10:00:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg2",
+      "sender": "user2",
+      "content": "네, 모두 모인 것 같네요.",
+      "timestamp": "2024-11-07T10:01:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg3",
+      "sender": "user3",
+      "content": "지난번에 얘기했던 주제부터 시작해볼까요?",
+      "timestamp": "2024-11-07T10:02:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg4",
+      "sender": "user4",
+      "content": "새 기능 개발 일정이 어떻게 되나요?",
+      "timestamp": "2024-11-07T11:00:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg5",
+      "sender": "user5",
+      "content": "일정을 공유할게요. 다들 확인해 주세요.",
+      "timestamp": "2024-11-07T11:01:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg6",
+      "sender": "user3",
+      "content": "디자인 피드백이 필요해요.",
+      "timestamp": "2024-11-07T12:00:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg7",
+      "sender": "user1",
+      "content": "확인했습니다. 몇 가지 개선사항을 논의해볼게요.",
+      "timestamp": "2024-11-07T12:05:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg8",
+      "sender": "user4",
+      "content": "디자인이 너무 좋아요!",
+      "timestamp": "2024-11-07T12:10:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg9",
+      "sender": "user1",
+      "content": "프로젝트 진행 상황을 업데이트해 주세요.",
+      "timestamp": "2024-11-07T13:00:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg10",
+      "sender": "user2",
+      "content": "현재 개발 단계에 있습니다.",
+      "timestamp": "2024-11-07T13:05:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg11",
+      "sender": "user3",
+      "content": "테스트 계획은 어떻게 되나요?",
+      "timestamp": "2024-11-07T13:10:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg12",
+      "sender": "user4",
+      "content": "버그 리포트가 있습니다.",
+      "timestamp": "2024-11-07T14:00:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg13",
+      "sender": "user5",
+      "content": "자세한 내용을 공유해 주세요.",
+      "timestamp": "2024-11-07T14:05:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg14",
+      "sender": "user2",
+      "content": "해당 버그를 재현할 수 있습니다.",
+      "timestamp": "2024-11-07T14:10:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg15",
+      "sender": "user3",
+      "content": "새로운 디자인 시안을 업로드했습니다.",
+      "timestamp": "2024-11-07T15:00:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg16",
+      "sender": "user1",
+      "content": "확인했습니다. 피드백 드리겠습니다.",
+      "timestamp": "2024-11-07T15:05:00Z"
+    },
+    {
+      "roomId": "room3",
+      "messageId": "msg17",
+      "sender": "user4",
+      "content": "색상 조합이 훌륭합니다.",
+      "timestamp": "2024-11-07T15:10:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg18",
+      "sender": "user1",
+      "content": "다음 회의는 언제로 할까요?",
+      "timestamp": "2024-11-07T16:00:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg19",
+      "sender": "user2",
+      "content": "내일 오전 10시는 어떨까요?",
+      "timestamp": "2024-11-07T16:05:00Z"
+    },
+    {
+      "roomId": "room1",
+      "messageId": "msg20",
+      "sender": "user3",
+      "content": "저도 가능합니다.",
+      "timestamp": "2024-11-07T16:10:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg21",
+      "sender": "user4",
+      "content": "코드 리뷰 부탁드립니다.",
+      "timestamp": "2024-11-07T17:00:00Z"
+    },
+    {
+      "roomId": "room2",
+      "messageId": "msg22",
+      "sender": "user5",
+      "content": "곧 확인하겠습니다.",
+      "timestamp": "2024-11-07T17:05:00Z"
+    }
+  ]
+}
