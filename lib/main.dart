@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/src/environment/app_build_setting.dart';
 import 'package:mobile1_flutter_coding_test/src/router/router.dart';
 
-void main() {
+Future<void> main() async {
+  await AppBuildSetting.init();
+
   runApp(const App());
 }
 
