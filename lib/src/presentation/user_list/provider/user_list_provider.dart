@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'user_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-final class UserListNotifier extends _$UserListNotifier {
+final class UserList extends _$UserList {
   @override
   Future<UserListResponseEntity> build() async {
     return await _fetchUserList();
@@ -19,7 +19,7 @@ final class UserListNotifier extends _$UserListNotifier {
     return await useCase.getUserList();
   }
 
-  Future<void> refresh() async {
+  Future<void> getUserList() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => _fetchUserList());
   }

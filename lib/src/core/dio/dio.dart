@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
@@ -35,6 +36,19 @@ class CustomInterceptor extends Interceptor {
   ) async {
     logger.d(
         '[RESPONSE] ${response.requestOptions.method}] ${response.requestOptions.uri}, ${response.data}');
+
+    //서버에서 응답을 text/plain으로 줘서 json으로 변환
+    if (response.data is String && response.data.isNotEmpty) {
+      try {
+        final jsonData = jsonDecode(response.data);
+        response.data = jsonData;
+        logger.d('[PARSED RESPONSE DATA] ${response.data}');
+      } catch (e) {
+        logger.e('Failed to parse response JSON: $e');
+      }
+    } else {
+      logger.d('[RESPONSE DATA] ${response.data}');
+    }
 
     return super.onResponse(response, handler);
   }
