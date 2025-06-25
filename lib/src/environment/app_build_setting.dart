@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/src/di/configurations.dart';
+import 'package:flutter/services.dart';
 
 class AppBuildSetting {
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    configureDependencies();
-    await getIt.allReady();
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 }

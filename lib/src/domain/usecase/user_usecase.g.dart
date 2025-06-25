@@ -1,26 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'router.dart';
+part of 'user_usecase.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'd00a75906cf9d5dc2be9096bb78803b3b40d1cc5';
+String _$getUserListUseCaseHash() =>
+    r'b8e508abd231b21c15682d0a5117613c4e02144d';
 
-/// See also [router].
-@ProviderFor(router)
-final routerProvider = AutoDisposeProvider<GoRouter>.internal(
-  router,
-  name: r'routerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
+/// See also [getUserListUseCase].
+@ProviderFor(getUserListUseCase)
+final getUserListUseCaseProvider =
+    AutoDisposeFutureProvider<UserListResponseModel>.internal(
+  getUserListUseCase,
+  name: r'getUserListUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getUserListUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef RouterRef = AutoDisposeProviderRef<GoRouter>;
+typedef GetUserListUseCaseRef
+    = AutoDisposeFutureProviderRef<UserListResponseModel>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
