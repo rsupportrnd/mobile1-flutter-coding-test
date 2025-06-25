@@ -6,25 +6,21 @@ part of 'user_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getUserListUseCaseHash() =>
-    r'b8e508abd231b21c15682d0a5117613c4e02144d';
+String _$userUseCaseHash() => r'c3b1c2fab5622c736b493ccd6b340db55655ffdc';
 
-/// See also [getUserListUseCase].
-@ProviderFor(getUserListUseCase)
-final getUserListUseCaseProvider =
-    AutoDisposeFutureProvider<UserListResponseModel>.internal(
-  getUserListUseCase,
-  name: r'getUserListUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getUserListUseCaseHash,
+/// See also [userUseCase].
+@ProviderFor(userUseCase)
+final userUseCaseProvider = AutoDisposeProvider<UserUseCase>.internal(
+  userUseCase,
+  name: r'userUseCaseProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetUserListUseCaseRef
-    = AutoDisposeFutureProviderRef<UserListResponseModel>;
+typedef UserUseCaseRef = AutoDisposeProviderRef<UserUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

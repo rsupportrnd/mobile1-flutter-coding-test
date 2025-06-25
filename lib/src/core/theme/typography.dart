@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
 
 const String fontFamily = 'Pretendard';
 
 abstract class AppTextStyle {
-  static const TextStyle h1 = TextStyle(
+  static TextStyle h1 = const TextStyle(
     fontFamily: fontFamily,
     fontSize: 32.0,
     fontWeight: FontWeight.bold,
+    color: AppColors.textPrimary,
     height: 1.3,
   );
 
@@ -14,6 +16,7 @@ abstract class AppTextStyle {
     fontFamily: fontFamily,
     fontSize: 24.0,
     fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
     height: 1.25,
   );
 
@@ -21,6 +24,7 @@ abstract class AppTextStyle {
     fontFamily: fontFamily,
     fontSize: 18.0,
     fontWeight: FontWeight.w500,
+    color: AppColors.textPrimary,
     height: 1.4,
   );
 
@@ -28,6 +32,7 @@ abstract class AppTextStyle {
     fontFamily: fontFamily,
     fontSize: 14.0,
     fontWeight: FontWeight.w400,
+    color: AppColors.textPrimary,
     height: 1.5,
   );
 
@@ -35,6 +40,7 @@ abstract class AppTextStyle {
     fontFamily: fontFamily,
     fontSize: 12.0,
     fontWeight: FontWeight.w400,
+    color: AppColors.textPrimary,
     height: 1.2,
   );
 }

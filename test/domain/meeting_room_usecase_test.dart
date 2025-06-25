@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/meeting_room_repository_impl.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/repository/meeting_room_repository.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/meeting_room_usecase.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/src/data/repository/meeting_room_repository_impl.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/usecase/meeting_room_usecase.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/repository/meeting_room_repository.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/entity/meeting_room_list_response_entity.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
 import 'package:mobile1_flutter_coding_test/src/data/model/meeting_room_list_response_model.dart';
 import 'package:mobile1_flutter_coding_test/src/data/model/message_list_response_model.dart';
 
@@ -15,58 +17,61 @@ void main() {
 
   setUp(() {
     mockRepo = _MockMeetingRoomRepository();
-    container = ProviderContainer(
-      overrides: [
-        meetingRoomRepositoryProvider.overrideWithValue(mockRepo),
-      ],
-    );
+    container = ProviderContainer(overrides: [
+      meetingRoomRepositoryProvider.overrideWithValue(mockRepo),
+    ]);
   });
 
   tearDown(() => container.dispose());
 
-  group('GetMeetingRoomListUseCase', () {
-    test('returns data on success', () async {
-      const MeetingRoomListResponseModel expected = MeetingRoomListResponseModel(meetingRooms: []);
-      when(() => mockRepo.getMeetingRoomList()).thenAnswer((_) async => expected);
+  group('MeetingRoomUseCase', () {
+    test('getMeetingRoomList returns data on success', () async {
+      const MeetingRoomListResponseModel dummyModel =
+          MeetingRoomListResponseModel(meetingRooms: []);
+      when(() => mockRepo.getMeetingRoomList()).thenAnswer((_) async => dummyModel);
 
-      final MeetingRoomListResponseModel result =
-          await container.read(getMeetingRoomListUseCaseProvider.future);
+      final MeetingRoomUseCase useCase = container.read(meetingRoomUseCaseProvider);
+      final MeetingRoomListResponseEntity result = await useCase.getMeetingRoomList();
 
-      expect(result, expected);
+      expect(result, MeetingRoomListResponseEntity.fromModel(dummyModel));
       verify(() => mockRepo.getMeetingRoomList()).called(1);
     });
 
-    test('throws when repository fails', () async {
+    test('getMeetingRoomList throws when repository fails', () async {
       final Exception exception = Exception('Repo error');
       when(() => mockRepo.getMeetingRoomList()).thenThrow(exception);
 
+      final MeetingRoomUseCase useCase = container.read(meetingRoomUseCaseProvider);
+
       expect(
-        () => container.read(getMeetingRoomListUseCaseProvider.future),
-        throwsA(exception),
+        () => useCase.getMeetingRoomList(),
+        throwsA(same(exception)),
       );
       verify(() => mockRepo.getMeetingRoomList()).called(1);
     });
   });
 
-  group('GetMessageListUseCase', () {
-    test('returns data on success', () async {
-      const MessageListResponseModel expected = MessageListResponseModel(messages: []);
-      when(() => mockRepo.getMessageList()).thenAnswer((_) async => expected);
+  group('MessageUseCase', () {
+    test('getMessageList returns data on success', () async {
+      const MessageListResponseModel dummyModel = MessageListResponseModel(messages: []);
+      when(() => mockRepo.getMessageList()).thenAnswer((_) async => dummyModel);
 
-      final MessageListResponseModel result =
-          await container.read(getMessageListUseCaseProvider.future);
+      final MessageUseCase useCase = container.read(messageUseCaseProvider);
+      final MessageListResponseEntity result = await useCase.getMessageList();
 
-      expect(result, expected);
+      expect(result, MessageListResponseEntity.fromModel(dummyModel));
       verify(() => mockRepo.getMessageList()).called(1);
     });
 
-    test('throws when repository fails', () async {
+    test('getMessageList throws when repository fails', () async {
       final Exception exception = Exception('Repo error');
       when(() => mockRepo.getMessageList()).thenThrow(exception);
 
+      final MessageUseCase useCase = container.read(messageUseCaseProvider);
+
       expect(
-        () => container.read(getMessageListUseCaseProvider.future),
-        throwsA(exception),
+        () => useCase.getMessageList(),
+        throwsA(same(exception)),
       );
       verify(() => mockRepo.getMessageList()).called(1);
     });
