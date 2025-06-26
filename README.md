@@ -1,5 +1,15 @@
 # RSUPPORT mobile1 flutter developer test
 
+# 개발코멘트
+
+    riverPod을 이용하여 상태관리 및 di작업을 하였습니다.
+    MVVM패턴 및 clean architecture를 사용하였습니다.
+    dio와 interceptor를 사용하여 성공 또는 에러 시의 처리를 하였습니다.
+    
+
+
+
+
     알서포트 코딩 테스트 참여에 감사 드립니다.
     본 테스트는 지원자의 개발 및 협업 역량을 예측하기 위하여 진행합니다.
     요구 사항을 만족하는 코드를 작성해 주세요.
