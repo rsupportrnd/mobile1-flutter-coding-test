@@ -16,7 +16,7 @@ import 'package:mobile1_flutter_coding_test/src/presentation/common/component/us
 import 'package:mobile1_flutter_coding_test/src/presentation/common/error_screen.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_event.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_state.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_provider.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_list_provider.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/user_list/mixin/user_list_state.dart';
 
 part 'view/message_view.dart';
@@ -64,12 +64,9 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
               );
             },
             error: (error, stackTrace) => ErrorView(
-              appException:
-                  error is AppException ? error : const UnknownException(),
+              appException: error is AppException ? error : const UnknownException(),
               onPressed: () async {
-                await ref
-                    .read(messageListProvider(roomId).notifier)
-                    .loadMessages();
+                await ref.read(messageListProvider(roomId).notifier).reloadMessages();
               },
             ),
             loading: () => const LoadingIndicator(),

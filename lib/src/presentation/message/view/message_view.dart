@@ -19,21 +19,15 @@ class _MessageListView extends BaseView with UserListState {
       for (final UserEntity user in users) user.userId: user,
     };
 
-    ///메시지 정렬
-    final List<MessageEntity> sortedMessages = [...messages]..sort(
-        (MessageEntity a, MessageEntity b) =>
-            b.timestamp.compareTo(a.timestamp),
-      );
-
     return Align(
       alignment: Alignment.topCenter,
       child: ListView.builder(
         shrinkWrap: true,
         controller: scrollController,
         reverse: true,
-        itemCount: sortedMessages.length,
+        itemCount: messages.length,
         itemBuilder: (BuildContext context, int index) {
-          final MessageEntity message = sortedMessages[index];
+          final MessageEntity message = messages[index];
           final UserEntity? user = userMap[message.sender];
           return _MessageBubble(
             message: message,
@@ -74,8 +68,7 @@ class _MessageBubble extends StatelessWidget {
         horizontal: 12,
       ),
       child: Row(
-        mainAxisAlignment:
-            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isMe) ...[
@@ -86,8 +79,7 @@ class _MessageBubble extends StatelessWidget {
           ],
           Flexible(
             child: Column(
-              crossAxisAlignment:
-                  isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 if (!isMe)
                   Text(

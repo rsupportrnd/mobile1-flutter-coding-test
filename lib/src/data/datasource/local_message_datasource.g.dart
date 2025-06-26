@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meeting_room_repository_impl.dart';
+part of 'local_message_datasource.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$meetingRoomRepositoryHash() =>
-    r'61c2fbce5a78870a7b93010e57e81a49e76e29e5';
+String _$localMessageDatasourceHash() =>
+    r'62655ed98b45b7dbea937b272fe0204a59cf3261';
 
-/// See also [meetingRoomRepository].
-@ProviderFor(meetingRoomRepository)
-final meetingRoomRepositoryProvider =
-    AutoDisposeProvider<MeetingRoomRepository>.internal(
-  meetingRoomRepository,
-  name: r'meetingRoomRepositoryProvider',
+/// See also [localMessageDatasource].
+@ProviderFor(localMessageDatasource)
+final localMessageDatasourceProvider =
+    AutoDisposeProvider<LocalMessageDatasource>.internal(
+  localMessageDatasource,
+  name: r'localMessageDatasourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$meetingRoomRepositoryHash,
+      : _$localMessageDatasourceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef MeetingRoomRepositoryRef
-    = AutoDisposeProviderRef<MeetingRoomRepository>;
+typedef LocalMessageDatasourceRef
+    = AutoDisposeProviderRef<LocalMessageDatasource>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
