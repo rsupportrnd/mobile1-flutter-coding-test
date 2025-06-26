@@ -6,6 +6,7 @@
     MVVM패턴 및 clean architecture를 사용하였습니다.
     dio와 interceptor를 사용하여 성공 또는 에러 시의 처리를 하였습니다.
     스크린에 사용되는 view들은 스크린의 part로 만들었으며 다론곳에서의 사용을 막았습니다.
+    채팅은 보냇던 시간대별로 보이는것이 다르게 구현하였습니다. 당일HH:mm , 같은달MM.dd, 그 이전yy.MM
 
 
 

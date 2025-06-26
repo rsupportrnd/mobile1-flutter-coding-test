@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_screen_string_constant.dart';
+import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_string_constant.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
 
 /// 사용자 상태
@@ -28,13 +28,13 @@ enum UserStatus {
   String getStatusName() {
     switch (this) {
       case UserStatus.online:
-        return UserListScreenStringConstant.online;
+        return UserListStringConstant.online;
       case UserStatus.offline:
-        return UserListScreenStringConstant.offline;
+        return UserListStringConstant.offline;
       case UserStatus.away:
-        return UserListScreenStringConstant.away;
+        return UserListStringConstant.away;
       case UserStatus.doNotDisturb:
-        return UserListScreenStringConstant.doNotDisturb;
+        return UserListStringConstant.doNotDisturb;
     }
   }
 }
@@ -47,9 +47,9 @@ enum UserRole {
   String getRoleName() {
     switch (this) {
       case UserRole.admin:
-        return UserListScreenStringConstant.admin;
+        return UserListStringConstant.admin;
       case UserRole.member:
-        return UserListScreenStringConstant.member;
+        return UserListStringConstant.member;
     }
   }
 }

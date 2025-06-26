@@ -25,7 +25,7 @@ abstract class BaseScreen extends HookConsumerWidget {
       bottomNavigationBar: renderBottomNavigationBar(context, ref),
       body: GestureDetector(
         onTap: () {
-          SystemChannels.textInput.invokeMethod('TextInput.hide');
+          FocusScope.of(context).unfocus();
         },
         child: Container(
           color: Colors.transparent,

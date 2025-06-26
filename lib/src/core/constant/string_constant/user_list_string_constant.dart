@@ -1,4 +1,4 @@
-class UserListScreenStringConstant {
+class UserListStringConstant {
   static const String title = '유저목록';
   static const String userRole = '역활';
   static const String admin = '관리자';

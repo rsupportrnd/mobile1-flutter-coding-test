@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
+import 'package:mobile1_flutter_coding_test/src/core/constant/image_path_constant.dart';
 
 class UserAvatarWidget extends StatelessWidget {
   final String profilePictureUrl;
@@ -11,18 +11,26 @@ class UserAvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: Image.network(
-        profilePictureUrl,
+      child: FadeInImage.assetNetwork(
+        placeholder: ImagePath.defaultProfile,
+        image: profilePictureUrl,
         width: 56,
         height: 56,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            color: AppColors.iconInactive,
-            child: const Icon(
-              Icons.person_outline_sharp,
-              size: 56,
-            ),
+        imageErrorBuilder: (context, error, stackTrace) {
+          return Image.network(
+            profilePictureUrl,
+            width: 56,
+            height: 56,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                ImagePath.defaultProfile,
+                width: 56,
+                height: 56,
+                fit: BoxFit.cover,
+              );
+            },
           );
         },
       ),

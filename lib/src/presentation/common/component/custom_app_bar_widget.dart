@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
 
@@ -45,43 +44,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleTextStyle: AppTextStyle.h1,
         toolbarHeight: 64,
         leadingWidth: 44,
-        leading: Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            top: 20,
-            bottom: 20,
-          ),
-          child: leading ??
-              (context.canPop() || onBackPressed != null
-                  ? IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        if (onBackPressed == null) {
-                          context.pop();
-                          return;
-                        }
-                        onBackPressed?.call();
-                      },
-                    )
-                  : const SizedBox.shrink()),
-        ),
-        actions: showCloseIcon
-            ? [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: IconButton(
-                    icon: const Icon(Icons.exit_to_app),
-                    onPressed: () {
-                      if (onClosePressed == null) {
-                        context.pop();
-                        return;
-                      }
-                      onClosePressed?.call();
-                    },
-                  ),
-                )
-              ]
-            : null,
       ),
     );
   }

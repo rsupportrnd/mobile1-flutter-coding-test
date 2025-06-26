@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
-import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_screen_string_constant.dart';
+import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_string_constant.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
 import 'package:mobile1_flutter_coding_test/src/core/util/bottom_sheet_modal_util.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
@@ -23,7 +23,7 @@ class UserListScreen extends BaseScreen with UserListState, UserListEvent {
 
   @override
   Widget buildScreen(BuildContext context, WidgetRef ref) {
-    return getUserListProvider(ref: ref).when(
+    return watchUserListProvider(ref: ref).when(
       data: (UserListResponseEntity userListEntity) {
         return _UserInfoListView(userListEntity: userListEntity.users);
       },
@@ -43,7 +43,7 @@ class UserListScreen extends BaseScreen with UserListState, UserListEvent {
   @override
   PreferredSizeWidget? renderAppBar(BuildContext context, WidgetRef ref) {
     return const CustomAppBar(
-      title: UserListScreenStringConstant.title,
+      title: UserListStringConstant.title,
       showDivider: true,
     );
   }
