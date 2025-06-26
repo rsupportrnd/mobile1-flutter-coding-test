@@ -5,7 +5,7 @@
     riverPod을 이용하여 상태관리 및 di작업을 하였습니다.
     MVVM패턴 및 clean architecture를 사용하였습니다.
     dio와 interceptor를 사용하여 성공 또는 에러 시의 처리를 하였습니다.
-    
+    스크린에 사용되는 view들은 스크린의 part로 만들었으며 다론곳에서의 사용을 막았습니다.
 
 
 
