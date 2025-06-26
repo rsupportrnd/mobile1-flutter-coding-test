@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors {
   AppColors._();
 
@@ -21,4 +23,6 @@ class AppColors {
   static const Color textSecondary = Color(0xFF757575);
   static const Color iconActive = primary;
   static const Color iconInactive = Color(0xFF9E9E9E);
+
+  static const Color orange = Colors.orange;
 }

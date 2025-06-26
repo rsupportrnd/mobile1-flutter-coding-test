@@ -22,8 +22,8 @@ class UserListResponseEntity with _$UserListResponseEntity {
           name: e.name,
           email: e.email,
           profilePicture: e.profilePicture,
-          status: UserStatus.values.firstWhere((s) => s == e.status),
-          role: UserRole.values.firstWhere((r) => r == e.role),
+          status: e.status,
+          role: e.role,
         );
       }).toList(),
     );
@@ -41,7 +41,9 @@ class UserEntity with _$UserEntity {
     required UserRole role,
   }) = _UserEntity;
 
-  factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserEntityFromJson(json);
 
-  factory UserEntity.fromModel(UserModel model) => UserEntity.fromJson(model.toJson());
+  factory UserEntity.fromModel(UserModel model) =>
+      UserEntity.fromJson(model.toJson());
 }

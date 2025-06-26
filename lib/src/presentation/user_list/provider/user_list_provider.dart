@@ -13,9 +13,9 @@ final class UserList extends _$UserList {
   }
 
   Future<UserListResponseEntity> _fetchUserList({
-    UserUseCase? userCase,
+    UserUseCase? userUseCase,
   }) async {
-    final UserUseCase useCase = userCase ?? ref.read(userUseCaseProvider);
+    final UserUseCase useCase = userUseCase ?? ref.read(userUseCaseProvider);
     return await useCase.getUserList();
   }
 

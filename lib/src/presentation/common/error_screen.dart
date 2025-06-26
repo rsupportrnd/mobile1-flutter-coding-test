@@ -32,7 +32,7 @@ class ErrorView extends StatelessWidget {
                 onPressed(); // 실제 동작
               });
             },
-            child: const Text(CommonStringConstant.newTry),
+            child: const Text(CommonStringConstant.reTry),
           ),
         ],
       ),

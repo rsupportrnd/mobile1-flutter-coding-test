@@ -1,3 +1,3 @@
 class CommonStringConstant {
-  static const String newTry = '다시 시도';
+  static const String reTry = '다시 시도';
 }

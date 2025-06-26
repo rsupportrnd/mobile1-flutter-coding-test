@@ -11,13 +11,15 @@ part 'meeting_room_usecase.g.dart';
 
 @riverpod
 MeetingRoomUseCase meetingRoomUseCase(Ref ref) {
-  final MeetingRoomRepository meetingRoomRepository = ref.read(meetingRoomRepositoryProvider);
+  final MeetingRoomRepository meetingRoomRepository =
+      ref.read(meetingRoomRepositoryProvider);
   return MeetingRoomUseCase(meetingRoomRepository: meetingRoomRepository);
 }
 
 @riverpod
 MessageUseCase messageUseCase(Ref ref) {
-  final MeetingRoomRepository meetingRoomRepository = ref.read(meetingRoomRepositoryProvider);
+  final MeetingRoomRepository meetingRoomRepository =
+      ref.read(meetingRoomRepositoryProvider);
   return MessageUseCase(meetingRoomRepository: meetingRoomRepository);
 }
 
@@ -27,13 +29,9 @@ class MeetingRoomUseCase {
   MeetingRoomUseCase({required this.meetingRoomRepository});
 
   Future<MeetingRoomListResponseEntity> getMeetingRoomList() async {
-    try {
-      final MeetingRoomListResponseModel response =
-          await meetingRoomRepository.getMeetingRoomList();
-      return MeetingRoomListResponseEntity.fromModel(response);
-    } catch (e) {
-      rethrow;
-    }
+    final MeetingRoomListResponseModel response =
+        await meetingRoomRepository.getMeetingRoomList();
+    return MeetingRoomListResponseEntity.fromModel(response);
   }
 }
 
@@ -43,11 +41,8 @@ class MessageUseCase {
   MessageUseCase({required this.meetingRoomRepository});
 
   Future<MessageListResponseEntity> getMessageList() async {
-    try {
-      final MessageListResponseModel response = await meetingRoomRepository.getMessageList();
-      return MessageListResponseEntity.fromModel(response);
-    } catch (e) {
-      rethrow;
-    }
+    final MessageListResponseModel response =
+        await meetingRoomRepository.getMessageList();
+    return MessageListResponseEntity.fromModel(response);
   }
 }

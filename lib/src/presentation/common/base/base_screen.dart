@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
 
+///모든 스크린들이 상속받아 사용하는 클래스
 abstract class BaseScreen extends HookConsumerWidget {
   const BaseScreen({super.key});
 
@@ -62,10 +63,12 @@ abstract class BaseScreen extends HookConsumerWidget {
   bool get resizeToAvoidBottomInset => true;
 
   @protected
-  PreferredSizeWidget? renderAppBar(BuildContext context, WidgetRef ref) => null;
+  PreferredSizeWidget? renderAppBar(BuildContext context, WidgetRef ref) =>
+      null;
 
   @protected
-  Widget? renderBottomNavigationBar(BuildContext context, WidgetRef ref) => null;
+  Widget? renderBottomNavigationBar(BuildContext context, WidgetRef ref) =>
+      null;
 
   @protected
   void onResumed(WidgetRef ref) {}
