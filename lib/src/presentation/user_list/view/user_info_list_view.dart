@@ -10,12 +10,14 @@ class _UserInfoListView extends BaseView {
   Widget buildView(BuildContext context, WidgetRef ref) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: _UserInfoItem(
-            userEntity: userListEntity[index],
-            onTap: () {},
-          ),
+        return _UserInfoItem(
+          userEntity: userListEntity[index],
+          onTap: () {
+            BottomSheetUtil.showUserDetailSheet(
+              context: context,
+              user: userListEntity[index],
+            );
+          },
         );
       },
       separatorBuilder: (context, index) {
@@ -38,10 +40,13 @@ class _UserInfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => onTap(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 6,
+        ),
         child: SizedBox(
           width: double.infinity,
           height: 60,
@@ -56,15 +61,7 @@ class _UserInfoItem extends StatelessWidget {
                 style: AppTextStyle.body,
               ),
               const Spacer(),
-              Container(
-                width: 12,
-                height: 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: userEntity.status.getStatusColor(),
-                  border: Border.all(color: Colors.white, width: 2),
-                ),
-              ),
+              UserStatusWidget(userStatus: userEntity.status),
             ],
           ),
         ),
