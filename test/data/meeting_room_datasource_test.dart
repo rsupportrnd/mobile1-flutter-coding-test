@@ -15,7 +15,7 @@ void main() {
 
     setUp(() {
       mockDatasource = _MockMeetingRoomDatasource();
-      repository = MeetingRoomRepositoryImpl(datasource: mockDatasource);
+      repository = MeetingRoomRepositoryImpl(meetingRoomDatasource: mockDatasource);
     });
 
     test('getMeetingRoomList returns data on success', () async {
