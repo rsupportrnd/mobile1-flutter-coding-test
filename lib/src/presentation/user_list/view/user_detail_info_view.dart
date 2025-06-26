@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/src/consumer.dart';
-import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_screen_string_constant.dart';
+import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_string_constant.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_view.dart';
@@ -45,7 +45,7 @@ class UserDetailInfoView extends BaseView {
           Text(userEntity.email, style: const TextStyle(color: Colors.grey)),
           const SizedBox(height: 8),
           Text(
-            '${UserListScreenStringConstant.userRole}: ${userEntity.role.getRoleName()}',
+            '${UserListStringConstant.userRole}: ${userEntity.role.getRoleName()}',
             style: AppTextStyle.body,
           ),
           const SizedBox(height: 16),
