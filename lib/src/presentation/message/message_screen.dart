@@ -4,15 +4,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/extension/data_time_extension.dart';
 import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/message_string_constant.dart';
+import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
+import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_screen.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_view.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/component/custom_app_bar_widget.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/component/loading_indicator.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/common/component/user_avatar_widget.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/error_screen.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_event.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_state.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_provider.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/user_list/mixin/user_list_state.dart';
 
 part 'view/message_view.dart';
 part 'view/message_input_view.dart';
@@ -32,15 +37,28 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
   Widget buildScreen(BuildContext context, WidgetRef ref) {
     final TextEditingController controller = useTextEditingController();
 
-    final AsyncValue<List<MessageEntity>> messages =
-        watchMessages(ref: ref, roomId: roomId);
+    final AsyncValue<List<MessageEntity>> messages = watchMessages(
+      ref: ref,
+      roomId: roomId,
+    );
+
+    final ScrollController scrollController = useScrollController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (scrollController.hasClients) {
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      }
+    });
 
     return Column(
       children: [
         Expanded(
           child: messages.when(
             data: (List<MessageEntity> msgList) {
-              return _MessageListView(messages: msgList);
+              return _MessageListView(
+                messages: msgList,
+                scrollController: scrollController,
+              );
             },
             error: (error, stackTrace) => ErrorView(
               appException:
@@ -63,6 +81,13 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
               sender: MessageStringConstant.me,
               content: text,
             );
+            if (scrollController.hasClients) {
+              scrollController.animateTo(
+                scrollController.position.maxScrollExtent,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+              );
+            }
             controller.clear();
           },
         ),
