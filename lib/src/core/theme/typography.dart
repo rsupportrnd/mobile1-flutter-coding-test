@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
 
-const String fontFamily = 'Pretendard';
+const String fontFamily = 'Roboto';
 
 abstract class AppTextStyle {
   static TextStyle h1 = const TextStyle(
