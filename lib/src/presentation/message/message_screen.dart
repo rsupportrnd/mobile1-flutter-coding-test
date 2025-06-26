@@ -75,12 +75,19 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
         _MessageInputView(
           controller: controller,
           onSend: (String text) async {
-            await sendMessage(
+            final MessageEntity messageEntity = await sendMessage(
               ref: ref,
               roomId: roomId,
               sender: MessageStringConstant.me,
               content: text,
             );
+            controller.clear();
+
+            updateLastMessage(
+              ref: ref,
+              messageEntity: messageEntity,
+            );
+
             if (scrollController.hasClients) {
               scrollController.animateTo(
                 scrollController.position.minScrollExtent,
@@ -88,7 +95,6 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
                 curve: Curves.easeOut,
               );
             }
-            controller.clear();
           },
         ),
       ],

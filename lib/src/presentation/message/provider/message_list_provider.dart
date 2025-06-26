@@ -46,7 +46,7 @@ class MessageList extends _$MessageList {
   }
 
   /// 새로운 메시지를 전송
-  Future<void> sendMessage({
+  Future<MessageEntity> sendMessage({
     required String sender,
     required String content,
     MessageUseCase? messageUseCase,
@@ -73,6 +73,7 @@ class MessageList extends _$MessageList {
       roomId: currentRoomId,
       messages: updatedMessages,
     );
+    return newMessage;
   }
 
   /// 메시지 목록을 새로고침
