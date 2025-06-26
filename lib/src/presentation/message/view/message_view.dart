@@ -22,23 +22,24 @@ class _MessageListView extends BaseView with UserListState {
     ///메시지 정렬
     final List<MessageEntity> sortedMessages = [...messages]..sort(
         (MessageEntity a, MessageEntity b) =>
-            a.timestamp.compareTo(b.timestamp),
+            b.timestamp.compareTo(a.timestamp),
       );
 
-    return ListView.builder(
-      controller: scrollController,
-      reverse: false,
-      itemCount: sortedMessages.length,
-      itemBuilder: (BuildContext context, int index) {
-        final MessageEntity message = sortedMessages[index];
-        final UserEntity? user = userMap[message.sender];
-        return _MessageBubble(
-          message: message,
-          sender: user,
-        );
-      },
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom, // 여유값 추가
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ListView.builder(
+        shrinkWrap: true,
+        controller: scrollController,
+        reverse: true,
+        itemCount: sortedMessages.length,
+        itemBuilder: (BuildContext context, int index) {
+          final MessageEntity message = sortedMessages[index];
+          final UserEntity? user = userMap[message.sender];
+          return _MessageBubble(
+            message: message,
+            sender: user,
+          );
+        },
       ),
     );
   }

@@ -44,11 +44,14 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
 
     final ScrollController scrollController = useScrollController();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
-        scrollController.jumpTo(scrollController.position.maxScrollExtent);
-      }
-    });
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (scrollController.hasClients) {
+          scrollController.jumpTo(scrollController.position.minScrollExtent);
+        }
+      });
+      return null;
+    }, []);
 
     return Column(
       children: [
@@ -83,7 +86,7 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
             );
             if (scrollController.hasClients) {
               scrollController.animateTo(
-                scrollController.position.maxScrollExtent,
+                scrollController.position.minScrollExtent,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
               );
