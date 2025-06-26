@@ -3,7 +3,7 @@ import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response
 import 'package:mobile1_flutter_coding_test/src/presentation/user_list/provider/user_list_provider.dart';
 
 mixin class UserListState {
-  AsyncValue<UserListResponseEntity> getUserListProvider(
+  AsyncValue<UserListResponseEntity> watchUserListProvider(
           {required WidgetRef ref}) =>
       ref.watch(userListProvider);
 }

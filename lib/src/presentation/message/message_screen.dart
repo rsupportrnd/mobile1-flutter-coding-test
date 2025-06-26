@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
+import 'package:mobile1_flutter_coding_test/src/core/common/extension/data_time_extension.dart';
+import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/message_string_constant.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_screen.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_view.dart';
 import 'package:mobile1_flutter_coding_test/src/presentation/common/component/custom_app_bar_widget.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/common/component/loading_indicator.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/common/error_screen.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_event.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_state.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_provider.dart';
 
 part 'view/message_view.dart';
 part 'view/message_input_view.dart';
 
-class MessageScreen extends BaseScreen {
+class MessageScreen extends BaseScreen with MessageState, MessageEvent {
   static const String route = 'MessageScreen';
 
   final String roomId;
@@ -19,19 +30,44 @@ class MessageScreen extends BaseScreen {
 
   @override
   Widget buildScreen(BuildContext context, WidgetRef ref) {
-    return Container();
-    // return watchMessages(ref: ref, roomId: roomId).when(
-    //   data: (List<MessageEntity> messages) {
-    //     return Column(
-    //       children: [],
-    //     );
-    //   },
-    //   error: (error, stackTrace) => ErrorView(
-    //     appException: error is AppException ? error : const UnknownException(),
-    //     onPressed: () {},
-    //   ),
-    //   loading: () => const LoadingIndicator(),
-    // );
+    final TextEditingController controller = useTextEditingController();
+
+    final AsyncValue<List<MessageEntity>> messages =
+        watchMessages(ref: ref, roomId: roomId);
+
+    return Column(
+      children: [
+        Expanded(
+          child: messages.when(
+            data: (List<MessageEntity> msgList) {
+              return _MessageListView(messages: msgList);
+            },
+            error: (error, stackTrace) => ErrorView(
+              appException:
+                  error is AppException ? error : const UnknownException(),
+              onPressed: () async {
+                await ref
+                    .read(messageListProvider(roomId).notifier)
+                    .loadMessages();
+              },
+            ),
+            loading: () => const LoadingIndicator(),
+          ),
+        ),
+        _MessageInputView(
+          controller: controller,
+          onSend: (String text) async {
+            await sendMessage(
+              ref: ref,
+              roomId: roomId,
+              sender: MessageStringConstant.me,
+              content: text,
+            );
+            controller.clear();
+          },
+        ),
+      ],
+    );
   }
 
   @override

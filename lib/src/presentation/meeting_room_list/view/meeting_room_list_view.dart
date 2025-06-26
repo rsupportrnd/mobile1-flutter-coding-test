@@ -15,7 +15,16 @@ class _MeetingRoomListView extends BaseView {
             lastMessage.timestamp.updateLastMessageDateFormat;
 
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(
+              MessageScreen.route,
+              pathParameters: {'roomId': meetingRoom.roomId},
+              extra: {
+                'roomId': meetingRoom.roomId,
+                'roomName': meetingRoom.roomName,
+              },
+            );
+          },
           leading:
               UserAvatarWidget(profilePictureUrl: meetingRoom.thumbnailImage),
           title: Text(meetingRoom.roomName),

@@ -23,7 +23,7 @@ class UserListScreen extends BaseScreen with UserListState, UserListEvent {
 
   @override
   Widget buildScreen(BuildContext context, WidgetRef ref) {
-    return getUserListProvider(ref: ref).when(
+    return watchUserListProvider(ref: ref).when(
       data: (UserListResponseEntity userListEntity) {
         return _UserInfoListView(userListEntity: userListEntity.users);
       },
