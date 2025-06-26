@@ -34,7 +34,7 @@ class _MeetingRoomDatasource implements MeetingRoomDatasource {
     )
         .compose(
           _dio.options,
-          '/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/rooms.json',
+          'rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/rooms.json',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -67,7 +67,7 @@ class _MeetingRoomDatasource implements MeetingRoomDatasource {
     )
         .compose(
           _dio.options,
-          '/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/messages.json',
+          'rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/messages.json',
           queryParameters: queryParameters,
           data: _data,
         )

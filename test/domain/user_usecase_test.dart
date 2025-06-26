@@ -1,9 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/user_repository_impl.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/repository/user_repository.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/user_usecase.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/src/data/repository/user_repository_impl.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/usecase/user_usecase.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/repository/user_repository.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
 import 'package:mobile1_flutter_coding_test/src/data/model/user_list_response_model.dart';
 
 class _MockUserRepository extends Mock implements UserRepository {}
@@ -14,33 +15,35 @@ void main() {
 
   setUp(() {
     mockRepo = _MockUserRepository();
-    container = ProviderContainer(
-      overrides: [
-        userRepositoryProvider.overrideWithValue(mockRepo),
-      ],
-    );
+    container = ProviderContainer(overrides: <Override>[
+      userRepositoryProvider.overrideWithValue(mockRepo),
+    ]);
   });
 
   tearDown(() => container.dispose());
 
-  group('GetUserListUseCase', () {
-    test('returns data on success', () async {
-      const UserListResponseModel expected = UserListResponseModel(users: []);
-      when(() => mockRepo.getUserList()).thenAnswer((_) async => expected);
+  group('UserUseCase', () {
+    test('getUserList returns entity on success', () async {
+      const UserListResponseModel dummyModel = UserListResponseModel(users: []);
+      final UserListResponseEntity expected = UserListResponseEntity.fromModel(dummyModel);
+      when(() => mockRepo.getUserList()).thenAnswer((_) async => dummyModel);
 
-      final UserListResponseModel result = await container.read(getUserListUseCaseProvider.future);
+      final UserUseCase useCase = container.read(userUseCaseProvider);
+      final UserListResponseEntity result = await useCase.getUserList();
 
       expect(result, expected);
       verify(() => mockRepo.getUserList()).called(1);
     });
 
-    test('throws on failure', () async {
+    test('getUserList throws when repository fails', () async {
       final Exception exception = Exception('Repo error');
       when(() => mockRepo.getUserList()).thenThrow(exception);
 
+      final UserUseCase useCase = container.read(userUseCaseProvider);
+
       expect(
-        () => container.read(getUserListUseCaseProvider.future),
-        throwsA(exception),
+        () => useCase.getUserList(),
+        throwsA(same(exception)),
       );
       verify(() => mockRepo.getUserList()).called(1);
     });
