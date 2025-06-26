@@ -9,7 +9,7 @@ part of 'meeting_room_list_response_model.dart';
 _$MeetingRoomListResponseModelImpl _$$MeetingRoomListResponseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$MeetingRoomListResponseModelImpl(
-      meetingRooms: (json['meetingRooms'] as List<dynamic>)
+      meetingRooms: (json['chatRooms'] as List<dynamic>)
           .map((e) => MeetingRoomModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -17,7 +17,7 @@ _$MeetingRoomListResponseModelImpl _$$MeetingRoomListResponseModelImplFromJson(
 Map<String, dynamic> _$$MeetingRoomListResponseModelImplToJson(
         _$MeetingRoomListResponseModelImpl instance) =>
     <String, dynamic>{
-      'meetingRooms': instance.meetingRooms,
+      'chatRooms': instance.meetingRooms,
     };
 
 _$MeetingRoomModelImpl _$$MeetingRoomModelImplFromJson(

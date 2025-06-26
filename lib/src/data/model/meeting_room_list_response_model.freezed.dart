@@ -21,6 +21,7 @@ MeetingRoomListResponseModel _$MeetingRoomListResponseModelFromJson(
 
 /// @nodoc
 mixin _$MeetingRoomListResponseModel {
+  @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms => throw _privateConstructorUsedError;
 
   /// Serializes this MeetingRoomListResponseModel to a JSON map.
@@ -41,7 +42,7 @@ abstract class $MeetingRoomListResponseModelCopyWith<$Res> {
       _$MeetingRoomListResponseModelCopyWithImpl<$Res,
           MeetingRoomListResponseModel>;
   @useResult
-  $Res call({List<MeetingRoomModel> meetingRooms});
+  $Res call({@JsonKey(name: 'chatRooms') List<MeetingRoomModel> meetingRooms});
 }
 
 /// @nodoc
@@ -80,7 +81,7 @@ abstract class _$$MeetingRoomListResponseModelImplCopyWith<$Res>
       __$$MeetingRoomListResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MeetingRoomModel> meetingRooms});
+  $Res call({@JsonKey(name: 'chatRooms') List<MeetingRoomModel> meetingRooms});
 }
 
 /// @nodoc
@@ -114,7 +115,8 @@ class __$$MeetingRoomListResponseModelImplCopyWithImpl<$Res>
 class _$MeetingRoomListResponseModelImpl
     implements _MeetingRoomListResponseModel {
   const _$MeetingRoomListResponseModelImpl(
-      {required final List<MeetingRoomModel> meetingRooms})
+      {@JsonKey(name: 'chatRooms')
+      required final List<MeetingRoomModel> meetingRooms})
       : _meetingRooms = meetingRooms;
 
   factory _$MeetingRoomListResponseModelImpl.fromJson(
@@ -123,6 +125,7 @@ class _$MeetingRoomListResponseModelImpl
 
   final List<MeetingRoomModel> _meetingRooms;
   @override
+  @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms {
     if (_meetingRooms is EqualUnmodifiableListView) return _meetingRooms;
     // ignore: implicit_dynamic_type
@@ -169,13 +172,15 @@ class _$MeetingRoomListResponseModelImpl
 abstract class _MeetingRoomListResponseModel
     implements MeetingRoomListResponseModel {
   const factory _MeetingRoomListResponseModel(
-          {required final List<MeetingRoomModel> meetingRooms}) =
+          {@JsonKey(name: 'chatRooms')
+          required final List<MeetingRoomModel> meetingRooms}) =
       _$MeetingRoomListResponseModelImpl;
 
   factory _MeetingRoomListResponseModel.fromJson(Map<String, dynamic> json) =
       _$MeetingRoomListResponseModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms;
 
   /// Create a copy of MeetingRoomListResponseModel

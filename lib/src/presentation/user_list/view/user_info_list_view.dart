@@ -10,12 +10,13 @@ class _UserInfoListView extends BaseView {
   Widget buildView(BuildContext context, WidgetRef ref) {
     return ListView.separated(
       itemBuilder: (context, index) {
+        final UserEntity user = userListEntity[index];
         return _UserInfoItem(
-          userEntity: userListEntity[index],
+          userEntity: user,
           onTap: () {
             BottomSheetUtil.showUserDetailSheet(
               context: context,
-              user: userListEntity[index],
+              user: user,
             );
           },
         );
