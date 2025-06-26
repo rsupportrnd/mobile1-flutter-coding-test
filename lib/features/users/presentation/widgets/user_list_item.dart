@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/user.dart';
+import 'user_detail_bottom_sheet.dart';
 
 class UserListItem extends StatelessWidget {
   final User user;
@@ -11,6 +12,15 @@ class UserListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          useRootNavigator: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          builder: (context) => UserDetailBottomSheet(user: user),
+        );
       },
         child: Container(
       color: Colors.white,
