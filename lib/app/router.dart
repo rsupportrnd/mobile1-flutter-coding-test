@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
+import 'package:mobile1_flutter_coding_test/features/users/presentation/user_list_screen.dart';
 
 import '../presentation/chat_screen.dart';
 import '../presentation/room_list_screen.dart';
-import '../presentation/user_list_screen.dart';
 import 'app_scaffold.dart';
 
 final GoRouter router = GoRouter(
