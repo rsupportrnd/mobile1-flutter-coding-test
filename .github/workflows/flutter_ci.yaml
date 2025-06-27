@@ -2,9 +2,9 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main]          # ✔ main 브랜치 푸시
+    branches: [main]
   pull_request:
-    branches: [main]          # ✔ main 대상 PR
+    branches: [main]
 
 jobs:
   build:

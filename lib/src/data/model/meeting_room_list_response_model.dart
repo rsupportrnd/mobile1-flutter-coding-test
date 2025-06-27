@@ -6,6 +6,7 @@ part 'meeting_room_list_response_model.g.dart';
 @freezed
 class MeetingRoomListResponseModel with _$MeetingRoomListResponseModel {
   const factory MeetingRoomListResponseModel({
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'chatRooms') required List<MeetingRoomModel> meetingRooms,
   }) = _MeetingRoomListResponseModel;
 
