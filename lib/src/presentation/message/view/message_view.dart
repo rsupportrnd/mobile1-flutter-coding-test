@@ -94,16 +94,13 @@ class _MessageBubble extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     message.content,
-                    style: const TextStyle(color: textColor),
+                    style: AppTextStyle.body.copyWith(color: textColor),
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   message.timestamp.updateLastMessageDateFormat,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: AppColors.textSecondary,
-                  ),
+                  style: AppTextStyle.caption.copyWith(color: AppColors.textSecondary),
                 ),
               ],
             ),
