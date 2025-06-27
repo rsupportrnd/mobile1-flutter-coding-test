@@ -15,6 +15,7 @@ class _MeetingRoomListView extends BaseView {
             lastMessage.timestamp.updateLastMessageDateFormat;
 
         return ListTile(
+          key: ValueKey(meetingRoom.roomId),
           onTap: () {
             context.pushNamed(
               MessageScreen.route,

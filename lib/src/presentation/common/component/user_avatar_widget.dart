@@ -10,27 +10,26 @@ class UserAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double imageSize = 56;
     return ClipOval(
-      child: FadeInImage.assetNetwork(
-        placeholder: ImagePath.defaultProfile,
-        image: profilePictureUrl,
-        width: 56,
-        height: 56,
+      child: Image.network(
+        profilePictureUrl,
+        width: imageSize,
+        height: imageSize,
         fit: BoxFit.cover,
-        imageErrorBuilder: (context, error, stackTrace) {
-          return Image.network(
-            profilePictureUrl,
-            width: 56,
-            height: 56,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
-                ImagePath.defaultProfile,
-                width: 56,
-                height: 56,
-                fit: BoxFit.cover,
-              );
-            },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Image.asset(
+            ImagePath.defaultProfile,
+            width: imageSize,
+            height: imageSize,
+          );
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(
+            ImagePath.defaultProfile,
+            width: imageSize,
+            height: imageSize,
           );
         },
       ),

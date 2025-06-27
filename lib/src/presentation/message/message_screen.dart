@@ -37,11 +37,6 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
   Widget buildScreen(BuildContext context, WidgetRef ref) {
     final TextEditingController controller = useTextEditingController();
 
-    final AsyncValue<List<MessageEntity>> messages = watchMessages(
-      ref: ref,
-      roomId: roomId,
-    );
-
     final ScrollController scrollController = useScrollController();
 
     useEffect(() {
@@ -56,7 +51,10 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
     return Column(
       children: [
         Expanded(
-          child: messages.when(
+          child: watchMessagesProvider(
+            ref: ref,
+            roomId: roomId,
+          ).when(
             data: (List<MessageEntity> msgList) {
               return _MessageListView(
                 messages: msgList,
@@ -64,9 +62,12 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
               );
             },
             error: (error, stackTrace) => ErrorView(
-              appException: error is AppException ? error : const UnknownException(),
+              appException:
+                  error is AppException ? error : const UnknownException(),
               onPressed: () async {
-                await ref.read(messageListProvider(roomId).notifier).reloadMessages();
+                await ref
+                    .read(messageListProvider(roomId).notifier)
+                    .reloadMessages();
               },
             ),
             loading: () => const LoadingIndicator(),
@@ -75,12 +76,19 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
         _MessageInputView(
           controller: controller,
           onSend: (String text) async {
-            await sendMessage(
+            final MessageEntity messageEntity = await sendMessage(
               ref: ref,
               roomId: roomId,
               sender: MessageStringConstant.me,
               content: text,
             );
+            controller.clear();
+
+            updateLastMessage(
+              ref: ref,
+              messageEntity: messageEntity,
+            );
+
             if (scrollController.hasClients) {
               scrollController.animateTo(
                 scrollController.position.minScrollExtent,
@@ -88,7 +96,6 @@ class MessageScreen extends BaseScreen with MessageState, MessageEvent {
                 curve: Curves.easeOut,
               );
             }
-            controller.clear();
           },
         ),
       ],

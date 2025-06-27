@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-//모든 뷰들이 상속받는 기본 클래스
+///모든 뷰들이 상속받는 기본 클래스
 abstract class BaseView extends HookConsumerWidget {
   const BaseView({super.key});
 

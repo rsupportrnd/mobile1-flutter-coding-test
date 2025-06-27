@@ -26,7 +26,7 @@ class _MessageInputView extends BaseView {
           IconButton(
             icon: const Icon(Icons.send),
             onPressed: () {
-              final text = controller.text.trim();
+              final String text = controller.text.trim();
               if (text.isEmpty) return;
               onSend(text);
             },

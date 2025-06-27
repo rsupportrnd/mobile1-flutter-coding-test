@@ -1,3 +1,4 @@
+///에러 종류별 Exception
 abstract class AppException implements Exception {
   final String message;
   const AppException(this.message);

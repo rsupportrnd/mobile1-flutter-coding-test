@@ -11,6 +11,7 @@ part 'dio.g.dart';
 @riverpod
 Dio dio(Ref ref) {
   final Dio dio = Dio();
+  //인터셉터 추가
   dio.interceptors.add(
     CustomInterceptor(dio: dio),
   );
@@ -63,6 +64,7 @@ class CustomInterceptor extends Interceptor {
 
     late final DioException dioError;
 
+    //에러별 고유의 Exception 리턴
     switch (statusCode) {
       case 401:
         dioError = DioException(

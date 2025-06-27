@@ -32,8 +32,14 @@ class HomeScreen extends HookConsumerWidget {
               .setTab(BottomNavTabType.values[idx]);
         },
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: '유저'),
-          BottomNavigationBarItem(icon: Icon(Icons.meeting_room), label: '미팅룸'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: '유저',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.meeting_room),
+            label: '미팅룸',
+          ),
         ],
       ),
     );
