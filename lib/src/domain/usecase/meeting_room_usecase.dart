@@ -7,8 +7,7 @@ part 'meeting_room_usecase.g.dart';
 
 @riverpod
 MeetingRoomUseCase meetingRoomUseCase(Ref ref) {
-  final MeetingRoomRepository meetingRoomRepository =
-      ref.read(meetingRoomRepositoryProvider);
+  final MeetingRoomRepository meetingRoomRepository = ref.read(meetingRoomRepositoryProvider);
   return MeetingRoomUseCase(meetingRoomRepository: meetingRoomRepository);
 }
 
@@ -18,8 +17,6 @@ class MeetingRoomUseCase {
   MeetingRoomUseCase({required this.meetingRoomRepository});
 
   Future<MeetingRoomListResponseEntity> getMeetingRoomList() async {
-    final MeetingRoomListResponseModel response =
-        await meetingRoomRepository.getMeetingRoomList();
-    return MeetingRoomListResponseEntity.fromModel(response);
+    return await meetingRoomRepository.getMeetingRoomList();
   }
 }

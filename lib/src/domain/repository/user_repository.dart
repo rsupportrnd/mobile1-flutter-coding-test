@@ -1,5 +1,5 @@
-import 'package:mobile1_flutter_coding_test/src/data/model/user_list_response_model.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 
 abstract interface class UserRepository {
-  Future<UserListResponseModel> getUserList();
+  Future<UserListResponseEntity> getUserList();
 }

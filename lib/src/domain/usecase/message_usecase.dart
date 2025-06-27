@@ -7,8 +7,7 @@ part 'message_usecase.g.dart';
 
 @riverpod
 MessageUseCase messageUseCase(Ref ref) {
-  final MessageRepository messageRepository =
-      ref.read(messageRepositoryProvider);
+  final MessageRepository messageRepository = ref.read(messageRepositoryProvider);
   return MessageUseCase(messageRepository: messageRepository);
 }
 
@@ -18,9 +17,7 @@ class MessageUseCase {
   MessageUseCase({required this.messageRepository});
 
   Future<MessageListResponseEntity> getMessageList() async {
-    final MessageListResponseModel response =
-        await messageRepository.getRemoteMessageList();
-    return MessageListResponseEntity.fromModel(response);
+    return await messageRepository.getRemoteMessageList();
   }
 
   Future<List<MessageEntity>> getLocalMessages({required String roomId}) {

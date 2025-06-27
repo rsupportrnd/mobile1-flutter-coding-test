@@ -14,18 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-MeetingRoomListResponseEntity _$MeetingRoomListResponseEntityFromJson(
-    Map<String, dynamic> json) {
-  return _MeetingRoomListResponseEntity.fromJson(json);
-}
-
 /// @nodoc
 mixin _$MeetingRoomListResponseEntity {
   List<MeetingRoomEntity> get meetingRooms =>
       throw _privateConstructorUsedError;
-
-  /// Serializes this MeetingRoomListResponseEntity to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of MeetingRoomListResponseEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -111,16 +103,12 @@ class __$$MeetingRoomListResponseEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$MeetingRoomListResponseEntityImpl
     implements _MeetingRoomListResponseEntity {
   const _$MeetingRoomListResponseEntityImpl(
       {required final List<MeetingRoomEntity> meetingRooms})
       : _meetingRooms = meetingRooms;
-
-  factory _$MeetingRoomListResponseEntityImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$MeetingRoomListResponseEntityImplFromJson(json);
 
   final List<MeetingRoomEntity> _meetingRooms;
   @override
@@ -144,7 +132,6 @@ class _$MeetingRoomListResponseEntityImpl
                 .equals(other._meetingRooms, _meetingRooms));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_meetingRooms));
@@ -158,13 +145,6 @@ class _$MeetingRoomListResponseEntityImpl
           _$MeetingRoomListResponseEntityImpl>
       get copyWith => __$$MeetingRoomListResponseEntityImplCopyWithImpl<
           _$MeetingRoomListResponseEntityImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MeetingRoomListResponseEntityImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _MeetingRoomListResponseEntity
@@ -172,9 +152,6 @@ abstract class _MeetingRoomListResponseEntity
   const factory _MeetingRoomListResponseEntity(
           {required final List<MeetingRoomEntity> meetingRooms}) =
       _$MeetingRoomListResponseEntityImpl;
-
-  factory _MeetingRoomListResponseEntity.fromJson(Map<String, dynamic> json) =
-      _$MeetingRoomListResponseEntityImpl.fromJson;
 
   @override
   List<MeetingRoomEntity> get meetingRooms;

@@ -6,20 +6,6 @@ part of 'meeting_room_list_response_entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MeetingRoomListResponseEntityImpl
-    _$$MeetingRoomListResponseEntityImplFromJson(Map<String, dynamic> json) =>
-        _$MeetingRoomListResponseEntityImpl(
-          meetingRooms: (json['meetingRooms'] as List<dynamic>)
-              .map((e) => MeetingRoomEntity.fromJson(e as Map<String, dynamic>))
-              .toList(),
-        );
-
-Map<String, dynamic> _$$MeetingRoomListResponseEntityImplToJson(
-        _$MeetingRoomListResponseEntityImpl instance) =>
-    <String, dynamic>{
-      'meetingRooms': instance.meetingRooms,
-    };
-
 _$MeetingRoomEntityImpl _$$MeetingRoomEntityImplFromJson(
         Map<String, dynamic> json) =>
     _$MeetingRoomEntityImpl(

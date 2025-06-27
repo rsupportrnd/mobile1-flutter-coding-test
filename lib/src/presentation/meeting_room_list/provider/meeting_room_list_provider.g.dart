@@ -6,7 +6,7 @@ part of 'meeting_room_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$meetingRoomListHash() => r'7f1903abfb3a575c92f41844f9463018c2f51fd8';
+String _$meetingRoomListHash() => r'013d973ec043b78e1b0e9409c9118e23b4906e1d';
 
 /// See also [MeetingRoomList].
 @ProviderFor(MeetingRoomList)
