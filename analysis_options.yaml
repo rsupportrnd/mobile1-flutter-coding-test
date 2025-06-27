@@ -6,4 +6,4 @@ analyzer:
     - "**/*.g.dart"
 
   errors:
-    unnecessary_import:      warning
+    unnecessary_import: warning
