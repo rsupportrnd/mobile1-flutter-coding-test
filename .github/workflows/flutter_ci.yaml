@@ -5,28 +5,86 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch: {}
+  release:
+    types: [published]
 
+### pr과 release 구분
+#  기본 pr시는 빠르고 가볍게 품질 검증
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: '3.24.4'
           cache: true
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Analyze
-        run: flutter analyze --no-fatal-warnings
+        run: flutter analyze
 
       - name: Run tests
-        run: flutter test
+        run: |
+          flutter test --coverage
 
-      - name: Build debug APK
-        run: flutter build apk --debug
+  # 릴리즈 시에는 Android/iOS 빌드
+  release:
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up tooling
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.4'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run unit tests again
+        run: flutter test --no-pub
+
+      #Android
+      - name: Build Android
+        if: matrix.os == 'ubuntu-latest'
+        run: flutter build apk --release
+
+      # iOS
+      - name: Build iOS
+        if: matrix.os == 'macos-latest'
+        env:
+          FLUTTER_XCODE_CODE_SIGN_STYLE: Manual
+        run: |
+          flutter build ipa \
+            --export-options-plist=ios/ExportOptions.plist \
+            --no-codesign
+
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}
+          path: |
+            build/app/outputs/**/*.apk
+            build/ios/ipa/*.ipa
+
+
+#워크플로 동시 실행 방지                                     #
+concurrency:
+  group: flutter-ci-${{ github.ref }}
+  cancel-in-progress: true

@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,13 +14,10 @@ class MeetingRoomList extends _$MeetingRoomList {
     MeetingRoomUseCase? meetingRoomUseCase,
     MessageUseCase? messageUseCase,
   }) async {
-    final MeetingRoomUseCase useCase =
-        meetingRoomUseCase ?? ref.read(meetingRoomUseCaseProvider);
-    final MessageUseCase msgUseCase =
-        messageUseCase ?? ref.read(messageUseCaseProvider);
+    final MeetingRoomUseCase useCase = meetingRoomUseCase ?? ref.read(meetingRoomUseCaseProvider);
+    final MessageUseCase msgUseCase = messageUseCase ?? ref.read(messageUseCaseProvider);
 
-    final MeetingRoomListResponseEntity responseEntity =
-        await useCase.getMeetingRoomList();
+    final MeetingRoomListResponseEntity responseEntity = await useCase.getMeetingRoomList();
 
     // 로컬 메시지 기반 lastMessage 갱신
     final List<MeetingRoomEntity> updatedRooms = await Future.wait(
@@ -51,8 +47,7 @@ class MeetingRoomList extends _$MeetingRoomList {
 
     bool updated = false;
 
-    final MeetingRoomListResponseEntity currentEntity =
-        currentState.requireValue;
+    final MeetingRoomListResponseEntity currentEntity = currentState.requireValue;
 
     final List<MeetingRoomEntity> updatedRooms = currentEntity.meetingRooms.map(
       (final MeetingRoomEntity room) {
