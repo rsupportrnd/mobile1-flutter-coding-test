@@ -10,14 +10,21 @@ on:
     types: [published]
 
 ### pr과 release 구분
-#  기본 pr시는 빠르고 가볍게 품질 검증
+#  기본 pr시는 빌드만
 jobs:
   quality:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: macos-latest
+    timeout-minutes: 30
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -32,10 +39,15 @@ jobs:
         run: flutter analyze
 
       - name: Run tests
-        run: |
-          flutter test --coverage
+        run: flutter test --coverage
 
-  # 릴리즈 시에는 Android/iOS 빌드
+      - name: Build Android APK
+        run: flutter build apk --debug
+
+      - name: Build iOS app
+        run: flutter build ios  --simulator
+
+  # 릴리즈 시에는 apk업로드
   release:
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     runs-on: ${{ matrix.os }}
@@ -45,7 +57,14 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Set up tooling
         uses: subosito/flutter-action@v2
@@ -59,8 +78,12 @@ jobs:
       - name: Run unit tests again
         run: flutter test --no-pub
 
-      #Android
-      - name: Build Android
+      # Android
+      - name: Clean build artifacts
+        if: matrix.os == 'ubuntu-latest'
+        run: flutter clean
+
+      - name: Build Android APK
         if: matrix.os == 'ubuntu-latest'
         run: flutter build apk --release
 
@@ -70,19 +93,23 @@ jobs:
         env:
           FLUTTER_XCODE_CODE_SIGN_STYLE: Manual
         run: |
-          flutter build ipa \
-            --export-options-plist=ios/ExportOptions.plist \
-            --no-codesign
+          flutter clean
+          flutter build ios --simulator
 
 
-      - name: Upload build artifacts
+      # Android APK만 업로드
+      - name: Upload Android APK
+        if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ matrix.os }}
-          path: |
-            build/app/outputs/**/*.apk
-            build/ios/ipa/*.ipa
+          name: android-release-apk
+          path: build/app/outputs/**/*.apk
 
+      - name: Upload APK to Release
+        if: github.event_name == 'release' && matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
 
 #워크플로 동시 실행 방지                                     #
 concurrency:
