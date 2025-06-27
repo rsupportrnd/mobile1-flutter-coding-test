@@ -7,7 +7,7 @@ part of 'meeting_room_repository_impl.dart';
 // **************************************************************************
 
 String _$meetingRoomRepositoryHash() =>
-    r'61c2fbce5a78870a7b93010e57e81a49e76e29e5';
+    r'2de6c87ee7b0f3ad7f873ece1155bee28cbe8785';
 
 /// See also [meetingRoomRepository].
 @ProviderFor(meetingRoomRepository)
