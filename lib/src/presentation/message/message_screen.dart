@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
-import 'package:mobile1_flutter_coding_test/src/core/common/extension/data_time_extension.dart';
-import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/message_string_constant.dart';
-import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
-import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_screen.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/base/base_view.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/component/custom_app_bar_widget.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/component/loading_indicator.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/component/user_avatar_widget.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/common/error_screen.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_event.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/message/mixin/message_state.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_list_provider.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/user_list/mixin/user_list_state.dart';
+import 'package:mobile1_flutter_coding_test/src/core/core.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/presentation.dart';
 
 part 'view/message_view.dart';
 part 'view/message_input_view.dart';

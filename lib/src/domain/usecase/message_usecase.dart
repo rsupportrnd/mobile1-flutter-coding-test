@@ -1,8 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/message_list_response_model.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/message_repository.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/repository/message_repository.dart';
+import 'package:mobile1_flutter_coding_test/src/data/data.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'message_usecase.g.dart';
