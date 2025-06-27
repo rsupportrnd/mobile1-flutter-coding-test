@@ -1,34 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
 import 'package:mobile1_flutter_coding_test/src/data/datasource/local_message_datasource.dart';
+import 'package:mobile1_flutter_coding_test/src/data/datasource/remote_message_datasource.dart';
+import 'package:mobile1_flutter_coding_test/src/data/repository/message_repository.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/meeting_room_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/meeting_room_list_response_model.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/message_list_response_model.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/meeting_room_repository_impl.dart';
-
-class _MockMeetingRoomDatasource extends Mock
-    implements MeetingRoomDatasource {}
 
 class _MockLocalMessageDatasource extends Mock
     implements LocalMessageDatasource {}
 
+class _MockRemoteMessageDatasource extends Mock
+    implements RemoteMessageDatasource {}
+
 void main() {
   group('LocalMessageRepositoryImpl', () {
-    late _MockMeetingRoomDatasource mockMeetingRoomDatasource;
     late _MockLocalMessageDatasource mockLocalMessageDatasource;
+    late _MockRemoteMessageDatasource mockRemoteMessageDatasource;
 
-    late MeetingRoomRepositoryImpl repository;
+    late MessageRepositoryImpl repository;
     const String roomId = 'room_1';
     setUp(() {
-      mockMeetingRoomDatasource = _MockMeetingRoomDatasource();
       mockLocalMessageDatasource = _MockLocalMessageDatasource();
-
-      repository = MeetingRoomRepositoryImpl(
-        meetingRoomDatasource: mockMeetingRoomDatasource,
-        localMessageDatasource: mockLocalMessageDatasource,
-      );
+      mockRemoteMessageDatasource = _MockRemoteMessageDatasource();
+      repository = MessageRepositoryImpl(
+          localMessageDatasource: mockLocalMessageDatasource,
+          remoteMessageDatasource: mockRemoteMessageDatasource);
     });
 
     test('getLocalMessageList returns messages from datasource', () async {

@@ -33,7 +33,7 @@ class MessageRepositoryImpl with ApiUtilMixin implements MessageRepository {
 
   @override
   Future<MessageListResponseModel> getRemoteMessageList() {
-    return safeApiCall(() => _remoteMessageDatasource.getMessageList());
+    return safeApiCall(() => _remoteMessageDatasource.getRemoteMessageList());
   }
 
   @override

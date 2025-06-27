@@ -22,7 +22,7 @@ class _RemoteMessageDatasource implements RemoteMessageDatasource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MessageListResponseModel> getMessageList() async {
+  Future<MessageListResponseModel> getRemoteMessageList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -21,5 +21,5 @@ abstract class RemoteMessageDatasource {
       _RemoteMessageDatasource;
 
   @GET(ApiConfig.messageListUrl)
-  Future<MessageListResponseModel> getMessageList();
+  Future<MessageListResponseModel> getRemoteMessageList();
 }
