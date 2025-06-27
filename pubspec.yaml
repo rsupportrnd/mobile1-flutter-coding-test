@@ -36,6 +36,25 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # HTTP requests
+  http: ^1.4.0
+
+  # JSON
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
+
+  # For local storage
+  shared_preferences: ^2.5.3
+
+  # Model generation and serialization
+  build_runner: ^2.5.4
+  freezed: ^3.0.6
+  json_serializable: ^6.9.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
