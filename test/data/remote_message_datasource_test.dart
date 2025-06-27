@@ -1,9 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/local_message_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/remote_message_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/message_list_response_model.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/message_repository.dart';
+import 'package:mobile1_flutter_coding_test/src/data/data.dart';
+
 import 'package:mocktail/mocktail.dart';
 
 class _MockLocalMessageDatasource extends Mock

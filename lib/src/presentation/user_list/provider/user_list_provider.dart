@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/user_usecase.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_list_provider.g.dart';

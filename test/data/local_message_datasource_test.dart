@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/local_message_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/remote_message_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/repository/message_repository.dart';
+import 'package:mobile1_flutter_coding_test/src/data/data.dart';
+
 import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
 import 'package:mocktail/mocktail.dart';
 

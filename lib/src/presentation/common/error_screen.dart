@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
-import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/common_string_constant.dart';
-import 'package:mobile1_flutter_coding_test/src/core/util/throttle.dart';
+import 'package:mobile1_flutter_coding_test/src/core/core.dart';
 
 class ErrorView extends StatelessWidget {
   const ErrorView({

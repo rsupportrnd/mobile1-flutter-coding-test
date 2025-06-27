@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
-import 'package:mobile1_flutter_coding_test/src/core/util/logger_util.dart';
+import 'package:mobile1_flutter_coding_test/src/core/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio.g.dart';
@@ -24,7 +23,8 @@ class CustomInterceptor extends Interceptor {
   CustomInterceptor({required this.dio});
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     logger.d('[REQUEST] ${options.method}] ${options.uri}, ${options.data}');
 
     return super.onRequest(options, handler);
@@ -56,7 +56,8 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    logger.e('[ERROR] ${err.requestOptions.method}] ${err.requestOptions.uri} \n'
+    logger.e(
+        '[ERROR] ${err.requestOptions.method}] ${err.requestOptions.uri} \n'
         '[response] : ${err.response} '
         '[StatusCode]:${err.response?.statusCode}, ${err.message}, ${err.type}');
     final int? statusCode = err.response?.statusCode;

@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/util/api_util.dart';
-import 'package:mobile1_flutter_coding_test/src/data/datasource/meeting_room_datasource.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/meeting_room_list_response_model.dart';
+import 'package:mobile1_flutter_coding_test/src/data/data.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/repository/meeting_room_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

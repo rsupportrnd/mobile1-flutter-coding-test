@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/provider/bottom_nav_index_provider.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/meeting_room_list/meeting_room_list_screen.dart';
-import 'package:mobile1_flutter_coding_test/src/presentation/user_list/user_list_screen.dart';
+import 'package:mobile1_flutter_coding_test/src/presentation/presentation.dart';
 
 class HomeScreen extends HookConsumerWidget {
   static const route = 'HomeScreen';

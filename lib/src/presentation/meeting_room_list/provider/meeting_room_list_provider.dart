@@ -1,8 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/meeting_room_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/meeting_room_usecase.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/message_usecase.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'meeting_room_list_provider.g.dart';
@@ -11,10 +8,10 @@ part 'meeting_room_list_provider.g.dart';
 class MeetingRoomList extends _$MeetingRoomList {
   @override
   Future<MeetingRoomListResponseEntity> build() async {
-    return await _fetchUserList();
+    return await _fetchMeetingRoomList();
   }
 
-  Future<MeetingRoomListResponseEntity> _fetchUserList({
+  Future<MeetingRoomListResponseEntity> _fetchMeetingRoomList({
     MeetingRoomUseCase? meetingRoomUseCase,
     MessageUseCase? messageUseCase,
   }) async {
@@ -44,7 +41,7 @@ class MeetingRoomList extends _$MeetingRoomList {
 
   Future<void> getUserList() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => _fetchUserList());
+    state = await AsyncValue.guard(() => _fetchMeetingRoomList());
   }
 
   void updateLastMessage({required MessageEntity messageEntity}) {

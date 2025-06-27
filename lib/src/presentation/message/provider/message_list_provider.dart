@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
-import 'package:mobile1_flutter_coding_test/src/domain/usecase/message_usecase.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'message_list_provider.g.dart';

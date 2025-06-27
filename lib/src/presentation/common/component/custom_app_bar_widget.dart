@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
-import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
+import 'package:mobile1_flutter_coding_test/src/core/core.dart';
 
 ///기본기능들이 담긴 커스텀 앱바위젯
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
