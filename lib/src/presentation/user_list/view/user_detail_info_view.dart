@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/constant/string_constant/user_list_string_constant.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/typography.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/entity/user_list_response_entity.dart';
