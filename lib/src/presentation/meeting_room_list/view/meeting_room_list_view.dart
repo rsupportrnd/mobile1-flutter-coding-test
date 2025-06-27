@@ -8,11 +8,9 @@ class _MeetingRoomListView extends BaseView {
   Widget buildView(BuildContext context, WidgetRef ref) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        final MeetingRoomEntity meetingRoom =
-            meetingRoomListEntity.meetingRooms[index];
+        final MeetingRoomEntity meetingRoom = meetingRoomListEntity.meetingRooms[index];
         final LastMessageEntity lastMessage = meetingRoom.lastMessage;
-        final String formattedTime =
-            lastMessage.timestamp.updateLastMessageDateFormat;
+        final String formattedTime = lastMessage.timestamp.updateLastMessageDateFormat;
 
         return ListTile(
           key: ValueKey(meetingRoom.roomId),
@@ -26,17 +24,17 @@ class _MeetingRoomListView extends BaseView {
               },
             );
           },
-          leading:
-              UserAvatarWidget(profilePictureUrl: meetingRoom.thumbnailImage),
+          leading: UserAvatarWidget(profilePictureUrl: meetingRoom.thumbnailImage),
           title: Text(meetingRoom.roomName),
           subtitle: Text(
             '${lastMessage.sender}: ${lastMessage.content}',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: AppTextStyle.body,
           ),
           trailing: Text(
             formattedTime,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            style: AppTextStyle.subtitle.copyWith(fontSize: 12, color: Colors.grey),
           ),
         );
       },

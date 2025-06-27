@@ -34,18 +34,14 @@ class UserDetailInfoView extends BaseView {
               const SizedBox(width: 8),
               Text(
                 userEntity.status.getStatusName(),
-                style: AppTextStyle.body
-                    .copyWith(color: userEntity.status.getStatusColor()),
+                style: AppTextStyle.body.copyWith(color: userEntity.status.getStatusColor()),
               ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
             userEntity.name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyle.h2.copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
             userEntity.email,
