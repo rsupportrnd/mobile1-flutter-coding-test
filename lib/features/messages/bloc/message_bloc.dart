@@ -1,6 +1,7 @@
-// message_bloc.dart
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../rooms/bloc/room_bloc.dart';
+import '../../rooms/bloc/room_event.dart';
+import '../../rooms/data/models/room.dart';
 import 'message_event.dart';
 import 'message_state.dart';
 import '../data/repositories/message_repository.dart';
@@ -8,8 +9,12 @@ import '../data/models/message.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final MessageRepository messageRepository;
+  final RoomBloc roomBloc;
 
-  MessageBloc({required this.messageRepository}) : super(MessageInitial()) {
+  MessageBloc({
+    required this.messageRepository,
+    required this.roomBloc,
+  }) : super(MessageInitial()) {
     on<MessageLoadRequested>(_onMessageLoadRequested);
     on<MessageSent>(_onMessageSent);
   }
@@ -19,10 +24,16 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     Emitter<MessageState> emit,
   ) async {
     emit(MessageLoadInProgress());
+
     try {
-      final allMessages = await messageRepository.fetchMessages();
-      final filtered = allMessages.where((message) => message.roomId == event.roomId).toList();
-      emit(MessageLoadSuccess(filtered));
+      final remoteMessages = await messageRepository.fetchMessages();
+      final localMessages = await messageRepository.getLocalMessagesByRoom(event.roomId);
+
+      final apiMessages = remoteMessages.where((msg) => msg.roomId == event.roomId).toList();
+
+      final allMessages = [...apiMessages, ...localMessages]..sort((a, b) => a.timestamp.compareTo(b.timestamp));
+
+      emit(MessageLoadSuccess(allMessages));
     } catch (e) {
       emit(MessageLoadFailure('메시지를 불러오지 못했습니다.'));
     }
@@ -32,30 +43,42 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     MessageSent event,
     Emitter<MessageState> emit,
   ) async {
-    if (state is MessageLoadSuccess) {
-      final currentState = state as MessageLoadSuccess;
-      final messages = List<Message>.from(currentState.messages);
+    if (state is! MessageLoadSuccess) return;
 
-      // 새로운 메시지 ID 생성
-      int lastId = 0;
-      if (messages.isNotEmpty) {
-        final last = messages.last.messageId;
-        final number = int.tryParse(last.replaceAll(RegExp(r'[^0-9]'), ''));
-        lastId = number ?? 0;
-      }
-      final newMessageId = 'msg${lastId + 1}';
+    final currentState = state as MessageLoadSuccess;
+    final messages = List<Message>.from(currentState.messages);
 
-      final newMessage = Message(
-        roomId: event.roomId,
-        messageId: newMessageId,
-        sender: 'user99',
-        content: event.content,
-        timestamp: DateTime.now().toUtc(),
-      );
+    // 마지막 메시지 ID에서 숫자 추출
+    final lastId = messages.map((msg) {
+      final num = int.tryParse(msg.messageId.replaceAll(RegExp(r'[^0-9]'), ''));
+      return num ?? 0;
+    }).fold<int>(0, (prev, curr) => curr > prev ? curr : prev);
 
-      messages.add(newMessage);
+    final newMessage = Message(
+      roomId: event.roomId,
+      messageId: 'msg${lastId + 1}',
+      sender: 'user99',
+      content: event.content,
+      timestamp: DateTime.now().toUtc(),
+    );
 
-      emit(MessageLoadSuccess(messages));
-    }
+    // 로컬 DB에 메시지 저장
+    await messageRepository.saveMessage(newMessage);
+
+    // RoomBloc에도 최신 메시지 정보 업데이트
+    roomBloc.add(
+      RoomLastMessageUpdated(
+        roomId: newMessage.roomId,
+        lastMessage: LastMessage(
+          sender: newMessage.sender,
+          content: newMessage.content,
+          timestamp: newMessage.timestamp,
+        ),
+      ),
+    );
+
+    // 화면에 반영
+    messages.add(newMessage);
+    emit(MessageLoadSuccess(messages));
   }
 }

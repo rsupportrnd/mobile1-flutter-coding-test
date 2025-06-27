@@ -13,7 +13,6 @@ class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
 
   @override
   Future<List<Message>> fetchMessages() async {
-    print("fetchMessages()");
     final url = Uri.parse(
       'https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/messages.json',
     );

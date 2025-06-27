@@ -17,6 +17,7 @@ class MessageListScreen extends StatefulWidget {
 
 class _MessageListScreenState extends State<MessageListScreen> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _MessageListScreenState extends State<MessageListScreen> {
   @override
   void dispose() {
     _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -36,13 +38,26 @@ class _MessageListScreenState extends State<MessageListScreen> {
     if (text.isEmpty) return;
 
     context.read<MessageBloc>().add(
-          MessageSent(
-            roomId: widget.roomId,
-            content: text,
-          ),
-        );
+      MessageSent(
+        roomId: widget.roomId,
+        content: text,
+      ),
+    );
 
     _controller.clear();
+
+    // 메시지 전송 후 스크롤 최하단으로 이동
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+          );
+        });
+      }
+    });
   }
 
   @override
@@ -69,6 +84,17 @@ class _MessageListScreenState extends State<MessageListScreen> {
                   if (messageState is MessageLoadInProgress) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (messageState is MessageLoadSuccess) {
+                    // 메시지가 로드된 직후 스크롤 최하단으로 이동
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (_scrollController.hasClients) {
+                        _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: const Duration(milliseconds: 1),
+                          curve: Curves.easeOut,
+                        );
+                      }
+                    });
+
                     return BlocBuilder<UserBloc, UserState>(
                       builder: (context, userState) {
                         if (userState is UserLoadSuccess) {
@@ -76,13 +102,13 @@ class _MessageListScreenState extends State<MessageListScreen> {
                           final messages = messageState.messages;
 
                           return ListView.builder(
-                            reverse: true, // 최신 메시지가 아래로 오도록 뒤집기
+                            controller: _scrollController,
+                            reverse: false,
                             itemCount: messages.length,
                             itemBuilder: (context, index) {
-                              final message = messages[messages.length - 1 - index]; // 역순 처리
-                              final user;
-                              user = users.firstWhere(
-                                (u) => u.userId == message.sender,
+                              final message = messages[index];
+                              final user = users.firstWhere(
+                                    (u) => u.userId == message.sender,
                                 orElse: () => User(
                                   userId: message.sender,
                                   profilePicture: '',
@@ -96,15 +122,18 @@ class _MessageListScreenState extends State<MessageListScreen> {
                               return ListTile(
                                 leading: user.profilePicture.isNotEmpty
                                     ? CircleAvatar(
-                                        backgroundImage: NetworkImage(user.profilePicture),
-                                      )
-                                    : CircleAvatar(
-                                        child: Text(user.name),
-                                      ),
-                                title: Text(user.name == '' ? '사용자' : user.name),
+                                  backgroundImage:
+                                  NetworkImage(user.profilePicture),
+                                )
+                                    : const CircleAvatar(),
+                                title: Text(
+                                    user.name.isEmpty ? '사용자' : user.name),
                                 subtitle: Text(message.content),
                                 trailing: Text(
-                                  DateTime.parse(message.timestamp.toString()).toLocal().toString().substring(11, 16), // 시간만 표시 (HH:mm)
+                                  DateTime.parse(message.timestamp.toString())
+                                      .toLocal()
+                                      .toString()
+                                      .substring(11, 16), // HH:mm 포맷
                                   style: const TextStyle(fontSize: 12),
                                 ),
                               );
@@ -113,7 +142,8 @@ class _MessageListScreenState extends State<MessageListScreen> {
                         } else if (userState is UserLoadInProgress) {
                           return const Center(child: CircularProgressIndicator());
                         } else {
-                          return const Center(child: Text('사용자 목록을 불러올 수 없습니다.'));
+                          return const Center(
+                              child: Text('사용자 목록을 불러올 수 없습니다.'));
                         }
                       },
                     );
@@ -126,7 +156,7 @@ class _MessageListScreenState extends State<MessageListScreen> {
               ),
             ),
           ),
-          // 메시지 입력란
+          // 메시지 입력 영역
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             child: Row(

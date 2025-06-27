@@ -26,7 +26,7 @@ class RoomListItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: CachedNetworkImage(
-                      imageUrl: room.thumbnailImage,
+                      imageUrl: room.lastMessage.sender == 'user99' ? '' : room.thumbnailImage,
                       width: 60,
                       height: 60,
                       memCacheWidth: 60,

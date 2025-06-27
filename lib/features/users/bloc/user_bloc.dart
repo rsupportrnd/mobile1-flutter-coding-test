@@ -4,6 +4,7 @@ import '../data/models/user.dart';
 import '../data/repositories/user_repository.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -13,8 +14,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserLoadRequested>(_onUserLoadRequested);
   }
 
-  Future<void> _onUserLoadRequested(
-      UserLoadRequested event, Emitter<UserState> emit) async {
+  Future<void> _onUserLoadRequested(UserLoadRequested event, Emitter<UserState> emit) async {
     emit(UserLoadInProgress());
     try {
       final users = await userRepository.getUsers();
