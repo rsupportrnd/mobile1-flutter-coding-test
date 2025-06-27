@@ -21,6 +21,7 @@ MeetingRoomListResponseModel _$MeetingRoomListResponseModelFromJson(
 
 /// @nodoc
 mixin _$MeetingRoomListResponseModel {
+// ignore: invalid_annotation_target
   @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms => throw _privateConstructorUsedError;
 
@@ -123,7 +124,9 @@ class _$MeetingRoomListResponseModelImpl
           Map<String, dynamic> json) =>
       _$$MeetingRoomListResponseModelImplFromJson(json);
 
+// ignore: invalid_annotation_target
   final List<MeetingRoomModel> _meetingRooms;
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms {
@@ -179,6 +182,7 @@ abstract class _MeetingRoomListResponseModel
   factory _MeetingRoomListResponseModel.fromJson(Map<String, dynamic> json) =
       _$MeetingRoomListResponseModelImpl.fromJson;
 
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'chatRooms')
   List<MeetingRoomModel> get meetingRooms;

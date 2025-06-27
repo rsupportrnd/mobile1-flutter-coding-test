@@ -8,10 +8,8 @@ part 'message_repository.g.dart';
 
 @riverpod
 MessageRepository messageRepository(Ref ref) {
-  final LocalMessageDatasource localMessageDatasource =
-      ref.read(localMessageDatasourceProvider);
-  final RemoteMessageDatasource remoteMessageDatasource =
-      ref.read(remoteMessageDatasourceProvider);
+  final LocalMessageDatasource localMessageDatasource = ref.read(localMessageDatasourceProvider);
+  final RemoteMessageDatasource remoteMessageDatasource = ref.read(remoteMessageDatasourceProvider);
   return MessageRepositoryImpl(
     localMessageDatasource: localMessageDatasource,
     remoteMessageDatasource: remoteMessageDatasource,
@@ -29,13 +27,18 @@ class MessageRepositoryImpl with ApiUtilMixin implements MessageRepository {
         _remoteMessageDatasource = remoteMessageDatasource;
 
   @override
-  Future<MessageListResponseModel> getRemoteMessageList() {
-    return safeApiCall(() => _remoteMessageDatasource.getRemoteMessageList());
+  Future<MessageListResponseEntity> getRemoteMessageList() {
+    return safeApiCall<MessageListResponseEntity>(() async {
+      final MessageListResponseModel model = await _remoteMessageDatasource.getRemoteMessageList();
+      return MessageMapper.messageListModelToEntity(model);
+    });
   }
 
   @override
-  Future<List<MessageEntity>> getLocalMessageList({required String roomId}) {
-    return _localMessageDatasource.getMessages(roomId: roomId);
+  Future<List<MessageEntity>> getLocalMessageList({required String roomId}) async {
+    final List<MessageModel> modelList = await _localMessageDatasource.getMessages(roomId: roomId);
+
+    return modelList.map((MessageModel e) => MessageMapper.messageModelToEntity(e)).toList();
   }
 
   @override

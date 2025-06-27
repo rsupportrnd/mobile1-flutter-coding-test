@@ -17,7 +17,6 @@ class UserUseCase {
   UserUseCase({required this.userRepository});
 
   Future<UserListResponseEntity> getUserList() async {
-    final UserListResponseModel response = await userRepository.getUserList();
-    return UserListResponseEntity.fromModel(response);
+    return await userRepository.getUserList();
   }
 }

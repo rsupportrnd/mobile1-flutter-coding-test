@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

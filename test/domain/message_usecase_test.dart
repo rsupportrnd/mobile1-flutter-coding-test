@@ -21,15 +21,13 @@ void main() {
 
   group('MessageUseCase', () {
     test('getMessageList returns data on success', () async {
-      const MessageListResponseModel dummyModel =
-          MessageListResponseModel(messages: []);
-      when(() => mockRepo.getRemoteMessageList())
-          .thenAnswer((_) async => dummyModel);
+      const MessageListResponseEntity dummyEntity = MessageListResponseEntity(messages: []);
+      when(() => mockRepo.getRemoteMessageList()).thenAnswer((_) async => dummyEntity);
 
       final MessageUseCase useCase = container.read(messageUseCaseProvider);
       final MessageListResponseEntity result = await useCase.getMessageList();
 
-      expect(result, MessageListResponseEntity.fromModel(dummyModel));
+      expect(result, dummyEntity);
       verify(() => mockRepo.getRemoteMessageList()).called(1);
     });
 
@@ -49,12 +47,10 @@ void main() {
     test('getLocalMessages returns messages from repository', () async {
       const String roomId = 'room_1';
       const List<MessageEntity> expected = <MessageEntity>[];
-      when(() => mockRepo.getLocalMessageList(roomId: roomId))
-          .thenAnswer((_) async => expected);
+      when(() => mockRepo.getLocalMessageList(roomId: roomId)).thenAnswer((_) async => expected);
 
       final MessageUseCase useCase = container.read(messageUseCaseProvider);
-      final List<MessageEntity> result =
-          await useCase.getLocalMessages(roomId: roomId);
+      final List<MessageEntity> result = await useCase.getLocalMessages(roomId: roomId);
 
       expect(result, expected);
       verify(() => mockRepo.getLocalMessageList(roomId: roomId)).called(1);
@@ -63,8 +59,7 @@ void main() {
     test('getLocalMessages throws when repository fails', () async {
       const String roomId = 'room_1';
       final Exception exception = Exception('Repo error');
-      when(() => mockRepo.getLocalMessageList(roomId: roomId))
-          .thenThrow(exception);
+      when(() => mockRepo.getLocalMessageList(roomId: roomId)).thenThrow(exception);
 
       final MessageUseCase useCase = container.read(messageUseCaseProvider);
 
@@ -84,16 +79,14 @@ void main() {
       final MessageUseCase useCase = container.read(messageUseCaseProvider);
       await useCase.saveMessages(roomId: roomId, messages: messages);
 
-      verify(() => mockRepo.saveMessages(roomId: roomId, messages: messages))
-          .called(1);
+      verify(() => mockRepo.saveMessages(roomId: roomId, messages: messages)).called(1);
     });
 
     test('saveMessages throws when repository fails', () async {
       const String roomId = 'room_1';
       const List<MessageEntity> messages = <MessageEntity>[];
       final Exception exception = Exception('Repo error');
-      when(() => mockRepo.saveMessages(roomId: roomId, messages: messages))
-          .thenThrow(exception);
+      when(() => mockRepo.saveMessages(roomId: roomId, messages: messages)).thenThrow(exception);
 
       final MessageUseCase useCase = container.read(messageUseCaseProvider);
 
@@ -101,8 +94,7 @@ void main() {
         () => useCase.saveMessages(roomId: roomId, messages: messages),
         throwsA(same(exception)),
       );
-      verify(() => mockRepo.saveMessages(roomId: roomId, messages: messages))
-          .called(1);
+      verify(() => mockRepo.saveMessages(roomId: roomId, messages: messages)).called(1);
     });
   });
 }

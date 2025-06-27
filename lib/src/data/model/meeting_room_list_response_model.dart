@@ -26,8 +26,7 @@ class MeetingRoomModel with _$MeetingRoomModel {
     required String thumbnailImage,
   }) = _MeetingRoomModel;
 
-  factory MeetingRoomModel.fromJson(Map<String, dynamic> json) =>
-      _$MeetingRoomModelFromJson(json);
+  factory MeetingRoomModel.fromJson(Map<String, dynamic> json) => _$MeetingRoomModelFromJson(json);
 }
 
 @freezed
@@ -38,6 +37,5 @@ class LastMessageModel with _$LastMessageModel {
     required DateTime timestamp,
   }) = _LastMessageModel;
 
-  factory LastMessageModel.fromJson(Map<String, dynamic> json) =>
-      _$LastMessageModelFromJson(json);
+  factory LastMessageModel.fromJson(Map<String, dynamic> json) => _$LastMessageModelFromJson(json);
 }

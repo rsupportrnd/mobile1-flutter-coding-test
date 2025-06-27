@@ -4,6 +4,8 @@ import 'package:mobile1_flutter_coding_test/src/core/constant/hive_constant.dart
 import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_response_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../model/message_list_response_model.dart';
+
 part 'local_message_datasource.g.dart';
 
 @riverpod
@@ -14,12 +16,10 @@ LocalMessageDatasource localMessageDatasource(Ref ref) {
 class LocalMessageDatasource {
   Box<dynamic> get _box => Hive.box<dynamic>(HiveStringConstant.messages);
 
-  Future<List<MessageEntity>> getMessages({required String roomId}) async {
+  Future<List<MessageModel>> getMessages({required String roomId}) async {
     final List<dynamic>? stored = _box.get(roomId) as List<dynamic>?;
     if (stored == null) return [];
-    return stored
-        .map((e) => MessageEntity.fromJson(Map<String, dynamic>.from(e)))
-        .toList();
+    return stored.map((e) => MessageModel.fromJson(Map<String, dynamic>.from(e))).toList();
   }
 
   Future<void> saveMessages({

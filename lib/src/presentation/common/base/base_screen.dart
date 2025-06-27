@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/theme/app_color.dart';
@@ -63,12 +62,10 @@ abstract class BaseScreen extends HookConsumerWidget {
   bool get resizeToAvoidBottomInset => true;
 
   @protected
-  PreferredSizeWidget? renderAppBar(BuildContext context, WidgetRef ref) =>
-      null;
+  PreferredSizeWidget? renderAppBar(BuildContext context, WidgetRef ref) => null;
 
   @protected
-  Widget? renderBottomNavigationBar(BuildContext context, WidgetRef ref) =>
-      null;
+  Widget? renderBottomNavigationBar(BuildContext context, WidgetRef ref) => null;
 
   @protected
   void onResumed(WidgetRef ref) {}

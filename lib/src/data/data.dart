@@ -8,3 +8,6 @@ export 'repository/user_repository_impl.dart';
 export 'model/message_list_response_model.dart';
 export 'model/user_list_response_model.dart';
 export 'model/meeting_room_list_response_model.dart';
+export 'mapper/user_mapper.dart';
+export 'mapper/meeting_room_mapper.dart';
+export 'mapper/message_mapper.dart';

@@ -4,6 +4,7 @@ analyzer:
    #코드 생성 파일은 분석 대상에서 제외
   exclude:
     - "**/*.g.dart"
+    - "**/*.freezed.dart"
 
   errors:
     unnecessary_import: warning

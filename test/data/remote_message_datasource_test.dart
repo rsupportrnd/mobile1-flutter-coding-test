@@ -1,14 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exception.dart';
 import 'package:mobile1_flutter_coding_test/src/data/data.dart';
+import 'package:mobile1_flutter_coding_test/src/domain/domain.dart';
 
 import 'package:mocktail/mocktail.dart';
 
-class _MockLocalMessageDatasource extends Mock
-    implements LocalMessageDatasource {}
+class _MockLocalMessageDatasource extends Mock implements LocalMessageDatasource {}
 
-class _MockRemoteMessageDatasource extends Mock
-    implements RemoteMessageDatasource {}
+class _MockRemoteMessageDatasource extends Mock implements RemoteMessageDatasource {}
 
 void main() {
   group('RemoteMessageRepositoryImpl', () {
@@ -24,30 +23,25 @@ void main() {
           remoteMessageDatasource: mockRemoteMessageDatasource);
     });
     test('getMessageList returns data on success', () async {
-      const MessageListResponseModel expected =
-          MessageListResponseModel(messages: []);
+      const MessageListResponseModel expected = MessageListResponseModel(messages: []);
       when(() => mockRemoteMessageDatasource.getRemoteMessageList())
           .thenAnswer((_) async => expected);
 
-      final MessageListResponseModel result =
-          await repository.getRemoteMessageList();
+      final MessageListResponseEntity result = await repository.getRemoteMessageList();
 
-      expect(result, expected);
-      verify(() => mockRemoteMessageDatasource.getRemoteMessageList())
-          .called(1);
+      expect(result, MessageMapper.messageListModelToEntity(expected));
+      verify(() => mockRemoteMessageDatasource.getRemoteMessageList()).called(1);
     });
 
     test('getMessageList throws when datasource fails', () async {
       final Exception exception = Exception('Datasource error');
-      when(() => mockRemoteMessageDatasource.getRemoteMessageList())
-          .thenThrow(exception);
+      when(() => mockRemoteMessageDatasource.getRemoteMessageList()).thenThrow(exception);
 
       expect(
         () => repository.getRemoteMessageList(),
         throwsA(isA<UnknownException>()),
       );
-      verify(() => mockRemoteMessageDatasource.getRemoteMessageList())
-          .called(1);
+      verify(() => mockRemoteMessageDatasource.getRemoteMessageList()).called(1);
     });
   });
 }

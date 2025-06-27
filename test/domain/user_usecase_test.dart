@@ -21,15 +21,14 @@ void main() {
 
   group('UserUseCase', () {
     test('getUserList returns entity on success', () async {
-      const UserListResponseModel dummyModel = UserListResponseModel(users: []);
-      final UserListResponseEntity expected =
-          UserListResponseEntity.fromModel(dummyModel);
-      when(() => mockRepo.getUserList()).thenAnswer((_) async => dummyModel);
+      const UserListResponseEntity dummyEntity = UserListResponseEntity(users: []);
+
+      when(() => mockRepo.getUserList()).thenAnswer((_) async => dummyEntity);
 
       final UserUseCase useCase = container.read(userUseCaseProvider);
       final UserListResponseEntity result = await useCase.getUserList();
 
-      expect(result, expected);
+      expect(result, dummyEntity);
       verify(() => mockRepo.getUserList()).called(1);
     });
 
