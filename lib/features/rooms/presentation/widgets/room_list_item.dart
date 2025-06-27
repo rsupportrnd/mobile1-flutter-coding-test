@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../data/models/room.dart';
 
 class RoomListItem extends StatelessWidget {
@@ -11,6 +12,7 @@ class RoomListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: (){
+          context.pushNamed('messages', pathParameters: {'roomId': room.roomId});
         },
         child: Container(
           color: Colors.white,
