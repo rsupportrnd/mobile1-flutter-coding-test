@@ -2,11 +2,18 @@
 
 # 개발코멘트
 
-    riverPod을 이용하여 상태관리 및 di작업을 하였습니다.
-    MVVM패턴 및 clean architecture를 사용하였습니다.
-    dio와 interceptor를 사용하여 성공 또는 에러 시의 처리를 하였습니다.
-    스크린에 사용되는 view들은 스크린의 part로 만들었으며 다론곳에서의 사용을 막았습니다.
-    채팅은 보냇던 시간대별로 보이는것이 다르게 구현하였습니다. 당일HH:mm , 같은달MM.dd, 그 이전yy.MM
+프로젝트의 주요 특징은 다음과 같습니다.
+
+- Riverpod을 이용해 상태 관리와 DI를 구현했습니다.
+- MVVM 패턴과 Clean Architecture를 적용해 Presentation, Domain, Data 레이어를 분리했습니다.
+- Dio에 Interceptor를 적용해 네트워크 성공/에러를 처리합니다.
+- 각 스크린에서 사용하는 뷰는 해당 스크린의 part로 분리해 다른 곳에서의 사용을 방지했습니다.
+- 채팅 시간 표시는 날짜에 따라 `HH:mm`, `MM.dd`, `yy.MM` 형식으로 다르게 노출됩니다.
+- 메시지는 Hive에 저장해 로컬 저장소를 활용합니다.
+- 화면 전환은 GoRouter로 관리하며 ProviderLogger를 통해 상태 변화를 로깅합니다.
+- 데이터 모델은 Freezed와 JSON Serializable을 사용해 생성했습니다.
+- 미팅룸은 온 메세지의 순서에 맞도록 정렬하였습니다.
+- 
 
 
 
