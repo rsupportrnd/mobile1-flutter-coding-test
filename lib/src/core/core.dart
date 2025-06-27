@@ -4,7 +4,7 @@ export 'util/throttle.dart';
 export 'util/bottom_sheet_modal_util.dart';
 export 'util/provider_logger.dart';
 export 'config/api_config.dart';
-export 'common/extension/data_time_extension.dart';
+export 'common/extension/date_time_extension.dart';
 export 'common/enum/user_enum.dart';
 export 'common/provider/bottom_nav_index_provider.dart';
 export 'common/exception/custom_exception.dart';
