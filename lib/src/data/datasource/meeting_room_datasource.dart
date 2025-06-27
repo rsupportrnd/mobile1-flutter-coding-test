@@ -2,7 +2,6 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/src/core/config/api_config.dart';
 import 'package:mobile1_flutter_coding_test/src/core/dio/dio.dart';
-import 'package:mobile1_flutter_coding_test/src/data/model/message_list_response_model.dart';
 import 'package:mobile1_flutter_coding_test/src/data/model/meeting_room_list_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,11 +17,9 @@ MeetingRoomDatasource meetingRoomDatasource(Ref ref) {
 
 @RestApi()
 abstract class MeetingRoomDatasource {
-  factory MeetingRoomDatasource(Dio dio, {String baseUrl}) = _MeetingRoomDatasource;
+  factory MeetingRoomDatasource(Dio dio, {String baseUrl}) =
+      _MeetingRoomDatasource;
 
   @GET(ApiConfig.meetingRoomListUrl)
   Future<MeetingRoomListResponseModel> getMeetingRoomList();
-
-  @GET(ApiConfig.messageListUrl)
-  Future<MessageListResponseModel> getMessageList();
 }
