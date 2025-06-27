@@ -10,15 +10,18 @@ mixin class MessageEvent {
     required String sender,
     required String content,
   }) async {
-    return await ref
-        .read(messageListProvider(roomId).notifier)
-        .sendMessage(sender: sender, content: content);
+    return await ref.read(messageListProvider(roomId).notifier).sendMessage(
+          sender: sender,
+          content: content,
+        );
   }
 
   void updateLastMessage({
     required WidgetRef ref,
     required MessageEntity messageEntity,
   }) {
-    ref.read(meetingRoomListProvider.notifier).updateLastMessage(messageEntity: messageEntity);
+    ref
+        .read(meetingRoomListProvider.notifier)
+        .updateLastMessage(messageEntity: messageEntity);
   }
 }

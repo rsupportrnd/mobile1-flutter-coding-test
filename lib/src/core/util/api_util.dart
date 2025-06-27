@@ -4,6 +4,7 @@ import 'package:mobile1_flutter_coding_test/src/core/common/exception/custom_exc
 import 'logger_util.dart';
 
 mixin ApiUtilMixin {
+  ///Api통신 결과에 따른 결과괎 리턴
   Future<T> safeApiCall<T>(Future<T> Function() apiCall) async {
     try {
       return await apiCall();

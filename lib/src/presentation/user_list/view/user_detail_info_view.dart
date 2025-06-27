@@ -19,7 +19,10 @@ class UserDetailInfoView extends BaseView {
   @override
   Widget buildView(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 16,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,9 +43,15 @@ class UserDetailInfoView extends BaseView {
           const SizedBox(height: 12),
           Text(
             userEntity.name,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          Text(userEntity.email, style: const TextStyle(color: Colors.grey)),
+          Text(
+            userEntity.email,
+            style: const TextStyle(color: Colors.grey),
+          ),
           const SizedBox(height: 8),
           Text(
             '${UserListStringConstant.userRole}: ${userEntity.role.getRoleName()}',

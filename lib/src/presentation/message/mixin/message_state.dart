@@ -3,7 +3,10 @@ import 'package:mobile1_flutter_coding_test/src/domain/entity/message_list_respo
 import 'package:mobile1_flutter_coding_test/src/presentation/message/provider/message_list_provider.dart';
 
 mixin class MessageState {
-  AsyncValue<List<MessageEntity>> watchMessages({required WidgetRef ref, required String roomId}) {
+  AsyncValue<List<MessageEntity>> watchMessagesProvider({
+    required WidgetRef ref,
+    required String roomId,
+  }) {
     return ref.watch(messageListProvider(roomId));
   }
 }
