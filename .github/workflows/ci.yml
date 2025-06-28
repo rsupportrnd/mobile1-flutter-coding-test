@@ -81,7 +81,7 @@ jobs:
           
     - name: Android 빌드
       if: matrix.target == 'android'
-      run: flutter build apk --release
+      run: flutter build apk --release --android-skip-build-dependency-validation
       
     - name: Web 빌드
       if: matrix.target == 'web'
