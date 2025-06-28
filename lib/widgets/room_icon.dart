@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/user.dart';
 import '../models/room.dart';
-import '../config/app_constants.dart';
-import '../utils/color_utils.dart';
 
 class RoomIcon extends StatefulWidget {
   final Room room;

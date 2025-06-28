@@ -27,10 +27,15 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const ProviderScope(child: MyApp()));
     
-    // 앱이 완전히 로드될 때까지 대기
-    await tester.pumpAndSettle();
+    // 앱이 로드될 때까지 몇 번만 pump
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
-    // 네비게이션 바가 있는지 확인
+    // 네비게이션 바가 있는지 확인 (timeout 없이)
     expect(find.byType(BottomNavigationBar), findsOneWidget);
+    
+    // 기본 탭들이 있는지 확인
+    expect(find.text('사용자'), findsOneWidget);
+    expect(find.text('룸'), findsOneWidget);
   });
 }

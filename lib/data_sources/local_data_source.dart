@@ -8,6 +8,7 @@ import '../repositories/room_repository.dart';
 import '../repositories/message_repository.dart';
 import '../config/app_constants.dart';
 import '../utils/cache_utils.dart';
+import '../utils/logger.dart';
 
 /// 사용자 로컬 데이터 소스 구현체
 class UserLocalDataSourceImpl implements UserLocalDataSource {
@@ -34,7 +35,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       await prefs.setStringList(_usersKey, usersJson);
       await prefs.setString(_lastUpdateKey, CacheUtils.dateTimeToString(DateTime.now()));
     } catch (e) {
-      print('사용자 저장 실패: $e');
+      Logger.error('사용자 저장 실패', error: e);
     }
   }
 
@@ -45,7 +46,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       await prefs.remove(_usersKey);
       await prefs.remove(_lastUpdateKey);
     } catch (e) {
-      print('사용자 캐시 클리어 실패: $e');
+      Logger.error('사용자 캐시 클리어 실패', error: e);
     }
   }
 }
@@ -75,7 +76,7 @@ class RoomLocalDataSourceImpl implements RoomLocalDataSource {
       await prefs.setStringList(_roomsKey, roomsJson);
       await prefs.setString(_lastUpdateKey, CacheUtils.dateTimeToString(DateTime.now()));
     } catch (e) {
-      print('회의실 저장 실패: $e');
+      Logger.error('회의실 저장 실패', error: e);
     }
   }
 
@@ -86,7 +87,7 @@ class RoomLocalDataSourceImpl implements RoomLocalDataSource {
       await prefs.remove(_roomsKey);
       await prefs.remove(_lastUpdateKey);
     } catch (e) {
-      print('회의실 캐시 클리어 실패: $e');
+      Logger.error('회의실 캐시 클리어 실패', error: e);
     }
   }
 
@@ -96,7 +97,7 @@ class RoomLocalDataSourceImpl implements RoomLocalDataSource {
       final lastUpdateStr = prefs.getString(_lastUpdateKey);
       return CacheUtils.stringToDateTime(lastUpdateStr);
     } catch (e) {
-      print('마지막 업데이트 시간 가져오기 실패: $e');
+      Logger.error('마지막 업데이트 시간 가져오기 실패', error: e);
       return null;
     }
   }
@@ -156,7 +157,7 @@ class MessageLocalDataSourceImpl implements MessageLocalDataSource {
       
       await prefs.setStringList(_messagesKey, messagesJson);
     } catch (e) {
-      print('메시지 저장 실패: $e');
+      Logger.error('메시지 저장 실패', error: e);
     }
   }
 }

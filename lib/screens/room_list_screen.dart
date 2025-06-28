@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../config/app_constants.dart';
-import '../config/app_text_styles.dart';
 import '../models/room.dart';
 import '../router/navigation_helper.dart';
 import '../utils/logger.dart';

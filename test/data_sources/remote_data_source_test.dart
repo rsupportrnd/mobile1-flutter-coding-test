@@ -49,12 +49,13 @@ void main() {
         )).thenAnswer((_) async => http.Response(json.encode(mockData), 200));
 
         // When
-        final users = await userDataSource.fetchUsers();
+        final List<User> users = await userDataSource.fetchUsers();
 
         // Then
         expect(users.length, 1);
-        expect(users[0].name, 'Test User');
-        expect(users[0].isOnline, true);
+        final User firstUser = users[0];
+        expect(firstUser.name, 'Test User');
+        expect(firstUser.isOnline, true);
       });
 
       test('HTTP 오류 응답 처리 테스트', () async {

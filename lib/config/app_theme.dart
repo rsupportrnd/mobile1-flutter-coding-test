@@ -17,7 +17,7 @@ class AppTheme {
       ),
       
       // AppBar 테마
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 2,

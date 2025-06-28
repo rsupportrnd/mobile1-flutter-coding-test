@@ -1,9 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data_sources/local_data_source.dart';
 import '../data_sources/remote_data_source.dart';
-import '../models/user.dart';
-import '../models/room.dart';
-import '../models/message.dart';
 import '../repositories/user_repository.dart';
 import '../repositories/room_repository.dart';
 import '../repositories/message_repository.dart';
