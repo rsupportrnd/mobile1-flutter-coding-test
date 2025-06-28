@@ -53,7 +53,6 @@ class Room with _$Room {
     return now.difference(messageTime).inHours < 1;
   }
   
-  // 회의실 채팅방 이니셜 (이름의 첫 글자)
   String get initials {
     if (name.isNotEmpty) {
       return name[0].toUpperCase();
