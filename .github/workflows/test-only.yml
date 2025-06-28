@@ -1,0 +1,49 @@
+name: 빠른 테스트
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  quick-test:
+    name: 빠른 테스트 및 분석
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 체크아웃
+      uses: actions/checkout@v4
+      
+    - name: Flutter SDK 설정
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.5.4'
+        cache: true
+        
+    - name: 의존성 캐시
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.pub-cache
+          **/.packages
+          **/.flutter-plugins
+          **/.flutter-plugin-dependencies
+          **/.dart_tool/package_config.json
+        key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pub-
+        
+    - name: 의존성 설치
+      run: flutter pub get
+      
+    - name: 코드 생성 (build_runner)
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      
+    - name: 코드 분석
+      run: flutter analyze --fatal-infos
+      
+    - name: 테스트 실행
+      run: flutter test --reporter=expanded 
