@@ -104,12 +104,13 @@ void main() {
         )).thenAnswer((_) async => http.Response(json.encode(mockData), 200));
 
         // When
-        final rooms = await roomDataSource.fetchRooms();
+        final List<Room> rooms = await roomDataSource.fetchRooms();
 
         // Then
         expect(rooms.length, 1);
-        expect(rooms[0].name, 'Test Room');
-        expect(rooms[0].participantCount, 2);
+        final Room firstRoom = rooms[0];
+        expect(firstRoom.name, 'Test Room');
+        expect(firstRoom.participantCount, 2);
       });
     });
 
