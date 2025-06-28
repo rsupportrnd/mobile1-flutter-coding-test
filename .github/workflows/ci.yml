@@ -33,7 +33,7 @@ jobs:
       run: flutter test --coverage
       
     - name: 커버리지 업로드
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: coverage/lcov.info
 
@@ -71,14 +71,14 @@ jobs:
       
     - name: 빌드 아티팩트 업로드 (Android)
       if: matrix.target == 'android'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: android-apk
         path: build/app/outputs/flutter-apk/app-release.apk
         
     - name: 빌드 아티팩트 업로드 (Web)
       if: matrix.target == 'web'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: web-build
         path: build/web/
@@ -107,7 +107,7 @@ jobs:
       run: flutter build ios --release --no-codesign
       
     - name: 빌드 아티팩트 업로드 (iOS)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ios-build
         path: build/ios/iphoneos/Runner.app 
