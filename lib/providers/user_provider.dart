@@ -101,29 +101,39 @@ class UsersNotifier extends StateNotifier<UsersState> {
     state = state.copyWith(isLoading: true, error: null);
     
     try {
-      Logger.info('사용자 목록 로드 시작');
       final users = await _userRepository.getUsers();
       state = state.copyWith(
         users: users,
         isLoading: false,
+        error: null,
       );
       Logger.info('사용자 목록 로드 완료: ${users.length}명');
     } catch (e) {
-      Logger.error('사용자 목록 로드 실패', error: e);
       state = state.copyWith(
         isLoading: false,
         error: e.toString(),
       );
+      Logger.error('사용자 목록 로드 실패', error: e);
     }
   }
 
-  /// 사용자 목록 새로고침
+  void searchUsers(String query) {
+    state = state.copyWith(searchQuery: query);
+    Logger.debug('사용자 검색: "$query"');
+  }
+
   Future<void> refreshUsers() async {
     Logger.info('사용자 목록 새로고침');
-    await _userRepository.refreshUsers();
     await loadUsers();
   }
 
+  User? getUserById(String userId) {
+    try {
+      return state.users.firstWhere((user) => user.id == userId);
+    } on StateError {
+      return null;
+    }
+  }
 }
 
 final currentUserProvider = StateNotifierProvider<CurrentUserNotifier, CurrentUserState>((ref) {
@@ -145,6 +155,11 @@ final isLoggedInProvider = Provider<bool>((ref) {
 
 final currentUserIdProvider = Provider<String?>((ref) {
   return ref.watch(currentUserProvider).currentUser?.id;
+});
+
+final userByIdProvider = Provider.family<User?, String>((ref, userId) {
+  final usersNotifier = ref.watch(usersProvider.notifier);
+  return usersNotifier.getUserById(userId);
 });
 
 final filteredUsersProvider = Provider<List<User>>((ref) {

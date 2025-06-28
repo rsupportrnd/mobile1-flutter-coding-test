@@ -121,6 +121,7 @@ class RoomsNotifier extends StateNotifier<RoomsState> {
       state = state.copyWith(
         rooms: rooms,
         isLoading: false,
+        error: null,
       );
       Logger.info('룸 목록 로드 완료: ${rooms.length}개');
     } catch (e) {
@@ -141,8 +142,33 @@ class RoomsNotifier extends StateNotifier<RoomsState> {
   /// 룸 목록 새로고침
   Future<void> refreshRooms() async {
     Logger.info('룸 목록 새로고침');
-    await _roomRepository.refreshRooms();
     await loadRooms();
+  }
+
+  Room? getRoomById(String roomId) {
+    try {
+      return state.rooms.firstWhere((room) => room.id == roomId);
+    } on StateError {
+      return null;
+    }
+  }
+
+  List<Room> getActiveRooms() {
+    return state.rooms.where((room) => room.isActive).toList();
+  }
+
+  List<Room> getRoomsByCreator(String userId) {
+    return state.rooms.where((room) => room.creator == userId).toList();
+  }
+
+  void setFilter(RoomFilter filter) {
+    state = state.copyWith(filter: filter);
+    Logger.debug('룸 필터 변경: $filter');
+  }
+
+  void setSortType(RoomSortType sortType) {
+    state = state.copyWith(sortType: sortType);
+    Logger.debug('룸 정렬 변경: $sortType');
   }
 }
 
@@ -236,6 +262,21 @@ final currentRoomDataProvider = Provider<Room?>((ref) {
 
 final currentRoomIdProvider = Provider<String?>((ref) {
   return ref.watch(currentRoomProvider).currentRoom?.id;
+});
+
+final activeRoomsProvider = Provider<List<Room>>((ref) {
+  final roomsNotifier = ref.watch(roomsProvider.notifier);
+  return roomsNotifier.getActiveRooms();
+});
+
+final roomByIdProvider = Provider.family<Room?, String>((ref, roomId) {
+  final roomsNotifier = ref.watch(roomsProvider.notifier);
+  return roomsNotifier.getRoomById(roomId);
+});
+
+final roomsByCreatorProvider = Provider.family<List<Room>, String>((ref, userId) {
+  final roomsNotifier = ref.watch(roomsProvider.notifier);
+  return roomsNotifier.getRoomsByCreator(userId);
 });
 
 final activeRoomsProvider = Provider<List<Room>>((ref) {
