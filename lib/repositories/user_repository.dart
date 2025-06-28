@@ -4,7 +4,6 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import '../data_sources/user_data_source.dart';
 
-/// 사용자 데이터 Repository 인터페이스
 abstract class UserRepository {
   Future<List<User>> getUsers();
   Future<User?> getUserById(String userId);
@@ -13,12 +12,10 @@ abstract class UserRepository {
   void clearCache();
 }
 
-/// 사용자 Repository 구현체
 class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource _remoteDataSource;
   final UserLocalDataSource? _localDataSource;
   
-  // 캐시된 사용자 목록
   List<User>? _cachedUsers;
   DateTime? _lastFetchTime;
   static const Duration _cacheValidDuration = AppConstants.userCacheValidDuration;
@@ -31,7 +28,6 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<List<User>> getUsers() async {
-    // 캐시 체크 - 안전한 접근
     final cachedUsers = _cachedUsers;
     if (_isCacheValid() && cachedUsers != null) {
       Logger.cache('캐시 사용', 'users', hit: true);
@@ -41,14 +37,11 @@ class UserRepositoryImpl implements UserRepository {
     try {
       Logger.info('사용자 목록 조회 시작');
       
-      // 원격에서 데이터 가져오기
       final users = await _remoteDataSource.fetchUsers();
       
-      // 캐시 업데이트
       _cachedUsers = users;
       _lastFetchTime = DateTime.now();
       
-      // 로컬에 저장 (옵션)
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         await localDataSource.saveUsers(users);
@@ -59,7 +52,6 @@ class UserRepositoryImpl implements UserRepository {
     } catch (e) {
       Logger.warning('원격 데이터 조회 실패, 로컬 캐시 확인 중');
       
-      // 원격 실패 시 로컬에서 가져오기 시도
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         final localUsers = await localDataSource.getUsers();
@@ -70,7 +62,6 @@ class UserRepositoryImpl implements UserRepository {
         }
       }
       
-      // 캐시된 데이터가 있다면 반환
       final cachedUsers = _cachedUsers;
       if (cachedUsers != null) {
         Logger.info('메모리 캐시에서 사용자 ${cachedUsers.length}명 반환');
@@ -90,7 +81,6 @@ class UserRepositoryImpl implements UserRepository {
       Logger.debug('사용자 ID $userId 조회 성공: ${user.name}');
       return user;
     } on StateError {
-      // firstWhere가 요소를 찾지 못했을 때
       Logger.warning('사용자 ID $userId를 찾을 수 없음');
       return null;
     }
@@ -130,12 +120,10 @@ class UserRepositoryImpl implements UserRepository {
     _lastFetchTime = null;
   }
 
-  /// 캐시가 유효한지 확인
   bool _isCacheValid() {
     return CacheUtils.isCacheValid(_lastFetchTime, _cacheValidDuration);
   }
   
-  // 캐시 상태 조회 (디버깅용)
   bool get hasCachedData => _cachedUsers != null;
   int get cachedUsersCount => _cachedUsers?.length ?? 0;
   DateTime? get lastFetchTime => _lastFetchTime;

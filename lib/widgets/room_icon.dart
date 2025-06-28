@@ -51,8 +51,9 @@ class RoomIcon extends StatelessWidget {
     );
   }
 
+
+  // Room BG Color 랜덤적용
   Color _getRoomColor() {
-    // 룸 이름의 해시코드를 기반으로 색상 생성
     final hash = room.name.hashCode;
     final colors = [
       Colors.blue,

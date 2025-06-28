@@ -3,11 +3,8 @@ import '../models/room.dart';
 import '../utils/logger.dart';
 import 'repository_providers.dart';
 
-// =============================================================================
-// 룸 목록 상태 관리
-// =============================================================================
+// Room 상태 관리
 
-/// 룸 목록 상태 클래스
 class RoomsState {
   final List<Room> rooms;
   final bool isLoading;
@@ -43,7 +40,6 @@ class RoomsState {
     );
   }
 
-  /// 필터링 및 정렬된 룸 목록
   List<Room> get filteredAndSortedRooms {
     var filteredRooms = rooms;
 
@@ -95,27 +91,27 @@ class RoomsState {
   }
 }
 
-/// 룸 필터 타입
+/// Room 필터 타입
 enum RoomFilter {
   all,
   active,
   inactive,
 }
 
-/// 룸 정렬 타입
+/// Room 정렬 타입
 enum RoomSortType {
   name,
   participantCount,
   lastActivity,
 }
 
-/// 룸 목록 관리 Notifier
+/// Room 목록 관리 Notifier
 class RoomsNotifier extends StateNotifier<RoomsState> {
   final RoomRepository _roomRepository;
 
   RoomsNotifier(this._roomRepository) : super(RoomsState());
 
-  /// 룸 목록 로드
+  /// Room 목록 로드
   Future<void> loadRooms() async {
     state = state.copyWith(isLoading: true, error: null);
     
@@ -136,22 +132,10 @@ class RoomsNotifier extends StateNotifier<RoomsState> {
     }
   }
 
-  /// 룸 검색
+  /// Room 검색
   void searchRooms(String query) {
     state = state.copyWith(searchQuery: query);
     Logger.debug('룸 검색: "$query"');
-  }
-
-  /// 필터 변경
-  void setFilter(RoomFilter filter) {
-    state = state.copyWith(filter: filter);
-    Logger.debug('룸 필터 변경: $filter');
-  }
-
-  /// 정렬 타입 변경
-  void setSortType(RoomSortType sortType) {
-    state = state.copyWith(sortType: sortType);
-    Logger.debug('룸 정렬 변경: $sortType');
   }
 
   /// 룸 목록 새로고침
@@ -160,32 +144,10 @@ class RoomsNotifier extends StateNotifier<RoomsState> {
     await _roomRepository.refreshRooms();
     await loadRooms();
   }
-
-  /// 특정 룸 조회
-  Room? getRoomById(String roomId) {
-    try {
-      return state.rooms.firstWhere((room) => room.id == roomId);
-    } on StateError {
-      return null;
-    }
-  }
-
-  /// 활성 룸만 조회
-  List<Room> getActiveRooms() {
-    return state.rooms.where((room) => room.isActive).toList();
-  }
-
-  /// 특정 사용자가 생성한 룸 조회
-  List<Room> getRoomsByCreator(String userId) {
-    return state.rooms.where((room) => room.creator == userId).toList();
-  }
 }
 
-// =============================================================================
-// 현재 선택된 룸 상태 관리
-// =============================================================================
+// 현재 선택된 Room 상태 관리
 
-/// 현재 룸 상태 클래스
 class CurrentRoomState {
   final Room? currentRoom;
   final bool isLoading;
@@ -210,13 +172,12 @@ class CurrentRoomState {
   }
 }
 
-/// 현재 룸 관리 Notifier
 class CurrentRoomNotifier extends StateNotifier<CurrentRoomState> {
   final RoomRepository _roomRepository;
 
   CurrentRoomNotifier(this._roomRepository) : super(CurrentRoomState());
 
-  /// 룸 선택
+  /// Room 선택
   Future<void> selectRoom(String roomId) async {
     state = state.copyWith(isLoading: true, error: null);
     
@@ -246,61 +207,47 @@ class CurrentRoomNotifier extends StateNotifier<CurrentRoomState> {
     }
   }
 
-  /// 룸 선택 해제
+  /// Room 선택 해제
   void clearRoom() {
     state = state.copyWith(currentRoom: null);
     Logger.info('룸 선택 해제');
   }
 }
 
-// =============================================================================
 // Provider 정의
-// =============================================================================
 
-/// 룸 목록 Provider
 final roomsProvider = StateNotifierProvider<RoomsNotifier, RoomsState>((ref) {
   final roomRepository = ref.watch(roomRepositoryProvider);
   return RoomsNotifier(roomRepository);
 });
 
-/// 현재 룸 Provider
 final currentRoomProvider = StateNotifierProvider<CurrentRoomNotifier, CurrentRoomState>((ref) {
   final roomRepository = ref.watch(roomRepositoryProvider);
   return CurrentRoomNotifier(roomRepository);
 });
 
-// =============================================================================
-// 편의를 위한 개별 Provider들
-// =============================================================================
-
-/// 필터링된 룸 목록 Provider
 final filteredRoomsProvider = Provider<List<Room>>((ref) {
   return ref.watch(roomsProvider).filteredAndSortedRooms;
 });
 
-/// 현재 룸 데이터 Provider
 final currentRoomDataProvider = Provider<Room?>((ref) {
   return ref.watch(currentRoomProvider).currentRoom;
 });
 
-/// 현재 룸 ID Provider
 final currentRoomIdProvider = Provider<String?>((ref) {
   return ref.watch(currentRoomProvider).currentRoom?.id;
 });
 
-/// 활성 룸 목록 Provider
 final activeRoomsProvider = Provider<List<Room>>((ref) {
   final roomsNotifier = ref.watch(roomsProvider.notifier);
   return roomsNotifier.getActiveRooms();
 });
 
-/// 특정 룸 조회 Provider
 final roomByIdProvider = Provider.family<Room?, String>((ref, roomId) {
   final roomsNotifier = ref.watch(roomsProvider.notifier);
   return roomsNotifier.getRoomById(roomId);
 });
 
-/// 사용자별 생성 룸 Provider
 final roomsByCreatorProvider = Provider.family<List<Room>, String>((ref, userId) {
   final roomsNotifier = ref.watch(roomsProvider.notifier);
   return roomsNotifier.getRoomsByCreator(userId);

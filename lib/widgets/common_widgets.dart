@@ -3,16 +3,14 @@ import '../config/app_constants.dart';
 import '../config/app_text_styles.dart';
 import '../utils/icon_utils.dart';
 
-/// 공통으로 사용되는 위젯들을 모아놓은 클래스
+/// Common Widgets
 class CommonWidgets {
-  /// 로딩 인디케이터
   static Widget loadingIndicator() {
     return const Center(
       child: CircularProgressIndicator(),
     );
   }
 
-  /// 에러 위젯
   static Widget errorWidget({
     required String message,
     VoidCallback? onRetry,
@@ -41,7 +39,6 @@ class CommonWidgets {
     );
   }
 
-  /// 빈 목록 위젯
   static Widget emptyListWidget({
     required IconData icon,
     required String message,
@@ -70,7 +67,6 @@ class CommonWidgets {
     );
   }
 
-  /// 검색바 위젯
   static Widget searchBar({
     required TextEditingController controller,
     required String hintText,
@@ -101,7 +97,6 @@ class CommonWidgets {
     );
   }
 
-  /// 공통 카드 래퍼
   static Widget commonCard({
     required Widget child,
     VoidCallback? onTap,
@@ -121,7 +116,6 @@ class CommonWidgets {
     );
   }
 
-  /// 상태 표시 칩
   static Widget statusChip({
     required String label,
     required Color color,
@@ -167,7 +161,6 @@ class CommonWidgets {
     );
   }
 
-  /// 섹션 헤더
   static Widget sectionHeader({
     required String title,
     String? subtitle,

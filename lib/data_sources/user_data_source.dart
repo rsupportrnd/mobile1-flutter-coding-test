@@ -5,12 +5,10 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import 'http_client.dart';
 
-/// 사용자 원격 데이터 소스 인터페이스
 abstract class UserRemoteDataSource {
   Future<List<User>> fetchUsers();
 }
 
-/// 사용자 로컬 데이터 소스 인터페이스
 abstract class UserLocalDataSource {
   Future<List<User>> getUsers();
   Future<void> saveUsers(List<User> users);
@@ -18,7 +16,6 @@ abstract class UserLocalDataSource {
   Future<DateTime?> getLastUpdateTime();
 }
 
-/// 사용자 원격 데이터 소스 구현체
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final HttpClient _httpClient;
 
@@ -47,7 +44,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 }
 
-/// 사용자 로컬 데이터 소스 구현체
 class UserLocalDataSourceImpl implements UserLocalDataSource {
   static const String _usersKey = AppConstants.cachedUsersKey;
   static const String _lastUpdateKey = AppConstants.usersLastUpdateKey;

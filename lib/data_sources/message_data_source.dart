@@ -6,13 +6,11 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import 'http_client.dart';
 
-/// 메시지 원격 데이터 소스 인터페이스
 abstract class MessageRemoteDataSource {
   Future<List<Message>> fetchMessages(String roomId);
   Future<void> sendMessage(Message message);
 }
 
-/// 메시지 로컬 데이터 소스 인터페이스
 abstract class MessageLocalDataSource {
   Future<List<Message>> getMessages(String roomId);
   Future<Message?> getMessageById(String messageId);
@@ -22,7 +20,6 @@ abstract class MessageLocalDataSource {
   Future<void> clearAllMessages();
 }
 
-/// 메시지 원격 데이터 소스 구현체
 class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
   final HttpClient _httpClient;
 
@@ -39,19 +36,17 @@ class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
       final jsonResponse = await _httpClient.get(url);
       final List<dynamic> jsonData = jsonResponse['messages'];
       final allMessages = jsonData.map((json) {
-        // API 데이터 형태에 맞게 변환
         final messageJson = {
           'id': json['messageId'],
           'roomId': json['roomId'],
           'userId': json['sender'],
-          'userName': null, // API에서 제공하지 않음
+          'userName': null,
           'content': json['content'],
           'timestamp': json['timestamp'],
         };
         return Message.fromJson(messageJson);
       }).toList();
       
-      // 특정 룸의 메시지만 필터링
       final filteredMessages = allMessages.where((message) => message.roomId == roomId).toList();
       
       Logger.info('룸 $roomId의 메시지 ${filteredMessages.length}개 조회 완료 (전체 ${allMessages.length}개 중)');
@@ -89,7 +84,6 @@ class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
   }
 }
 
-/// 메시지 로컬 데이터 소스 구현체
 class MessageLocalDataSourceImpl implements MessageLocalDataSource {
   static const String _messagesKey = AppConstants.cachedMessagesKey;
 
@@ -136,17 +130,14 @@ class MessageLocalDataSourceImpl implements MessageLocalDataSource {
       final prefs = await SharedPreferences.getInstance();
       final messagesJson = prefs.getStringList(_messagesKey) ?? [];
       
-      // 중복 메시지 확인
       final existingMessages = CacheUtils.jsonListToMessages(messagesJson);
       
       final existingIndex = existingMessages.indexWhere((m) => m.id == message.id);
       
       if (existingIndex != -1) {
-        // 기존 메시지 업데이트
         messagesJson[existingIndex] = json.encode(message.toJson());
         Logger.cache('업데이트', '${_messagesKey}_${message.id}');
       } else {
-        // 새 메시지 추가
         messagesJson.add(json.encode(message.toJson()));
         Logger.cache('저장', '${_messagesKey}_${message.id}');
       }
@@ -165,7 +156,6 @@ class MessageLocalDataSourceImpl implements MessageLocalDataSource {
       
       final allMessages = CacheUtils.jsonListToMessages(messagesJson);
       
-      // 해당 룸의 메시지만 제거
       final filteredMessages = allMessages
           .where((message) => message.roomId != roomId)
           .toList();

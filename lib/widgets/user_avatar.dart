@@ -98,7 +98,6 @@ class _UserAvatarState extends State<UserAvatar> {
   }
 
   Widget _buildFallbackContent() {
-    // 사용자 이름의 첫 글자 또는 fallbackText 사용
     final text = widget.fallbackText ?? 
                  widget.user?.name.isNotEmpty == true 
                      ? widget.user!.name[0].toUpperCase()
@@ -118,7 +117,6 @@ class _UserAvatarState extends State<UserAvatar> {
   void didUpdateWidget(UserAvatar oldWidget) {
     super.didUpdateWidget(oldWidget);
     
-    // URL이 변경되면 오류 상태 초기화
     final oldUrl = oldWidget.imageUrl ?? oldWidget.user?.profilePicture;
     final newUrl = widget.imageUrl ?? widget.user?.profilePicture;
     

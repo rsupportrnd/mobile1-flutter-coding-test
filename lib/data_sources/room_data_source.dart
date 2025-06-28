@@ -5,12 +5,10 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import 'http_client.dart';
 
-/// 룸 원격 데이터 소스 인터페이스
 abstract class RoomRemoteDataSource {
   Future<List<Room>> fetchRooms();
 }
 
-/// 룸 로컬 데이터 소스 인터페이스
 abstract class RoomLocalDataSource {
   Future<List<Room>> getRooms();
   Future<void> saveRooms(List<Room> rooms);
@@ -18,7 +16,6 @@ abstract class RoomLocalDataSource {
   Future<DateTime?> getLastUpdateTime();
 }
 
-/// 룸 원격 데이터 소스 구현체
 class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
   final HttpClient _httpClient;
 
@@ -47,7 +44,6 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
   }
 }
 
-/// 룸 로컬 데이터 소스 구현체
 class RoomLocalDataSourceImpl implements RoomLocalDataSource {
   static const String _roomsKey = AppConstants.cachedRoomsKey;
   static const String _lastUpdateKey = AppConstants.roomsLastUpdateKey;

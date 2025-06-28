@@ -3,11 +3,8 @@ import '../models/message.dart';
 import '../utils/logger.dart';
 import 'repository_providers.dart';
 
-// =============================================================================
 // 메시지 목록 상태 관리
-// =============================================================================
 
-/// 메시지 목록 상태 클래스
 class MessagesState {
   final Map<String, List<Message>> messagesByRoom;
   final Map<String, bool> loadingByRoom;
@@ -35,22 +32,18 @@ class MessagesState {
     );
   }
 
-  /// 특정 룸의 메시지 조회
   List<Message> getMessagesForRoom(String roomId) {
     return messagesByRoom[roomId] ?? [];
   }
 
-  /// 특정 룸의 로딩 상태 조회
   bool isLoadingForRoom(String roomId) {
     return loadingByRoom[roomId] ?? false;
   }
 
-  /// 특정 룸의 에러 상태 조회
   String? getErrorForRoom(String roomId) {
     return errorsByRoom[roomId];
   }
 
-  /// 필터링된 메시지 목록 (검색 적용)
   List<Message> getFilteredMessages(String roomId) {
     final messages = getMessagesForRoom(roomId);
     
@@ -63,7 +56,6 @@ class MessagesState {
     }).toList();
   }
 
-  /// 날짜별 메시지 그룹화
   Map<String, List<Message>> getMessagesByDate(String roomId) {
     final messages = getMessagesForRoom(roomId);
     final Map<String, List<Message>> grouped = {};
@@ -95,13 +87,11 @@ class MessagesState {
   }
 }
 
-/// 메시지 목록 관리 Notifier
 class MessagesNotifier extends StateNotifier<MessagesState> {
   final MessageRepository _messageRepository;
 
   MessagesNotifier(this._messageRepository) : super(MessagesState());
 
-  /// 특정 룸의 메시지 로드
   Future<void> loadMessages(String roomId) async {
     state = state.copyWith(
       loadingByRoom: {...state.loadingByRoom, roomId: true},
@@ -128,20 +118,17 @@ class MessagesNotifier extends StateNotifier<MessagesState> {
     }
   }
 
-  /// 메시지 검색
   void searchMessages(String query) {
     state = state.copyWith(searchQuery: query);
     Logger.debug('메시지 검색: "$query"');
   }
 
-  /// 메시지 새로고침
   Future<void> refreshMessages(String roomId) async {
     Logger.info('룸 $roomId 메시지 새로고침');
     await _messageRepository.refreshMessages(roomId);
     await loadMessages(roomId);
   }
 
-  /// 새 메시지 추가 (로컬)
   void addMessage(String roomId, Message message) {
     final currentMessages = state.getMessagesForRoom(roomId);
     final updatedMessages = [...currentMessages, message];
@@ -155,11 +142,8 @@ class MessagesNotifier extends StateNotifier<MessagesState> {
   }
 }
 
-// =============================================================================
 // 메시지 전송 상태 관리
-// =============================================================================
 
-/// 메시지 전송 상태 클래스
 class MessageSendState {
   final bool isSending;
   final String? error;
@@ -217,10 +201,8 @@ class MessageSendNotifier extends StateNotifier<MessageSendState> {
 
       Logger.info('메시지 전송 시작: 룸 $roomId');
       
-      // 즉시 UI 업데이트를 위해 로컬에 먼저 추가
       _ref.read(messagesProvider.notifier).addMessage(roomId, message);
       
-      // Repository를 통해 메시지 전송
       await _messageRepository.sendMessage(message);
       
       state = state.copyWith(
@@ -246,9 +228,7 @@ class MessageSendNotifier extends StateNotifier<MessageSendState> {
   }
 }
 
-// =============================================================================
 // Provider 정의
-// =============================================================================
 
 /// 메시지 목록 Provider
 final messagesProvider = StateNotifierProvider<MessagesNotifier, MessagesState>((ref) {
@@ -262,46 +242,35 @@ final messageSendProvider = StateNotifierProvider<MessageSendNotifier, MessageSe
   return MessageSendNotifier(messageRepository, ref);
 });
 
-// =============================================================================
-// 편의를 위한 개별 Provider들
-// =============================================================================
 
-/// 특정 룸의 메시지 목록 Provider
 final roomMessagesProvider = Provider.family<List<Message>, String>((ref, roomId) {
   return ref.watch(messagesProvider).getMessagesForRoom(roomId);
 });
 
-/// 특정 룸의 필터링된 메시지 목록 Provider
 final filteredRoomMessagesProvider = Provider.family<List<Message>, String>((ref, roomId) {
   return ref.watch(messagesProvider).getFilteredMessages(roomId);
 });
 
-/// 특정 룸의 날짜별 메시지 Provider
 final roomMessagesByDateProvider = Provider.family<Map<String, List<Message>>, String>((ref, roomId) {
   return ref.watch(messagesProvider).getMessagesByDate(roomId);
 });
 
-/// 특정 룸의 로딩 상태 Provider
 final roomMessagesLoadingProvider = Provider.family<bool, String>((ref, roomId) {
   return ref.watch(messagesProvider).isLoadingForRoom(roomId);
 });
 
-/// 특정 룸의 에러 상태 Provider
 final roomMessagesErrorProvider = Provider.family<String?, String>((ref, roomId) {
   return ref.watch(messagesProvider).getErrorForRoom(roomId);
 });
 
-/// 메시지 전송 중 상태 Provider
 final isMessageSendingProvider = Provider<bool>((ref) {
   return ref.watch(messageSendProvider).isSending;
 });
 
-/// 메시지 전송 에러 Provider
 final messageSendErrorProvider = Provider<String?>((ref) {
   return ref.watch(messageSendProvider).error;
 });
 
-/// 마지막 전송된 메시지 Provider
 final lastSentMessageProvider = Provider<Message?>((ref) {
   return ref.watch(messageSendProvider).lastSentMessage;
 }); 

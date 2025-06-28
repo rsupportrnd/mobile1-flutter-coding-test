@@ -4,7 +4,6 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import '../data_sources/room_data_source.dart';
 
-/// 회의실 데이터 Repository 인터페이스
 abstract class RoomRepository {
   Future<List<Room>> getRooms();
   Future<Room?> getRoomById(String roomId);
@@ -17,12 +16,10 @@ abstract class RoomRepository {
   void clearCache();
 }
 
-/// 회의실 Repository 구현체
 class RoomRepositoryImpl implements RoomRepository {
   final RoomRemoteDataSource _remoteDataSource;
   final RoomLocalDataSource? _localDataSource;
   
-  // 캐시된 회의실 목록
   List<Room>? _cachedRooms;
   DateTime? _lastFetchTime;
   static const Duration _cacheValidDuration = AppConstants.roomCacheValidDuration;
@@ -35,7 +32,6 @@ class RoomRepositoryImpl implements RoomRepository {
 
   @override
   Future<List<Room>> getRooms() async {
-    // 캐시 체크
     final cachedRooms = _cachedRooms;
     if (_isCacheValid() && cachedRooms != null) {
       Logger.cache('캐시 사용', 'rooms', hit: true);
@@ -45,14 +41,11 @@ class RoomRepositoryImpl implements RoomRepository {
     try {
       Logger.info('룸 목록 조회 시작');
       
-      // 원격에서 데이터 가져오기
       final rooms = await _remoteDataSource.fetchRooms();
       
-      // 캐시 업데이트
       _cachedRooms = rooms;
       _lastFetchTime = DateTime.now();
       
-      // 로컬에 저장 (옵션)
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         await localDataSource.saveRooms(rooms);
@@ -63,7 +56,6 @@ class RoomRepositoryImpl implements RoomRepository {
     } catch (e) {
       Logger.warning('원격 데이터 조회 실패, 로컬 캐시 확인 중');
       
-      // 원격 실패 시 로컬에서 가져오기 시도
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         final localRooms = await localDataSource.getRooms();
@@ -184,12 +176,10 @@ class RoomRepositoryImpl implements RoomRepository {
     _lastFetchTime = null;
   }
 
-  /// 캐시가 유효한지 확인
   bool _isCacheValid() {
     return CacheUtils.isCacheValid(_lastFetchTime, _cacheValidDuration);
   }
 
-  // 캐시 상태 조회 (디버깅용)
   bool get hasCachedData => _cachedRooms != null;
   int get cachedRoomsCount => _cachedRooms?.length ?? 0;
   DateTime? get lastFetchTime => _lastFetchTime;

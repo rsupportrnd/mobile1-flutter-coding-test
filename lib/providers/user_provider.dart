@@ -3,10 +3,6 @@ import '../models/user.dart';
 import '../utils/logger.dart';
 import 'repository_providers.dart';
 
-// =============================================================================
-// 현재 사용자 상태 관리
-// =============================================================================
-
 /// 현재 사용자 상태 클래스
 class CurrentUserState {
   final User? currentUser;
@@ -28,14 +24,12 @@ class CurrentUserState {
   }
 }
 
-/// 현재 사용자 관리 Notifier
 class CurrentUserNotifier extends StateNotifier<CurrentUserState> {
   CurrentUserNotifier() : super(CurrentUserState()) {
     _initializeCurrentUser();
   }
 
   void _initializeCurrentUser() {
-    // 앱 시작 시 임시 사용자로 로그인 (실제 앱에서는 인증 로직 필요)
     const currentUser = User(
       id: "HYW",
       name: "현영우",
@@ -53,35 +47,11 @@ class CurrentUserNotifier extends StateNotifier<CurrentUserState> {
     Logger.info('현재 사용자 초기화: ${currentUser.name} (${currentUser.id})');
   }
 
-  /// 사용자 로그인
-  void loginUser(User user) {
-    state = state.copyWith(
-      currentUser: user,
-      isLoggedIn: true,
-    );
-    Logger.userAction('로그인', details: {'userId': user.id, 'userName': user.name});
-  }
-
-  /// 사용자 로그아웃
-  void logoutUser() {
-    final currentUserId = state.currentUser?.id;
-    state = state.copyWith(
-      currentUser: null,
-      isLoggedIn: false,
-    );
-    Logger.userAction('로그아웃', details: {'userId': currentUserId});
-  }
-
-  /// 현재 사용자 정보 업데이트
   void updateCurrentUser(User updatedUser) {
     state = state.copyWith(currentUser: updatedUser);
     Logger.userAction('사용자 정보 업데이트', details: {'userId': updatedUser.id});
   }
 }
-
-// =============================================================================
-// 사용자 목록 상태 관리
-// =============================================================================
 
 /// 사용자 목록 상태 클래스
 class UsersState {
@@ -111,7 +81,6 @@ class UsersState {
     );
   }
 
-  /// 필터링된 사용자 목록
   List<User> get filteredUsers {
     if (searchQuery.isEmpty) return users;
     
@@ -123,13 +92,11 @@ class UsersState {
   }
 }
 
-/// 사용자 목록 관리 Notifier
 class UsersNotifier extends StateNotifier<UsersState> {
   final UserRepository _userRepository;
 
   UsersNotifier(this._userRepository) : super(UsersState());
 
-  /// 사용자 목록 로드
   Future<void> loadUsers() async {
     state = state.copyWith(isLoading: true, error: null);
     
@@ -150,12 +117,6 @@ class UsersNotifier extends StateNotifier<UsersState> {
     }
   }
 
-  /// 사용자 검색
-  void searchUsers(String query) {
-    state = state.copyWith(searchQuery: query);
-    Logger.debug('사용자 검색: "$query"');
-  }
-
   /// 사용자 목록 새로고침
   Future<void> refreshUsers() async {
     Logger.info('사용자 목록 새로고침');
@@ -163,56 +124,33 @@ class UsersNotifier extends StateNotifier<UsersState> {
     await loadUsers();
   }
 
-  /// 특정 사용자 조회
-  User? getUserById(String userId) {
-    try {
-      return state.users.firstWhere((user) => user.id == userId);
-    } on StateError {
-      return null;
-    }
-  }
 }
 
-// =============================================================================
-// Provider 정의
-// =============================================================================
-
-/// 현재 사용자 Provider
 final currentUserProvider = StateNotifierProvider<CurrentUserNotifier, CurrentUserState>((ref) {
   return CurrentUserNotifier();
 });
 
-/// 사용자 목록 Provider
 final usersProvider = StateNotifierProvider<UsersNotifier, UsersState>((ref) {
   final userRepository = ref.watch(userRepositoryProvider);
   return UsersNotifier(userRepository);
 });
 
-// =============================================================================
-// 편의를 위한 개별 Provider들
-// =============================================================================
-
-/// 현재 사용자 데이터 Provider
 final currentUserDataProvider = Provider<User?>((ref) {
   return ref.watch(currentUserProvider).currentUser;
 });
 
-/// 로그인 상태 Provider
 final isLoggedInProvider = Provider<bool>((ref) {
   return ref.watch(currentUserProvider).isLoggedIn;
 });
 
-/// 현재 사용자 ID Provider
 final currentUserIdProvider = Provider<String?>((ref) {
   return ref.watch(currentUserProvider).currentUser?.id;
 });
 
-/// 필터링된 사용자 목록 Provider
 final filteredUsersProvider = Provider<List<User>>((ref) {
   return ref.watch(usersProvider).filteredUsers;
 });
 
-/// 특정 사용자 조회 Provider
 final userByIdProvider = Provider.family<User?, String>((ref, userId) {
   final usersNotifier = ref.watch(usersProvider.notifier);
   return usersNotifier.getUserById(userId);

@@ -3,14 +3,12 @@ import 'package:http/http.dart' as http;
 import '../config/app_constants.dart';
 import '../utils/logger.dart';
 
-/// HTTP 클라이언트 래퍼 클래스
-/// API 통신을 위한 공통 기능을 제공
+/// HTTP
 class HttpClient {
   final http.Client _client;
 
   HttpClient({http.Client? client}) : _client = client ?? http.Client();
 
-  /// GET 요청
   Future<Map<String, dynamic>> get(String url) async {
     final stopwatch = Logger.startTimer('GET 요청');
     
@@ -46,7 +44,6 @@ class HttpClient {
     }
   }
 
-  /// POST 요청
   Future<Map<String, dynamic>> post(String url, Map<String, dynamic> body) async {
     final stopwatch = Logger.startTimer('POST 요청');
     
@@ -86,13 +83,11 @@ class HttpClient {
     }
   }
 
-  /// 리소스 정리
   void dispose() {
     _client.close();
   }
 }
 
-/// HTTP 예외 클래스
 class HttpException implements Exception {
   final String message;
   final int? statusCode;

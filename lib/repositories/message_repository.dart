@@ -4,7 +4,6 @@ import '../utils/cache_utils.dart';
 import '../utils/logger.dart';
 import '../data_sources/message_data_source.dart';
 
-/// 메시지 데이터 Repository 인터페이스
 abstract class MessageRepository {
   Future<List<Message>> getMessages(String roomId);
   Future<Message?> getMessageById(String messageId);
@@ -17,12 +16,10 @@ abstract class MessageRepository {
   void clearCache([String? roomId]);
 }
 
-/// 메시지 Repository 구현체
 class MessageRepositoryImpl implements MessageRepository {
   final MessageRemoteDataSource _remoteDataSource;
   final MessageLocalDataSource? _localDataSource;
   
-  // 룸별 캐시된 메시지 목록
   final Map<String, List<Message>> _cachedMessages = {};
   final Map<String, DateTime> _lastFetchTimes = {};
   static const Duration _cacheValidDuration = AppConstants.messageCacheValidDuration;
@@ -35,7 +32,6 @@ class MessageRepositoryImpl implements MessageRepository {
 
   @override
   Future<List<Message>> getMessages(String roomId) async {
-    // 캐시 체크
     if (_isCacheValid(roomId)) {
       final cachedMessages = _cachedMessages[roomId]!;
       Logger.cache('캐시 사용', 'messages_$roomId', hit: true);
@@ -45,10 +41,8 @@ class MessageRepositoryImpl implements MessageRepository {
     try {
       Logger.info('룸 $roomId 메시지 조회 시작');
       
-      // 원격에서 데이터 가져오기
       final remoteMessages = await _remoteDataSource.fetchMessages(roomId);
       
-      // 로컬에서 메시지 가져오기 (새로 전송한 메시지 등)
       List<Message> localMessages = [];
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
@@ -59,10 +53,8 @@ class MessageRepositoryImpl implements MessageRepository {
       final allMessages = [...remoteMessages, ...localMessages];
       allMessages.sort((a, b) => a.timestamp.compareTo(b.timestamp));
       
-      // 중복 제거 (ID 기준)
       final uniqueMessages = _removeDuplicateMessages(allMessages);
       
-      // 캐시 업데이트
       _cachedMessages[roomId] = uniqueMessages;
       _lastFetchTimes[roomId] = DateTime.now();
       
@@ -71,7 +63,6 @@ class MessageRepositoryImpl implements MessageRepository {
     } catch (e) {
       Logger.warning('원격 메시지 조회 실패, 로컬 캐시 확인 중');
       
-      // 원격 실패 시 로컬에서만 가져오기
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         final localMessages = await localDataSource.getMessages(roomId);
@@ -96,7 +87,6 @@ class MessageRepositoryImpl implements MessageRepository {
 
   @override
   Future<Message?> getMessageById(String messageId) async {
-    // 모든 캐시된 메시지에서 검색
     for (final messages in _cachedMessages.values) {
       try {
         final message = messages.firstWhere((message) => message.id == messageId);
@@ -107,7 +97,6 @@ class MessageRepositoryImpl implements MessageRepository {
       }
     }
     
-    // 캐시에 없으면 로컬에서 검색
     final localDataSource = _localDataSource;
     if (localDataSource != null) {
       final message = await localDataSource.getMessageById(messageId);
@@ -126,19 +115,16 @@ class MessageRepositoryImpl implements MessageRepository {
     try {
       Logger.info('메시지 전송 시작: ${message.content.length > 50 ? '${message.content.substring(0, 50)}...' : message.content}');
       
-      // 로컬에 먼저 저장 (즉시 UI 업데이트)
       final localDataSource = _localDataSource;
       if (localDataSource != null) {
         await localDataSource.saveMessage(message);
       }
       
-      // 캐시에 추가
       if (_cachedMessages.containsKey(message.roomId)) {
         _cachedMessages[message.roomId]!.add(message);
         _cachedMessages[message.roomId]!.sort((a, b) => a.timestamp.compareTo(b.timestamp));
       }
       
-      // 원격으로 전송
       await _remoteDataSource.sendMessage(message);
       
       Logger.info('메시지 전송 성공: 룸 ${message.roomId}');
@@ -222,13 +208,11 @@ class MessageRepositoryImpl implements MessageRepository {
     }
   }
 
-  /// 특정 룸의 캐시가 유효한지 확인
   bool _isCacheValid(String roomId) {
     final lastFetchTime = _lastFetchTimes[roomId];
     return CacheUtils.isCacheValid(lastFetchTime, _cacheValidDuration);
   }
 
-  /// 중복 메시지 제거 (ID 기준)
   List<Message> _removeDuplicateMessages(List<Message> messages) {
     final Map<String, Message> uniqueMap = {};
     for (final message in messages) {
@@ -237,7 +221,6 @@ class MessageRepositoryImpl implements MessageRepository {
     return uniqueMap.values.toList();
   }
 
-  /// 날짜 키 포맷
   String _formatDateKey(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -256,7 +239,6 @@ class MessageRepositoryImpl implements MessageRepository {
     }
   }
 
-  // 캐시 상태 조회 (디버깅용)
   bool hasCachedData(String roomId) => _cachedMessages.containsKey(roomId);
   int getCachedMessageCount(String roomId) => _cachedMessages[roomId]?.length ?? 0;
   DateTime? getLastFetchTime(String roomId) => _lastFetchTimes[roomId];

@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 
 import '../config/app_constants.dart';
 
-/// Route 변경사항을 관찰하고 로그를 출력하는 Navigator Observer
+/// Route 관찰하는 Navigator Observer
 class AppRouteObserver extends NavigatorObserver {
   static const String _tag = AppConstants.appRouteObserverTag;
 
