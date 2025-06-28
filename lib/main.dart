@@ -1,25 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
-import 'core/sqlite/chat_data_base.dart';
-import 'features/messages/bloc/message_bloc.dart';
-import 'features/messages/data/datasources/message_local_datasource.dart';
-import 'features/messages/data/datasources/message_remote_datasource.dart';
-import 'features/messages/data/repositories/message_repository.dart';
-import 'features/messages/data/repositories/message_repository_impl.dart';
-import 'features/rooms/bloc/room_event.dart';
-import 'features/rooms/data/datasources/room_local_datasource.dart';
-import 'features/rooms/data/repositories/room_repository.dart';
-import 'features/users/bloc/user_bloc.dart';
-import 'features/users/data/datasources/user_remote_datasource.dart';
-import 'features/users/data/repositories/user_repository.dart';
-import 'features/users/data/repositories/user_repository_impl.dart';
-import 'features/rooms/bloc/room_bloc.dart';
-import 'features/rooms/data/datasources/room_remote_datasource.dart';
-import 'features/rooms/data/repositories/room_repository_impl.dart';
-
-import 'app/router.dart'; // router 파일
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

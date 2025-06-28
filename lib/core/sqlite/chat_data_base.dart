@@ -1,7 +1,4 @@
-import 'package:mobile1_flutter_coding_test/features/messages/data/models/message.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import '../../features/rooms/data/models/room.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class ChatDatabase {
   static final ChatDatabase _instance = ChatDatabase._internal();

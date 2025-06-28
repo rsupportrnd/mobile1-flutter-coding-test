@@ -1,8 +1,4 @@
-import 'package:mobile1_flutter_coding_test/features/rooms/data/repositories/room_repository.dart';
-
-import '../datasources/room_local_datasource.dart';
-import '../datasources/room_remote_datasource.dart';
-import '../models/room.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class RoomRepositoryImpl implements RoomRepository {
   final RoomRemoteDataSource remoteDataSource;

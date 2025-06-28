@@ -1,7 +1,4 @@
-import 'package:flutter/foundation.dart';
-import '../datasources/user_remote_datasource.dart';
-import '../models/user.dart';
-import 'user_repository.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource remoteDataSource;

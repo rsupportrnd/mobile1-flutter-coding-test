@@ -1,6 +1,5 @@
-import 'dart:convert';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 import 'package:http/http.dart' as http;
-import '../models/message.dart';
 
 abstract class MessageRemoteDataSource {
   Future<List<Message>> fetchMessages();

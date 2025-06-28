@@ -1,11 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../rooms/bloc/room_bloc.dart';
-import '../../rooms/bloc/room_event.dart';
-import '../../rooms/data/models/room.dart';
-import 'message_event.dart';
-import 'message_state.dart';
-import '../data/repositories/message_repository.dart';
-import '../data/models/message.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final MessageRepository messageRepository;

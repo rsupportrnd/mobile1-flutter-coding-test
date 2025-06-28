@@ -1,7 +1,4 @@
-import '../datasources/message_remote_datasource.dart';
-import '../datasources/message_local_datasource.dart';
-import '../models/message.dart';
-import 'message_repository.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class MessageRepositoryImpl implements MessageRepository {
   final MessageRemoteDataSource remoteDataSource;

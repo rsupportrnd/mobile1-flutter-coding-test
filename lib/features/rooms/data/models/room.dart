@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 part 'room.freezed.dart';
 part 'room.g.dart';

@@ -1,4 +1,4 @@
-import '../models/message.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 abstract class MessageRepository {
   Future<List<Message>> fetchMessages();

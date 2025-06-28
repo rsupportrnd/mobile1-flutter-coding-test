@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:mobile1_flutter_coding_test/features/users/bloc/user_bloc.dart';
-
-import '../../users/data/models/user.dart';
-import '../bloc/message_bloc.dart';
-import '../bloc/message_event.dart';
-import '../bloc/message_state.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class MessageListScreen extends HookWidget {
   final String roomId;
@@ -15,37 +7,15 @@ class MessageListScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final messageBloc = context.read<MessageBloc>();
-
     final textController = useTextEditingController();
     final scrollController = useScrollController();
 
-    // 메시지 초기 로딩
+    final messageBloc = useMemoized(() => context.read<MessageBloc>(), []);
+
     useEffect(() {
       messageBloc.add(MessageLoadRequested(roomId));
       return null;
     }, [roomId]);
-
-    // 메시지 전송 함수
-    void sendMessage() {
-      final text = textController.text.trim();
-      if (text.isEmpty) return;
-
-      messageBloc.add(MessageSent(roomId: roomId, content: text));
-      textController.clear();
-
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (scrollController.hasClients) {
-          Future.delayed(const Duration(milliseconds: 100), () {
-            scrollController.animateTo(
-              scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeOut,
-            );
-          });
-        }
-      });
-    }
 
     return Scaffold(
       appBar: AppBar(title: Text('메시지 목록 - $roomId')),
@@ -63,26 +33,29 @@ class MessageListScreen extends HookWidget {
                     }
                   },
                 ),
+
+                // 여기서 메시지 상태 변화 감지하고 스크롤 내림 처리
+                BlocListener<MessageBloc, MessageState>(
+                  listener: (context, state) {
+                    if (state is MessageLoadSuccess) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        if (scrollController.hasClients) {
+                          scrollController.animateTo(
+                            scrollController.position.maxScrollExtent,
+                            duration: const Duration(milliseconds: 10),
+                            curve: Curves.easeOut,
+                          );
+                        }
+                      });
+                    }
+                  },
+                ),
               ],
               child: BlocBuilder<MessageBloc, MessageState>(
                 builder: (context, messageState) {
                   if (messageState is MessageLoadInProgress) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (messageState is MessageLoadSuccess) {
-                    // 메시지 로드 완료 시 자동 스크롤
-                    useEffect(() {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        if (scrollController.hasClients) {
-                          scrollController.animateTo(
-                            scrollController.position.maxScrollExtent,
-                            duration: const Duration(milliseconds: 1),
-                            curve: Curves.easeOut,
-                          );
-                        }
-                      });
-                      return null;
-                    }, [messageState.messages]);
-
                     return BlocBuilder<UserBloc, UserState>(
                       builder: (context, userState) {
                         if (userState is UserLoadSuccess) {
@@ -95,7 +68,7 @@ class MessageListScreen extends HookWidget {
                             itemBuilder: (context, index) {
                               final message = messages[index];
                               final user = users.firstWhere(
-                                (u) => u.userId == message.sender,
+                                    (u) => u.userId == message.sender,
                                 orElse: () => User(
                                   userId: message.sender,
                                   profilePicture: '',
@@ -109,13 +82,16 @@ class MessageListScreen extends HookWidget {
                               return ListTile(
                                 leading: user.profilePicture.isNotEmpty
                                     ? CircleAvatar(
-                                        backgroundImage: NetworkImage(user.profilePicture),
-                                      )
+                                  backgroundImage: NetworkImage(user.profilePicture),
+                                )
                                     : const CircleAvatar(),
                                 title: Text(user.name.isEmpty ? '사용자' : user.name),
                                 subtitle: Text(message.content),
                                 trailing: Text(
-                                  DateTime.parse(message.timestamp.toString()).toLocal().toString().substring(11, 16),
+                                  DateTime.parse(message.timestamp.toString())
+                                      .toLocal()
+                                      .toString()
+                                      .substring(11, 16),
                                   style: const TextStyle(fontSize: 12),
                                 ),
                               );
@@ -137,6 +113,7 @@ class MessageListScreen extends HookWidget {
               ),
             ),
           ),
+          // 메시지 입력 영역
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             child: Row(
@@ -148,12 +125,12 @@ class MessageListScreen extends HookWidget {
                       hintText: '메시지를 입력하세요...',
                       border: OutlineInputBorder(),
                     ),
-                    onSubmitted: (_) => sendMessage(),
+                    onSubmitted: (_) => _sendMessage(context, roomId, textController),
                   ),
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: sendMessage,
+                  onPressed: () => _sendMessage(context, roomId, textController),
                   child: const Text('전송'),
                 ),
               ],
@@ -162,5 +139,17 @@ class MessageListScreen extends HookWidget {
         ],
       ),
     );
+  }
+
+  void _sendMessage(
+      BuildContext context,
+      String roomId,
+      TextEditingController controller,
+      ) {
+    final text = controller.text.trim();
+    if (text.isEmpty) return;
+
+    context.read<MessageBloc>().add(MessageSent(roomId: roomId, content: text));
+    controller.clear();
   }
 }

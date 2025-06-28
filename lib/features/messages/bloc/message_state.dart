@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import '../data/models/message.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 abstract class MessageState extends Equatable {
   const MessageState();

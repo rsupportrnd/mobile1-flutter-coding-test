@@ -1,13 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mobile1_flutter_coding_test/features/rooms/presentation/room_list_screen.dart';
-import 'package:mobile1_flutter_coding_test/features/users/presentation/user_list_screen.dart';
-
-import '../features/messages/bloc/message_bloc.dart';
-import '../features/messages/bloc/message_event.dart';
-import '../features/messages/data/repositories/message_repository.dart';
-import '../features/messages/presentation/message_list_screen.dart';
-import 'app_scaffold.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/users',

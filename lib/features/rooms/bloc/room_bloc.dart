@@ -1,7 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../data/repositories/room_repository.dart';
-import 'room_event.dart';
-import 'room_state.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 class RoomBloc extends Bloc<RoomEvent, RoomState> {
   final RoomRepository roomRepository;

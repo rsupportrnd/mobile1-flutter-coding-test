@@ -1,6 +1,4 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import '../models/message.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 abstract class MessageLocalDataSource {
   Future<void> saveMessage(Message message);

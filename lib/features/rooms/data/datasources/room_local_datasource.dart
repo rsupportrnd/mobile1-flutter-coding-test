@@ -1,7 +1,4 @@
-import 'package:sqflite/sqflite.dart';
-
-import '../../../../core/sqlite/chat_data_base.dart';
-import '../models/room.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 abstract class RoomLocalDataSource {
   Future<Map<String, LastMessage>> fetchAllLastMessages();

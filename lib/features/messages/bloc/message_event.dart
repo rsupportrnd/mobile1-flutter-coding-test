@@ -1,6 +1,4 @@
-// message_event.dart
-
-import 'package:equatable/equatable.dart';
+import 'package:mobile1_flutter_coding_test/app/index.dart';
 
 abstract class MessageEvent extends Equatable {
   const MessageEvent();
