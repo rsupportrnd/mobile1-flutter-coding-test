@@ -20,7 +20,7 @@ jobs:
     - name: Flutter SDK 설정
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.5.4'
+        flutter-version: '3.32.0'
         cache: true
         
     - name: 의존성 캐시
