@@ -1,0 +1,131 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: 테스트 및 분석
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 체크아웃
+      uses: actions/checkout@v4
+      
+    - name: Flutter SDK 설정
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        
+    - name: 의존성 설치
+      run: flutter pub get
+      
+    - name: 코드 생성 (build_runner)
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      
+    - name: 코드 분석
+      run: flutter analyze
+      
+    - name: 테스트 실행
+      run: flutter test --coverage
+      
+    - name: 커버리지 업로드
+      uses: codecov/codecov-action@v4
+      with:
+        file: coverage/lcov.info
+
+  build:
+    name: 빌드
+    runs-on: ubuntu-latest
+    needs: test
+    
+    strategy:
+      matrix:
+        target: [android, web]
+        
+    steps:
+    - name: 체크아웃
+      uses: actions/checkout@v4
+      
+    - name: Flutter SDK 설정
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        
+    - name: 의존성 설치
+      run: flutter pub get
+      
+    - name: 코드 생성 (build_runner)
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      
+    - name: Java 설정 (Android)
+      if: matrix.target == 'android'
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Gradle 캐시 설정 (Android)
+      if: matrix.target == 'android'
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Android 빌드
+      if: matrix.target == 'android'
+      run: flutter build apk --release --android-skip-build-dependency-validation
+      
+    - name: Web 빌드
+      if: matrix.target == 'web'
+      run: flutter build web --release
+      
+    - name: 빌드 아티팩트 업로드 (Android)
+      if: matrix.target == 'android'
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+        
+    - name: 빌드 아티팩트 업로드 (Web)
+      if: matrix.target == 'web'
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-build
+        path: build/web/
+
+  ios-build:
+    name: iOS 빌드
+    runs-on: macos-latest
+    needs: test
+    
+    steps:
+    - name: 체크아웃
+      uses: actions/checkout@v4
+      
+    - name: Flutter SDK 설정
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        
+    - name: 의존성 설치
+      run: flutter pub get
+      
+    - name: 코드 생성 (build_runner)
+      run: flutter packages pub run build_runner build --delete-conflicting-outputs
+      
+    - name: iOS 빌드
+      run: flutter build ios --release --no-codesign
+      
+    - name: 빌드 아티팩트 업로드 (iOS)
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-build
+        path: build/ios/iphoneos/Runner.app 

@@ -1,0 +1,1 @@
+/Users/admin/AndroidStudioProjects/rsupport/build/app/intermediates/cxx/RelWithDebInfo/6lp2y4w4/obj/x86_64
