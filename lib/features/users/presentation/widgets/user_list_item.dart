@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../data/models/user.dart';
 import 'user_detail_bottom_sheet.dart';
 
-class UserListItem extends StatelessWidget {
+class UserListItem extends HookWidget {
   final User user;
 
   const UserListItem({super.key, required this.user});

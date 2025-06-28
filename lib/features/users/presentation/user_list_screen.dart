@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../bloc/user_bloc.dart';
 import 'widgets/user_list_item.dart';
 
-class UserListScreen extends StatelessWidget {
+class UserListScreen extends HookWidget {
   const UserListScreen({super.key});
 
   @override
