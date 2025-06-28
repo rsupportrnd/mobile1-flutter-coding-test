@@ -61,6 +61,24 @@ jobs:
     - name: 코드 생성 (build_runner)
       run: flutter packages pub run build_runner build --delete-conflicting-outputs
       
+    - name: Java 설정 (Android)
+      if: matrix.target == 'android'
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Gradle 캐시 설정 (Android)
+      if: matrix.target == 'android'
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
     - name: Android 빌드
       if: matrix.target == 'android'
       run: flutter build apk --release
