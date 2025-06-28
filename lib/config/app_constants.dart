@@ -99,7 +99,7 @@ class UserRoleConfig {
 
 /// 앱 테마 Config
 class AppThemeConfig {
-  static const int primaryColorValue = 0xFF161616;
+  static const int primaryColorValue = 0xFF4AA8D8;
   
   static const int onlineColorValue = 0xFF4CAF50;   // Green
   static const int offlineColorValue = 0xFF9E9E9E;  // Grey

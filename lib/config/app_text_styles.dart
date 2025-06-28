@@ -119,6 +119,13 @@ class AppTextStyles {
     letterSpacing: 0.3,
   );
 
+  /// 기본 버튼 텍스트
+  static const TextStyle buttonText = TextStyle(
+    fontFamily: _poppins,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+
   // =============================================================================
   // 특수 스타일 (Poppins - 강조 및 액션)
   // =============================================================================
