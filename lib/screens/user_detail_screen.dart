@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import '../config/app_constants.dart';
-import '../config/app_text_styles.dart';
 import '../models/user.dart';
+import '../config/app_constants.dart';
 import '../utils/color_utils.dart';
 import '../utils/icon_utils.dart';
-import '../utils/logger.dart';
-import '../widgets/common_widgets.dart';
-import '../widgets/user_avatar.dart';
+import '../widgets/user_icon.dart';
 
 class UserDetailScreen extends StatelessWidget {
   final User user;
@@ -15,11 +12,10 @@ class UserDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Logger.info('사용자 상세 화면 진입: ${user.name}');
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('사용자 상세 정보'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -29,39 +25,18 @@ class UserDetailScreen extends StatelessWidget {
             children: [
               // 프로필 섹션
               _buildProfileSection(),
-              const SizedBox(height: 32),
-              
+              const SizedBox(height: 24),
+
               // 기본 정보 섹션
-              CommonWidgets.sectionHeader(title: '기본 정보'),
-              const SizedBox(height: 16),
-              _buildInfoCard(context, '이름', user.name),
+              _buildSectionHeader('기본 정보'),
               const SizedBox(height: 12),
-              _buildInfoCard(context, '이메일', user.email),
+              _buildInfoCard('이름', user.name),
               const SizedBox(height: 12),
-              _buildInfoCard(context, 'ID', user.id),
+              _buildInfoCard('이메일', user.email),
               const SizedBox(height: 12),
-              _buildStatusCard(context),
+              _buildStatusCard(),
               const SizedBox(height: 12),
-              _buildRoleCard(context),
-              
-              const SizedBox(height: 32),
-              
-              // 계정 정보 섹션
-              CommonWidgets.sectionHeader(title: '계정 정보'),
-              const SizedBox(height: 16),
-              _buildInfoCard(
-                context, 
-                '가입일', 
-                user.createdAt.toString().split(' ')[0],
-              ),
-              const SizedBox(height: 12),
-              _buildInfoCard(
-                context, 
-                '마지막 업데이트', 
-                user.updatedAt.toString().split(' ')[0],
-              ),
-              const SizedBox(height: 12),
-              _buildAdminStatusCard(context),
+              _buildRoleCard(),
             ],
           ),
         ),
@@ -73,7 +48,7 @@ class UserDetailScreen extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          UserAvatar(
+          UserIcon(
             user: user,
             radius: 60,
             showStatusIndicator: true,
@@ -82,25 +57,36 @@ class UserDetailScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             user.name,
-            style: AppTextStyles.pageTitle,
+            style: const TextStyle(
+              fontSize: AppThemeConfig.titleTextSize,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             user.email,
-            style: AppTextStyles.bodyMedium.copyWith(color: Colors.grey),
-          ),
-          const SizedBox(height: 8),
-          CommonWidgets.statusChip(
-            label: user.statusDisplayName,
-            color: ColorUtils.getStatusColor(user.status),
-            icon: IconUtils.getStatusIcon(user.status),
+            style: const TextStyle(
+              fontSize: AppThemeConfig.bodyTextSize,
+              color: Colors.grey,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoCard(BuildContext context, String label, String value) {
+  Widget _buildSectionHeader(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: AppThemeConfig.subtitleTextSize,
+        fontWeight: FontWeight.bold,
+        color: Colors.black87,
+      ),
+    );
+  }
+
+  Widget _buildInfoCard(String label, String value) {
     return Card(
       elevation: AppConstants.cardElevation,
       child: Padding(
@@ -109,12 +95,13 @@ class UserDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 100,
+              width: 80,
               child: Text(
                 label,
-                style: AppTextStyles.bodyMedium.copyWith(
+                style: const TextStyle(
+                  fontSize: AppThemeConfig.bodyTextSize,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -122,7 +109,9 @@ class UserDetailScreen extends StatelessWidget {
             Expanded(
               child: Text(
                 value,
-                style: AppTextStyles.bodyMedium,
+                style: const TextStyle(
+                  fontSize: AppThemeConfig.bodyTextSize,
+                ),
               ),
             ),
           ],
@@ -131,20 +120,21 @@ class UserDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusCard(BuildContext context) {
+  Widget _buildStatusCard() {
     return Card(
       elevation: AppConstants.cardElevation,
       child: Padding(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
         child: Row(
           children: [
-            SizedBox(
-              width: 100,
+            const SizedBox(
+              width: 80,
               child: Text(
                 '상태',
-                style: AppTextStyles.bodyMedium.copyWith(
+                style: TextStyle(
+                  fontSize: AppThemeConfig.bodyTextSize,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -157,7 +147,8 @@ class UserDetailScreen extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               user.statusDisplayName,
-              style: AppTextStyles.bodyMedium.copyWith(
+              style: TextStyle(
+                fontSize: AppThemeConfig.bodyTextSize,
                 color: ColorUtils.getStatusColor(user.status),
                 fontWeight: FontWeight.w500,
               ),
@@ -168,64 +159,49 @@ class UserDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRoleCard(BuildContext context) {
+  Widget _buildRoleCard() {
     return Card(
       elevation: AppConstants.cardElevation,
       child: Padding(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
         child: Row(
           children: [
-            SizedBox(
-              width: 100,
+            const SizedBox(
+              width: 80,
               child: Text(
                 '역할',
-                style: AppTextStyles.bodyMedium.copyWith(
+                style: TextStyle(
+                  fontSize: AppThemeConfig.bodyTextSize,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
+                  color: Colors.grey,
                 ),
               ),
             ),
             const SizedBox(width: 16),
-            CommonWidgets.statusChip(
-              label: user.roleDisplayName,
-              color: ColorUtils.getRoleColor(user.role),
-              icon: IconUtils.getRoleIcon(user.role),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAdminStatusCard(BuildContext context) {
-    return Card(
-      elevation: AppConstants.cardElevation,
-      child: Padding(
-        padding: const EdgeInsets.all(AppConstants.defaultPadding),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 100,
-              child: Text(
-                '관리자',
-                style: AppTextStyles.bodyMedium.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
-                ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: ColorUtils.getRoleColor(user.role),
+                borderRadius: BorderRadius.circular(AppConstants.borderRadius),
               ),
-            ),
-            const SizedBox(width: 16),
-            Icon(
-              user.isAdmin ? Icons.check_circle : Icons.cancel,
-              size: 20,
-              color: user.isAdmin ? Colors.green : Colors.grey,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              user.isAdmin ? '예' : '아니오',
-              style: AppTextStyles.bodyMedium.copyWith(
-                color: user.isAdmin ? Colors.green : Colors.grey,
-                fontWeight: FontWeight.w500,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    IconUtils.getRoleIcon(user.role),
+                    size: 16,
+                    color: ColorUtils.getTextColor(ColorUtils.getRoleColor(user.role)),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    user.roleDisplayName,
+                    style: TextStyle(
+                      fontSize: AppThemeConfig.smallTextSize,
+                      color: ColorUtils.getTextColor(ColorUtils.getRoleColor(user.role)),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

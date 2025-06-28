@@ -4,7 +4,7 @@ import '../config/app_constants.dart';
 import '../utils/color_utils.dart';
 import '../utils/icon_utils.dart';
 
-class UserAvatar extends StatefulWidget {
+class UserIcon extends StatefulWidget {
   final User? user;
   final String? imageUrl;
   final String? fallbackText;
@@ -12,7 +12,7 @@ class UserAvatar extends StatefulWidget {
   final bool showStatusIndicator;
   final bool showRoleBadge;
 
-  const UserAvatar({
+  const UserIcon({
     super.key,
     this.user,
     this.imageUrl,
@@ -23,10 +23,10 @@ class UserAvatar extends StatefulWidget {
   });
 
   @override
-  State<UserAvatar> createState() => _UserAvatarState();
+  State<UserIcon> createState() => _UserIconState();
 }
 
-class _UserAvatarState extends State<UserAvatar> {
+class _UserIconState extends State<UserIcon> {
   bool _hasImageError = false;
 
   @override
@@ -40,7 +40,7 @@ class _UserAvatarState extends State<UserAvatar> {
           radius: widget.radius,
           backgroundColor: Colors.grey[300],
           backgroundImage: shouldShowImage 
-              ? NetworkImage(imageUrl!)
+              ? NetworkImage(imageUrl)
               : null,
           onBackgroundImageError: shouldShowImage
               ? (exception, stackTrace) {
@@ -99,9 +99,9 @@ class _UserAvatarState extends State<UserAvatar> {
 
   Widget _buildFallbackContent() {
     final text = widget.fallbackText ?? 
-                 widget.user?.name.isNotEmpty == true 
+                 (widget.user?.name.isNotEmpty == true 
                      ? widget.user!.name[0].toUpperCase()
-                     : '?';
+                     : '?');
 
     return Text(
       text,
@@ -114,7 +114,7 @@ class _UserAvatarState extends State<UserAvatar> {
   }
 
   @override
-  void didUpdateWidget(UserAvatar oldWidget) {
+  void didUpdateWidget(UserIcon oldWidget) {
     super.didUpdateWidget(oldWidget);
     
     final oldUrl = oldWidget.imageUrl ?? oldWidget.user?.profilePicture;

@@ -1,59 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../router/navigation_helper.dart';
+import '../viewmodels/user_viewmodel.dart';
+import 'user_detail_screen.dart';
 import '../config/app_constants.dart';
 import '../config/app_text_styles.dart';
-import '../models/user.dart';
-import '../providers/user_provider.dart';
 import '../utils/color_utils.dart';
 import '../utils/icon_utils.dart';
 import '../utils/logger.dart';
+import '../widgets/user_icon.dart';
 import '../widgets/common_widgets.dart';
-import '../widgets/user_avatar.dart';
-import 'user_detail_screen.dart';
+import '../models/user.dart';
 
-class UserListScreen extends ConsumerStatefulWidget {
-  const UserListScreen({super.key});
+class UsersView extends ConsumerStatefulWidget {
+  const UsersView({super.key});
 
   @override
-  ConsumerState<UserListScreen> createState() => _UserListScreenState();
+  ConsumerState<UsersView> createState() => _UsersViewState();
 }
 
-class _UserListScreenState extends ConsumerState<UserListScreen> 
-    with TickerProviderStateMixin {
+class _UsersViewState extends ConsumerState<UsersView> with TickerProviderStateMixin {
   late AnimationController _refreshButtonController;
-  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     Logger.info('사용자 목록 화면 진입');
-    
+
+    // Refresh 버튼 애니메이션 컨트롤러
     _refreshButtonController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     // 화면 초기화 시 사용자 목록 로드
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(usersProvider.notifier).loadUsers();
+      Logger.info('사용자 목록 로드 시작');
+      ref.read(userViewModelProvider.notifier).loadUsers();
     });
   }
 
   @override
   void dispose() {
     _refreshButtonController.dispose();
-    _searchController.dispose();
     super.dispose();
   }
 
+  // Refresh 함수 (버튼 클릭 시)
   Future<void> _onRefreshButtonPressed() async {
     Logger.userAction('새로고침 버튼 클릭', details: {'screen': '사용자 목록'});
-    
+    final userViewModel = ref.read(userViewModelProvider.notifier);
+
+    // 회전 애니메이션 시작
     _refreshButtonController.repeat();
-    
+
     try {
-      await ref.read(usersProvider.notifier).refreshUsers();
-      
+      await userViewModel.refreshUsers();
+      Logger.info('사용자 목록 새로고침 성공');
+
+      // 성공 시 스낵바 표시
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -75,7 +80,7 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
       }
     } catch (e) {
       Logger.error('사용자 목록 새로고침 실패', error: e);
-      
+      // 실패 시 에러 스낵바 표시
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -96,6 +101,7 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
         );
       }
     } finally {
+      // 애니메이션 정지
       if (mounted) {
         _refreshButtonController.stop();
         _refreshButtonController.reset();
@@ -103,30 +109,24 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
     }
   }
 
+  // Pull-to-refresh 함수
   Future<void> _onPullToRefresh() async {
     Logger.userAction('Pull-to-refresh 액션', details: {'screen': '사용자 목록'});
-    
+    final userViewModel = ref.read(userViewModelProvider.notifier);
+
     try {
-      await ref.read(usersProvider.notifier).refreshUsers();
+      await userViewModel.refreshUsers();
+      Logger.info('Pull-to-refresh 새로고침 성공');
     } catch (e) {
       Logger.error('Pull-to-refresh 새로고침 실패', error: e);
       rethrow;
     }
   }
 
-  void _onSearchChanged(String query) {
-    ref.read(usersProvider.notifier).searchUsers(query);
-  }
-
-  void _onClearSearch() {
-    _searchController.clear();
-    ref.read(usersProvider.notifier).searchUsers('');
-  }
-
   @override
   Widget build(BuildContext context) {
-    final usersState = ref.watch(usersProvider);
-    final filteredUsers = ref.watch(filteredUsersProvider);
+    final userState = ref.watch(userViewModelProvider);
+    final userViewModel = ref.read(userViewModelProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -147,38 +147,23 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // 검색바
-          CommonWidgets.searchBar(
-            controller: _searchController,
-            hintText: '사용자 검색...',
-            onChanged: _onSearchChanged,
-            onClear: _onClearSearch,
-          ),
-          
-          // 사용자 목록
-          Expanded(
-            child: _buildBody(usersState, filteredUsers),
-          ),
-        ],
-      ),
+      body: _buildBody(userState, userViewModel),
     );
   }
 
-  Widget _buildBody(UsersState usersState, List<User> filteredUsers) {
-    if (usersState.isLoading && usersState.users.isEmpty) {
+  Widget _buildBody(UserListState userState, UserViewModel userViewModel) {
+    if (userState.isLoading && userState.users.isEmpty) {
       return CommonWidgets.loadingIndicator();
     }
 
-    if (usersState.error != null && usersState.users.isEmpty) {
+    if (userState.error != null && userState.users.isEmpty) {
       return CommonWidgets.errorWidget(
-        message: '오류가 발생했습니다: ${usersState.error!}',
-        onRetry: () => ref.read(usersProvider.notifier).refreshUsers(),
+        message: '오류가 발생했습니다: ${userState.error!}',
+        onRetry: () => userViewModel.refreshUsers(),
       );
     }
 
-    if (filteredUsers.isEmpty) {
+    if (userState.users.isEmpty) {
       return RefreshIndicator(
         onRefresh: _onPullToRefresh,
         child: SingleChildScrollView(
@@ -187,12 +172,7 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
             height: MediaQuery.of(context).size.height * 0.6,
             child: CommonWidgets.emptyListWidget(
               icon: Icons.people,
-              message: usersState.searchQuery.isEmpty 
-                  ? '사용자가 없습니다'
-                  : '검색 결과가 없습니다',
-              description: usersState.searchQuery.isEmpty 
-                  ? null
-                  : '"${usersState.searchQuery}"에 대한 검색 결과가 없습니다',
+              message: '사용자가 없습니다',
             ),
           ),
         ),
@@ -204,16 +184,16 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
       color: Theme.of(context).primaryColor,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: filteredUsers.length,
+        itemCount: userState.users.length,
         itemBuilder: (context, index) {
-          final user = filteredUsers[index];
-          return _buildUserCard(user);
+          final user = userState.users[index];
+          return _buildUserCard(user, userViewModel);
         },
       ),
     );
   }
 
-  Widget _buildUserCard(User user) {
+  Widget _buildUserCard(User user, UserViewModel userViewModel) {
     return CommonWidgets.commonCard(
       onTap: () {
         Logger.userAction('사용자 카드 클릭', details: {
@@ -222,34 +202,43 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
           'userRole': user.role,
           'userStatus': user.status,
         });
-        
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => UserDetailScreen(user: user),
-          ),
+        Logger.navigation('사용자 목록', '사용자 상세: ${user.name}');
+
+        userViewModel.selectUser(user);
+        NavigationHelper.to(
+          UserDetailScreen(user: user),
+          routeName: '/user/${user.id}',
         );
       },
       child: ListTile(
         contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
-        leading: UserAvatar(
+        leading: UserIcon(
           user: user,
           radius: AppConstants.avatarRadius,
           showStatusIndicator: true,
           showRoleBadge: true,
         ),
         title: Row(
+          spacing: 12,
           children: [
-            Expanded(
-              child: Text(
-                user.name,
-                style: AppTextStyles.sectionTitle,
-              ),
+            Text(
+              user.name,
+              style: AppTextStyles.listTitle,
             ),
             // 역할 배지
-            CommonWidgets.statusChip(
-              label: user.roleDisplayName,
-              color: ColorUtils.getRoleColor(user.role),
-              icon: IconUtils.getRoleIcon(user.role),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: ColorUtils.getRoleColor(user.role),
+                borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+              ),
+              child: Text(
+                user.roleDisplayName,
+                style: AppTextStyles.withColor(
+                  AppTextStyles.roleBadge,
+                  ColorUtils.getTextColor(ColorUtils.getRoleColor(user.role)),
+                ),
+              ),
             ),
           ],
         ),
@@ -259,7 +248,7 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
             const SizedBox(height: 4),
             Text(
               user.email,
-              style: AppTextStyles.bodyMedium,
+              style: AppTextStyles.listSubtitle,
             ),
             const SizedBox(height: 4),
             Row(
@@ -272,15 +261,16 @@ class _UserListScreenState extends ConsumerState<UserListScreen>
                 const SizedBox(width: 4),
                 Text(
                   user.statusDisplayName,
-                  style: AppTextStyles.caption.copyWith(
-                    color: ColorUtils.getStatusColor(user.status),
+                  style: AppTextStyles.withColor(
+                    AppTextStyles.emphasis,
+                    ColorUtils.getStatusColor(user.status),
                   ),
                 ),
               ],
             ),
           ],
         ),
-        trailing: const Icon(Icons.chevron_right, size: 16),
+        trailing: const Icon(IconUtils.forward, size: 16),
       ),
     );
   }
