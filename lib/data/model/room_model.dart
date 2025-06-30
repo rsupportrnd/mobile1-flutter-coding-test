@@ -4,7 +4,7 @@ part 'room_model.freezed.dart';
 part 'room_model.g.dart';
 
 @freezed
-class ChatRoomModel with _$ChatRoomModel {
+abstract class ChatRoomModel with _$ChatRoomModel {
   const factory ChatRoomModel({
     required String roomId,
     required String roomName,
@@ -20,7 +20,7 @@ class ChatRoomModel with _$ChatRoomModel {
 }
 
 @freezed
-class LastMessageModel with _$LastMessageModel {
+abstract class LastMessageModel with _$LastMessageModel {
   const factory LastMessageModel({
     required String sender,
     required String content,

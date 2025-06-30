@@ -4,7 +4,7 @@ part 'message_model.freezed.dart';
 part 'message_model.g.dart';
 
 @freezed
-class MessageModel with _$MessageModel {
+abstract class MessageModel with _$MessageModel {
   const factory MessageModel({
     required String roomId,
     required String messageId,

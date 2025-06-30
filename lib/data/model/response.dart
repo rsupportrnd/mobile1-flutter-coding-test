@@ -7,7 +7,7 @@ part 'response.freezed.dart';
 part 'response.g.dart';
 
 @freezed
-class UsersResponse with _$UsersResponse {
+abstract class UsersResponse with _$UsersResponse {
   const factory UsersResponse({
     required List<UserModel> users,
   }) = _UsersResponse;
@@ -17,7 +17,7 @@ class UsersResponse with _$UsersResponse {
 }
 
 @freezed
-class ChatRoomResponse with _$ChatRoomResponse {
+abstract class ChatRoomResponse with _$ChatRoomResponse {
   const factory ChatRoomResponse({
     required List<ChatRoomModel> chatRooms,
   }) = _ChatRoomResponse;
@@ -27,7 +27,7 @@ class ChatRoomResponse with _$ChatRoomResponse {
 }
 
 @freezed
-class MessageResponse with _$MessageResponse {
+abstract class MessageResponse with _$MessageResponse {
   const factory MessageResponse({
     required List<MessageModel> messages,
   }) = _MessageResponse;
