@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/presentation/pages/home.dart';
+import 'package:mobile1_flutter_coding_test/presentation/pages/room_list/room_list_page.dart';
 import 'package:mobile1_flutter_coding_test/presentation/pages/user_list/user_list_page.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.routeName: (context) => const HomePage(),
         UserListPage.routeName: (context) => const UserListPage(),
+        RoomListPage.routeName: (context) => const RoomListPage(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
