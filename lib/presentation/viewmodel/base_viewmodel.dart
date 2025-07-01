@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/my_error.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/result.dart';
-import 'package:mobile1_flutter_coding_test/presentation/utils/my_logger.dart';
 
 abstract class BaseViewModel<T> extends StateNotifier<T> {
   BaseViewModel(super.state);
@@ -13,7 +12,6 @@ abstract class BaseViewModel<T> extends StateNotifier<T> {
     required void Function(R data) onSuccess,
     void Function(MyError error)? onFailure,
   }) async {
-    Log.d("runWithResult");
     setLoading(true);
     final result = await task();
     await Future.delayed(const Duration(milliseconds: 1000));
