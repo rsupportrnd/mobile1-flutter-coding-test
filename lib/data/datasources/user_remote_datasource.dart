@@ -8,7 +8,8 @@ class UserRemoteDataSource extends BaseRequest {
   Future<List<UserModel>> getUsers() async {
     return call(() async {
       final response = await dio.get(Apis.getUsers);
-      return response.data.map((e) => UserModel.fromJson(e)).toList();
+      final users = safeConverter(response.data)['users'] as List<dynamic>;
+      return users.map((e) => UserModel.fromJson(e)).toList();
     });
   }
 }
