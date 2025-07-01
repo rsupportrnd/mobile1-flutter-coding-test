@@ -1,6 +1,7 @@
 import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/model/response.dart';
 import 'package:mobile1_flutter_coding_test/data/utils/json_loader.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
 
 class RoomDataSourceImpl implements RoomDataSource {
   RoomDataSourceImpl({required IJsonLoader jsonLoader})
@@ -9,7 +10,11 @@ class RoomDataSourceImpl implements RoomDataSource {
 
   @override
   Future<ChatRoomResponse> getRooms() async {
-    final jsonMap = await _jsonLoader.loadJson('api/rooms.json');
-    return ChatRoomResponse.fromJson(jsonMap);
+    try {
+      final jsonMap = await _jsonLoader.loadJson('api/rooms.json');
+      return ChatRoomResponse.fromJson(jsonMap);
+    } on JsonLoadException {
+      rethrow; // Repository에서 처리
+    }
   }
 }

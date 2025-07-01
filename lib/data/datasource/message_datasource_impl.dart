@@ -1,6 +1,7 @@
 import 'package:mobile1_flutter_coding_test/data/datasource/message_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/model/response.dart';
 import 'package:mobile1_flutter_coding_test/data/utils/json_loader.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
 
 class MessageDataSourceImpl implements MessageDataSource {
   MessageDataSourceImpl({required IJsonLoader jsonLoader})
@@ -9,7 +10,11 @@ class MessageDataSourceImpl implements MessageDataSource {
 
   @override
   Future<MessageResponse> getMessages() async {
-    final jsonMap = await _jsonLoader.loadJson('api/messages.json');
-    return MessageResponse.fromJson(jsonMap);
+    try {
+      final jsonMap = await _jsonLoader.loadJson('api/messages.json');
+      return MessageResponse.fromJson(jsonMap);
+    } on JsonLoadException {
+      rethrow; // Repository에서 처리
+    }
   }
 }
