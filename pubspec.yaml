@@ -15,6 +15,7 @@ dependencies:
   json_annotation: ^4.9.0
   shared_preferences: ^2.2.2
   dio: ^5.4.3+1
+  intl: ^0.20.2
 
   cupertino_icons: ^1.0.8
 
