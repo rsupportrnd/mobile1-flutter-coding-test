@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/presentation/pages/room_list/room_list_page.dart';
 import 'package:mobile1_flutter_coding_test/presentation/pages/user_list/user_list_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,8 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const UserListPage(),
-    // TODO: 회의 목록 화면
-    const Placeholder()
+    const RoomListPage(),
   ];
 
   void _onItemTapped(int index) {

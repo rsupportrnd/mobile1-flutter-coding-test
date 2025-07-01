@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/image_component.dart';
 
 class UserProfile extends StatelessWidget {
   final String url;
@@ -15,13 +16,12 @@ class UserProfile extends StatelessWidget {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      child: Image.network(
-        url,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.person);
-        },
-      ),
+      child: ImageComponent(
+          url: url,
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => const Icon(Icons.person)),
     );
   }
 }
