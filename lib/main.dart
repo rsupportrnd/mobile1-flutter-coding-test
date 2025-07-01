@@ -1,30 +1,23 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/home.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/room/room_page.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/room_list/room_list_page.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/user_list/user_list_page.dart';
+import 'package:mobile1_flutter_coding_test/routes/app_router.dart';
+import 'package:mobile1_flutter_coding_test/routes/route_observer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(Main());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Main extends StatelessWidget {
+  Main({super.key});
+
+  final appRouter = AppRouter();
+  final routeObserver = AutoRouteListener();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      initialRoute: HomePage.routeName,
-      routes: {
-        HomePage.routeName: (context) => const HomePage(),
-        UserListPage.routeName: (context) => const UserListPage(),
-        RoomListPage.routeName: (context) => const RoomListPage(),
-        RoomPage.routeName: (context) => const RoomPage(),
-      },
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MaterialApp.router(
+      routerConfig: appRouter.config(
+        navigatorObservers: () => [routeObserver],
       ),
     );
   }

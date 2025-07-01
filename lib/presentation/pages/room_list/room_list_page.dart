@@ -6,14 +6,14 @@ import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasou
 import 'package:mobile1_flutter_coding_test/data/repositories/room_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/room/room_page.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/room_tile.dart';
+import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class RoomListPage extends StatelessWidget {
-  static const routeName = '/roomList';
-
   const RoomListPage({super.key});
 
   @override
@@ -64,9 +64,6 @@ class _RoomList extends StatelessWidget {
     BuildContext context,
     RoomEntity room,
   ) {
-    Navigator.pushNamed(context, RoomPage.routeName, arguments: {
-      'roomId': room.roomId,
-      'roomName': room.roomName,
-    });
+    context.router.push(RoomRoute(roomId: room.roomId, roomName: room.roomName));
   }
 }
