@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
@@ -14,7 +13,6 @@ class MessageRepositoryImpl implements MessageRepository {
   Future<List<MessageEntity>> getMessages() async {
     final localMessages = await localDataSource.getMessages();
     if (localMessages.isNotEmpty) {
-      debugPrint('localMessages: catched $localMessages');
       return localMessages.map((e) => MessageEntity.fromModel(e)).toList();
     }
 
@@ -24,8 +22,8 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<MessageEntity> postMessage(MessageEntity message) {
-    // TODO: 메시지 저장 구현
-    throw UnimplementedError();
+  Future<MessageEntity> postMessage(MessageEntity message) async {
+    final model = await localDataSource.postMessage(message.toModel());
+    return MessageEntity.fromModel(model);
   }
 }

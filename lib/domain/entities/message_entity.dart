@@ -4,6 +4,18 @@ import 'package:mobile1_flutter_coding_test/data/models/message_model.dart';
 part 'message_entity.freezed.dart';
 part 'message_entity.g.dart';
 
+extension MessageEntityExtensions on MessageEntity {
+  MessageModel toModel() {
+    return MessageModel(
+      roomId: roomId,
+      messageId: messageId,
+      sender: sender,
+      content: content,
+      timestamp: timestamp,
+    );
+  }
+}
+
 @freezed
 abstract class MessageEntity with _$MessageEntity {
   const factory MessageEntity({

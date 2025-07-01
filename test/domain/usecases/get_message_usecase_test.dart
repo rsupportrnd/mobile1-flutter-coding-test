@@ -33,7 +33,6 @@ class FakeMessageRepository implements MessageRepository {
 
   @override
   Future<MessageEntity> postMessage(MessageEntity message) {
-    // TODO : 메시지 저장 로직 구현
     throw UnimplementedError();
   }
 }
