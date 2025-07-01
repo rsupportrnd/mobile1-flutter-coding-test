@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
+import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/repositories/room_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
@@ -21,6 +22,7 @@ class RoomListPage extends StatelessWidget {
       create: (context) => RoomListViewModel(
           getRoomsUseCase: GetRoomsUseCase(RoomRepositoryImpl(
         remoteDataSource: UserRemoteDataSource(dio: Dio()),
+        localDataSource: UserLocalDataSource(),
       ))),
       child: Scaffold(
         appBar: AppBar(
