@@ -6,6 +6,7 @@ import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasou
 import 'package:mobile1_flutter_coding_test/data/repositories/message_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_room_message_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/message_tile.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,10 @@ class RoomPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RoomViewModel(
           roomId: roomId,
+          postRoomMessageUseCase: PostRoomMessageUseCase(MessageRepositoryImpl(
+            remoteDataSource: UserRemoteDataSource(dio: Dio()),
+            localDataSource: UserLocalDataSource(),
+          )),
           getRoomMessageUseCase: GetRoomMessageUseCase(MessageRepositoryImpl(
             remoteDataSource: UserRemoteDataSource(dio: Dio()),
             localDataSource: UserLocalDataSource(),
@@ -38,8 +43,12 @@ class RoomPage extends StatelessWidget {
               ViewModelStateLoading<List<MessageEntity>>() =>
                 const Center(child: CircularProgressIndicator()),
               ViewModelStateError<List<MessageEntity>> error => Center(child: Text(error.error)),
-              ViewModelStateSuccess<List<MessageEntity>> success =>
-                _MessageList(messages: success.data),
+              ViewModelStateSuccess<List<MessageEntity>> success => Column(
+                  children: [
+                    Expanded(child: _MessageList(messages: success.data)),
+                    _MessageInput(),
+                  ],
+                ),
             };
           },
         ),
@@ -59,6 +68,54 @@ class _MessageList extends StatelessWidget {
       itemBuilder: (context, index) {
         return MessageTile(message: messages[index]);
       },
+    );
+  }
+}
+
+class _MessageInput extends StatefulWidget {
+  @override
+  State<_MessageInput> createState() => _MessageInputState();
+}
+
+class _MessageInputState extends State<_MessageInput> {
+  final TextEditingController messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
+  }
+
+  void sendMessage() async {
+    final message = messageController.text;
+    if (message.isNotEmpty) {
+      await context.read<RoomViewModel>().sendMessage(message);
+      messageController.clear();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: messageController,
+              decoration: const InputDecoration(
+                hintText: '메시지를 입력하세요...',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          TextButton(
+            onPressed: sendMessage,
+            child: const Text('전송'),
+          ),
+        ],
+      ),
     );
   }
 }
