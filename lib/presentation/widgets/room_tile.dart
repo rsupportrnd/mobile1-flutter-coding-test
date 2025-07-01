@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/extensions/extensions.dart';
 import 'package:mobile1_flutter_coding_test/common/widgets/image_component.dart';
-import 'package:mobile1_flutter_coding_test/common/widgets/user_profile.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 
 class RoomTile extends StatelessWidget {

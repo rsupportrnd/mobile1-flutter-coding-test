@@ -1,8 +1,8 @@
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
-import 'package:mobile1_flutter_coding_test/domain/repositories/room_repository.dart';
+import 'package:mobile1_flutter_coding_test/domain/repositories/message_repository.dart';
 
 class GetRoomMessageUseCase {
-  final RoomRepository repository;
+  final MessageRepository repository;
 
   GetRoomMessageUseCase(this.repository);
 
