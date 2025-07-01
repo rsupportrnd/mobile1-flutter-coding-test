@@ -49,8 +49,32 @@ class _UserList extends StatelessWidget {
     return ListView.builder(
       itemCount: users.length,
       itemBuilder: (context, index) {
-        return UserTile(user: users[index]);
+        return GestureDetector(
+          onTap: () => showDetail(context, users[index]),
+          child: UserTile(user: users[index]),
+        );
       },
+    );
+  }
+
+  void showDetail(
+    BuildContext context,
+    UserEntity user,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(user.name),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(user.name),
+            Text(user.email),
+            Text(user.role),
+          ],
+        ),
+      ),
     );
   }
 }
