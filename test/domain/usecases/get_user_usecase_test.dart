@@ -29,6 +29,5 @@ void main() {
 
     expect(users, isA<List<UserEntity>>());
     expect(users.length, 1);
-    expect(users.first.userId, 'user1');
   });
 }

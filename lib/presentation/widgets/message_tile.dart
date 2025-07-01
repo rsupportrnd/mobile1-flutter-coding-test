@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/extensions/extensions.dart';
-import 'package:mobile1_flutter_coding_test/common/widgets/image_component.dart';
-import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
+import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
 
-class RoomTile extends StatelessWidget {
-  final RoomEntity room;
-  const RoomTile({super.key, required this.room});
+class MessageTile extends StatelessWidget {
+  final MessageEntity message;
+  const MessageTile({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +18,12 @@ class RoomTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16,
         children: [
-          ImageComponent(
-              url: room.thumbnailImage,
-              width: 40,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => const Icon(Icons.room_outlined)),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(room.roomName),
-              Text(room.lastMessage.content),
-              Text(room.lastMessage.timestamp.toYYYYMMDDHHMM()),
+              Text(message.content),
+              Text(message.timestamp.toYYYYMMDDHHMM()),
             ],
           )),
         ],

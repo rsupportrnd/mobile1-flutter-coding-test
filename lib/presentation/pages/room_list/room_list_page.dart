@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
+import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/repositories/room_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
+import 'package:mobile1_flutter_coding_test/presentation/pages/room/room_page.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/room_tile.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +22,7 @@ class RoomListPage extends StatelessWidget {
       create: (context) => RoomListViewModel(
           getRoomsUseCase: GetRoomsUseCase(RoomRepositoryImpl(
         remoteDataSource: UserRemoteDataSource(dio: Dio()),
+        localDataSource: UserLocalDataSource(),
       ))),
       child: Scaffold(
         appBar: AppBar(
@@ -61,6 +64,9 @@ class _RoomList extends StatelessWidget {
     BuildContext context,
     RoomEntity room,
   ) {
-    // TODO: 상세 페이지로 이동
+    Navigator.pushNamed(context, RoomPage.routeName, arguments: {
+      'roomId': room.roomId,
+      'roomName': room.roomName,
+    });
   }
 }

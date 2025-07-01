@@ -3,7 +3,6 @@ import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/repositories/room_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
 
-// 가짜 RoomRepository
 class FakeRoomRepository implements RoomRepository {
   @override
   Future<List<RoomEntity>> getRooms() async {
