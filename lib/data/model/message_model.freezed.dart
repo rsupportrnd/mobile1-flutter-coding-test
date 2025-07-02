@@ -19,7 +19,7 @@ mixin _$MessageModel {
   String get messageId;
   String get sender;
   String get content;
-  DateTime get timestamp;
+  String get timestamp;
 
   /// Create a copy of MessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -68,7 +68,7 @@ abstract mixin class $MessageModelCopyWith<$Res> {
       String messageId,
       String sender,
       String content,
-      DateTime timestamp});
+      String timestamp});
 }
 
 /// @nodoc
@@ -109,7 +109,7 @@ class _$MessageModelCopyWithImpl<$Res> implements $MessageModelCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }
@@ -135,7 +135,7 @@ class _MessageModel implements MessageModel {
   @override
   final String content;
   @override
-  final DateTime timestamp;
+  final String timestamp;
 
   /// Create a copy of MessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -190,7 +190,7 @@ abstract mixin class _$MessageModelCopyWith<$Res>
       String messageId,
       String sender,
       String content,
-      DateTime timestamp});
+      String timestamp});
 }
 
 /// @nodoc
@@ -232,7 +232,7 @@ class __$MessageModelCopyWithImpl<$Res>
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }

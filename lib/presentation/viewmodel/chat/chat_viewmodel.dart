@@ -22,24 +22,34 @@ class ChatViewModel extends BaseViewModel<ChatState> {
   }
 
   _setItems({required List<Message> list}) {
+    Log.d("setItems ${list.length}");
     state = state.copyWith(items: list);
   }
 
   _addItem({required Message item}) {
+    Log.d("setItems ${item.messageId}");
     state = state.copyWith(items: [...state.items, item]);
   }
 
   Future<void> loadMessages({required String roomId}) async {
+    Log.d("loadMessages roomId: $roomId");
     await runWithResult<List<Message>>(
         () => _selectMessageUseCase(roomId: roomId),
         onSuccess: (items) => _setItems(list: items),
         onFailure: (error) => Log.e(error.toString()));
   }
 
-  void sendMessage({required String message}) async {
-    // await runWithResult<void>(
-    //     () => _insertMessageUseCase.insertMessage(message: message),
-    //     onSuccess: (items) => _addItem(item: message),
-    //     onFailure: (error) => Log.e(error.toString()));
+  void sendMessage({required String roomId, required String message}) async {
+    Log.d("sendMessage roomId: $roomId, message: $message");
+    final msg = Message(
+        content: message,
+        messageId: DateTime.now().millisecondsSinceEpoch.toString(),
+        roomId: roomId,
+        sender: "Me",
+        timestamp: DateTime.now().toUtc().toIso8601String());
+    await runWithResult<void>(
+        () => _insertMessageUseCase.insertMessage(message: msg),
+        onSuccess: (items) => _addItem(item: msg),
+        onFailure: (error) => Log.e(error.toString()));
   }
 }

@@ -10,7 +10,7 @@ abstract class ChatRoom with _$ChatRoom {
     required String roomName,
     required String creator,
     required List<String> participants,
-    required DateTime createdAt,
+    required String createdAt,
     required LastMessage lastMessage,
     required String thumbnailImage,
   }) = _ChatRoom;
@@ -24,7 +24,7 @@ abstract class LastMessage with _$LastMessage {
   const factory LastMessage({
     required String sender,
     required String content,
-    required DateTime timestamp,
+    required String timestamp,
   }) = _LastMessage;
 
   factory LastMessage.fromJson(Map<String, dynamic> json) =>

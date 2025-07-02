@@ -11,7 +11,7 @@ _Message _$MessageFromJson(Map<String, dynamic> json) => _Message(
       messageId: json['messageId'] as String,
       sender: json['sender'] as String,
       content: json['content'] as String,
-      timestamp: DateTime.parse(json['timestamp'] as String),
+      timestamp: json['timestamp'] as String,
     );
 
 Map<String, dynamic> _$MessageToJson(_Message instance) => <String, dynamic>{
@@ -19,5 +19,5 @@ Map<String, dynamic> _$MessageToJson(_Message instance) => <String, dynamic>{
       'messageId': instance.messageId,
       'sender': instance.sender,
       'content': instance.content,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'timestamp': instance.timestamp,
     };

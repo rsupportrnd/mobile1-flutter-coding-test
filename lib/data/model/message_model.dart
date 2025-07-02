@@ -10,7 +10,7 @@ abstract class MessageModel with _$MessageModel {
     required String messageId,
     required String sender,
     required String content,
-    required DateTime timestamp,
+    required String timestamp,
   }) = _MessageModel;
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>

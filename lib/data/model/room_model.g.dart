@@ -14,7 +14,7 @@ _ChatRoomModel _$ChatRoomModelFromJson(Map<String, dynamic> json) =>
       participants: (json['participants'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] as String,
       lastMessage: LastMessageModel.fromJson(
           json['lastMessage'] as Map<String, dynamic>),
       thumbnailImage: json['thumbnailImage'] as String,
@@ -26,7 +26,7 @@ Map<String, dynamic> _$ChatRoomModelToJson(_ChatRoomModel instance) =>
       'roomName': instance.roomName,
       'creator': instance.creator,
       'participants': instance.participants,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': instance.createdAt,
       'lastMessage': instance.lastMessage,
       'thumbnailImage': instance.thumbnailImage,
     };
@@ -35,12 +35,12 @@ _LastMessageModel _$LastMessageModelFromJson(Map<String, dynamic> json) =>
     _LastMessageModel(
       sender: json['sender'] as String,
       content: json['content'] as String,
-      timestamp: DateTime.parse(json['timestamp'] as String),
+      timestamp: json['timestamp'] as String,
     );
 
 Map<String, dynamic> _$LastMessageModelToJson(_LastMessageModel instance) =>
     <String, dynamic>{
       'sender': instance.sender,
       'content': instance.content,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'timestamp': instance.timestamp,
     };

@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/di/usecase_provider.dart';
-import 'package:mobile1_flutter_coding_test/domain/usecase/select_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/chat/chat_state.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/chat/chat_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/home/home_state.dart';
@@ -13,8 +12,11 @@ import 'package:mobile1_flutter_coding_test/presentation/viewmodel/user_list/use
 final homeViewModelProvider =
     StateNotifierProvider<HomeViewmodel, HomeState>((ref) {
   final getMessageUseCase = ref.watch(getMessageUseCaseProvider);
+  final insertMessageUseCase = ref.watch(insertMessageUseCaseProvider);
 
-  return HomeViewmodel(getMessageUseCase: getMessageUseCase);
+  return HomeViewmodel(
+      getMessageUseCase: getMessageUseCase,
+      insertMessageUseCase: insertMessageUseCase);
 });
 
 final userListViewModelProvider =

@@ -19,7 +19,7 @@ mixin _$ChatRoom {
   String get roomName;
   String get creator;
   List<String> get participants;
-  DateTime get createdAt;
+  String get createdAt;
   LastMessage get lastMessage;
   String get thumbnailImage;
 
@@ -80,7 +80,7 @@ abstract mixin class $ChatRoomCopyWith<$Res> {
       String roomName,
       String creator,
       List<String> participants,
-      DateTime createdAt,
+      String createdAt,
       LastMessage lastMessage,
       String thumbnailImage});
 
@@ -127,7 +127,7 @@ class _$ChatRoomCopyWithImpl<$Res> implements $ChatRoomCopyWith<$Res> {
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       lastMessage: null == lastMessage
           ? _self.lastMessage
           : lastMessage // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ class _ChatRoom implements ChatRoom {
   }
 
   @override
-  final DateTime createdAt;
+  final String createdAt;
   @override
   final LastMessage lastMessage;
   @override
@@ -250,7 +250,7 @@ abstract mixin class _$ChatRoomCopyWith<$Res>
       String roomName,
       String creator,
       List<String> participants,
-      DateTime createdAt,
+      String createdAt,
       LastMessage lastMessage,
       String thumbnailImage});
 
@@ -298,7 +298,7 @@ class __$ChatRoomCopyWithImpl<$Res> implements _$ChatRoomCopyWith<$Res> {
       createdAt: null == createdAt
           ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       lastMessage: null == lastMessage
           ? _self.lastMessage
           : lastMessage // ignore: cast_nullable_to_non_nullable
@@ -325,7 +325,7 @@ class __$ChatRoomCopyWithImpl<$Res> implements _$ChatRoomCopyWith<$Res> {
 mixin _$LastMessage {
   String get sender;
   String get content;
-  DateTime get timestamp;
+  String get timestamp;
 
   /// Create a copy of LastMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -364,7 +364,7 @@ abstract mixin class $LastMessageCopyWith<$Res> {
           LastMessage value, $Res Function(LastMessage) _then) =
       _$LastMessageCopyWithImpl;
   @useResult
-  $Res call({String sender, String content, DateTime timestamp});
+  $Res call({String sender, String content, String timestamp});
 }
 
 /// @nodoc
@@ -395,7 +395,7 @@ class _$LastMessageCopyWithImpl<$Res> implements $LastMessageCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }
@@ -413,7 +413,7 @@ class _LastMessage implements LastMessage {
   @override
   final String content;
   @override
-  final DateTime timestamp;
+  final String timestamp;
 
   /// Create a copy of LastMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -459,7 +459,7 @@ abstract mixin class _$LastMessageCopyWith<$Res>
       __$LastMessageCopyWithImpl;
   @override
   @useResult
-  $Res call({String sender, String content, DateTime timestamp});
+  $Res call({String sender, String content, String timestamp});
 }
 
 /// @nodoc
@@ -490,7 +490,7 @@ class __$LastMessageCopyWithImpl<$Res> implements _$LastMessageCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }

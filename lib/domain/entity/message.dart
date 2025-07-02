@@ -10,7 +10,7 @@ abstract class Message with _$Message {
     required String messageId,
     required String sender,
     required String content,
-    required DateTime timestamp,
+    required String timestamp,
   }) = _Message;
 
   factory Message.fromJson(Map<String, dynamic> json) =>

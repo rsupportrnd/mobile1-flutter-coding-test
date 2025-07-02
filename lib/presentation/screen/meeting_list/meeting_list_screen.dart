@@ -36,7 +36,7 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      ChatScreen(meetingName: state.items[index].roomId),
+                      ChatScreen(roomId: state.items[index].roomId),
                 ),
               );
             },
