@@ -8,7 +8,9 @@ import 'package:mobile1_flutter_coding_test/domain/repository/user_repository.da
 import 'package:mobile1_flutter_coding_test/di/datasource_provider.dart';
 
 final messageRepositoryProvider = Provider<MessageRepository>((ref) =>
-    MessageRepositoryImpl(dataSource: ref.read(messageDataSourceProvider)));
+    MessageRepositoryImpl(
+        dataSource: ref.read(messageDataSourceProvider),
+        localDatabaseDataSource: ref.read(localDatabaseDataSourceProvider)));
 
 final roomRepositoryProvider = Provider<RoomRepository>(
     (ref) => RoomRepositoryImpl(dataSource: ref.read(roomDataSourceProvider)));

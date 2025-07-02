@@ -11,16 +11,29 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   Future<Database> get _db async => await _database.database;
 
   @override
-  Future<List<MessageModel>> getMessage() async {
-    final db = await _db;
-    final maps = await db.query('messages');
-    return maps.map((e) => MessageModel.fromJson(e)).toList();
+  Future<List<MessageModel>> selectMessages({required String roomId}) async {
+    try {
+      final db = await _db;
+      final maps = await db.query(
+        'messages',
+        where: 'roomId = ?',
+        whereArgs: [roomId],
+        orderBy: 'timestamp ASC',
+      );
+      return maps.map((e) => MessageModel.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> insertMessage({required MessageModel message}) async {
-    final db = await _db;
-    await db.insert('messages', message.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    try {
+      final db = await _db;
+      await db.insert('messages', message.toJson(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

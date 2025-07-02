@@ -16,15 +16,17 @@ class LocalDatabase {
 
   Future<Database> _initDb() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'users.db');
-    //TODO
+    final path = join(dbPath, 'messages.db');
     return openDatabase(
       path,
       version: 1,
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)',
-        );
+      onCreate: (db, version) async {
+        await db.execute('CREATE TABLE messages('
+            'messageId TEXT PRIMARY KEY, '
+            'roomId TEXT, '
+            'sender TEXT, '
+            'content TEXT, '
+            'timestamp TEXT)');
       },
     );
   }
