@@ -38,11 +38,12 @@ final meetingListViewModelProvider =
 });
 
 final chatViewModelProvider =
-    StateNotifierProvider<ChatViewModel, ChatState>((ref) {
+    StateNotifierProvider.autoDispose<ChatViewModel, ChatState>((ref) {
   final selectMessageUseCase = ref.watch(selectMessageUseCaseProvider);
   final insertMessageUseCase = ref.watch(insertMessageUseCaseProvider);
 
   return ChatViewModel(
-      selectMessageUseCase: selectMessageUseCase,
-      insertMessageUseCase: insertMessageUseCase);
+    selectMessageUseCase: selectMessageUseCase,
+    insertMessageUseCase: insertMessageUseCase,
+  );
 });

@@ -16,9 +16,16 @@ class ChatViewModel extends BaseViewModel<ChatState> {
         _selectMessageUseCase = selectMessageUseCase,
         super(const ChatState());
 
+  late String roomId;
+
   @override
   void setLoading(bool isLoading) {
     state = state.copyWith(isLoading: isLoading);
+  }
+
+  setRoomId({required String roomId}) {
+    Log.d("setRoomId $roomId");
+    this.roomId = roomId;
   }
 
   _setItems({required List<Message> list}) {
@@ -31,7 +38,7 @@ class ChatViewModel extends BaseViewModel<ChatState> {
     state = state.copyWith(items: [...state.items, item]);
   }
 
-  Future<void> loadMessages({required String roomId}) async {
+  Future<void> loadMessages() async {
     Log.d("loadMessages roomId: $roomId");
     await runWithResult<List<Message>>(
         () => _selectMessageUseCase(roomId: roomId),
@@ -39,7 +46,7 @@ class ChatViewModel extends BaseViewModel<ChatState> {
         onFailure: (error) => Log.e(error.toString()));
   }
 
-  void sendMessage({required String roomId, required String message}) async {
+  void sendMessage({required String message}) async {
     Log.d("sendMessage roomId: $roomId, message: $message");
     final msg = Message(
         content: message,

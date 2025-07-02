@@ -16,18 +16,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void initState() {
     Future.microtask(() {
-      ref
-          .read(chatViewModelProvider.notifier)
-          .loadMessages(roomId: widget.roomId);
+      ref.read(chatViewModelProvider.notifier).setRoomId(roomId: widget.roomId);
+      ref.read(chatViewModelProvider.notifier).loadMessages();
     });
     super.initState();
   }
 
   void _sendMessage(BuildContext context, WidgetRef ref) {
     final text = _controller.text;
-    ref
-        .read(chatViewModelProvider.notifier)
-        .sendMessage(roomId: widget.roomId, message: text);
+    ref.read(chatViewModelProvider.notifier).sendMessage(message: text);
     _controller.clear();
   }
 

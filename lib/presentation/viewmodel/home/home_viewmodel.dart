@@ -20,11 +20,13 @@ class HomeViewmodel extends BaseViewModel<HomeState> {
   void setLoading(bool isLoading) {}
 
   _setTab({required MainTab tab}) {
-    state = state.copyWith(tab: tab);
+    Log.d("setTab $tab");
+    if (state.tab != tab) {
+      state = state.copyWith(tab: tab);
+    }
   }
 
   void changeTab({required MainTab tab}) {
-    Log.d("changeTab");
     _setTab(tab: tab);
   }
 
