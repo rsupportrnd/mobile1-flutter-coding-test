@@ -8,5 +8,6 @@ part 'chat_state.freezed.dart';
 abstract class ChatState with _$ChatState implements BaseState {
   const factory ChatState(
       {@Default(false) bool isLoading,
+      @Default("empty") String roomId,
       @Default([]) List<Message> items}) = _ChatState;
 }

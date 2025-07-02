@@ -36,4 +36,19 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> insertMessages({required List<MessageModel> messages}) async {
+    try {
+      final db = await _db;
+      final batch = db.batch();
+      for (var msg in messages) {
+        batch.insert('messages', msg.toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+      await batch.commit(noResult: true);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

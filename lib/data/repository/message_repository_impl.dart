@@ -38,4 +38,12 @@ class MessageRepositoryImpl implements MessageRepository {
       await _localDatabaseDataSource.insertMessage(message: message.toModel());
     });
   }
+
+  @override
+  Future<Result<void>> insertMessages({required List<Message> messages}) async {
+    return await safeCall(() async {
+      await _localDatabaseDataSource.insertMessages(
+          messages: messages.map((element) => element.toModel()).toList());
+    });
+  }
 }

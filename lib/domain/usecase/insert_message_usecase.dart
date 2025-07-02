@@ -7,6 +7,10 @@ class InsertMessageUseCase {
       : _repository = repository;
   final MessageRepository _repository;
 
-  Future<Result<void>> call({required Message message}) async =>
+  Future<Result<void>> insertMessage({required Message message}) async =>
       await _repository.insertMessage(message: message);
+
+  Future<Result<void>> insertMessages(
+          {required List<Message> messages}) async =>
+      await _repository.insertMessages(messages: messages);
 }

@@ -19,35 +19,37 @@ class ChatScreen extends ConsumerWidget {
     final state = ref.watch(chatViewModelProvider);
     return Scaffold(
       appBar: AppBar(title: Text(meetingName)),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: state.items.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text(state.items[index].messageId),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: state.items.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(state.items[index].messageId),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration:
-                        const InputDecoration(hintText: 'Type a message'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration:
+                          const InputDecoration(hintText: 'Type a message'),
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => _sendMessage(context, ref),
-                )
-              ],
-            ),
-          )
-        ],
+                  IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () => _sendMessage(context, ref),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

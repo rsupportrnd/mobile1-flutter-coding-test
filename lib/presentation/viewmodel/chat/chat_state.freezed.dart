@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
   bool get isLoading;
+  String get roomId;
   List<Message> get items;
 
   /// Create a copy of ChatState
@@ -32,16 +33,17 @@ mixin _$ChatState {
             other is ChatState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
             const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(items));
+  int get hashCode => Object.hash(runtimeType, isLoading, roomId,
+      const DeepCollectionEquality().hash(items));
 
   @override
   String toString() {
-    return 'ChatState(isLoading: $isLoading, items: $items)';
+    return 'ChatState(isLoading: $isLoading, roomId: $roomId, items: $items)';
   }
 }
 
@@ -50,7 +52,7 @@ abstract mixin class $ChatStateCopyWith<$Res> {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) =
       _$ChatStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, List<Message> items});
+  $Res call({bool isLoading, String roomId, List<Message> items});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
   @override
   $Res call({
     Object? isLoading = null,
+    Object? roomId = null,
     Object? items = null,
   }) {
     return _then(_self.copyWith(
@@ -73,6 +76,10 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      roomId: null == roomId
+          ? _self.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as String,
       items: null == items
           ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -85,12 +92,17 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
 
 class _ChatState implements ChatState {
   const _ChatState(
-      {this.isLoading = false, final List<Message> items = const []})
+      {this.isLoading = false,
+      this.roomId = "empty",
+      final List<Message> items = const []})
       : _items = items;
 
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final String roomId;
   final List<Message> _items;
   @override
   @JsonKey()
@@ -115,16 +127,17 @@ class _ChatState implements ChatState {
             other is _ChatState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(runtimeType, isLoading, roomId,
+      const DeepCollectionEquality().hash(_items));
 
   @override
   String toString() {
-    return 'ChatState(isLoading: $isLoading, items: $items)';
+    return 'ChatState(isLoading: $isLoading, roomId: $roomId, items: $items)';
   }
 }
 
@@ -136,7 +149,7 @@ abstract mixin class _$ChatStateCopyWith<$Res>
       __$ChatStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, List<Message> items});
+  $Res call({bool isLoading, String roomId, List<Message> items});
 }
 
 /// @nodoc
@@ -152,6 +165,7 @@ class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? isLoading = null,
+    Object? roomId = null,
     Object? items = null,
   }) {
     return _then(_ChatState(
@@ -159,6 +173,10 @@ class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      roomId: null == roomId
+          ? _self.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as String,
       items: null == items
           ? _self._items
           : items // ignore: cast_nullable_to_non_nullable
