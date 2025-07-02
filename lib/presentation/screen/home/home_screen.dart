@@ -13,7 +13,7 @@ class MainScreen extends ConsumerWidget {
     final selectedTab = ref.watch(homeVIewModelProvider);
     final screens = {
       MainTab.users: const UserListScreen(),
-      MainTab.rooms: const MeetingListScreen(),
+      MainTab.meetings: const MeetingListScreen(),
     };
     return Scaffold(
       body: screens[selectedTab],

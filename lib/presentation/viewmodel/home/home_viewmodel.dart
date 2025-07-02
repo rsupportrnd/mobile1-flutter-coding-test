@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum MainTab { users, rooms }
+enum MainTab { users, meetings }
 
 class HomeViewmodel extends StateNotifier<MainTab> {
   HomeViewmodel() : super(MainTab.users);
