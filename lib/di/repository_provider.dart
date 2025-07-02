@@ -5,7 +5,7 @@ import 'package:mobile1_flutter_coding_test/data/repository/user_repository_impl
 import 'package:mobile1_flutter_coding_test/domain/repository/message_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/repository/room_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/repository/user_repository.dart';
-import 'package:mobile1_flutter_coding_test/presentation/provider/datasource_provider.dart';
+import 'package:mobile1_flutter_coding_test/di/datasource_provider.dart';
 
 final messageRepositoryProvider = Provider<MessageRepository>((ref) =>
     MessageRepositoryImpl(dataSource: ref.read(messageDataSourceProvider)));

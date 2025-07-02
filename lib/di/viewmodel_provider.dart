@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/presentation/provider/usecase_provider.dart';
+import 'package:mobile1_flutter_coding_test/di/usecase_provider.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/chat/chat_state.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/chat/chat_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/home/home_viewmodel.dart';
