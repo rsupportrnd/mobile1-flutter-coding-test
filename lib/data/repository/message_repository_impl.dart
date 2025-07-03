@@ -33,9 +33,11 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<Result<void>> insertMessage({required Message message}) async {
+  Future<Result<Message>> insertMessage({required Message message}) async {
     return await safeCall(() async {
-      await _localDatabaseDataSource.insertMessage(message: message.toModel());
+      final resposne = await _localDatabaseDataSource.insertMessage(
+          message: message.toModel());
+      return resposne.toEntity();
     });
   }
 

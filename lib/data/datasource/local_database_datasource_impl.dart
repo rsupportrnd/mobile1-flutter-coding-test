@@ -1,12 +1,16 @@
 import 'package:mobile1_flutter_coding_test/data/database/local_database.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/local_database_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/model/message_model.dart';
+import 'package:mobile1_flutter_coding_test/data/utils/id_generator.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
-  LocalDatabaseDataSourceImpl({required LocalDatabase database})
-      : _database = database;
+  LocalDatabaseDataSourceImpl(
+      {required LocalDatabase database, required IdGenerator idGenerator})
+      : _database = database,
+        _idGenerator = idGenerator;
   final LocalDatabase _database;
+  final IdGenerator _idGenerator;
 
   Future<Database> get _db async => await _database.database;
 
@@ -27,11 +31,14 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   }
 
   @override
-  Future<void> insertMessage({required MessageModel message}) async {
+  Future<MessageModel> insertMessage({required MessageModel message}) async {
     try {
       final db = await _db;
-      await db.insert('messages', message.toJson(),
+      final newMessage = message.copyWith(
+          messageId: await _idGenerator.generateNextMessageId());
+      await db.insert('messages', newMessage.toJson(),
           conflictAlgorithm: ConflictAlgorithm.replace);
+      return newMessage;
     } catch (e) {
       rethrow;
     }
