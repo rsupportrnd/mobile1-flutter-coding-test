@@ -31,11 +31,11 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
       itemCount: state.items.length,
       itemBuilder: (context, index) => _roomTile(
         room: state.items[index],
-        onTap: (roomId) {
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ChatScreen(roomId: roomId),
+              builder: (context) => ChatScreen(room: state.items[index]),
             ),
           ).then((_) {
             ref.read(meetingListViewModelProvider.notifier).loadMeetings();
@@ -45,9 +45,9 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
     );
   }
 
-  Widget _roomTile({required ChatRoom room, required Function(String) onTap}) {
+  Widget _roomTile({required ChatRoom room, required Function onTap}) {
     return GestureDetector(
-      onTap: () => onTap(room.roomId),
+      onTap: () => onTap(),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         color: Colors.transparent,

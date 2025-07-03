@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/di/viewmodel_provider.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/message.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/room.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
-  const ChatScreen({super.key, required String roomId}) : _roomId = roomId;
-  final String _roomId;
+  const ChatScreen({super.key, required ChatRoom room}) : _room = room;
+  final ChatRoom _room;
 
   @override
   ConsumerState<ChatScreen> createState() => _ChatScreenState();
@@ -21,7 +22,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     Future.microtask(() {
       ref
           .read(chatViewModelProvider.notifier)
-          .setRoomId(roomId: widget._roomId);
+          .setRoomId(roomId: widget._room.roomId);
     });
     super.initState();
   }
@@ -64,7 +65,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(title: Text(widget._roomId)),
+        appBar: AppBar(title: Text(widget._room.roomName)),
         body: SafeArea(
           child: Column(
             children: [
