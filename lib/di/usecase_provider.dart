@@ -6,6 +6,7 @@ import 'package:mobile1_flutter_coding_test/di/repository_provider.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/insert_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/select_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/select_room_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecase/select_user_usecase.dart';
 
 final getMessageUseCaseProvider = Provider<GetMessageUseCase>((ref) =>
     GetMessageUseCase(repository: ref.read(messageRepositoryProvider)));
@@ -24,3 +25,6 @@ final selectRoomUseCaseProvider = Provider<SelectRoomUseCase>(
 
 final getUserUseCaseProvider = Provider<GetUserUseCase>(
     (ref) => GetUserUseCase(repository: ref.read(userRepositoryProvider)));
+
+final selectUserUseCaseProvider = Provider<SelectUserUseCase>(
+    (ref) => SelectUserUseCase(repository: ref.read(userRepositoryProvider)));

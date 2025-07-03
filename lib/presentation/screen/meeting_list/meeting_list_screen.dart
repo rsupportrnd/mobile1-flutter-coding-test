@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/di/viewmodel_provider.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/room.dart';
 import 'package:mobile1_flutter_coding_test/presentation/screen/chat/chat_screen.dart';

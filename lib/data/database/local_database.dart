@@ -44,6 +44,17 @@ class LocalDatabase {
             lastMessageTimestamp TEXT
           )
         ''');
+
+        await db.execute('''
+          CREATE TABLE users(
+            userId TEXT PRIMARY KEY,
+            name TEXT,
+            email TEXT,
+            profilePicture TEXT,
+            status TEXT,
+            role TEXT
+          )
+        ''');
       },
     );
   }

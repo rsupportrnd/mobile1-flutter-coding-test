@@ -3,6 +3,7 @@ import 'package:mobile1_flutter_coding_test/data/datasource/local_database_datas
 import 'package:mobile1_flutter_coding_test/data/mapper/room_mapper.dart';
 import 'package:mobile1_flutter_coding_test/data/model/message_model.dart';
 import 'package:mobile1_flutter_coding_test/data/model/room_model.dart';
+import 'package:mobile1_flutter_coding_test/data/model/user_model.dart';
 import 'package:mobile1_flutter_coding_test/data/utils/id_generator.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -105,6 +106,34 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
         where: 'roomId = ?',
         whereArgs: [roomId],
       );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> insertUsers({required List<UserModel> users}) async {
+    try {
+      final db = await _db;
+      final batch = db.batch();
+      for (var user in users) {
+        batch.insert('users', user.toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+      await batch.commit(noResult: true);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<UserModel>> selectUsers() async {
+    try {
+      final db = await _db;
+      final maps = await db.query(
+        'users',
+      );
+      return maps.map((e) => UserModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }

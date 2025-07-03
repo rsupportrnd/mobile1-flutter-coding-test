@@ -17,5 +17,7 @@ final roomRepositoryProvider = Provider<RoomRepository>((ref) =>
         dataSource: ref.read(roomDataSourceProvider),
         localDatabaseDataSource: ref.read(localDatabaseDataSourceProvider)));
 
-final userRepositoryProvider = Provider<UserRepository>(
-    (ref) => UserRepositoryImpl(dataSource: ref.read(userDataSourceProvider)));
+final userRepositoryProvider = Provider<UserRepository>((ref) =>
+    UserRepositoryImpl(
+        dataSource: ref.read(userDataSourceProvider),
+        localDatabaseDataSource: ref.read(localDatabaseDataSourceProvider)));
