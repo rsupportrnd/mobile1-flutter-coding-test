@@ -70,15 +70,17 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           child: Column(
             children: [
               Expanded(
-                child: state.items.isEmpty
-                    ? const Center(child: Text("메시지가 없습니다."))
-                    : ListView.builder(
-                        controller: _scrollController,
-                        itemCount: state.items.length,
-                        itemBuilder: (context, index) {
-                          return _chatTile(message: state.items[index]);
-                        },
-                      ),
+                child: state.isLoading
+                    ? const SizedBox.shrink()
+                    : state.items.isEmpty
+                        ? const Center(child: Text("메시지가 없습니다."))
+                        : ListView.builder(
+                            controller: _scrollController,
+                            itemCount: state.items.length,
+                            itemBuilder: (context, index) {
+                              return _chatTile(message: state.items[index]);
+                            },
+                          ),
               ),
               const Divider(height: 1),
               Padding(
