@@ -7,4 +7,6 @@ abstract class LocalDatabaseDataSource {
   Future<void> insertMessages({required List<MessageModel> messages});
   Future<List<ChatRoomModel>> selectRooms();
   Future<void> insertRooms({required List<ChatRoomModel> rooms});
+  Future<void> updateRoom(
+      {required String roomId, required LastMessageModel message});
 }

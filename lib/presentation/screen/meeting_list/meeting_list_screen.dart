@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/di/viewmodel_provider.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/room.dart';
 import 'package:mobile1_flutter_coding_test/presentation/screen/chat/chat_screen.dart';
+import 'package:mobile1_flutter_coding_test/presentation/utils/utils.dart';
 
 class MeetingListScreen extends ConsumerStatefulWidget {
   const MeetingListScreen({super.key});
@@ -27,17 +30,62 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
     final state = ref.watch(meetingListViewModelProvider);
     return ListView.builder(
       itemCount: state.items.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(state.items[index].roomId),
-        onTap: () {
+      itemBuilder: (context, index) => _roomTile(
+        room: state.items[index],
+        onTap: (roomId) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  ChatScreen(roomId: state.items[index].roomId),
+              builder: (context) => ChatScreen(roomId: roomId),
             ),
-          );
+          ).then((_) {
+            ref.read(meetingListViewModelProvider.notifier).loadMeetings();
+          });
         },
+      ),
+    );
+  }
+
+  Widget _roomTile({required ChatRoom room, required Function(String) onTap}) {
+    return GestureDetector(
+      onTap: () => onTap(room.roomId),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        color: Colors.transparent,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      room.roomName,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      room.participants.length.toString(),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+                Text(
+                  room.lastMessage.content,
+                  style: const TextStyle(color: Colors.blueGrey),
+                )
+              ],
+            ),
+            const Spacer(),
+            Text(
+              Utils().formatMessageTime(room.lastMessage.timestamp),
+              style: const TextStyle(fontSize: 11, color: Colors.grey),
+            ),
+          ],
+        ),
       ),
     );
   }

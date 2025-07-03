@@ -1,4 +1,5 @@
 import 'package:mobile1_flutter_coding_test/data/model/message_model.dart';
+import 'package:mobile1_flutter_coding_test/data/model/room_model.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/message.dart';
 
 extension MessageModelToEntityExtension on MessageModel {
@@ -17,4 +18,9 @@ extension MessageEntityToModelExtension on Message {
       sender: sender,
       content: content,
       timestamp: timestamp);
+}
+
+extension MessageEntityToLastMessageModellExtension on Message {
+  LastMessageModel toLastMessageModel() =>
+      LastMessageModel(sender: sender, content: content, timestamp: timestamp);
 }

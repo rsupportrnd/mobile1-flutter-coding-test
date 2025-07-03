@@ -90,16 +90,23 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
     }
   }
 
-  // @override
-  // Future<void> updateLastMessage(String roomId, Message message) async {
-  //   await db.update(
-  //     'rooms',
-  //     {
-  //       'lastMessageContent': message.content,
-  //       'lastMessageTime': message.timestamp.toIso8601String(),
-  //     },
-  //     where: 'roomId = ?',
-  //     whereArgs: [roomId],
-  //   );
-  // }
+  @override
+  Future<void> updateRoom(
+      {required String roomId, required LastMessageModel message}) async {
+    try {
+      final db = await _db;
+      await db.update(
+        'rooms',
+        {
+          'lastMessageSender': message.sender,
+          'lastMessageContent': message.content,
+          'lastMessageTimestamp': message.timestamp,
+        },
+        where: 'roomId = ?',
+        whereArgs: [roomId],
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

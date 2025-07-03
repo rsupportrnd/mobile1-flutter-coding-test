@@ -40,6 +40,8 @@ class MessageRepositoryImpl implements MessageRepository {
     return await safeCall(() async {
       final resposne = await _localDatabaseDataSource.insertMessage(
           message: message.toModel());
+      await _localDatabaseDataSource.updateRoom(
+          roomId: message.roomId, message: message.toLastMessageModel());
       return resposne.toEntity();
     });
   }
