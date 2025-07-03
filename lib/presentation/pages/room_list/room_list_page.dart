@@ -49,14 +49,27 @@ class _RoomList extends StatelessWidget {
   Widget build(BuildContext context) {
     final sortedRooms = rooms.sortedBy((room) => room.lastMessage.timestamp).reversed.toList();
 
-    return ListView.builder(
-      itemCount: sortedRooms.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () => routeToDetail(context, sortedRooms[index]),
-          child: RoomTile(room: sortedRooms[index]),
-        );
-      },
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 120),
+          sliver: SliverList.builder(
+            itemCount: sortedRooms.length,
+            itemBuilder: (context, index) {
+              final room = sortedRooms[index];
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () => routeToDetail(context, room),
+                    child: RoomTile(room: room),
+                  ),
+                  SizedBox(height: 8),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 

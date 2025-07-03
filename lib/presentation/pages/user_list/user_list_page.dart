@@ -59,11 +59,13 @@ class _UserList extends StatelessWidget {
           sliver: SliverList.builder(
             itemCount: sortedUsers.length,
             itemBuilder: (context, index) {
+              final user = sortedUsers[index];
               return Column(
                 children: [
                   GestureDetector(
-                      onTap: () => showDetail(context, sortedUsers[index]),
-                      child: UserTile(user: sortedUsers[index])),
+                    onTap: () => showDetail(context, user),
+                    child: UserTile(user: user),
+                  ),
                   SizedBox(height: 8),
                 ],
               );
