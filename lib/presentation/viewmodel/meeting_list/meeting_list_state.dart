@@ -5,7 +5,6 @@ part 'meeting_list_state.freezed.dart';
 
 @freezed
 abstract class MeetingListState with _$MeetingListState {
-  const factory MeetingListState(
-      {@Default(false) bool isLoading,
-      @Default([]) List<ChatRoom> items}) = _MeetingListState;
+  const factory MeetingListState({@Default([]) List<ChatRoom> items}) =
+      _MeetingListState;
 }

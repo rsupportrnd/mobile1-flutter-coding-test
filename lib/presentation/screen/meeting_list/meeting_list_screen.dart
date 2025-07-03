@@ -25,30 +25,20 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(meetingListViewModelProvider);
-    return Stack(
-      children: [
-        ListView.builder(
-          itemCount: state.items.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(state.items[index].roomId),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ChatScreen(roomId: state.items[index].roomId),
-                ),
-              );
-            },
-          ),
-        ),
-        // if (state.isLoading)
-        //   const Center(
-        //     child: IgnorePointer(
-        //       child: CircularProgressIndicator(),
-        //     ),
-        //   ),
-      ],
+    return ListView.builder(
+      itemCount: state.items.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(state.items[index].roomId),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ChatScreen(roomId: state.items[index].roomId),
+            ),
+          );
+        },
+      ),
     );
   }
 }

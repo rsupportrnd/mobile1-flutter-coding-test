@@ -5,7 +5,5 @@ part 'user_list_state.freezed.dart';
 
 @freezed
 abstract class UserListState with _$UserListState {
-  const factory UserListState(
-      {@Default(false) bool isLoading,
-      @Default([]) List<User> items}) = _UserListState;
+  const factory UserListState({@Default([]) List<User> items}) = _UserListState;
 }

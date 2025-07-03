@@ -13,9 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Chat App',
-      home: GlobalLoadingWrapper(child: MainScreen()),
+      home: const HomeScreen(),
+      builder: (context, child) {
+        return GlobalLoadingWrapper(
+            child: child ??
+                const SizedBox.shrink(
+                  child: Text("화면을 불러올 수 없습니다."),
+                ));
+      },
     );
   }
 }

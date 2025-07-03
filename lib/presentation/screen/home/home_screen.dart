@@ -5,14 +5,14 @@ import 'package:mobile1_flutter_coding_test/presentation/screen/meeting_list/mee
 import 'package:mobile1_flutter_coding_test/presentation/screen/user_list/user_list_screen.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/home/home_state.dart';
 
-class MainScreen extends ConsumerStatefulWidget {
-  const MainScreen({super.key});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  ConsumerState<MainScreen> createState() => _MainScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MainScreenState extends ConsumerState<MainScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();

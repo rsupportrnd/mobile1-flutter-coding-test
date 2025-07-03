@@ -24,7 +24,7 @@ class ChatViewModel extends BaseViewModel<ChatState> {
 
   @override
   void setLoading(bool isLoading) {
-    // state = state.copyWith(isLoading: isLoading);
+    state = state.copyWith(isLoading: isLoading);
     _loadingManager.isLoading = isLoading;
   }
 

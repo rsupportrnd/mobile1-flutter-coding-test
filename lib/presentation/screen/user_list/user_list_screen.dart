@@ -78,22 +78,12 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(userListViewModelProvider);
-    return Stack(
-      children: [
-        ListView.builder(
-          itemCount: state.items.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(state.items[index].name),
-            onTap: () => _showUserDetail(context, state.items[index]),
-          ),
-        ),
-        // if (state.isLoading)
-        //   const Center(
-        //     child: IgnorePointer(
-        //       child: CircularProgressIndicator(),
-        //     ),
-        //   ),
-      ],
+    return ListView.builder(
+      itemCount: state.items.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(state.items[index].name),
+        onTap: () => _showUserDetail(context, state.items[index]),
+      ),
     );
   }
 }

@@ -6,7 +6,5 @@ enum MainTab { users, meetings }
 
 @freezed
 abstract class HomeState with _$HomeState {
-  const factory HomeState(
-      {@Default(false) bool isLoading,
-      @Default(MainTab.users) MainTab tab}) = _HomeState;
+  const factory HomeState({@Default(MainTab.users) MainTab tab}) = _HomeState;
 }
