@@ -1,33 +1,32 @@
-import 'package:dio/dio.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
-import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
-import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
-import 'package:mobile1_flutter_coding_test/data/repositories/room_repository_impl.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_app_bar.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/room/room_page.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/room_tile.dart';
+import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class RoomListPage extends StatelessWidget {
-  static const routeName = '/roomList';
-
   const RoomListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => RoomListViewModel(
-          getRoomsUseCase: GetRoomsUseCase(RoomRepositoryImpl(
-        remoteDataSource: UserRemoteDataSource(dio: Dio()),
-        localDataSource: UserLocalDataSource(),
-      ))),
+        getRoomsUseCase: locator<GetRoomsUseCase>(),
+        postRoomMessageUseCase: locator<PostRoomMessageUseCase>(),
+      ),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('회의 목록'),
-        ),
+        backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
+        appBar: LiquidAppBar(title: '회의 목록'),
         body: Consumer<RoomListViewModel>(
           builder: (context, viewModel, child) {
             return switch (viewModel.roomsState) {
@@ -49,14 +48,31 @@ class _RoomList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: rooms.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () => routeToDetail(context, rooms[index]),
-          child: RoomTile(room: rooms[index]),
-        );
-      },
+    final sortedRooms = rooms.sortedBy((room) => room.lastMessage.timestamp).reversed.toList();
+
+    return CustomScrollView(
+      slivers: [
+        SliverSafeArea(
+          sliver: SliverPadding(
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 120),
+            sliver: SliverList.builder(
+              itemCount: sortedRooms.length,
+              itemBuilder: (context, index) {
+                final room = sortedRooms[index];
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () => routeToDetail(context, room),
+                      child: RoomTile(room: room),
+                    ),
+                    SizedBox(height: 8),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -64,9 +80,6 @@ class _RoomList extends StatelessWidget {
     BuildContext context,
     RoomEntity room,
   ) {
-    Navigator.pushNamed(context, RoomPage.routeName, arguments: {
-      'roomId': room.roomId,
-      'roomName': room.roomName,
-    });
+    context.router.push(RoomRoute(roomId: room.roomId, roomName: room.roomName));
   }
 }

@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/room_list/room_list_page.dart';
-import 'package:mobile1_flutter_coding_test/presentation/pages/user_list/user_list_page.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_tab_switch.dart';
+import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
-  static const routeName = '/';
   const HomePage({super.key});
 
   @override
@@ -11,37 +13,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const UserListPage(),
-    const RoomListPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '유저',
+    return AutoTabsScaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonBuilder: (context, tabsRouter) {
+        return SafeArea(
+          minimum: EdgeInsets.only(bottom: 16),
+          child: LiquidTabSwitch(
+            currentIndex: tabsRouter.activeIndex,
+            items: [
+              LiquidTabSwitchItem(
+                label: '유저',
+                icon: CupertinoIcons.person,
+                onTap: () => tabsRouter.setActiveIndex(0),
+              ),
+              LiquidTabSwitchItem(
+                label: '회의',
+                icon: Icons.meeting_room,
+                onTap: () => tabsRouter.setActiveIndex(1),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.meeting_room),
-            label: '회의',
-          ),
-        ],
-      ),
+        );
+      },
+      routes: [
+        UserListRoute(),
+        RoomListRoute(),
+      ],
     );
   }
 }
