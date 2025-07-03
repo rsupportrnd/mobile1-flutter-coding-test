@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/common/di/di.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
@@ -20,10 +21,8 @@ class RoomListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => RoomListViewModel(
-          getRoomsUseCase: GetRoomsUseCase(RoomRepositoryImpl(
-        remoteDataSource: UserRemoteDataSource(dio: Dio()),
-        localDataSource: UserLocalDataSource(),
-      ))),
+        getRoomsUseCase: locator<GetRoomsUseCase>(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('회의 목록'),

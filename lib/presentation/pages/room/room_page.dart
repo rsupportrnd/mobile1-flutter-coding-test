@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/common/di/di.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_local_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
@@ -23,15 +24,10 @@ class RoomPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => RoomViewModel(
-          roomId: roomId,
-          postRoomMessageUseCase: PostRoomMessageUseCase(MessageRepositoryImpl(
-            remoteDataSource: UserRemoteDataSource(dio: Dio()),
-            localDataSource: UserLocalDataSource(),
-          )),
-          getRoomMessageUseCase: GetRoomMessageUseCase(MessageRepositoryImpl(
-            remoteDataSource: UserRemoteDataSource(dio: Dio()),
-            localDataSource: UserLocalDataSource(),
-          ))),
+        roomId: roomId,
+        postRoomMessageUseCase: locator<PostRoomMessageUseCase>(),
+        getRoomMessageUseCase: locator<GetRoomMessageUseCase>(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(roomName),
