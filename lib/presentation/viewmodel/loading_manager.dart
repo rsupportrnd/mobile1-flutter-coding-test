@@ -10,7 +10,7 @@ abstract class LoadingManager {
 class LoadingManagerImpl implements LoadingManager {
   final Ref _ref;
   LoadingManagerImpl(this._ref) {
-    Log.d("LoadingManagerImpl ${this.hashCode}");
+    Log.d("LoadingManagerImpl $hashCode");
   }
 
   @override
@@ -18,7 +18,7 @@ class LoadingManagerImpl implements LoadingManager {
 
   @override
   set isLoading(bool value) {
-    Log.d("setIsLoading $value, ${this.hashCode}");
+    Log.d("setIsLoading $value, $hashCode");
     _ref.read(globalLoadingProvider.notifier).state = value;
   }
 }

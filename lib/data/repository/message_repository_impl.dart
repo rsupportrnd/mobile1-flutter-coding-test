@@ -19,7 +19,10 @@ class MessageRepositoryImpl implements MessageRepository {
   Future<Result<List<Message>>> getMessages() async {
     return await safeCall(() async {
       final response = await _dataSource.getMessages();
-      return response.messages.map((element) => element.toEntity()).toList();
+      final result =
+          response.messages.map((element) => element.toEntity()).toList();
+      await insertMessages(messages: result);
+      return result;
     });
   }
 

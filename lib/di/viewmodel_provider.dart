@@ -19,13 +19,10 @@ final loadingManagerProvider = Provider<LoadingManager>((ref) {
 final homeViewModelProvider =
     StateNotifierProvider<HomeViewmodel, HomeState>((ref) {
   final getMessageUseCase = ref.watch(getMessageUseCaseProvider);
-  final insertMessageUseCase = ref.watch(insertMessageUseCaseProvider);
   final loadingManager = ref.read(loadingManagerProvider);
 
   return HomeViewmodel(
-      getMessageUseCase: getMessageUseCase,
-      insertMessageUseCase: insertMessageUseCase,
-      loadingManager: loadingManager);
+      getMessageUseCase: getMessageUseCase, loadingManager: loadingManager);
 });
 
 final userListViewModelProvider =
