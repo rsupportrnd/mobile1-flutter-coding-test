@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
@@ -39,16 +40,24 @@ class UserListPage extends StatelessWidget {
 
 class _UserList extends StatelessWidget {
   final List<UserEntity> users;
-  const _UserList({required this.users});
+  _UserList({required this.users});
+
+  final statusPriority = {
+    'online': 0,
+    'do_not_disturb': 1,
+    'away': 2,
+    'offline': 3,
+  };
 
   @override
   Widget build(BuildContext context) {
+    final sortedUsers = users.sortedBy((user) => statusPriority[user.status] ?? 3);
     return ListView.builder(
-      itemCount: users.length,
+      itemCount: sortedUsers.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () => showDetail(context, users[index]),
-          child: UserTile(user: users[index]),
+          onTap: () => showDetail(context, sortedUsers[index]),
+          child: UserTile(user: sortedUsers[index]),
         );
       },
     );

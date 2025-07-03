@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
@@ -46,12 +47,14 @@ class _RoomList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedRooms = rooms.sortedBy((room) => room.lastMessage.timestamp).reversed.toList();
+
     return ListView.builder(
-      itemCount: rooms.length,
+      itemCount: sortedRooms.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () => routeToDetail(context, rooms[index]),
-          child: RoomTile(room: rooms[index]),
+          onTap: () => routeToDetail(context, sortedRooms[index]),
+          child: RoomTile(room: sortedRooms[index]),
         );
       },
     );

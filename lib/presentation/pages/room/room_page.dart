@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
@@ -54,10 +55,12 @@ class _MessageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedMessages = messages.sortedBy((message) => message.timestamp);
+
     return ListView.builder(
-      itemCount: messages.length,
+      itemCount: sortedMessages.length,
       itemBuilder: (context, index) {
-        return MessageTile(message: messages[index]);
+        return MessageTile(message: sortedMessages[index]);
       },
     );
   }
