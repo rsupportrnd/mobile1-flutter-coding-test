@@ -23,10 +23,7 @@ class MessageTile extends StatelessWidget {
           UserProfile.large(url: user?.profilePicture ?? ''),
           SizedBox(width: 8),
         },
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            minWidth: 120,
-          ),
+        Flexible(
           child: Column(
             crossAxisAlignment: isMine ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
@@ -41,21 +38,18 @@ class MessageTile extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
               },
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    color: Colors.black.withValues(alpha: 0.3),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text(
-                        message.content,
-                        style: TextStyle(
-                          color: Colors.white60,
-                          fontSize: 16,
-                        ),
-                      ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.black.withValues(alpha: 0.3),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    message.content,
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: 16,
                     ),
                   ),
                 ),

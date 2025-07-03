@@ -22,6 +22,7 @@ class Main extends StatelessWidget {
       theme: appTheme,
       darkTheme: appTheme,
       themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
       routerConfig: appRouter.config(
         navigatorObservers: () => [routeObserver],
       ),

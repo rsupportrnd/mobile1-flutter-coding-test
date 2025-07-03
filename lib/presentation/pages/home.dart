@@ -18,20 +18,23 @@ class _HomePageState extends State<HomePage> {
     return AutoTabsScaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButtonBuilder: (context, tabsRouter) {
-        return LiquidTabSwitch(
-          currentIndex: tabsRouter.activeIndex,
-          items: [
-            LiquidTabSwitchItem(
-              label: '유저',
-              icon: CupertinoIcons.person,
-              onTap: () => tabsRouter.setActiveIndex(0),
-            ),
-            LiquidTabSwitchItem(
-              label: '회의',
-              icon: Icons.meeting_room,
-              onTap: () => tabsRouter.setActiveIndex(1),
-            ),
-          ],
+        return SafeArea(
+          minimum: EdgeInsets.only(bottom: 16),
+          child: LiquidTabSwitch(
+            currentIndex: tabsRouter.activeIndex,
+            items: [
+              LiquidTabSwitchItem(
+                label: '유저',
+                icon: CupertinoIcons.person,
+                onTap: () => tabsRouter.setActiveIndex(0),
+              ),
+              LiquidTabSwitchItem(
+                label: '회의',
+                icon: Icons.meeting_room,
+                onTap: () => tabsRouter.setActiveIndex(1),
+              ),
+            ],
+          ),
         );
       },
       routes: [

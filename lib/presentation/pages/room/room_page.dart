@@ -106,19 +106,29 @@ class _MessageInput extends StatefulWidget {
 
 class _MessageInputState extends State<_MessageInput> {
   final TextEditingController messageController = TextEditingController();
-
   @override
   void dispose() {
     messageController.dispose();
     super.dispose();
   }
 
-  void sendMessage() async {
+  void sendMessage(BuildContext context) async {
     final message = messageController.text;
     if (message.isNotEmpty) {
       await context.read<RoomViewModel>().sendMessage(message);
       messageController.clear();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        PrimaryScrollController.of(context).animateTo(
+          PrimaryScrollController.of(context).position.minScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
     }
+  }
+
+  void scrollToBottom(BuildContext context) {
+    if (!context.mounted) return;
   }
 
   @override
@@ -137,7 +147,7 @@ class _MessageInputState extends State<_MessageInput> {
           ),
           LiquidIconButton(
             icon: Icons.send,
-            onPressed: sendMessage,
+            onPressed: () => sendMessage(context),
           ),
         ],
       ),
