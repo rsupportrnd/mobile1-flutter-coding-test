@@ -52,14 +52,25 @@ class _UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sortedUsers = users.sortedBy((user) => statusPriority[user.status] ?? 3);
-    return ListView.builder(
-      itemCount: sortedUsers.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () => showDetail(context, sortedUsers[index]),
-          child: UserTile(user: sortedUsers[index]),
-        );
-      },
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 120),
+          sliver: SliverList.builder(
+            itemCount: sortedUsers.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  GestureDetector(
+                      onTap: () => showDetail(context, sortedUsers[index]),
+                      child: UserTile(user: sortedUsers[index])),
+                  SizedBox(height: 8),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
