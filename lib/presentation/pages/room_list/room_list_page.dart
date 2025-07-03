@@ -1,8 +1,10 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/room_tile.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
@@ -18,6 +20,7 @@ class RoomListPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RoomListViewModel(
         getRoomsUseCase: locator<GetRoomsUseCase>(),
+        postRoomMessageUseCase: locator<PostRoomMessageUseCase>(),
       ),
       child: Scaffold(
         appBar: AppBar(
@@ -44,12 +47,14 @@ class _RoomList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedRooms = rooms.sortedBy((room) => room.lastMessage.timestamp).reversed.toList();
+
     return ListView.builder(
-      itemCount: rooms.length,
+      itemCount: sortedRooms.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () => routeToDetail(context, rooms[index]),
-          child: RoomTile(room: rooms[index]),
+          onTap: () => routeToDetail(context, sortedRooms[index]),
+          child: RoomTile(room: sortedRooms[index]),
         );
       },
     );
