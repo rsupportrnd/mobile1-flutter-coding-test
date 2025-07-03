@@ -13,15 +13,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late Future<void> _loadFuture;
+
   @override
   void initState() {
     super.initState();
 
-    // 현재 프레임 이후에 실행하도록 지연시켜 build가 완료된 후 실행
-    Future.microtask(() {
-      // microtask 없이 호출할 경우 생명주기 중 State를 변경하여 에러
-      // ref.read(homeViewModelProvider.notifier).loadData();
-    });
+    _loadFuture = ref.read(homeViewModelProvider.notifier).loadData();
   }
 
   @override
@@ -33,7 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     };
     return Scaffold(
       body: FutureBuilder(
-          future: ref.read(homeViewModelProvider.notifier).loadData(),
+          future: _loadFuture,
           builder: (context, asyncSnapshot) {
             if (asyncSnapshot.connectionState == ConnectionState.done) {
               if (asyncSnapshot.hasError) {

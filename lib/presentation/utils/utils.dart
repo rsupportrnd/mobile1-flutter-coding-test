@@ -10,7 +10,6 @@ class Utils {
   }
 
   String formatMessageTime(String timeStamp) {
-    Log.d("formatMessageTime $timeStamp");
     final now = DateTime.now();
     final utcDate = DateTime.parse(timeStamp);
     final date = utcDate.toLocal(); // Z(UTC) → 로컬 시간 변환
