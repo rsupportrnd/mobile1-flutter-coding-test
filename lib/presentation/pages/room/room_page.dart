@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
@@ -11,17 +12,15 @@ import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_viewmod
 import 'package:mobile1_flutter_coding_test/presentation/widgets/message_tile.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class RoomPage extends StatelessWidget {
-  static const routeName = '/room';
+  final String roomId;
+  final String roomName;
 
-  const RoomPage({super.key});
+  const RoomPage({super.key, required this.roomId, required this.roomName});
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final roomId = args?['roomId'] as String;
-    final roomName = args?['roomName'] as String;
-
     return ChangeNotifierProvider(
       create: (context) => RoomViewModel(
           roomId: roomId,

@@ -8,10 +8,10 @@ import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.da
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/user_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/user_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class UserListPage extends StatelessWidget {
-  static const routeName = '/userList';
-
   const UserListPage({super.key});
 
   @override
