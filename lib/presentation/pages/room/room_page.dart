@@ -9,7 +9,6 @@ import 'package:mobile1_flutter_coding_test/domain/usecases/get_room_message_use
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_viewmodel.dart';
-import 'package:mobile1_flutter_coding_test/presentation/viewmodels/user_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/message_tile.dart';
 import 'package:provider/provider.dart';
 
