@@ -15,7 +15,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.27.4"
-          cache: true
+          cache: false
 
       - name: Install dependencies
         run: flutter pub get
