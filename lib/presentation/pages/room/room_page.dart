@@ -3,6 +3,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_app_bar.dart';
 import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_icon_button.dart';
 import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_text_field.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
@@ -31,9 +32,8 @@ class RoomPage extends StatelessWidget {
         getUsersUseCase: locator<GetUsersUseCase>(),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(roomName),
-        ),
+        appBar: LiquidAppBar(title: roomName),
+        extendBodyBehindAppBar: true,
         body: Consumer<RoomViewModel>(
           builder: (context, viewModel, child) {
             final users = switch (viewModel.usersState) {
@@ -69,21 +69,23 @@ class _MessageList extends StatelessWidget {
         CustomScrollView(
           reverse: true,
           slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 110),
-              sliver: SliverList.builder(
-                itemCount: sortedMessages.length,
-                itemBuilder: (context, index) {
-                  final message = sortedMessages[index];
-                  final user = users.firstOrNullWhere((user) => user.userId == message.sender);
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      MessageTile(message: message, user: user),
-                      SizedBox(height: 8),
-                    ],
-                  );
-                },
+            SliverSafeArea(
+              sliver: SliverPadding(
+                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 110),
+                sliver: SliverList.builder(
+                  itemCount: sortedMessages.length,
+                  itemBuilder: (context, index) {
+                    final message = sortedMessages[index];
+                    final user = users.firstOrNullWhere((user) => user.userId == message.sender);
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        MessageTile(message: message, user: user),
+                        SizedBox(height: 8),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ],

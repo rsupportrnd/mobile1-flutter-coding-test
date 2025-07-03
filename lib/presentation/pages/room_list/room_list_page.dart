@@ -2,6 +2,7 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_app_bar.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
@@ -23,9 +24,9 @@ class RoomListPage extends StatelessWidget {
         postRoomMessageUseCase: locator<PostRoomMessageUseCase>(),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('회의 목록'),
-        ),
+        backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
+        appBar: LiquidAppBar(title: '회의 목록'),
         body: Consumer<RoomListViewModel>(
           builder: (context, viewModel, child) {
             return switch (viewModel.roomsState) {
@@ -51,22 +52,24 @@ class _RoomList extends StatelessWidget {
 
     return CustomScrollView(
       slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 120),
-          sliver: SliverList.builder(
-            itemCount: sortedRooms.length,
-            itemBuilder: (context, index) {
-              final room = sortedRooms[index];
-              return Column(
-                children: [
-                  GestureDetector(
-                    onTap: () => routeToDetail(context, room),
-                    child: RoomTile(room: room),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              );
-            },
+        SliverSafeArea(
+          sliver: SliverPadding(
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 120),
+            sliver: SliverList.builder(
+              itemCount: sortedRooms.length,
+              itemBuilder: (context, index) {
+                final room = sortedRooms[index];
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () => routeToDetail(context, room),
+                      child: RoomTile(room: room),
+                    ),
+                    SizedBox(height: 8),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ],

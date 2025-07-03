@@ -33,17 +33,16 @@ class LiquidTextField extends StatelessWidget {
                 focusNode: focusNode,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 decoration: InputDecoration(
                   hintText: hintText,
+                  isDense: true,
                   hintStyle: TextStyle(
                     color: Colors.white60,
-                    fontSize: 15,
+                    fontSize: 14,
                   ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 12,
-                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: InputBorder.none,
                 ),
               ),

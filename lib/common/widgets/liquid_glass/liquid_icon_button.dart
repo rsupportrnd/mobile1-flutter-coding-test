@@ -28,7 +28,7 @@ class LiquidIconButton extends StatelessWidget {
           ),
           glassContainsChild: false,
           child: Padding(
-            padding: const EdgeInsets.all(14.0),
+            padding: const EdgeInsets.all(10.0),
             child: Icon(
               icon,
               color: Colors.white,
