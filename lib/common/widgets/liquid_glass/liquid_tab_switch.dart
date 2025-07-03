@@ -51,6 +51,7 @@ class LiquidTabSwitch extends StatelessWidget {
                         final isActive = currentIndex == index;
                         return GestureDetector(
                           onTap: item.onTap,
+                          behavior: HitTestBehavior.opaque,
                           child: LiquidGlass(
                             blur: isActive ? 8 : 0,
                             settings: LiquidGlassSettings(

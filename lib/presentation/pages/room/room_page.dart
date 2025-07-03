@@ -3,6 +3,8 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_icon_button.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_text_field.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/user_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_room_message_usecase.dart';
@@ -43,12 +45,8 @@ class RoomPage extends StatelessWidget {
               ViewModelStateLoading<List<MessageEntity>>() =>
                 const Center(child: CircularProgressIndicator()),
               ViewModelStateError<List<MessageEntity>> error => Center(child: Text(error.error)),
-              ViewModelStateSuccess<List<MessageEntity>> success => Column(
-                  children: [
-                    Expanded(child: _MessageList(messages: success.data, users: users)),
-                    _MessageInput(),
-                  ],
-                ),
+              ViewModelStateSuccess<List<MessageEntity>> success =>
+                _MessageList(messages: success.data, users: users),
             };
           },
         ),
@@ -66,25 +64,33 @@ class _MessageList extends StatelessWidget {
   Widget build(BuildContext context) {
     final sortedMessages = messages.sortedBy((message) => message.timestamp).reversed.toList();
 
-    return CustomScrollView(
-      reverse: true,
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          sliver: SliverList.builder(
-            itemCount: sortedMessages.length,
-            itemBuilder: (context, index) {
-              final message = sortedMessages[index];
-              final user = users.firstOrNullWhere((user) => user.userId == message.sender);
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  MessageTile(message: message, user: user),
-                  SizedBox(height: 8),
-                ],
-              );
-            },
-          ),
+    return Stack(
+      children: [
+        CustomScrollView(
+          reverse: true,
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 110),
+              sliver: SliverList.builder(
+                itemCount: sortedMessages.length,
+                itemBuilder: (context, index) {
+                  final message = sortedMessages[index];
+                  final user = users.firstOrNullWhere((user) => user.userId == message.sender);
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      MessageTile(message: message, user: user),
+                      SizedBox(height: 8),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: _MessageInput(),
         ),
       ],
     );
@@ -115,23 +121,21 @@ class _MessageInputState extends State<_MessageInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return SafeArea(
+      top: false,
+      minimum: EdgeInsets.only(bottom: 16, left: 16, right: 16),
       child: Row(
+        spacing: 8,
         children: [
           Expanded(
-            child: TextField(
+            child: LiquidTextField(
               controller: messageController,
-              decoration: const InputDecoration(
-                hintText: '메시지를 입력하세요...',
-                border: OutlineInputBorder(),
-              ),
+              hintText: '메시지 입력',
             ),
           ),
-          const SizedBox(width: 8),
-          TextButton(
+          LiquidIconButton(
+            icon: Icons.send,
             onPressed: sendMessage,
-            child: const Text('전송'),
           ),
         ],
       ),

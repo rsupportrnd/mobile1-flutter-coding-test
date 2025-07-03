@@ -21,6 +21,11 @@ final appTheme = ThemeData(
     titleMedium: TextStyle(color: Color(0xFFE3E3E3)),
     titleSmall: TextStyle(color: Color(0xFFBDBDBD)),
   ),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Color.fromARGB(255, 197, 207, 226), // 원하는 커서 색상으로 변경
+    selectionColor: Color(0x334F8CFF), // 선택 영역 색상(선택)
+    selectionHandleColor: Color(0xFF4F8CFF), // 핸들 색상(선택)
+  ),
   iconTheme: const IconThemeData(color: Color(0xFFE3E3E3)),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Color(0xFF4F8CFF),
