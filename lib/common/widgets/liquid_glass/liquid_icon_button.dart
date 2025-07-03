@@ -1,8 +1,6 @@
-import 'dart:math' as math;
-
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class LiquidIconButton extends StatelessWidget {
   final IconData icon;
@@ -15,24 +13,22 @@ class LiquidIconButton extends StatelessWidget {
       onPressed: onPressed,
       padding: EdgeInsets.zero,
       minimumSize: Size.zero,
-      child: LiquidGlassLayer(
-        settings: LiquidGlassSettings(
-          ambientStrength: 0.5,
-          lightAngle: 0.2 * math.pi,
-          glassColor: Colors.white12,
-        ),
-        child: LiquidGlass.inLayer(
-          blur: 3,
-          shape: LiquidRoundedSuperellipse(
-            borderRadius: const Radius.circular(40),
-          ),
-          glassContainsChild: false,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(40),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white12,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 24,
+              ),
             ),
           ),
         ),

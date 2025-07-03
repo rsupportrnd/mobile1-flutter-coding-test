@@ -1,7 +1,5 @@
-import 'dart:math' as math;
-
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 class LiquidTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -14,36 +12,35 @@ class LiquidTextField extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: LiquidGlass(
-            blur: 4,
-            settings: LiquidGlassSettings(
-              ambientStrength: 2,
-              lightAngle: 0.4 * math.pi,
-              glassColor: Colors.black12,
-              thickness: 30,
-            ),
-            shape: LiquidRoundedSuperellipse(
-              borderRadius: const Radius.circular(40),
-            ),
-            glassContainsChild: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-              child: TextField(
-                controller: controller,
-                focusNode: focusNode,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  borderRadius: BorderRadius.circular(40),
                 ),
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  isDense: true,
-                  hintStyle: TextStyle(
-                    color: Colors.white60,
-                    fontSize: 14,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                  child: TextField(
+                    controller: controller,
+                    focusNode: focusNode,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      isDense: true,
+                      hintStyle: TextStyle(
+                        color: Colors.white60,
+                        fontSize: 14,
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8),
+                      border: InputBorder.none,
+                    ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  border: InputBorder.none,
                 ),
               ),
             ),
