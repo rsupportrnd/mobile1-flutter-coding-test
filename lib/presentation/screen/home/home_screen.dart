@@ -20,7 +20,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // 현재 프레임 이후에 실행하도록 지연시켜 build가 완료된 후 실행
     Future.microtask(() {
       // microtask 없이 호출할 경우 생명주기 중 State를 변경하여 에러
-      ref.read(homeViewModelProvider.notifier).loadMessages();
+      ref.read(homeViewModelProvider.notifier).loadData();
     });
   }
 

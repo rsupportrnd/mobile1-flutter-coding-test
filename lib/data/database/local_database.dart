@@ -38,8 +38,10 @@ class LocalDatabase {
             creator TEXT,
             participants TEXT,
             createdAt TEXT,
-            lastMessage TEXT,
-            thumbnailImage TEXT
+            thumbnailImage TEXT,
+            lastMessageSender TEXT,
+            lastMessageContent TEXT,
+            lastMessageTimestamp TEXT
           )
         ''');
       },

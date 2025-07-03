@@ -15,7 +15,6 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$MeetingListState {
-  bool get isLoading;
   List<ChatRoom> get items;
 
   /// Create a copy of MeetingListState
@@ -31,18 +30,16 @@ mixin _$MeetingListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is MeetingListState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(items));
 
   @override
   String toString() {
-    return 'MeetingListState(isLoading: $isLoading, items: $items)';
+    return 'MeetingListState(items: $items)';
   }
 }
 
@@ -52,7 +49,7 @@ abstract mixin class $MeetingListStateCopyWith<$Res> {
           MeetingListState value, $Res Function(MeetingListState) _then) =
       _$MeetingListStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, List<ChatRoom> items});
+  $Res call({List<ChatRoom> items});
 }
 
 /// @nodoc
@@ -68,14 +65,9 @@ class _$MeetingListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
     Object? items = null,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       items: null == items
           ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -87,13 +79,9 @@ class _$MeetingListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _MeetingListState implements MeetingListState {
-  const _MeetingListState(
-      {this.isLoading = false, final List<ChatRoom> items = const []})
+  const _MeetingListState({final List<ChatRoom> items = const []})
       : _items = items;
 
-  @override
-  @JsonKey()
-  final bool isLoading;
   final List<ChatRoom> _items;
   @override
   @JsonKey()
@@ -116,18 +104,16 @@ class _MeetingListState implements MeetingListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _MeetingListState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @override
   String toString() {
-    return 'MeetingListState(isLoading: $isLoading, items: $items)';
+    return 'MeetingListState(items: $items)';
   }
 }
 
@@ -139,7 +125,7 @@ abstract mixin class _$MeetingListStateCopyWith<$Res>
       __$MeetingListStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, List<ChatRoom> items});
+  $Res call({List<ChatRoom> items});
 }
 
 /// @nodoc
@@ -155,14 +141,9 @@ class __$MeetingListStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
     Object? items = null,
   }) {
     return _then(_MeetingListState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       items: null == items
           ? _self._items
           : items // ignore: cast_nullable_to_non_nullable

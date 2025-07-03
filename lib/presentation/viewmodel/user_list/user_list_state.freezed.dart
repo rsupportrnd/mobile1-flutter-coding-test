@@ -15,7 +15,6 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$UserListState {
-  bool get isLoading;
   List<User> get items;
 
   /// Create a copy of UserListState
@@ -31,18 +30,16 @@ mixin _$UserListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is UserListState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other.items, items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(items));
 
   @override
   String toString() {
-    return 'UserListState(isLoading: $isLoading, items: $items)';
+    return 'UserListState(items: $items)';
   }
 }
 
@@ -52,7 +49,7 @@ abstract mixin class $UserListStateCopyWith<$Res> {
           UserListState value, $Res Function(UserListState) _then) =
       _$UserListStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, List<User> items});
+  $Res call({List<User> items});
 }
 
 /// @nodoc
@@ -68,14 +65,9 @@ class _$UserListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
     Object? items = null,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       items: null == items
           ? _self.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -87,13 +79,8 @@ class _$UserListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _UserListState implements UserListState {
-  const _UserListState(
-      {this.isLoading = false, final List<User> items = const []})
-      : _items = items;
+  const _UserListState({final List<User> items = const []}) : _items = items;
 
-  @override
-  @JsonKey()
-  final bool isLoading;
   final List<User> _items;
   @override
   @JsonKey()
@@ -116,18 +103,16 @@ class _UserListState implements UserListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UserListState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(_items));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
   @override
   String toString() {
-    return 'UserListState(isLoading: $isLoading, items: $items)';
+    return 'UserListState(items: $items)';
   }
 }
 
@@ -139,7 +124,7 @@ abstract mixin class _$UserListStateCopyWith<$Res>
       __$UserListStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, List<User> items});
+  $Res call({List<User> items});
 }
 
 /// @nodoc
@@ -155,14 +140,9 @@ class __$UserListStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
     Object? items = null,
   }) {
     return _then(_UserListState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       items: null == items
           ? _self._items
           : items // ignore: cast_nullable_to_non_nullable

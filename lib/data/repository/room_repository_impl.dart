@@ -27,6 +27,14 @@ class RoomRepositoryImpl implements RoomRepository {
   }
 
   @override
+  Future<Result<List<ChatRoom>>> selectRooms() async {
+    return await safeCall(() async {
+      final response = await _localDatabaseDataSource.selectRooms();
+      return response.map((element) => element.toEntity()).toList();
+    });
+  }
+
+  @override
   Future<Result<void>> insertRooms({required List<ChatRoom> rooms}) async {
     return await safeCall(() async {
       await _localDatabaseDataSource.insertRooms(

@@ -19,10 +19,13 @@ final loadingManagerProvider = Provider<LoadingManager>((ref) {
 final homeViewModelProvider =
     StateNotifierProvider<HomeViewmodel, HomeState>((ref) {
   final getMessageUseCase = ref.watch(getMessageUseCaseProvider);
+  final getRoomUseCase = ref.watch(getRoomUseCaseProvider);
   final loadingManager = ref.read(loadingManagerProvider);
 
   return HomeViewmodel(
-      getMessageUseCase: getMessageUseCase, loadingManager: loadingManager);
+      getMessageUseCase: getMessageUseCase,
+      getRoomUseCase: getRoomUseCase,
+      loadingManager: loadingManager);
 });
 
 final userListViewModelProvider =
@@ -36,10 +39,10 @@ final userListViewModelProvider =
 
 final meetingListViewModelProvider =
     StateNotifierProvider<MeetingListViewModel, MeetingListState>((ref) {
-  final getRoomUseCase = ref.watch(getRoomUseCaseProvider);
+  final selectRoomUseCase = ref.watch(selectRoomUseCaseProvider);
 
   return MeetingListViewModel(
-    getRoomUseCase: getRoomUseCase,
+    selectRoomUseCase: selectRoomUseCase,
   );
 });
 

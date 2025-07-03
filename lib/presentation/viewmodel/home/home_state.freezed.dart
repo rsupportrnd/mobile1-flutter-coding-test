@@ -15,7 +15,6 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$HomeState {
-  bool get isLoading;
   MainTab get tab;
 
   /// Create a copy of HomeState
@@ -30,17 +29,15 @@ mixin _$HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is HomeState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             (identical(other.tab, tab) || other.tab == tab));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, tab);
+  int get hashCode => Object.hash(runtimeType, tab);
 
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, tab: $tab)';
+    return 'HomeState(tab: $tab)';
   }
 }
 
@@ -49,7 +46,7 @@ abstract mixin class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
       _$HomeStateCopyWithImpl;
   @useResult
-  $Res call({bool isLoading, MainTab tab});
+  $Res call({MainTab tab});
 }
 
 /// @nodoc
@@ -64,14 +61,9 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
     Object? tab = null,
   }) {
     return _then(_self.copyWith(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable
@@ -83,11 +75,8 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 /// @nodoc
 
 class _HomeState implements HomeState {
-  const _HomeState({this.isLoading = false, this.tab = MainTab.users});
+  const _HomeState({this.tab = MainTab.users});
 
-  @override
-  @JsonKey()
-  final bool isLoading;
   @override
   @JsonKey()
   final MainTab tab;
@@ -105,17 +94,15 @@ class _HomeState implements HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _HomeState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             (identical(other.tab, tab) || other.tab == tab));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, tab);
+  int get hashCode => Object.hash(runtimeType, tab);
 
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, tab: $tab)';
+    return 'HomeState(tab: $tab)';
   }
 }
 
@@ -127,7 +114,7 @@ abstract mixin class _$HomeStateCopyWith<$Res>
       __$HomeStateCopyWithImpl;
   @override
   @useResult
-  $Res call({bool isLoading, MainTab tab});
+  $Res call({MainTab tab});
 }
 
 /// @nodoc
@@ -142,14 +129,9 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? isLoading = null,
     Object? tab = null,
   }) {
     return _then(_HomeState(
-      isLoading: null == isLoading
-          ? _self.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       tab: null == tab
           ? _self.tab
           : tab // ignore: cast_nullable_to_non_nullable

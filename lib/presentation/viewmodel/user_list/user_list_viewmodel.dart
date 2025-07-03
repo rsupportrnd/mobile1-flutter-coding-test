@@ -14,7 +14,7 @@ class UserListViewModel extends BaseViewModel<UserListState> {
 
   @override
   void setLoading(bool isLoading) {
-    state = state.copyWith(isLoading: isLoading);
+    // state = state.copyWith(isLoading: isLoading);
   }
 
   _setItems({required List<User> list}) {

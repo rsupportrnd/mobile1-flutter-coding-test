@@ -1,5 +1,6 @@
 import 'package:mobile1_flutter_coding_test/data/database/local_database.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/local_database_datasource.dart';
+import 'package:mobile1_flutter_coding_test/data/mapper/room_mapper.dart';
 import 'package:mobile1_flutter_coding_test/data/model/message_model.dart';
 import 'package:mobile1_flutter_coding_test/data/model/room_model.dart';
 import 'package:mobile1_flutter_coding_test/data/utils/id_generator.dart';
@@ -61,12 +62,26 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   }
 
   @override
+  Future<List<ChatRoomModel>> selectRooms() async {
+    try {
+      final db = await _db;
+      final maps = await db.query(
+        'rooms',
+        orderBy: 'lastMessageTimestamp DESC',
+      );
+      return maps.map(ChatRoomDbExtension.fromDbJson).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> insertRooms({required List<ChatRoomModel> rooms}) async {
     try {
       final db = await _db;
       final batch = db.batch();
       for (var room in rooms) {
-        batch.insert('rooms', room.toJson(),
+        batch.insert('rooms', room.toDbJson(),
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);
@@ -74,4 +89,17 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
       rethrow;
     }
   }
+
+  // @override
+  // Future<void> updateLastMessage(String roomId, Message message) async {
+  //   await db.update(
+  //     'rooms',
+  //     {
+  //       'lastMessageContent': message.content,
+  //       'lastMessageTime': message.timestamp.toIso8601String(),
+  //     },
+  //     where: 'roomId = ?',
+  //     whereArgs: [roomId],
+  //   );
+  // }
 }
