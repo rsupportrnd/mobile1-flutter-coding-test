@@ -1,8 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_tab_switch.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
+import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/viewmodels/user_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {

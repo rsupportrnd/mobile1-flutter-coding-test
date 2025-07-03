@@ -5,6 +5,10 @@ extension DateTimeExtensions on DateTime {
     return DateFormat('yyyy-MM-dd HH:mm').format(this);
   }
 
+  String toHHMM() {
+    return DateFormat('HH:mm').format(this);
+  }
+
   String toDiffTime() {
     final now = DateTime.now();
     final diff = now.difference(this);
