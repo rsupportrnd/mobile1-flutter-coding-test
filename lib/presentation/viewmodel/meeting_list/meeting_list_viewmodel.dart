@@ -2,19 +2,23 @@ import 'package:mobile1_flutter_coding_test/domain/entity/room.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/select_room_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/my_logger.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/base_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/viewmodel/loading_manager.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/meeting_list/meeting_list_state.dart';
 
 class MeetingListViewModel extends BaseViewModel<MeetingListState> {
   final SelectRoomUseCase _selectRoomUseCase;
+  final LoadingManager _loadingManager;
 
   MeetingListViewModel({
     required SelectRoomUseCase selectRoomUseCase,
+    required LoadingManager loadingManager,
   })  : _selectRoomUseCase = selectRoomUseCase,
+        _loadingManager = loadingManager,
         super(const MeetingListState());
 
   @override
   void setLoading(bool isLoading) {
-    // state = state.copyWith(isLoading: isLoading);
+    _loadingManager.isLoading = isLoading;
   }
 
   _setItems({required List<ChatRoom> list}) {

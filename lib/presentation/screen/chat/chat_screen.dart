@@ -35,7 +35,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       if (mounted) {
         if (result == true) {
           _controller.clear();
-          FocusScope.of(context).unfocus();
         }
       }
     });

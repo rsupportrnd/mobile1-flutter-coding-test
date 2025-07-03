@@ -31,18 +31,22 @@ final homeViewModelProvider =
 final userListViewModelProvider =
     StateNotifierProvider<UserListViewModel, UserListState>((ref) {
   final getUserUseCase = ref.watch(getUserUseCaseProvider);
+  final loadingManager = ref.read(loadingManagerProvider);
 
   return UserListViewModel(
     getUserUseCase: getUserUseCase,
+    loadingManager: loadingManager,
   );
 });
 
 final meetingListViewModelProvider =
     StateNotifierProvider<MeetingListViewModel, MeetingListState>((ref) {
   final selectRoomUseCase = ref.watch(selectRoomUseCaseProvider);
+  final loadingManager = ref.read(loadingManagerProvider);
 
   return MeetingListViewModel(
     selectRoomUseCase: selectRoomUseCase,
+    loadingManager: loadingManager,
   );
 });
 
