@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/repositories/room_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
+import 'package:get_it/get_it.dart';
 
 class FakeRoomRepository implements RoomRepository {
   @override
@@ -25,9 +26,17 @@ class FakeRoomRepository implements RoomRepository {
 }
 
 void main() {
+  setUp(() {
+    GetIt.I.registerSingleton<RoomRepository>(FakeRoomRepository());
+    GetIt.I.registerSingleton<GetRoomsUseCase>(GetRoomsUseCase(GetIt.I<RoomRepository>()));
+  });
+
+  tearDown(() {
+    GetIt.I.reset();
+  });
+
   test('GetRoomsUseCase', () async {
-    final repository = FakeRoomRepository();
-    final useCase = GetRoomsUseCase(repository);
+    final useCase = GetIt.I<GetRoomsUseCase>();
 
     final rooms = await useCase.call();
 

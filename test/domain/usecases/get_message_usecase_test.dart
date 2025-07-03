@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/repositories/message_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_room_message_usecase.dart';
+import 'package:get_it/get_it.dart';
 
 class FakeMessageRepository implements MessageRepository {
   @override
@@ -38,9 +39,18 @@ class FakeMessageRepository implements MessageRepository {
 }
 
 void main() {
+  setUp(() {
+    GetIt.I.registerSingleton<MessageRepository>(FakeMessageRepository());
+    GetIt.I.registerSingleton<GetRoomMessageUseCase>(
+        GetRoomMessageUseCase(GetIt.I<MessageRepository>()));
+  });
+
+  tearDown(() {
+    GetIt.I.reset();
+  });
+
   test('GetRoomMessageUseCase', () async {
-    final repository = FakeMessageRepository();
-    final useCase = GetRoomMessageUseCase(repository);
+    final useCase = GetIt.I<GetRoomMessageUseCase>();
 
     final messages = await useCase.call(roomId: 'room1');
 

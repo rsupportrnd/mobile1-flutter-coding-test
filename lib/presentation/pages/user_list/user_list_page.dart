@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
-import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
-import 'package:mobile1_flutter_coding_test/data/repositories/user_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/user_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/user_list_viewmodel.dart';
@@ -18,9 +16,8 @@ class UserListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => UserListViewModel(
-          getUsersUseCase: GetUsersUseCase(UserRepositoryImpl(
-        remoteDataSource: UserRemoteDataSource(dio: Dio()),
-      ))),
+        getUsersUseCase: locator<GetUsersUseCase>(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('유저 목록'),

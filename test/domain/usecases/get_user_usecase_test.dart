@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/user_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/repositories/user_repository.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.dart';
+import 'package:get_it/get_it.dart';
 
-// 가짜 UserRepository
 class FakeUserRepository implements UserRepository {
   @override
   Future<List<UserEntity>> getUsers() async {
@@ -21,9 +21,17 @@ class FakeUserRepository implements UserRepository {
 }
 
 void main() {
+  setUp(() {
+    GetIt.I.registerSingleton<UserRepository>(FakeUserRepository());
+    GetIt.I.registerSingleton<GetUsersUseCase>(GetUsersUseCase(GetIt.I<UserRepository>()));
+  });
+
+  tearDown(() {
+    GetIt.I.reset();
+  });
+
   test('GetUsersUseCase', () async {
-    final repository = FakeUserRepository();
-    final useCase = GetUsersUseCase(repository);
+    final useCase = GetIt.I<GetUsersUseCase>();
 
     final users = await useCase.call();
 
