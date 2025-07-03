@@ -3,6 +3,7 @@ import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/room_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_rooms_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodels/room_list_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/widgets/room_tile.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
@@ -18,6 +19,7 @@ class RoomListPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RoomListViewModel(
         getRoomsUseCase: locator<GetRoomsUseCase>(),
+        postRoomMessageUseCase: locator<PostRoomMessageUseCase>(),
       ),
       child: Scaffold(
         appBar: AppBar(

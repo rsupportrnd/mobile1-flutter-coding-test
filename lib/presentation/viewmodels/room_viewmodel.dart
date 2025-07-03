@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/network/custom_exceptions.dart';
+import 'package:mobile1_flutter_coding_test/common/viewmodel/base_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/message_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/post_room_message_usecase.dart';
 
-class RoomViewModel extends ChangeNotifier {
+class RoomViewModel extends BaseViewModel {
   final String roomId;
   final GetRoomMessageUseCase getRoomMessageUseCase;
   final PostRoomMessageUseCase postRoomMessageUseCase;

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/common/network/custom_exceptions.dart';
+import 'package:mobile1_flutter_coding_test/common/viewmodel/base_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/domain/entities/user_entity.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecases/get_users_usecase.dart';
 
-class UserListViewModel extends ChangeNotifier {
+class UserListViewModel extends BaseViewModel {
   final GetUsersUseCase getUsersUseCase;
   ViewModelState<List<UserEntity>> _users = ViewModelState.loading();
   ViewModelState<List<UserEntity>> get usersState => _users;
