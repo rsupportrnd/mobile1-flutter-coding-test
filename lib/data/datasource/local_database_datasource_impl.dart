@@ -1,6 +1,7 @@
 import 'package:mobile1_flutter_coding_test/data/database/local_database.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/local_database_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/model/message_model.dart';
+import 'package:mobile1_flutter_coding_test/data/model/room_model.dart';
 import 'package:mobile1_flutter_coding_test/data/utils/id_generator.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -51,6 +52,21 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
       final batch = db.batch();
       for (var msg in messages) {
         batch.insert('messages', msg.toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+      await batch.commit(noResult: true);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> insertRooms({required List<ChatRoomModel> rooms}) async {
+    try {
+      final db = await _db;
+      final batch = db.batch();
+      for (var room in rooms) {
+        batch.insert('rooms', room.toJson(),
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);

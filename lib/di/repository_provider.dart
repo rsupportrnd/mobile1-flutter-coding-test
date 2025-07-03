@@ -12,8 +12,10 @@ final messageRepositoryProvider = Provider<MessageRepository>((ref) =>
         dataSource: ref.read(messageDataSourceProvider),
         localDatabaseDataSource: ref.read(localDatabaseDataSourceProvider)));
 
-final roomRepositoryProvider = Provider<RoomRepository>(
-    (ref) => RoomRepositoryImpl(dataSource: ref.read(roomDataSourceProvider)));
+final roomRepositoryProvider = Provider<RoomRepository>((ref) =>
+    RoomRepositoryImpl(
+        dataSource: ref.read(roomDataSourceProvider),
+        localDatabaseDataSource: ref.read(localDatabaseDataSourceProvider)));
 
 final userRepositoryProvider = Provider<UserRepository>(
     (ref) => UserRepositoryImpl(dataSource: ref.read(userDataSourceProvider)));

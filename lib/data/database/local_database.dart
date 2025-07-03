@@ -16,17 +16,32 @@ class LocalDatabase {
 
   Future<Database> _initDb() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'messages.db');
+    final path = join(dbPath, 'chat.db');
     return openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute('CREATE TABLE messages('
-            'messageId TEXT PRIMARY KEY, '
-            'roomId TEXT, '
-            'sender TEXT, '
-            'content TEXT, '
-            'timestamp TEXT)');
+        await db.execute('''
+          CREATE TABLE messages(
+            messageId TEXT PRIMARY KEY,
+            roomId TEXT,
+            sender TEXT,
+            content TEXT,
+            timestamp TEXT
+          )
+        ''');
+
+        await db.execute('''
+          CREATE TABLE rooms (
+            roomId TEXT PRIMARY KEY,
+            roomName TEXT,
+            creator TEXT,
+            participants TEXT,
+            createdAt TEXT,
+            lastMessage TEXT,
+            thumbnailImage TEXT
+          )
+        ''');
       },
     );
   }
