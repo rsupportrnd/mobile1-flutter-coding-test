@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/message.dart';
-import 'package:mobile1_flutter_coding_test/presentation/utils/my_logger.dart';
 
 class Utils {
   factory Utils() => _instance;

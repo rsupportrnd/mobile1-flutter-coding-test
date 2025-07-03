@@ -27,10 +27,19 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<Result<List<Message>>> selectMessages({required String roomId}) async {
+  Future<Result<List<Message>>> selectMessages() async {
+    return await safeCall(() async {
+      final response = await _localDatabaseDataSource.selectMessages();
+      return response.map((element) => element.toEntity()).toList();
+    });
+  }
+
+  @override
+  Future<Result<List<Message>>> selecRoomtMessages(
+      {required String roomId}) async {
     return await safeCall(() async {
       final response =
-          await _localDatabaseDataSource.selectMessages(roomId: roomId);
+          await _localDatabaseDataSource.selectRoomMessages(roomId: roomId);
       return response.map((element) => element.toEntity()).toList();
     });
   }

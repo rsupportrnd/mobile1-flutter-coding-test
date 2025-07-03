@@ -21,11 +21,17 @@ final homeViewModelProvider =
   final getMessageUseCase = ref.watch(getMessageUseCaseProvider);
   final getRoomUseCase = ref.watch(getRoomUseCaseProvider);
   final getUserUseCase = ref.watch(getUserUseCaseProvider);
+  final selectMessageUseCase = ref.watch(selectMessageUseCaseProvider);
+  final selectRoomUseCase = ref.watch(selectRoomUseCaseProvider);
+  final selectUserUseCase = ref.watch(selectUserUseCaseProvider);
 
   return HomeViewmodel(
     getMessageUseCase: getMessageUseCase,
     getRoomUseCase: getRoomUseCase,
     getUserUseCase: getUserUseCase,
+    selectMessageUseCase: selectMessageUseCase,
+    selectRoomUseCase: selectRoomUseCase,
+    selectUserUseCase: selectUserUseCase,
   );
 });
 
@@ -53,7 +59,7 @@ final meetingListViewModelProvider =
 
 final chatViewModelProvider =
     StateNotifierProvider.autoDispose<ChatViewModel, ChatState>((ref) {
-  final selectMessageUseCase = ref.watch(selectMessageUseCaseProvider);
+  final selectMessageUseCase = ref.watch(selectRoomMessageUseCaseProvider);
   final insertMessageUseCase = ref.watch(insertMessageUseCaseProvider);
   final loadingManager = ref.read(loadingManagerProvider);
 

@@ -18,7 +18,21 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   Future<Database> get _db async => await _database.database;
 
   @override
-  Future<List<MessageModel>> selectMessages({required String roomId}) async {
+  Future<List<MessageModel>> selectMessages() async {
+    try {
+      final db = await _db;
+      final maps = await db.query(
+        'messages',
+      );
+      return maps.map((e) => MessageModel.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<MessageModel>> selectRoomMessages(
+      {required String roomId}) async {
     try {
       final db = await _db;
       final maps = await db.query(
@@ -112,6 +126,19 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   }
 
   @override
+  Future<List<UserModel>> selectUsers() async {
+    try {
+      final db = await _db;
+      final maps = await db.query(
+        'users',
+      );
+      return maps.map((e) => UserModel.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> insertUsers({required List<UserModel> users}) async {
     try {
       final db = await _db;
@@ -121,19 +148,6 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<UserModel>> selectUsers() async {
-    try {
-      final db = await _db;
-      final maps = await db.query(
-        'users',
-      );
-      return maps.map((e) => UserModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }
