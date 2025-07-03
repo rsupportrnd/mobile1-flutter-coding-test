@@ -38,7 +38,7 @@ class RoomViewModel extends ChangeNotifier {
   }
 
   Future<void> sendMessage(String message) async {
-    await postRoomMessageUseCase.call(
+    final sentMessage = await postRoomMessageUseCase.call(
       message: MessageEntity(
         sender: 'me',
         roomId: roomId,
@@ -47,6 +47,10 @@ class RoomViewModel extends ChangeNotifier {
         timestamp: DateTime.now(),
       ),
     );
-    fetchMessages();
+    List<MessageEntity> previousMessages = [];
+    if (messagesState is ViewModelStateSuccess<List<MessageEntity>>) {
+      previousMessages = (messagesState as ViewModelStateSuccess<List<MessageEntity>>).data;
+    }
+    setMessages(ViewModelState.success(data: [...previousMessages, sentMessage]));
   }
 }
