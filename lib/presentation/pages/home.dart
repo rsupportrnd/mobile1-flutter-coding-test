@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mobile1_flutter_coding_test/common/widgets/liquid_glass/liquid_tab_switch.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.gr.dart';
 
 @RoutePage()
@@ -14,26 +16,28 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: [
-        UserListRoute(),
-        RoomListRoute(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonBuilder: (context, tabsRouter) {
+        return LiquidTabSwitch(
           currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+          items: [
+            LiquidTabSwitchItem(
               label: '유저',
+              icon: CupertinoIcons.person,
+              onTap: () => tabsRouter.setActiveIndex(0),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.meeting_room),
+            LiquidTabSwitchItem(
               label: '회의',
+              icon: Icons.meeting_room,
+              onTap: () => tabsRouter.setActiveIndex(1),
             ),
           ],
         );
       },
+      routes: [
+        UserListRoute(),
+        RoomListRoute(),
+      ],
     );
   }
 }
