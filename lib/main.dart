@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
+import 'package:mobile1_flutter_coding_test/common/locator/locator.dart';
+import 'package:mobile1_flutter_coding_test/common/theme/app_theme.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.dart';
 import 'package:mobile1_flutter_coding_test/routes/route_observer.dart';
 
@@ -17,6 +18,11 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      color: Colors.black,
+      theme: appTheme,
+      darkTheme: appTheme,
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
       routerConfig: appRouter.config(
         navigatorObservers: () => [routeObserver],
       ),

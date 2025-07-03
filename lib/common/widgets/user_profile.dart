@@ -16,12 +16,15 @@ class UserProfile extends StatelessWidget {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
       ),
-      child: ImageComponent(
-          url: url,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => const Icon(Icons.person)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(size / 2),
+        child: ImageComponent(
+            url: url,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => const Icon(Icons.person)),
+      ),
     );
   }
 }

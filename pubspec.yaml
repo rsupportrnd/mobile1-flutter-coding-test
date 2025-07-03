@@ -23,7 +23,8 @@ dependencies:
   dartx: ^1.2.0 
 
   cupertino_icons: ^1.0.8  
- 
+  liquid_glass_renderer: ^0.1.1-dev.6
+  
 dev_dependencies: 
   flutter_test:
     sdk: flutter
