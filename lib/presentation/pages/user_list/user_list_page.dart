@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/common/di/di.dart';
+import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/common/viewmodel/viewmodel_state.dart';
 import 'package:mobile1_flutter_coding_test/data/datasources/user_remote_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/repositories/user_repository_impl.dart';

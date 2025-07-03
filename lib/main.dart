@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/common/di/di.dart';
+import 'package:mobile1_flutter_coding_test/common/%08locator/locator.dart';
 import 'package:mobile1_flutter_coding_test/routes/app_router.dart';
 import 'package:mobile1_flutter_coding_test/routes/route_observer.dart';
 
