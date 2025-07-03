@@ -23,7 +23,7 @@ class MeetingListViewModel extends BaseViewModel<MeetingListState> {
 
   Future<void> loadMeetings() async {
     Log.d("loadMeetings");
-    await runWithResult<List<ChatRoom>>(() => _getRoomUseCase(),
+    await runWithResult<List<ChatRoom>, void>(() => _getRoomUseCase(),
         onSuccess: (items) => _setItems(list: items),
         onFailure: (error) => Log.e(error.toString()));
   }

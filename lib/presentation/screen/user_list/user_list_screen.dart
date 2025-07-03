@@ -87,12 +87,12 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
             onTap: () => _showUserDetail(context, state.items[index]),
           ),
         ),
-        if (state.isLoading)
-          const Center(
-            child: IgnorePointer(
-              child: CircularProgressIndicator(),
-            ),
-          ),
+        // if (state.isLoading)
+        //   const Center(
+        //     child: IgnorePointer(
+        //       child: CircularProgressIndicator(),
+        //     ),
+        //   ),
       ],
     );
   }

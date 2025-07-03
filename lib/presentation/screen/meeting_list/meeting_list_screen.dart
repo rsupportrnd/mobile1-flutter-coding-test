@@ -42,12 +42,12 @@ class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
             },
           ),
         ),
-        if (state.isLoading)
-          const Center(
-            child: IgnorePointer(
-              child: CircularProgressIndicator(),
-            ),
-          ),
+        // if (state.isLoading)
+        //   const Center(
+        //     child: IgnorePointer(
+        //       child: CircularProgressIndicator(),
+        //     ),
+        //   ),
       ],
     );
   }

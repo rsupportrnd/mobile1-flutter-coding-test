@@ -23,7 +23,7 @@ class UserListViewModel extends BaseViewModel<UserListState> {
 
   Future<void> loadUsers() async {
     Log.d("loadUsers");
-    await runWithResult<List<User>>(() => _getUserUseCase(),
+    await runWithResult<List<User>, void>(() => _getUserUseCase(),
         onSuccess: (items) => _setItems(list: items),
         onFailure: (error) => Log.e(error.toString()));
   }

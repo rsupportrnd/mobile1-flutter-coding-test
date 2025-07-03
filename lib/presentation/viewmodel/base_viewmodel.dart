@@ -7,21 +7,19 @@ abstract class BaseViewModel<T> extends StateNotifier<T> {
 
   void setLoading(bool isLoading);
 
-  Future<void> runWithResult<R>(
+  Future<TReturn?> runWithResult<R, TReturn>(
     Future<Result<R>> Function() task, {
-    required void Function(R data) onSuccess,
-    void Function(MyError error)? onFailure,
+    required TReturn Function(R data) onSuccess,
+    TReturn Function(MyError error)? onFailure,
   }) async {
     setLoading(true);
     final result = await task();
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 3000));
     setLoading(false);
 
-    switch (result) {
-      case Success():
-        onSuccess(result.data);
-      case Failure():
-        onFailure?.call(result.error);
-    }
+    return switch (result) {
+      Success<R>(:final data) => onSuccess(data),
+      Failure<R>(:final error) => onFailure?.call(error),
+    };
   }
 }
