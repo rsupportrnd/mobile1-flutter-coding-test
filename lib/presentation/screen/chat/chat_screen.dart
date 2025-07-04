@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -41,7 +44,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(title: Text(widget._room.roomName)),
+        appBar: AppBar(
+          title: Text(widget._room.roomName),
+          leading: IconButton(
+            icon: Icon(
+              Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back,
+            ),
+            onPressed: () => Navigator.of(context).maybePop(),
+          ),
+        ),
         body: SafeArea(
           child: Column(
             children: [

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
@@ -36,49 +39,69 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
   }
 
   void _showUserDetail(BuildContext context, User user) {
+    final title = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [Text(user.name), Text(user.status)],
+    );
+
+    final content = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: Image.network(
+            user.profilePicture,
+            fit: BoxFit.scaleDown,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) => const SizedBox(
+              child: Center(child: Icon(Icons.error)),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text('UserId: ${user.userId}'),
+        Text('Email: ${user.email}'),
+        Text('Role: ${user.role}')
+      ],
+    );
+
+    final actions = [
+      TextButton(
+        onPressed: () => Navigator.of(context).pop(),
+        child: const Text('Close'),
+      )
+    ];
+
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(user.name), Text(user.status)],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Image.network(
-                user.profilePicture,
-                fit: BoxFit.scaleDown,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) => const SizedBox(
-                  child: Center(child: Icon(Icons.error)),
-                ),
-              ),
+      builder: (context) {
+        if (Platform.isIOS) {
+          return CupertinoAlertDialog(
+            title: title,
+            content: Material(
+              // CupertinoAlertDialog는 기본적으로 텍스트만 되므로 감싸줌
+              color: Colors.transparent,
+              child: content,
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text('UserId: ${user.userId}'),
-            Text('Email: ${user.email}'),
-            Text('Role: ${user.role}')
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          )
-        ],
-      ),
+            actions: actions,
+          );
+        } else {
+          return AlertDialog(
+            title: title,
+            content: content,
+            actions: actions,
+          );
+        }
+      },
     );
   }
 }
