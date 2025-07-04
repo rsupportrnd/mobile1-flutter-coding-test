@@ -1,5 +1,3 @@
-# .github/workflows/flutter_parallel_jobs.yml
-
 name: Github CI - Analyze & Test, Build AAB, Build iOS
 
 on:

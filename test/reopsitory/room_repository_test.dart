@@ -82,7 +82,8 @@ void main() {
       final result = await repository.getRooms();
 
       expect(result, isA<Failure>());
-      verify(() => mockRoomDataSource.getRooms()).called(1);
+      verify(() => mockRoomDataSource.getRooms())
+          .called(1 + 3); // retryWhen 동작하여 최대 3번 재시도
     });
   });
 

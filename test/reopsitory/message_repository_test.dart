@@ -89,7 +89,8 @@ void main() {
       final result = await repository.getMessages();
 
       expect(result, isA<Failure>());
-      verify(() => mockMessageDataSource.getMessages()).called(1);
+      verify(() => mockMessageDataSource.getMessages())
+          .called(1 + 3); // retryWhen 동작하여 최대 3번 재시도
     });
   });
 

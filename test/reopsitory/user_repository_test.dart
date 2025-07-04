@@ -74,7 +74,8 @@ void main() {
       final result = await repository.getUsers();
 
       expect(result, isA<Failure>());
-      verify(() => mockUserDataSource.getUsers()).called(1);
+      verify(() => mockUserDataSource.getUsers())
+          .called(1 + 3); // retryWhen 동작하여 최대 3번 재시도
     });
   });
 
