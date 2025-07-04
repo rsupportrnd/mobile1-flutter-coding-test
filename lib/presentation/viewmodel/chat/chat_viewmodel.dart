@@ -2,23 +2,27 @@ import 'package:mobile1_flutter_coding_test/domain/entity/message.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/insert_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/select_room_message_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/my_logger.dart';
+import 'package:mobile1_flutter_coding_test/presentation/utils/toast_service.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/utils.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/base_viewmodel.dart';
 import 'package:mobile1_flutter_coding_test/presentation/viewmodel/chat/chat_state.dart';
-import 'package:mobile1_flutter_coding_test/presentation/viewmodel/loading_manager.dart';
+import 'package:mobile1_flutter_coding_test/presentation/utils/loading_manager.dart';
 
 class ChatViewModel extends BaseViewModel<ChatState> {
   final InsertMessageUseCase _insertMessageUseCase;
   final SelectRoomMessageUseCase _selectMessageUseCase;
   final LoadingManager _loadingManager;
+  final ToastService _toastService;
 
   ChatViewModel({
     required InsertMessageUseCase insertMessageUseCase,
     required SelectRoomMessageUseCase selectMessageUseCase,
     required LoadingManager loadingManager,
+    required ToastService toastService,
   })  : _insertMessageUseCase = insertMessageUseCase,
         _selectMessageUseCase = selectMessageUseCase,
         _loadingManager = loadingManager,
+        _toastService = toastService,
         super(const ChatState());
 
   String? roomId;
@@ -54,7 +58,10 @@ class ChatViewModel extends BaseViewModel<ChatState> {
     await runWithResult<List<Message>, void>(
         () => _selectMessageUseCase(roomId: tempRoomId),
         onSuccess: (items) => _setItems(list: items),
-        onFailure: (error) => Log.e(error.toString()));
+        onFailure: (error) {
+          Log.e(error.toString());
+          _toastService.show("데이터베이스에서 Message 데이터를 불러오지 못했습니다.");
+        });
   }
 
   Future<bool?> sendMessage({required String message}) async {
@@ -75,6 +82,7 @@ class ChatViewModel extends BaseViewModel<ChatState> {
       return true;
     }, onFailure: (error) {
       Log.e(error.toString());
+      _toastService.show("메시지 전송에 실패했습니다.");
       return false;
     });
   }

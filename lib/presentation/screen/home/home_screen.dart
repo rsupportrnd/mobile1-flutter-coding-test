@@ -61,9 +61,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 icon: Icon(Icons.meeting_room), label: 'Meetings'),
           ],
           currentIndex: MainTab.values.indexOf(selectedTab),
-          onTap: (index) => ref
-              .read(homeViewModelProvider.notifier)
-              .changeTab(tab: MainTab.values[index])),
+          onTap: (index) {
+            ref
+                .read(homeViewModelProvider.notifier)
+                .changeTab(tab: MainTab.values[index]);
+          }),
     );
   }
 }
