@@ -29,8 +29,12 @@ class ChatViewModel extends BaseViewModel<ChatState> {
 
   @override
   void setLoading(bool isLoading) {
-    state = state.copyWith(isLoading: isLoading);
     _loadingManager.isLoading = isLoading;
+  }
+
+  /// 처음 데이터 불러올 때
+  setInitialLoading(bool isLoading) {
+    state = state.copyWith(isLoading: isLoading);
   }
 
   setRoomId({required String roomId}) {
@@ -55,13 +59,14 @@ class ChatViewModel extends BaseViewModel<ChatState> {
     Log.d("loadMessages roomId: $roomId");
     final tempRoomId = roomId;
     if (tempRoomId == null) return;
+    setInitialLoading(true);
     await runWithResult<List<Message>, void>(
         () => _selectMessageUseCase(roomId: tempRoomId),
         onSuccess: (items) => _setItems(list: items),
         onFailure: (error) {
           Log.e(error.toString());
           _toastService.show("데이터베이스에서 Message 데이터를 불러오지 못했습니다.");
-        });
+        }).then((_) => setInitialLoading(false));
   }
 
   Future<bool?> sendMessage({required String message}) async {
