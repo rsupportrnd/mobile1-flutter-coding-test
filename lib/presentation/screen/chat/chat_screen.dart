@@ -19,38 +19,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   void initState() {
+    // 현재 프레임 이후에 실행하도록 지연시켜 build가 완료된 후 실행
     Future.microtask(() {
+      // microtask 없이 호출할 경우 생명주기 중 State를 변경하여 에러
       ref
           .read(chatViewModelProvider.notifier)
           .setRoomId(roomId: widget._room.roomId);
     });
     super.initState();
-  }
-
-  void _sendMessage() {
-    final text = _controller.text;
-    ref
-        .read(chatViewModelProvider.notifier)
-        .sendMessage(message: text)
-        .then((result) {
-      if (mounted) {
-        if (result == true) {
-          _controller.clear();
-        }
-      }
-    });
-  }
-
-  void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
   }
 
   @override
@@ -161,5 +137,32 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ),
       ),
     );
+  }
+
+  void _sendMessage() {
+    final text = _controller.text;
+    ref
+        .read(chatViewModelProvider.notifier)
+        .sendMessage(message: text)
+        .then((result) {
+      if (mounted) {
+        if (result == true) {
+          _controller.clear();
+        }
+      }
+    });
+  }
+
+  void _scrollToBottom() {
+    // 프레임완료 후 콜백을 실행
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut, //천천히 시작해서, 중간에 빠르게, 그리고 천천히 끝나는 효과
+        );
+      }
+    });
   }
 }

@@ -7,8 +7,6 @@ import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource.dart
 import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource_impl.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/user_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/user_datasource_impl.dart';
-import 'package:mobile1_flutter_coding_test/data/utils/id_generator.dart';
-import 'package:mobile1_flutter_coding_test/data/utils/id_generator_impl.dart';
 import 'package:mobile1_flutter_coding_test/di/service_provider.dart';
 
 final messageDataSourceProvider = Provider<MessageDataSource>(
@@ -24,6 +22,3 @@ final localDatabaseDataSourceProvider = Provider<LocalDatabaseDataSource>(
     (ref) => LocalDatabaseDataSourceImpl(
         database: ref.read(localDatabaseProvider),
         idGenerator: ref.read(idGeneratorProvider)));
-
-final idGeneratorProvider = Provider<IdGenerator>(
-    (ref) => IdGeneratorImpl(database: ref.watch(localDatabaseProvider)));

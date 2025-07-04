@@ -13,6 +13,7 @@ class MeetingListScreen extends ConsumerStatefulWidget {
 }
 
 class _MeetingListScreenState extends ConsumerState<MeetingListScreen> {
+  // 상위 위젯인 HomeScreen의 tab 상태가 변경될 때 마다 실행
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

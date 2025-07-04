@@ -11,7 +11,7 @@ class Utils {
   String formatMessageTime(String timeStamp) {
     final now = DateTime.now();
     final utcDate = DateTime.parse(timeStamp);
-    final date = utcDate.toLocal(); // Z(UTC) → 로컬 시간 변환
+    final date = utcDate.toLocal();
 
     final today = DateTime(now.year, now.month, now.day);
     final messageDay = DateTime(date.year, date.month, date.day);
@@ -41,6 +41,10 @@ class Utils {
         messageId: "",
         roomId: roomId,
         sender: sender,
-        timestamp: DateTime.now().toLocal().toIso8601String().split('.').first);
+        timestamp: DateTime.now()
+            .toLocal()
+            .toIso8601String()
+            .split('.')
+            .first); // 소숫점 뒤 제거
   }
 }

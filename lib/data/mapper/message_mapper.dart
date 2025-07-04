@@ -20,7 +20,7 @@ extension MessageEntityToModelExtension on Message {
       timestamp: timestamp);
 }
 
-extension MessageEntityToLastMessageModellExtension on Message {
+extension MessageEntityToLastMessageModelExtension on Message {
   LastMessageModel toLastMessageModel() =>
       LastMessageModel(sender: sender, content: content, timestamp: timestamp);
 }

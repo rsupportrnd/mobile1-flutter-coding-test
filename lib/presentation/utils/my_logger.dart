@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class Log {
@@ -9,17 +10,17 @@ class Log {
   Log._internal() {
     // initCode
     _logger = Logger(
-      output: ConsoleOutput(),
-      printer: PrettyPrinter(
-        methodCount: 2, // number of method calls to be displayed
-        errorMethodCount: 8, // number of method calls if stacktrace is provided
-        lineLength: 100, // width of the output
-        colors: true, // Colorful log messages
-        printEmojis: true, // Print an emoji for each log message
-        // dateTimeFormat: true // Should each log print contain a timestamp
-      ),
-      // level: Level.trace
-    ); //kDebugMode ? Level.verbose : Level.nothing);
+        output: ConsoleOutput(),
+        printer: PrettyPrinter(
+          methodCount: 2, // number of method calls to be displayed
+          errorMethodCount:
+              8, // number of method calls if stacktrace is provided
+          lineLength: 100, // width of the output
+          colors: true, // Colorful log messages
+          printEmojis: true, // Print an emoji for each log message
+          // dateTimeFormat: true // Should each log print contain a timestamp
+        ),
+        level: kDebugMode ? Level.trace : Level.off);
   }
 
   static void t(dynamic message) {
@@ -44,12 +45,5 @@ class Log {
 
   static void f(dynamic message) {
     to.f(message);
-  }
-}
-
-class Filter extends LogFilter {
-  @override
-  bool shouldLog(LogEvent event) {
-    return true;
   }
 }

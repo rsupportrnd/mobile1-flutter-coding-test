@@ -1,6 +1,6 @@
 import 'package:mobile1_flutter_coding_test/domain/entity/message.dart';
 import 'package:mobile1_flutter_coding_test/domain/usecase/insert_message_usecase.dart';
-import 'package:mobile1_flutter_coding_test/domain/usecase/select_room_message_usecase.dart';
+import 'package:mobile1_flutter_coding_test/domain/usecase/select_message_by_room_id_usecase.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/my_logger.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/toast_service.dart';
 import 'package:mobile1_flutter_coding_test/presentation/utils/utils.dart';
@@ -10,13 +10,13 @@ import 'package:mobile1_flutter_coding_test/presentation/utils/loading_manager.d
 
 class ChatViewModel extends BaseViewModel<ChatState> {
   final InsertMessageUseCase _insertMessageUseCase;
-  final SelectRoomMessageUseCase _selectMessageUseCase;
+  final SelectMessagesByRoomIdUseCase _selectMessageUseCase;
   final LoadingManager _loadingManager;
   final ToastService _toastService;
 
   ChatViewModel({
     required InsertMessageUseCase insertMessageUseCase,
-    required SelectRoomMessageUseCase selectMessageUseCase,
+    required SelectMessagesByRoomIdUseCase selectMessageUseCase,
     required LoadingManager loadingManager,
     required ToastService toastService,
   })  : _insertMessageUseCase = insertMessageUseCase,

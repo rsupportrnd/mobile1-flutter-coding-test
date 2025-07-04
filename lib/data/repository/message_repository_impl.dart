@@ -35,11 +35,11 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<Result<List<Message>>> selecRoomtMessages(
+  Future<Result<List<Message>>> selectMessagesByRoomId(
       {required String roomId}) async {
     return await safeCall(() async {
       final response =
-          await _localDatabaseDataSource.selectRoomMessages(roomId: roomId);
+          await _localDatabaseDataSource.selectMessagesByRoomId(roomId: roomId);
       return response.map((element) => element.toEntity()).toList();
     });
   }
@@ -47,11 +47,11 @@ class MessageRepositoryImpl implements MessageRepository {
   @override
   Future<Result<Message>> insertMessage({required Message message}) async {
     return await safeCall(() async {
-      final resposne = await _localDatabaseDataSource.insertMessage(
+      final response = await _localDatabaseDataSource.insertMessage(
           message: message.toModel());
       await _localDatabaseDataSource.updateRoom(
           roomId: message.roomId, message: message.toLastMessageModel());
-      return resposne.toEntity();
+      return response.toEntity();
     });
   }
 

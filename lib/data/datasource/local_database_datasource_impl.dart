@@ -31,7 +31,7 @@ class LocalDatabaseDataSourceImpl implements LocalDatabaseDataSource {
   }
 
   @override
-  Future<List<MessageModel>> selectRoomMessages(
+  Future<List<MessageModel>> selectMessagesByRoomId(
       {required String roomId}) async {
     try {
       final db = await _db;

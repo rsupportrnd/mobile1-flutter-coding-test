@@ -59,7 +59,7 @@ final meetingListViewModelProvider =
 
 final chatViewModelProvider =
     StateNotifierProvider.autoDispose<ChatViewModel, ChatState>((ref) {
-  final selectMessageUseCase = ref.watch(selectRoomMessageUseCaseProvider);
+  final selectMessageUseCase = ref.watch(selectMessagesByRoomIdUseCaseProvider);
   final insertMessageUseCase = ref.watch(insertMessageUseCaseProvider);
   final loadingManager = ref.read(loadingManagerProvider);
   final toastService = ref.read(toastServiceProvider);

@@ -15,6 +15,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  // FutureBuilder의 future가 앱을 실행했을 때 단 한번만 호출되기 위해 함수를 지정
   late Future<void> _loadFuture;
   DateTime? _lastBackPressTime;
 

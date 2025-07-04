@@ -11,6 +11,30 @@ class UserListScreen extends ConsumerStatefulWidget {
 }
 
 class _UserListScreenState extends ConsumerState<UserListScreen> {
+  // 상위 위젯인 HomeScreen의 tab 상태가 변경될 때 마다 실행
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // 현재 프레임 이후에 실행하도록 지연시켜 build가 완료된 후 실행
+    Future.microtask(() {
+      // microtask 없이 호출할 경우 생명주기 중 State를 변경하여 에러
+      ref.read(userListViewModelProvider.notifier).loadUsers();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(userListViewModelProvider);
+    return ListView.builder(
+      itemCount: state.items.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(state.items[index].name),
+        onTap: () => _showUserDetail(context, state.items[index]),
+      ),
+    );
+  }
+
   void _showUserDetail(BuildContext context, User user) {
     showDialog(
       context: context,
@@ -31,14 +55,8 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      // 전체 용량이 있으면 진행률에 따라 로딩, 없으면 null(무한로딩)
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 },
                 errorBuilder: (context, error, stackTrace) => const SizedBox(
@@ -60,29 +78,6 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
             child: const Text('Close'),
           )
         ],
-      ),
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    // 현재 프레임 이후에 실행하도록 지연시켜 build가 완료된 후 실행
-    Future.microtask(() {
-      // microtask 없이 호출할 경우 생명주기 중 State를 변경하여 에러
-      ref.read(userListViewModelProvider.notifier).loadUsers();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final state = ref.watch(userListViewModelProvider);
-    return ListView.builder(
-      itemCount: state.items.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(state.items[index].name),
-        onTap: () => _showUserDetail(context, state.items[index]),
       ),
     );
   }
