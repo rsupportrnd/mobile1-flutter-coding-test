@@ -2,6 +2,12 @@ abstract class CustomException implements Exception {
   final String message;
   final String? etc;
   const CustomException({required this.message, this.etc});
+
+  @override
+  String toString() {
+    return '[${runtimeType.toString()}] $message'
+        '${etc != null ? ' (etc: $etc)' : ''}';
+  }
 }
 
 class NetworkException extends CustomException {
@@ -17,7 +23,8 @@ class ServerException extends CustomException {
 }
 
 class OverRetryException extends CustomException {
-  const OverRetryException() : super(message: '재시도 횟수가 초과되었습니다');
+  const OverRetryException([String? etc])
+      : super(message: '재시도 횟수가 초과되었습니다', etc: etc);
 }
 
 class UnKnownException extends CustomException {

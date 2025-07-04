@@ -27,7 +27,7 @@ class _RSupportApiService implements RSupportApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/users.json',
+            'rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/users.json',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -54,7 +54,7 @@ class _RSupportApiService implements RSupportApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/messages.json',
+            'rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/messages.json',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -81,7 +81,7 @@ class _RSupportApiService implements RSupportApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/rooms.json',
+            'rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api/rooms.json',
             queryParameters: queryParameters,
             data: _data,
           )
