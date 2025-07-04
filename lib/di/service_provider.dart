@@ -12,8 +12,6 @@ import 'package:mobile1_flutter_coding_test/presentation/utils/toast_service.dar
 final idGeneratorProvider = Provider<IdGenerator>(
     (ref) => IdGeneratorImpl(database: ref.watch(localDatabaseProvider)));
 
-// final jsonLoaderProvider = Provider<IJsonLoader>((ref) => JsonLoader());
-
 final localDatabaseProvider = Provider<LocalDatabase>((ref) => LocalDatabase());
 
 final globalLoadingProvider = StateProvider<bool>((ref) => false);

@@ -10,10 +10,11 @@ import 'package:mobile1_flutter_coding_test/domain/entity/result.dart';
 /// 에러 시 returnType: Result.failure
 Future<Result<T>> safeCall<T>(Future<T> Function() apiCall) async {
   try {
-    final data =
-        await apiCall().retryWhen(predicate: (error, retryCount, delay) {
-      return retryCount < 3; // 3번까지만 재시도
-    });
+    final data = await (() => apiCall()).retryWhen(
+      predicate: (error, retryCount, delay) {
+        return Future.value(retryCount < 3); // 3번까지만 재시도
+      },
+    );
     return Result.success(data);
   } on NetworkException catch (e) {
     return Result.failure(MyError(

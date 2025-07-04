@@ -16,6 +16,10 @@ class ServerException extends CustomException {
   const ServerException() : super(message: 'Interner Server Error');
 }
 
+class OverRetryException extends CustomException {
+  const OverRetryException() : super(message: '재시도 횟수가 초과되었습니다');
+}
+
 class UnKnownException extends CustomException {
   const UnKnownException([String? etc])
       : super(message: '알 수 없는 에러가 발생했습니다', etc: etc);

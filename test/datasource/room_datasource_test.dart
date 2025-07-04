@@ -1,60 +1,69 @@
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mocktail/mocktail.dart';
-// import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource_impl.dart';
-// import 'package:mobile1_flutter_coding_test/data/utils/json_loader.dart';
-// import 'package:mobile1_flutter_coding_test/data/model/response.dart';
-// import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mobile1_flutter_coding_test/data/model/room_model.dart';
+import 'package:mobile1_flutter_coding_test/data/remote/rsupport_api_service.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource_impl.dart';
+import 'package:mobile1_flutter_coding_test/data/model/response.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
 
-// // mock 클래스 생성
-// class MockJsonLoader extends Mock implements IJsonLoader {}
+// mock 클래스 생성
+class MockRSupportApiService extends Mock implements RSupportApiService {}
 
-// void main() {
-//   late MockJsonLoader mockJsonLoader;
-//   late RoomDataSourceImpl dataSource;
+void main() {
+  late MockRSupportApiService mockRSupportApiService;
+  late RoomDataSourceImpl dataSource;
 
-//   setUp(() {
-//     mockJsonLoader = MockJsonLoader();
-//     dataSource = RoomDataSourceImpl(jsonLoader: mockJsonLoader);
-//   });
+  setUp(() {
+    mockRSupportApiService = MockRSupportApiService();
+    dataSource = RoomDataSourceImpl(service: mockRSupportApiService);
+  });
 
-//   test('getRooms returns RoomResponse when JSON loads successfully', () async {
-//     // given
-//     final fakeJson = {
-//       'chatRooms': [
-//         {
-//           "roomId": "room1",
-//           "roomName": "프로젝트 A 회의",
-//           "creator": "user1",
-//           "participants": ["user1", "user2", "user3"],
-//           "createdAt": "2024-11-01T09:00:00Z",
-//           "lastMessage": {
-//             "sender": "user2",
-//             "content": "다음 회의는 언제로 할까요?",
-//             "timestamp": "2024-11-07T15:30:00Z"
-//           },
-//           "thumbnailImage": "https://picsum.photos/id/1011/200/200"
-//         }
-//       ]
-//     };
+  test('getRooms returns RoomResponse when API loads successfully', () async {
+    // given
 
-//     when(() => mockJsonLoader.loadJson(any()))
-//         .thenAnswer((_) async => fakeJson);
+    final fakeResponse = ChatRoomResponse(chatRooms: [
+      ChatRoomModel(
+          roomId: 'room1',
+          roomName: 'roomName1',
+          creator: 'user1',
+          participants: ['user1', 'user2', 'user3'],
+          createdAt: DateTime.now().toIso8601String(),
+          lastMessage: LastMessageModel(
+              sender: "user3",
+              content: "content3",
+              timestamp: DateTime.now().toIso8601String()),
+          thumbnailImage: 'url'),
+      ChatRoomModel(
+          roomId: 'room2',
+          roomName: 'roomName2',
+          creator: 'user2',
+          participants: ['user2', 'user3', 'user6'],
+          createdAt: DateTime.now().toIso8601String(),
+          lastMessage: LastMessageModel(
+              sender: "user2",
+              content: "content2",
+              timestamp: DateTime.now().toIso8601String()),
+          thumbnailImage: 'url')
+    ]);
 
-//     // when
-//     final result = await dataSource.getRooms();
+    when(() => mockRSupportApiService.getRooms())
+        .thenAnswer((_) async => fakeResponse);
 
-//     // then
-//     expect(result, isA<ChatRoomResponse>());
-//     expect(result.chatRooms, isNotEmpty);
-//     expect(result.chatRooms.first.roomId, 'room1');
-//   });
+    // when
+    final result = await dataSource.getRooms();
 
-//   test('getRooms rethrows JsonLoadException on loading error', () async {
-//     // given
-//     when(() => mockJsonLoader.loadJson(any()))
-//         .thenThrow(const JsonLoadException('Failed to load JSON'));
+    // then
+    expect(result, isA<ChatRoomResponse>());
+    expect(result.chatRooms, isNotEmpty);
+    expect(result.chatRooms.first.roomId, 'room1');
+  });
 
-//     // then
-//     expect(() => dataSource.getRooms(), throwsA(isA<JsonLoadException>()));
-//   });
-// }
+  test('getRooms rethrows UnKnownException on loading error', () async {
+    // given
+    when(() => mockRSupportApiService.getRooms())
+        .thenThrow(const UnKnownException('Failed to load JSON'));
+
+    // then
+    expect(() => dataSource.getRooms(), throwsA(isA<CustomException>()));
+  });
+}
