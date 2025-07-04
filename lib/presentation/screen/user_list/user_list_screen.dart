@@ -90,14 +90,18 @@ class _UserListScreenState extends ConsumerState<UserListScreen> {
             content: Material(
               // CupertinoAlertDialog는 기본적으로 텍스트만 되므로 감싸줌
               color: Colors.transparent,
-              child: content,
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 300),
+                    child: content),
+              ),
             ),
             actions: actions,
           );
         } else {
           return AlertDialog(
             title: title,
-            content: content,
+            content: SingleChildScrollView(child: content),
             actions: actions,
           );
         }

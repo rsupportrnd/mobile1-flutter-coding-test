@@ -52,30 +52,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         }
       },
       child: Scaffold(
-        body: FutureBuilder(
-            future: _loadFuture,
-            builder: (context, asyncSnapshot) {
-              if (asyncSnapshot.connectionState == ConnectionState.done) {
-                if (asyncSnapshot.hasError) {
-                  return const Center(child: Text("오류가 발생하였습니다."));
+        body: SafeArea(
+          child: FutureBuilder(
+              future: _loadFuture,
+              builder: (context, asyncSnapshot) {
+                if (asyncSnapshot.connectionState == ConnectionState.done) {
+                  if (asyncSnapshot.hasError) {
+                    return const Center(child: Text("오류가 발생하였습니다."));
+                  }
+                  return Center(
+                      child: screens[selectedTab] ??
+                          const Text("화면을 불러오는 중 오류가 발생하였습니다."));
+                } else {
+                  return const Center(
+                      child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text("데이터 불러오는중..."),
+                      SizedBox(height: 10),
+                      IgnorePointer(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
+                  ));
                 }
-                return Center(
-                    child: screens[selectedTab] ??
-                        const Text("화면을 불러오는 중 오류가 발생하였습니다."));
-              } else {
-                return const Center(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("데이터 불러오는중..."),
-                    SizedBox(height: 10),
-                    IgnorePointer(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ],
-                ));
-              }
-            }),
+              }),
+        ),
         bottomNavigationBar: BottomNavigationBar(
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Users'),
