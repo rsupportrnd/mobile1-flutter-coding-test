@@ -6,14 +6,14 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) =>
-    _UsersResponse(
+_UserResponse _$UserResponseFromJson(Map<String, dynamic> json) =>
+    _UserResponse(
       users: (json['users'] as List<dynamic>)
           .map((e) => UserModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$UsersResponseToJson(_UsersResponse instance) =>
+Map<String, dynamic> _$UserResponseToJson(_UserResponse instance) =>
     <String, dynamic>{
       'users': instance.users,
     };

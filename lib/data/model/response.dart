@@ -7,13 +7,13 @@ part 'response.freezed.dart';
 part 'response.g.dart';
 
 @freezed
-abstract class UsersResponse with _$UsersResponse {
-  const factory UsersResponse({
+abstract class UserResponse with _$UserResponse {
+  const factory UserResponse({
     required List<UserModel> users,
-  }) = _UsersResponse;
+  }) = _UserResponse;
 
-  factory UsersResponse.fromJson(Map<String, dynamic> json) =>
-      _$UsersResponseFromJson(json);
+  factory UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
 }
 
 @freezed

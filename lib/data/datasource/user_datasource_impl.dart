@@ -9,10 +9,10 @@ class UserDataSourceImpl implements UserDataSource {
   final IJsonLoader _jsonLoader;
 
   @override
-  Future<UsersResponse> getUsers() async {
+  Future<UserResponse> getUsers() async {
     try {
       final jsonMap = await _jsonLoader.loadJson('api/users.json');
-      return UsersResponse.fromJson(jsonMap);
+      return UserResponse.fromJson(jsonMap);
     } on JsonLoadException {
       rethrow; // Repository에서 처리
     }

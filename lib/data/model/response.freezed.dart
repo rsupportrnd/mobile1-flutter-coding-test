@@ -14,25 +14,25 @@ part of 'response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$UsersResponse {
+mixin _$UserResponse {
   List<UserModel> get users;
 
-  /// Create a copy of UsersResponse
+  /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $UsersResponseCopyWith<UsersResponse> get copyWith =>
-      _$UsersResponseCopyWithImpl<UsersResponse>(
-          this as UsersResponse, _$identity);
+  $UserResponseCopyWith<UserResponse> get copyWith =>
+      _$UserResponseCopyWithImpl<UserResponse>(
+          this as UserResponse, _$identity);
 
-  /// Serializes this UsersResponse to a JSON map.
+  /// Serializes this UserResponse to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is UsersResponse &&
+            other is UserResponse &&
             const DeepCollectionEquality().equals(other.users, users));
   }
 
@@ -43,28 +43,27 @@ mixin _$UsersResponse {
 
   @override
   String toString() {
-    return 'UsersResponse(users: $users)';
+    return 'UserResponse(users: $users)';
   }
 }
 
 /// @nodoc
-abstract mixin class $UsersResponseCopyWith<$Res> {
-  factory $UsersResponseCopyWith(
-          UsersResponse value, $Res Function(UsersResponse) _then) =
-      _$UsersResponseCopyWithImpl;
+abstract mixin class $UserResponseCopyWith<$Res> {
+  factory $UserResponseCopyWith(
+          UserResponse value, $Res Function(UserResponse) _then) =
+      _$UserResponseCopyWithImpl;
   @useResult
   $Res call({List<UserModel> users});
 }
 
 /// @nodoc
-class _$UsersResponseCopyWithImpl<$Res>
-    implements $UsersResponseCopyWith<$Res> {
-  _$UsersResponseCopyWithImpl(this._self, this._then);
+class _$UserResponseCopyWithImpl<$Res> implements $UserResponseCopyWith<$Res> {
+  _$UserResponseCopyWithImpl(this._self, this._then);
 
-  final UsersResponse _self;
-  final $Res Function(UsersResponse) _then;
+  final UserResponse _self;
+  final $Res Function(UserResponse) _then;
 
-  /// Create a copy of UsersResponse
+  /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -82,10 +81,10 @@ class _$UsersResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _UsersResponse implements UsersResponse {
-  const _UsersResponse({required final List<UserModel> users}) : _users = users;
-  factory _UsersResponse.fromJson(Map<String, dynamic> json) =>
-      _$UsersResponseFromJson(json);
+class _UserResponse implements UserResponse {
+  const _UserResponse({required final List<UserModel> users}) : _users = users;
+  factory _UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
 
   final List<UserModel> _users;
   @override
@@ -95,17 +94,17 @@ class _UsersResponse implements UsersResponse {
     return EqualUnmodifiableListView(_users);
   }
 
-  /// Create a copy of UsersResponse
+  /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$UsersResponseCopyWith<_UsersResponse> get copyWith =>
-      __$UsersResponseCopyWithImpl<_UsersResponse>(this, _$identity);
+  _$UserResponseCopyWith<_UserResponse> get copyWith =>
+      __$UserResponseCopyWithImpl<_UserResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$UsersResponseToJson(
+    return _$UserResponseToJson(
       this,
     );
   }
@@ -114,7 +113,7 @@ class _UsersResponse implements UsersResponse {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UsersResponse &&
+            other is _UserResponse &&
             const DeepCollectionEquality().equals(other._users, _users));
   }
 
@@ -125,37 +124,37 @@ class _UsersResponse implements UsersResponse {
 
   @override
   String toString() {
-    return 'UsersResponse(users: $users)';
+    return 'UserResponse(users: $users)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$UsersResponseCopyWith<$Res>
-    implements $UsersResponseCopyWith<$Res> {
-  factory _$UsersResponseCopyWith(
-          _UsersResponse value, $Res Function(_UsersResponse) _then) =
-      __$UsersResponseCopyWithImpl;
+abstract mixin class _$UserResponseCopyWith<$Res>
+    implements $UserResponseCopyWith<$Res> {
+  factory _$UserResponseCopyWith(
+          _UserResponse value, $Res Function(_UserResponse) _then) =
+      __$UserResponseCopyWithImpl;
   @override
   @useResult
   $Res call({List<UserModel> users});
 }
 
 /// @nodoc
-class __$UsersResponseCopyWithImpl<$Res>
-    implements _$UsersResponseCopyWith<$Res> {
-  __$UsersResponseCopyWithImpl(this._self, this._then);
+class __$UserResponseCopyWithImpl<$Res>
+    implements _$UserResponseCopyWith<$Res> {
+  __$UserResponseCopyWithImpl(this._self, this._then);
 
-  final _UsersResponse _self;
-  final $Res Function(_UsersResponse) _then;
+  final _UserResponse _self;
+  final $Res Function(_UserResponse) _then;
 
-  /// Create a copy of UsersResponse
+  /// Create a copy of UserResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? users = null,
   }) {
-    return _then(_UsersResponse(
+    return _then(_UserResponse(
       users: null == users
           ? _self._users
           : users // ignore: cast_nullable_to_non_nullable
