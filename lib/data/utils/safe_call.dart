@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:mobile1_flutter_coding_test/data/utils/retry_when.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/my_error.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/result.dart';
@@ -9,11 +10,24 @@ import 'package:mobile1_flutter_coding_test/domain/entity/result.dart';
 /// 에러 시 returnType: Result.failure
 Future<Result<T>> safeCall<T>(Future<T> Function() apiCall) async {
   try {
-    final data = await apiCall();
+    final data =
+        await apiCall().retryWhen(predicate: (error, retryCount, delay) {
+      return retryCount < 3; // 3번까지만 재시도
+    });
     return Result.success(data);
-  } on JsonLoadException catch (e) {
+  } on NetworkException catch (e) {
     return Result.failure(MyError(
-      type: ErrorType.jsonLoad,
+      type: ErrorType.network,
+      message: e.message,
+    ));
+  } on UnauthorizedException catch (e) {
+    return Result.failure(MyError(
+      type: ErrorType.unauthorized,
+      message: e.message,
+    ));
+  } on ServerException catch (e) {
+    return Result.failure(MyError(
+      type: ErrorType.server,
       message: e.message,
     ));
   } catch (e) {

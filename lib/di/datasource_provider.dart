@@ -9,14 +9,14 @@ import 'package:mobile1_flutter_coding_test/data/datasource/user_datasource.dart
 import 'package:mobile1_flutter_coding_test/data/datasource/user_datasource_impl.dart';
 import 'package:mobile1_flutter_coding_test/di/service_provider.dart';
 
-final messageDataSourceProvider = Provider<MessageDataSource>(
-    (ref) => MessageDataSourceImpl(jsonLoader: ref.read(jsonLoaderProvider)));
+final messageDataSourceProvider = Provider<MessageDataSource>((ref) =>
+    MessageDataSourceImpl(service: ref.read(rsupportApiServiceProvider)));
 
 final roomDataSourceProvider = Provider<RoomDataSource>(
-    (ref) => RoomDataSourceImpl(jsonLoader: ref.read(jsonLoaderProvider)));
+    (ref) => RoomDataSourceImpl(service: ref.read(rsupportApiServiceProvider)));
 
 final userDataSourceProvider = Provider<UserDataSource>(
-    (ref) => UserDataSourceImpl(jsonLoader: ref.read(jsonLoaderProvider)));
+    (ref) => UserDataSourceImpl(service: ref.read(rsupportApiServiceProvider)));
 
 final localDatabaseDataSourceProvider = Provider<LocalDatabaseDataSource>(
     (ref) => LocalDatabaseDataSourceImpl(

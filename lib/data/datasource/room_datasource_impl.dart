@@ -1,20 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/room_datasource.dart';
 import 'package:mobile1_flutter_coding_test/data/model/response.dart';
-import 'package:mobile1_flutter_coding_test/data/utils/json_loader.dart';
+import 'package:mobile1_flutter_coding_test/data/remote/rsupport_api_service.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/exception.dart';
 
 class RoomDataSourceImpl implements RoomDataSource {
-  RoomDataSourceImpl({required IJsonLoader jsonLoader})
-      : _jsonLoader = jsonLoader;
-  final IJsonLoader _jsonLoader;
+  RoomDataSourceImpl({required RSupportApiService service})
+      : _service = service;
+  final RSupportApiService _service;
 
   @override
   Future<ChatRoomResponse> getRooms() async {
     try {
-      final jsonMap = await _jsonLoader.loadJson('api/rooms.json');
-      return ChatRoomResponse.fromJson(jsonMap);
-    } on JsonLoadException {
-      rethrow; // Repository에서 처리
+      return await _service.getRooms();
+    } on DioException catch (e) {
+      throw e.error as CustomException;
     }
   }
 }

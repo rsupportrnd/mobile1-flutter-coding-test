@@ -45,6 +45,8 @@ dependencies:
   intl: ^0.20.2
   fluttertoast: ^8.2.12
   sqflite_common_ffi: ^2.3.6
+  retrofit: ^4.5.0
+  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +63,7 @@ dev_dependencies:
   json_serializable: ^6.9.5
   riverpod_generator: ^2.6.5
   mocktail: ^1.0.4
+  retrofit_generator: ^9.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

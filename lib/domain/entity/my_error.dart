@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'my_error.freezed.dart';
 
-enum ErrorType { jsonLoad, unknown }
+enum ErrorType { unauthorized, network, server, unknown }
 
 @freezed
 abstract class MyError with _$MyError {
