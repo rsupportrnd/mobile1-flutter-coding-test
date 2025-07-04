@@ -14,7 +14,6 @@ abstract class BaseViewModel<T> extends StateNotifier<T> {
   }) async {
     setLoading(true);
     final result = await task();
-    await Future.delayed(const Duration(milliseconds: 1000));
     setLoading(false);
 
     return switch (result) {
