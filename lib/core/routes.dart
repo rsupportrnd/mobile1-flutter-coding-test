@@ -1,0 +1,38 @@
+import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
+import '../presentation/startup/startup_view.dart';
+
+class AppRoutes {
+  static const String splash = '/'; // boot
+  static const String home = '/home'; // 메인 : 쉘 라우트 바텀 네비 (상태 유지)
+  static const String users = '/home/users'; // 유저 리스트
+  static const String rooms = '/home/rooms'; // 방 리스트
+  static const String userDetail = '/home/users/:userId'; // 유저 상세
+  static const String chat = '/home/rooms/:roomId/chat'; // 방 상세
+}
+
+GoRouter createRouter() {
+  return GoRouter(
+    initialLocation: AppRoutes.splash,
+    routes: [
+      GoRoute(
+        path: AppRoutes.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.home,
+        pageBuilder: (context, state) => NoTransitionPage(child: Container()),
+        routes: [
+          GoRoute(
+            path: 'users/:userId',
+            builder: (context, state) => Container(),
+          ),
+          GoRoute(
+            path: 'rooms/:roomId/chat',
+            builder: (context, state) => Container(),
+          ),
+        ],
+      ),
+    ],
+  );
+}
