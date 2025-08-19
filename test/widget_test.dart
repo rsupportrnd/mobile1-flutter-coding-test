@@ -7,24 +7,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/main.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() async {
+    await setupDependencies();
+  });
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    // 템플릿 Counter 테스트는 삭제하고, 앱이 부팅되는지만 확인
+    await tester.pumpWidget(const MyApp()); // 또는 const App()
+    await tester.pump(); // 1 프레임
+    await tester
+        .pump(const Duration(milliseconds: 400)); // StartupCubit delay 통과
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // 하단 탭/Users 화면 존재 확인(프로젝트 구조에 맞게 문구 조정)
+    expect(find.byType(BottomNavigationBar), findsOneWidget);
+    expect(find.text('Users'), findsWidgets);
   });
 }
