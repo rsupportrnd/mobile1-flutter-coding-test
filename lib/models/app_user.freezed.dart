@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,284 +9,280 @@ part of 'app_user.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+AppUser _$AppUserFromJson(Map<String, dynamic> json) {
+  return _AppUser.fromJson(json);
+}
 
 /// @nodoc
 mixin _$AppUser {
-
- String get userId; String get name; String get email; String get profilePicture; String get status; String get role;
-/// Create a copy of AppUser
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AppUserCopyWith<AppUser> get copyWith => _$AppUserCopyWithImpl<AppUser>(this as AppUser, _$identity);
+  String get userId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String get profilePicture => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
 
   /// Serializes this AppUser to a JSON map.
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppUser&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,userId,name,email,profilePicture,status,role);
-
-@override
-String toString() {
-  return 'AppUser(userId: $userId, name: $name, email: $email, profilePicture: $profilePicture, status: $status, role: $role)';
-}
-
-
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AppUserCopyWith<AppUser> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract mixin class $AppUserCopyWith<$Res>  {
-  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) _then) = _$AppUserCopyWithImpl;
-@useResult
-$Res call({
- String userId, String name, String email, String profilePicture, String status, String role
-});
-
-
-
-
+abstract class $AppUserCopyWith<$Res> {
+  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
+      _$AppUserCopyWithImpl<$Res, AppUser>;
+  @useResult
+  $Res call({
+    String userId,
+    String name,
+    String email,
+    String profilePicture,
+    String status,
+    String role,
+  });
 }
+
 /// @nodoc
-class _$AppUserCopyWithImpl<$Res>
+class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
     implements $AppUserCopyWith<$Res> {
-  _$AppUserCopyWithImpl(this._self, this._then);
+  _$AppUserCopyWithImpl(this._value, this._then);
 
-  final AppUser _self;
-  final $Res Function(AppUser) _then;
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
-/// Create a copy of AppUser
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? name = null,Object? email = null,Object? profilePicture = null,Object? status = null,Object? role = null,}) {
-  return _then(_self.copyWith(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,profilePicture: null == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? name = null,
+    Object? email = null,
+    Object? profilePicture = null,
+    Object? status = null,
+    Object? role = null,
+  }) {
+    return _then(
+      _value.copyWith(
+            userId: null == userId
+                ? _value.userId
+                : userId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            email: null == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            profilePicture: null == profilePicture
+                ? _value.profilePicture
+                : profilePicture // ignore: cast_nullable_to_non_nullable
+                      as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String,
+            role: null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
+                      as String,
+          )
+          as $Val,
+    );
+  }
 }
 
+/// @nodoc
+abstract class _$$AppUserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
+  factory _$$AppUserImplCopyWith(
+    _$AppUserImpl value,
+    $Res Function(_$AppUserImpl) then,
+  ) = __$$AppUserImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String userId,
+    String name,
+    String email,
+    String profilePicture,
+    String status,
+    String role,
+  });
 }
 
+/// @nodoc
+class __$$AppUserImplCopyWithImpl<$Res>
+    extends _$AppUserCopyWithImpl<$Res, _$AppUserImpl>
+    implements _$$AppUserImplCopyWith<$Res> {
+  __$$AppUserImplCopyWithImpl(
+    _$AppUserImpl _value,
+    $Res Function(_$AppUserImpl) _then,
+  ) : super(_value, _then);
 
-/// Adds pattern-matching-related methods to [AppUser].
-extension AppUserPatterns on AppUser {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AppUser value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _AppUser() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AppUser value)  $default,){
-final _that = this;
-switch (_that) {
-case _AppUser():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AppUser value)?  $default,){
-final _that = this;
-switch (_that) {
-case _AppUser() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  String name,  String email,  String profilePicture,  String status,  String role)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _AppUser() when $default != null:
-return $default(_that.userId,_that.name,_that.email,_that.profilePicture,_that.status,_that.role);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  String name,  String email,  String profilePicture,  String status,  String role)  $default,) {final _that = this;
-switch (_that) {
-case _AppUser():
-return $default(_that.userId,_that.name,_that.email,_that.profilePicture,_that.status,_that.role);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  String name,  String email,  String profilePicture,  String status,  String role)?  $default,) {final _that = this;
-switch (_that) {
-case _AppUser() when $default != null:
-return $default(_that.userId,_that.name,_that.email,_that.profilePicture,_that.status,_that.role);case _:
-  return null;
-
-}
-}
-
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? name = null,
+    Object? email = null,
+    Object? profilePicture = null,
+    Object? status = null,
+    Object? role = null,
+  }) {
+    return _then(
+      _$AppUserImpl(
+        userId: null == userId
+            ? _value.userId
+            : userId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: null == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        profilePicture: null == profilePicture
+            ? _value.profilePicture
+            : profilePicture // ignore: cast_nullable_to_non_nullable
+                  as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
+        role: null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
+class _$AppUserImpl implements _AppUser {
+  const _$AppUserImpl({
+    required this.userId,
+    this.name = 'unknown',
+    this.email = '',
+    this.profilePicture = '',
+    this.status = '',
+    this.role = '',
+  });
 
-class _AppUser implements AppUser {
-  const _AppUser({required this.userId, this.name = 'unknown', this.email = '', this.profilePicture = '', this.status = '', this.role = ''});
-  factory _AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);
+  factory _$AppUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AppUserImplFromJson(json);
 
-@override final  String userId;
-@override@JsonKey() final  String name;
-@override@JsonKey() final  String email;
-@override@JsonKey() final  String profilePicture;
-@override@JsonKey() final  String status;
-@override@JsonKey() final  String role;
+  @override
+  final String userId;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  @JsonKey()
+  final String email;
+  @override
+  @JsonKey()
+  final String profilePicture;
+  @override
+  @JsonKey()
+  final String status;
+  @override
+  @JsonKey()
+  final String role;
 
-/// Create a copy of AppUser
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$AppUserCopyWith<_AppUser> get copyWith => __$AppUserCopyWithImpl<_AppUser>(this, _$identity);
+  @override
+  String toString() {
+    return 'AppUser(userId: $userId, name: $name, email: $email, profilePicture: $profilePicture, status: $status, role: $role)';
+  }
 
-@override
-Map<String, dynamic> toJson() {
-  return _$AppUserToJson(this, );
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AppUserImpl &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.profilePicture, profilePicture) ||
+                other.profilePicture == profilePicture) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.role, role) || other.role == role));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    userId,
+    name,
+    email,
+    profilePicture,
+    status,
+    role,
+  );
+
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AppUserImplCopyWith<_$AppUserImpl> get copyWith =>
+      __$$AppUserImplCopyWithImpl<_$AppUserImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AppUserImplToJson(this);
+  }
 }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppUser&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture)&&(identical(other.status, status) || other.status == status)&&(identical(other.role, role) || other.role == role));
+abstract class _AppUser implements AppUser {
+  const factory _AppUser({
+    required final String userId,
+    final String name,
+    final String email,
+    final String profilePicture,
+    final String status,
+    final String role,
+  }) = _$AppUserImpl;
+
+  factory _AppUser.fromJson(Map<String, dynamic> json) = _$AppUserImpl.fromJson;
+
+  @override
+  String get userId;
+  @override
+  String get name;
+  @override
+  String get email;
+  @override
+  String get profilePicture;
+  @override
+  String get status;
+  @override
+  String get role;
+
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppUserImplCopyWith<_$AppUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,userId,name,email,profilePicture,status,role);
-
-@override
-String toString() {
-  return 'AppUser(userId: $userId, name: $name, email: $email, profilePicture: $profilePicture, status: $status, role: $role)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
-  factory _$AppUserCopyWith(_AppUser value, $Res Function(_AppUser) _then) = __$AppUserCopyWithImpl;
-@override @useResult
-$Res call({
- String userId, String name, String email, String profilePicture, String status, String role
-});
-
-
-
-
-}
-/// @nodoc
-class __$AppUserCopyWithImpl<$Res>
-    implements _$AppUserCopyWith<$Res> {
-  __$AppUserCopyWithImpl(this._self, this._then);
-
-  final _AppUser _self;
-  final $Res Function(_AppUser) _then;
-
-/// Create a copy of AppUser
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? name = null,Object? email = null,Object? profilePicture = null,Object? status = null,Object? role = null,}) {
-  return _then(_AppUser(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,profilePicture: null == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-// dart format on

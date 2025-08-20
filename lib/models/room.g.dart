@@ -6,7 +6,7 @@ part of 'room.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Room _$RoomFromJson(Map<String, dynamic> json) => _Room(
+_$RoomImpl _$$RoomImplFromJson(Map<String, dynamic> json) => _$RoomImpl(
   roomId: json['roomId'] as String? ?? '111',
   roomName: json['roomName'] as String? ?? '',
   creator: json['creator'] as String? ?? '',
@@ -20,12 +20,13 @@ _Room _$RoomFromJson(Map<String, dynamic> json) => _Room(
   lastMessage: json['lastMessage'] as Map<String, dynamic>?,
 );
 
-Map<String, dynamic> _$RoomToJson(_Room instance) => <String, dynamic>{
-  'roomId': instance.roomId,
-  'roomName': instance.roomName,
-  'creator': instance.creator,
-  'participants': instance.participants,
-  'createdAt': instance.createdAt,
-  'thumbnailImage': instance.thumbnailImage,
-  'lastMessage': instance.lastMessage,
-};
+Map<String, dynamic> _$$RoomImplToJson(_$RoomImpl instance) =>
+    <String, dynamic>{
+      'roomId': instance.roomId,
+      'roomName': instance.roomName,
+      'creator': instance.creator,
+      'participants': instance.participants,
+      'createdAt': instance.createdAt,
+      'thumbnailImage': instance.thumbnailImage,
+      'lastMessage': instance.lastMessage,
+    };

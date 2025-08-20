@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import '../presentation/startup/startup_view.dart';
+import 'package:mobile1_flutter_coding_test/presentation/home/home_shell.dart';
+import 'package:mobile1_flutter_coding_test/presentation/startup/startup_view.dart';
 
 class AppRoutes {
   static const String splash = '/'; // boot
@@ -21,7 +22,7 @@ GoRouter createRouter() {
       ),
       GoRoute(
         path: AppRoutes.home,
-        pageBuilder: (context, state) => NoTransitionPage(child: Container()),
+        pageBuilder: (context, state) => NoTransitionPage(child: HomeShell()),
         routes: [
           GoRoute(
             path: 'users/:userId',
