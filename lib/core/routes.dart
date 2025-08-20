@@ -29,26 +29,48 @@ class Routes {
       ),
       GoRoute(
         path: AppRoutes.home,
-        pageBuilder: (context, state) => NoTransitionPage(child: HomeShell()),
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: HomeShell(),
+          transitionDuration: const Duration(milliseconds: 220),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final fade = CurvedAnimation(curve: Curves.easeInOut, parent: animation);
+            return FadeTransition(opacity: fade, child: child);
+          },
+        ),
         routes: [
           GoRoute(
             path: 'users/:userId',
-            builder: (context, state) {
+            pageBuilder: (context, state) {
               final id = state.pathParameters['userId'] ?? '';
               final extra = state.extra;
-              if (extra is UserDetailArgs) {
-                return UserDetailView(
-                  userId: id,
-                  user: extra.user,
-                  isMe: extra.isMe,
-                );
-              }
-              return UserDetailView(userId: id);
+              final pageChild = (extra is UserDetailArgs)
+                  ? UserDetailView(userId: id, user: extra.user, isMe: extra.isMe)
+                  : UserDetailView(userId: id);
+              return CustomTransitionPage(
+                child: pageChild,
+                transitionDuration: const Duration(milliseconds: 260),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  final curved = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+                  final offset = Tween<Offset>(begin: const Offset(0.1, 0.0), end: Offset.zero).animate(curved);
+                  return SlideTransition(position: offset, child: FadeTransition(opacity: curved, child: child));
+                },
+              );
             },
           ),
           GoRoute(
             path: 'rooms/:roomId/chat',
-            builder: (context, state) => Container(),
+            pageBuilder: (context, state) {
+              final child = Container();
+              return CustomTransitionPage(
+                child: child,
+                transitionDuration: const Duration(milliseconds: 260),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  final curved = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+                  final offset = Tween<Offset>(begin: const Offset(0.1, 0.0), end: Offset.zero).animate(curved);
+                  return SlideTransition(position: offset, child: FadeTransition(opacity: curved, child: child));
+                },
+              );
+            },
           ),
         ],
       ),

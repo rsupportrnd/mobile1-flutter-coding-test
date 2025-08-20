@@ -110,23 +110,43 @@ class _HomeShellView extends StatelessWidget {
                 RoomsListScreen(key: ValueKey('rooms-${state.currentUserId}')),
               ],
             ),
-            bottomNavigationBar: NavigationBar(
-              selectedIndex: state.navIdx,
-              onDestinationSelected: (index) {
-                context.read<HomeBloc>().add(HomeEvent.move(index));
-              },
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.person_outline),
-                  selectedIcon: Icon(Icons.person),
-                  label: '사용자',
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                border: Border(
+                  top: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                    width: 0.5,
+                  ),
                 ),
-                NavigationDestination(
-                  icon: Icon(Icons.chat_bubble_outline),
-                  selectedIcon: Icon(Icons.chat_bubble),
-                  label: '채팅방',
-                ),
-              ],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    offset: const Offset(0, -2),
+                    blurRadius: 8,
+                  )
+                ],
+              ),
+              child: NavigationBar(
+                selectedIndex: state.navIdx,
+                onDestinationSelected: (index) {
+                  context.read<HomeBloc>().add(HomeEvent.move(index));
+                },
+                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                indicatorColor: Theme.of(context).colorScheme.primary.withOpacity(0.12),
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person),
+                    label: '사용자',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.chat_bubble_outline),
+                    selectedIcon: Icon(Icons.chat_bubble),
+                    label: '채팅방',
+                  ),
+                ],
+              ),
             ),
           );
         },
