@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = createRouter();
     return MultiBlocProvider(
       providers: [
         BlocProvider<StartupCubit>(
-          create: (_) => StartupCubit()..start(),
+          create: (_) => injector<StartupCubit>()..start(),
         ),
       ],
       child: MaterialApp.router(
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
-        routerConfig: router,
+        routerConfig: Routes.router,
       ),
     );
   }

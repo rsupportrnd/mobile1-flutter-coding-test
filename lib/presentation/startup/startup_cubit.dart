@@ -20,6 +20,7 @@ class StartupCubit extends Cubit<bool> {
 
       emit(true);
     } catch (e) {
+      print(e);
       emit(false);
     }
   }

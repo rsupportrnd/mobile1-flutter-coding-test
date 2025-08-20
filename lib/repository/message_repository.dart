@@ -8,8 +8,8 @@ import 'package:mobile1_flutter_coding_test/models/chat_message.dart';
 
 class MessageRepository {
   MessageRepository(this._dio, this._storage)
-      : _local = LocalDataSource(),
-        _net = NetworkDataSource(_dio);
+    : _local = LocalDataSource(),
+      _net = NetworkDataSource(_dio);
 
   final Dio _dio;
   final Storage _storage;
@@ -27,19 +27,30 @@ class MessageRepository {
     final seeded = (_storage.get(StorageKeys.firstSeedDone) as bool?) ?? false;
     if (!seeded) {
       await _seedFirstRun();
-      await _storage.set(StorageKeys.firstSeedDone, true);
+      await _storage.set(StorageKeys.firstSeedDone, true); // 여기까지 와서야 퍼스트런 체크
     }
     // Hive -> 캐시
     _cache.clear();
     for (final k in _storage.keys()) {
       if (k is String && k.startsWith('msgs:')) {
         final roomId = k.substring('msgs:'.length);
-        final list = ((_storage.get(k) as List?) ?? const [])
-            .cast<Map>()
-            .map((m) => ChatMessage.fromJson(Map<String, dynamic>.from(m)))
-            .toList()
-          ..sort((a, b) => DateTime.parse(a.timestamp)
-              .compareTo(DateTime.parse(b.timestamp)));
+        final raw = _storage.get(k);
+        final list = <ChatMessage>[];
+
+        if (raw is List) {
+          for (final e in raw) {
+            if (e is Map) {
+              // key를 String으로 고정
+              final m = e.map((key, value) => MapEntry(key.toString(), value));
+              list.add(ChatMessage.fromJson(m)); // Map<String, dynamic>
+            }
+          }
+        }
+
+        int ts(ChatMessage m) =>
+            DateTime.tryParse(m.timestamp)?.millisecondsSinceEpoch ?? 0;
+
+        list.sort((a, b) => ts(a).compareTo(ts(b)));
         _cache[roomId] = list;
       }
     }
@@ -55,15 +66,23 @@ class MessageRepository {
 
     // 방별 그룹 & 저장
     final byRoom = <String, List<Map<String, dynamic>>>{};
-    for (final m in list.cast<Map<String, dynamic>>()) {
-      final msg = ChatMessage.fromJson(m);
-      byRoom.putIfAbsent(msg.roomId, () => []).add(msg.toJson());
+    for (final e in list) {
+      if (e is Map) {
+        final m = Map<String, dynamic>.from(
+          e.map((k, v) => MapEntry(k.toString(), v)),
+        );
+        final msg = ChatMessage.fromJson(m);
+        byRoom.putIfAbsent(msg.roomId, () => []).add(msg.toJson());
+      } else {}
     }
     for (final entry in byRoom.entries) {
       final roomId = entry.key;
       final arr = entry.value
-        ..sort((a, b) => DateTime.parse(a['timestamp'])
-            .compareTo(DateTime.parse(b['timestamp'])));
+        ..sort(
+          (a, b) => DateTime.parse(
+            a['timestamp'],
+          ).compareTo(DateTime.parse(b['timestamp'])),
+        );
       await _storage.set(StorageKeys.roomMessages(roomId), arr);
 
       // roomMeta 갱신
@@ -80,8 +99,10 @@ class MessageRepository {
   Future<void> add(ChatMessage m) async {
     final list = List<ChatMessage>.from(_cache[m.roomId] ?? const []);
     list.add(m);
-    list.sort((a, b) =>
-        DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)));
+    list.sort(
+      (a, b) =>
+          DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)),
+    );
     _cache[m.roomId] = list;
 
     // 저장
@@ -109,8 +130,10 @@ class MessageRepository {
     final old = list[idx].toJson();
     final merged = {...old, ...patch};
     list[idx] = ChatMessage.fromJson(merged);
-    list.sort((a, b) =>
-        DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)));
+    list.sort(
+      (a, b) =>
+          DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)),
+    );
     _cache[roomId] = list;
 
     await _storage.set(
@@ -133,8 +156,10 @@ class MessageRepository {
     final removed = list.any((e) => e.messageId == messageId);
     if (!removed) return false;
 
-    list.sort((a, b) =>
-        DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)));
+    list.sort(
+      (a, b) =>
+          DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)),
+    );
     _cache[roomId] = list;
 
     await _storage.set(
@@ -180,16 +205,20 @@ class MessageRepository {
 
   // toDo : 방별 스트림 구독 => 서버측 수신시 stream을 통해 업데이트 가능
   Stream<List<ChatMessage>> watchByRoom(String roomId) {
-    return _storage
-        .watch(key: StorageKeys.roomMessages(roomId))
-        .asyncMap((_) async {
-      final raw = ((_storage.get(StorageKeys.roomMessages(roomId)) as List?) ??
-              const [])
-          .cast<Map>()
-          .map((m) => ChatMessage.fromJson(Map<String, dynamic>.from(m)))
-          .toList()
-        ..sort((a, b) =>
-            DateTime.parse(a.timestamp).compareTo(DateTime.parse(b.timestamp)));
+    return _storage.watch(key: StorageKeys.roomMessages(roomId)).asyncMap((
+      _,
+    ) async {
+      final raw =
+          ((_storage.get(StorageKeys.roomMessages(roomId)) as List?) ??
+                  const [])
+              .cast<Map>()
+              .map((m) => ChatMessage.fromJson(Map<String, dynamic>.from(m)))
+              .toList()
+            ..sort(
+              (a, b) => DateTime.parse(
+                a.timestamp,
+              ).compareTo(DateTime.parse(b.timestamp)),
+            );
       _cache[roomId] = raw;
       return List<ChatMessage>.from(raw);
     });

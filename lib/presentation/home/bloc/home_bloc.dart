@@ -32,14 +32,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> _setupUser() async {
     // 저장된 마지막 유저가 없다면 첫번째 유저를 설정
     await _userRepo.load();
-    final users = _userRepo.users;
-    if (users.isNotEmpty) {
-      final firstUser = users.first;
+    late final last;
+    if (_userRepo.lastSession != null) {
+      last = _userRepo.lastSession;
+    } else {
+      last = _userRepo.users.isNotEmpty ? _userRepo.users.first : null;
+    }
+    if (last != null) {
       emit(
-        state.copyWith(
-          currentUserId: firstUser.userId,
-          currentUserName: firstUser.name,
-        ),
+        state.copyWith(currentUserId: last.userId, currentUserName: last.name),
       );
     }
   }
@@ -51,7 +52,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (u) => u.userId == userId,
       orElse: () => users.first,
     );
-
+    await _userRepo.setLastSession(user.userId);
     emit(
       state.copyWith(currentUserId: user.userId, currentUserName: user.name),
     );

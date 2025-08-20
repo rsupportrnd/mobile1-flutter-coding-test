@@ -5,11 +5,12 @@ import 'package:mobile1_flutter_coding_test/api/network/network_data_source.dart
 import 'package:mobile1_flutter_coding_test/core/storage/storage.dart';
 import 'package:mobile1_flutter_coding_test/core/storage/storage_keys.dart';
 import 'package:mobile1_flutter_coding_test/models/room.dart';
+import 'package:mobile1_flutter_coding_test/repository/utils.dart';
 
 class RoomRepository {
   RoomRepository(this._dio, this._storage)
-      : _local = LocalDataSource(),
-        _net = NetworkDataSource(_dio);
+    : _local = LocalDataSource(),
+      _net = NetworkDataSource(_dio);
 
   final Dio _dio;
   final Storage _storage;
@@ -24,7 +25,6 @@ class RoomRepository {
     final seeded = (_storage.get(StorageKeys.firstSeedDone) as bool?) ?? false;
     if (!seeded) {
       await _seedFirstRun();
-      await _storage.set(StorageKeys.firstSeedDone, true);
     }
     _rooms
       ..clear()
@@ -38,9 +38,14 @@ class RoomRepository {
     } catch (_) {
       list = await _local.loadRooms();
     }
-    for (final m in list.cast<Map<String, dynamic>>()) {
-      final r = Room.fromJson(m);
-      await _storage.set(StorageKeys.room(r.roomId), r.toJson());
+    for (final e in list) {
+      if (e is Map) {
+        final m = Map<String, dynamic>.from(
+          e.map((k, v) => MapEntry(k.toString(), v)),
+        );
+        final r = Room.fromJson(m);
+        await _storage.set(StorageKeys.room(r.roomId), r.toJson());
+      } else {}
     }
   }
 
@@ -48,8 +53,11 @@ class RoomRepository {
     final out = <Room>[];
     for (final k in _storage.keys()) {
       if (k is String && k.startsWith('room:')) {
-        final map = (_storage.get(k) as Map?)?.cast<String, dynamic>();
-        if (map != null) out.add(Room.fromJson(map));
+        final raw = _storage.get(k);
+        if (raw is Map) {
+          final normalized = normalizeJson(raw) as Map<String, dynamic>;
+          out.add(Room.fromJson(normalized));
+        }
       }
     }
     return out;

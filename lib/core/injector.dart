@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile1_flutter_coding_test/core/storage/storage.dart';
+import 'package:mobile1_flutter_coding_test/presentation/startup/startup_cubit.dart';
 
 import '../repository/message_repository.dart';
 import '../repository/room_repository.dart';
@@ -17,9 +18,15 @@ Future<void> setupDependencies() async {
   injector.registerSingleton<Storage>(storage);
   // repo
   injector.registerLazySingleton<UserRepository>(
-      () => UserRepository(injector<Dio>(), injector<Storage>()));
+    () => UserRepository(injector<Dio>(), injector<Storage>()),
+  );
   injector.registerLazySingleton<RoomRepository>(
-      () => RoomRepository(injector<Dio>(), injector<Storage>()));
+    () => RoomRepository(injector<Dio>(), injector<Storage>()),
+  );
   injector.registerLazySingleton<MessageRepository>(
-      () => MessageRepository(injector<Dio>(), injector<Storage>()));
+    () => MessageRepository(injector<Dio>(), injector<Storage>()),
+  );
+
+  //startUp
+  injector.registerLazySingleton<StartupCubit>(() => StartupCubit());
 }
