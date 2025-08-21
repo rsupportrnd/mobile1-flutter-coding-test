@@ -116,6 +116,16 @@ class MessageRepository {
       'lastMessageId': last.messageId,
       'lastMessageAt': last.timestamp,
     });
+
+    // 룸 객체의 lastMessage 필드 패치 (로컬 저장소 반영)
+    final roomKey = StorageKeys.room(m.roomId);
+    final roomRaw = (_storage.get(roomKey) as Map?)?.cast<String, dynamic>() ?? <String, dynamic>{};
+    roomRaw['lastMessage'] = {
+      'sender': m.sender,
+      'content': m.content,
+      'timestamp': m.timestamp,
+    };
+    await _storage.set(roomKey, roomRaw);
   }
 
   Future<bool> update({

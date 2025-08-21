@@ -55,21 +55,10 @@ class _ChatViewState extends State<ChatView> {
               Expanded(
                 child: state.loading
                     ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        itemCount: state.messages.length,
-                        itemBuilder: (context, index) {
-                          final msg = state.messages[index];
-                          final isMine = msg.sender == me;
-                          return _MessageBubble(
-                            message: msg,
-                            isMine: isMine,
-                            sender: state.userById[msg.sender],
-                          );
-                        },
+                    : _GroupedChatList(
+                        messages: state.messages,
+                        me: me,
+                        userById: state.userById,
                       ),
               ),
               _InputBar(
@@ -189,6 +178,7 @@ class _MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userName = sender?.name ?? message.sender;
+    final time = _formatTime(message.timestamp);
 
     return Align(
       alignment: isMine ? Alignment.centerRight : Alignment.centerLeft,
@@ -245,15 +235,37 @@ class _MessageBubble extends StatelessWidget {
                   bottomRight: Radius.circular(isMine ? 4 : 14),
                 ),
               ),
-              child: Text(
-                message.content,
-                style: Theme.of(context).textTheme.bodyMedium,
+              child: Column(
+                crossAxisAlignment: isMine
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    message.content,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    time,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  String _formatTime(String iso) {
+    final dt = DateTime.tryParse(iso)?.toLocal();
+    if (dt == null) return '';
+    final h = dt.hour.toString().padLeft(2, '0');
+    final m = dt.minute.toString().padLeft(2, '0');
+    return '$h:$m';
   }
 }
 
@@ -299,5 +311,77 @@ class _InputBar extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _GroupedChatList extends StatelessWidget {
+  const _GroupedChatList({
+    required this.messages,
+    required this.me,
+    required this.userById,
+  });
+
+  final List<dynamic> messages;
+  final String me;
+  final Map<String, AppUser> userById;
+
+  @override
+  Widget build(BuildContext context) {
+    final groups = <String, List<dynamic>>{};
+    for (final m in messages) {
+      final day = _dayKey(m.timestamp);
+      groups.putIfAbsent(day, () => []).add(m);
+    }
+    final orderedDays = groups.keys.toList()..sort((a, b) => a.compareTo(b));
+
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      itemCount: orderedDays.length,
+      itemBuilder: (context, dayIndex) {
+        final day = orderedDays[dayIndex];
+        final list = groups[day]!
+          ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    day,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+              ),
+            ),
+            ...list.map((msg) {
+              final isMine = msg.sender == me;
+              return _MessageBubble(
+                message: msg,
+                isMine: isMine,
+                sender: userById[msg.sender],
+              );
+            }),
+          ],
+        );
+      },
+    );
+  }
+
+  String _dayKey(String iso) {
+    final dt = DateTime.tryParse(iso)?.toLocal();
+    if (dt == null) return '';
+    return '${dt.year}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}';
   }
 }
