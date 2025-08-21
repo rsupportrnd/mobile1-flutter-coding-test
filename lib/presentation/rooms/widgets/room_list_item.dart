@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
+import 'package:mobile1_flutter_coding_test/core/routes.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/models/room.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
+import 'package:mobile1_flutter_coding_test/presentation/rooms/chatting/chat_view.dart';
+import 'package:mobile1_flutter_coding_test/presentation/home/bloc/home_bloc.dart';
 
 class RoomListItem extends StatelessWidget {
   const RoomListItem({super.key, required this.room});
@@ -31,7 +37,11 @@ class RoomListItem extends StatelessWidget {
         ],
       ),
       onTap: () {
-        // TODO: 채팅방으로 이동
+        final currentUserId = context.read<HomeBloc>().state.currentUserId;
+        context.go(
+          '${AppRoutes.home}/rooms/${room.roomId}/chat',
+          extra: ChatArgs(currentUserId: currentUserId),
+        );
       },
     );
   }

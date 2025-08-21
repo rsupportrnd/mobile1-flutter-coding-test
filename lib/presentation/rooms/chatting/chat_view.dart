@@ -1,0 +1,303 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile1_flutter_coding_test/core/injector.dart';
+import 'package:mobile1_flutter_coding_test/models/app_user.dart';
+import 'package:mobile1_flutter_coding_test/presentation/users/widgets/user_avatar.dart';
+import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
+
+import 'bloc/chat_bloc.dart';
+
+class ChatArgs {
+  ChatArgs({required this.currentUserId});
+  final String currentUserId;
+}
+
+class ChatView extends StatefulWidget {
+  const ChatView({
+    super.key,
+    required this.roomId,
+    required this.currentUserId,
+  });
+
+  final String roomId;
+  final String currentUserId;
+
+  @override
+  State<ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<ChatView> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ChatBloc>().add(ChatEvent.load(widget.roomId));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ChatBloc, ChatState>(
+      builder: (context, state) {
+        final me = widget.currentUserId;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(state.room?.roomName ?? '채팅'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.group_outlined),
+                onPressed: () => _openDetailsSheet(context),
+              ),
+            ],
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: state.loading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        itemCount: state.messages.length,
+                        itemBuilder: (context, index) {
+                          final msg = state.messages[index];
+                          final isMine = msg.sender == me;
+                          return _MessageBubble(
+                            message: msg,
+                            isMine: isMine,
+                            sender: state.userById[msg.sender],
+                          );
+                        },
+                      ),
+              ),
+              _InputBar(
+                controller: _controller,
+                onSend: (text) {
+                  context.read<ChatBloc>().add(ChatEvent.send(text, me));
+                  _controller.clear();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _openDetailsSheet(BuildContext context) {
+    final state = context.read<ChatBloc>().state;
+    final room = state.room;
+    if (room == null) return;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.6,
+          minChildSize: 0.4,
+          maxChildSize: 0.9,
+          builder: (context, scrollController) {
+            return Column(
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).dividerColor,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Text(
+                        '참여자',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Expanded(
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: room.participants.length,
+                    itemBuilder: (context, index) {
+                      final uid = room.participants[index];
+                      final isHost = uid == room.creator;
+                      final user = state.userById[uid];
+                      return ListTile(
+                        leading: UserAvatar(
+                          url: user?.profilePicture ?? '',
+                          size: 40,
+                          iconSize: 20,
+                        ),
+                        title: Text(user?.name ?? uid),
+                        subtitle: Text(user?.email ?? ''),
+                        trailing: isHost
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primaryContainer,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  '방장',
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                ),
+                              )
+                            : null,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _MessageBubble extends StatelessWidget {
+  const _MessageBubble({
+    required this.message,
+    required this.isMine,
+    required this.sender,
+  });
+
+  final dynamic message;
+  final bool isMine;
+  final AppUser? sender;
+
+  @override
+  Widget build(BuildContext context) {
+    final userName = sender?.name ?? message.sender;
+
+    return Align(
+      alignment: isMine ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * .7,
+        ),
+        child: Column(
+          crossAxisAlignment: isMine
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
+          children: [
+            // 프로필 사진과 이름
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (!isMine) ...[
+                  UserAvatar(
+                    url: sender?.profilePicture ?? '',
+                    size: 24,
+                    iconSize: 12,
+                  ),
+                  const SizedBox(width: 6),
+                ],
+                Text(
+                  userName,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                if (isMine) ...[
+                  const SizedBox(width: 6),
+                  UserAvatar(
+                    url: sender?.profilePicture ?? '',
+                    size: 24,
+                    iconSize: 12,
+                  ),
+                ],
+              ],
+            ),
+            const SizedBox(height: 4),
+            // 채팅 박스
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: isMine
+                    ? Theme.of(context).colorScheme.primaryContainer
+                    : Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(14),
+                  topRight: const Radius.circular(14),
+                  bottomLeft: Radius.circular(isMine ? 14 : 4),
+                  bottomRight: Radius.circular(isMine ? 4 : 14),
+                ),
+              ),
+              child: Text(
+                message.content,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _InputBar extends StatelessWidget {
+  const _InputBar({required this.controller, required this.onSend});
+
+  final TextEditingController controller;
+  final ValueChanged<String> onSend;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          border: Border(
+            top: BorderSide(color: Theme.of(context).dividerColor, width: 0.5),
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                decoration: const InputDecoration(
+                  hintText: '메시지 입력...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  isDense: true,
+                ),
+                onSubmitted: onSend,
+              ),
+            ),
+            const SizedBox(width: 8),
+            FilledButton(
+              onPressed: () => onSend(controller.text),
+              child: const Icon(Icons.send),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
