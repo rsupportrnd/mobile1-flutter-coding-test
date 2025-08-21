@@ -40,6 +40,17 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
               : rooms.where((r) => r.participants.contains(userId)).toList();
           emit(state.copyWith(currentUserId: userId, rooms: filtered));
         },
+        updateLastMessage: (roomId, lastMessage) {
+          List<Room> list = [];
+          for (Room room in state.rooms) {
+            if (room.roomId == roomId) {
+              list.add(room.copyWith(lastMessage: lastMessage));
+            } else {
+              list.add(room);
+            }
+          }
+          emit(state.copyWith(rooms: list));
+        },
       );
     });
   }

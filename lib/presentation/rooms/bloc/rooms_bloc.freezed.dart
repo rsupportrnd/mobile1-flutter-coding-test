@@ -21,32 +21,41 @@ mixin _$RoomsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -116,6 +125,8 @@ class _$LoadImpl implements _Load {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
   }) {
     return load();
   }
@@ -125,6 +136,8 @@ class _$LoadImpl implements _Load {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
   }) {
     return load?.call();
   }
@@ -134,6 +147,8 @@ class _$LoadImpl implements _Load {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -147,6 +162,7 @@ class _$LoadImpl implements _Load {
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
   }) {
     return load(this);
   }
@@ -156,6 +172,7 @@ class _$LoadImpl implements _Load {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
   }) {
     return load?.call(this);
   }
@@ -165,6 +182,7 @@ class _$LoadImpl implements _Load {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -253,6 +271,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
   }) {
     return setCurrentUser(userId);
   }
@@ -262,6 +282,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
   }) {
     return setCurrentUser?.call(userId);
   }
@@ -271,6 +293,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
     required TResult orElse(),
   }) {
     if (setCurrentUser != null) {
@@ -284,6 +308,7 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
   }) {
     return setCurrentUser(this);
   }
@@ -293,6 +318,7 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
   }) {
     return setCurrentUser?.call(this);
   }
@@ -302,6 +328,7 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
     required TResult orElse(),
   }) {
     if (setCurrentUser != null) {
@@ -320,6 +347,186 @@ abstract class _SetCurrentUser implements RoomsEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SetCurrentUserImplCopyWith<_$SetCurrentUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateLastMessageImplCopyWith<$Res> {
+  factory _$$UpdateLastMessageImplCopyWith(
+    _$UpdateLastMessageImpl value,
+    $Res Function(_$UpdateLastMessageImpl) then,
+  ) = __$$UpdateLastMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String roomId, Map<String, dynamic> lastMessage});
+}
+
+/// @nodoc
+class __$$UpdateLastMessageImplCopyWithImpl<$Res>
+    extends _$RoomsEventCopyWithImpl<$Res, _$UpdateLastMessageImpl>
+    implements _$$UpdateLastMessageImplCopyWith<$Res> {
+  __$$UpdateLastMessageImplCopyWithImpl(
+    _$UpdateLastMessageImpl _value,
+    $Res Function(_$UpdateLastMessageImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? roomId = null, Object? lastMessage = null}) {
+    return _then(
+      _$UpdateLastMessageImpl(
+        null == roomId
+            ? _value.roomId
+            : roomId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        null == lastMessage
+            ? _value._lastMessage
+            : lastMessage // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$UpdateLastMessageImpl implements _UpdateLastMessage {
+  const _$UpdateLastMessageImpl(
+    this.roomId,
+    final Map<String, dynamic> lastMessage,
+  ) : _lastMessage = lastMessage;
+
+  @override
+  final String roomId;
+  final Map<String, dynamic> _lastMessage;
+  @override
+  Map<String, dynamic> get lastMessage {
+    if (_lastMessage is EqualUnmodifiableMapView) return _lastMessage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_lastMessage);
+  }
+
+  @override
+  String toString() {
+    return 'RoomsEvent.updateLastMessage(roomId: $roomId, lastMessage: $lastMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateLastMessageImpl &&
+            (identical(other.roomId, roomId) || other.roomId == roomId) &&
+            const DeepCollectionEquality().equals(
+              other._lastMessage,
+              _lastMessage,
+            ));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    roomId,
+    const DeepCollectionEquality().hash(_lastMessage),
+  );
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateLastMessageImplCopyWith<_$UpdateLastMessageImpl> get copyWith =>
+      __$$UpdateLastMessageImplCopyWithImpl<_$UpdateLastMessageImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
+  }) {
+    return updateLastMessage(roomId, lastMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+  }) {
+    return updateLastMessage?.call(roomId, lastMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+    required TResult orElse(),
+  }) {
+    if (updateLastMessage != null) {
+      return updateLastMessage(roomId, lastMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
+  }) {
+    return updateLastMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Load value)? load,
+    TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+  }) {
+    return updateLastMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    required TResult orElse(),
+  }) {
+    if (updateLastMessage != null) {
+      return updateLastMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateLastMessage implements RoomsEvent {
+  const factory _UpdateLastMessage(
+    final String roomId,
+    final Map<String, dynamic> lastMessage,
+  ) = _$UpdateLastMessageImpl;
+
+  String get roomId;
+  Map<String, dynamic> get lastMessage;
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateLastMessageImplCopyWith<_$UpdateLastMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

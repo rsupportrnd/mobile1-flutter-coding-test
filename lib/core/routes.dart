@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/presentation/home/home_shell.dart';
+import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
 import 'package:mobile1_flutter_coding_test/presentation/startup/startup_view.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/user_detail/user_detail_view.dart';
 import 'package:mobile1_flutter_coding_test/presentation/rooms/chatting/bloc/chat_bloc.dart';
@@ -81,8 +82,14 @@ class Routes {
               final roomId = state.pathParameters['roomId'] ?? '';
               final args = state.extra;
               final currentUserId = args is ChatArgs ? args.currentUserId : '';
-              final child = BlocProvider(
-                create: (_) => ChatBloc(),
+              final rBloc = args is ChatArgs
+                  ? args.rBloc
+                  : RoomsBloc(); // 디폴트 생성자가 오면 안되지만 방어 코드
+              final child = MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (_) => ChatBloc(rBloc)),
+                  BlocProvider.value(value: rBloc),
+                ],
                 child: ChatView(roomId: roomId, currentUserId: currentUserId),
               );
               return CustomTransitionPage(

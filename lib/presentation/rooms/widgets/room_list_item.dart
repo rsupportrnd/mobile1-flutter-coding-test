@@ -6,6 +6,7 @@ import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/core/routes.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/models/room.dart';
+import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
 import 'package:mobile1_flutter_coding_test/presentation/rooms/chatting/chat_view.dart';
 import 'package:mobile1_flutter_coding_test/presentation/home/bloc/home_bloc.dart';
@@ -38,9 +39,10 @@ class RoomListItem extends StatelessWidget {
       ),
       onTap: () {
         final currentUserId = context.read<HomeBloc>().state.currentUserId;
+        final roomsBloc = context.read<RoomsBloc>();
         context.go(
           '${AppRoutes.home}/rooms/${room.roomId}/chat',
-          extra: ChatArgs(currentUserId: currentUserId),
+          extra: ChatArgs(currentUserId: currentUserId, rBloc: roomsBloc),
         );
       },
     );

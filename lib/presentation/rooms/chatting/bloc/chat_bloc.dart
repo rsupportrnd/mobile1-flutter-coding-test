@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/models/chat_message.dart';
 import 'package:mobile1_flutter_coding_test/models/room.dart';
+import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
 import 'package:mobile1_flutter_coding_test/repository/message_repository.dart';
 import 'package:mobile1_flutter_coding_test/repository/room_repository.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
@@ -15,10 +17,11 @@ part 'chat_state.dart';
 part 'chat_bloc.freezed.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  ChatBloc()
+  ChatBloc(RoomsBloc rBloc)
     : _msgRepo = injector<MessageRepository>(),
       _roomRepo = injector<RoomRepository>(),
       _userRepo = injector<UserRepository>(),
+      _rBloc = rBloc,
       super(const ChatState()) {
     on<ChatEvent>((event, emit) async {
       await event.when(
@@ -54,6 +57,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             timestamp: now.toIso8601String(),
           );
           await _msgRepo.add(msg);
+          _rBloc.add(
+            RoomsEvent.updateLastMessage(state.room!.roomId, {
+              'sender': senderId,
+              'content': content.trim(),
+              'timestamp': now.toIso8601String(),
+            }),
+          );
         },
         messagesUpdated: (messages) async {
           emit(state.copyWith(messages: messages));
@@ -65,6 +75,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final MessageRepository _msgRepo;
   final RoomRepository _roomRepo;
   final UserRepository _userRepo;
+  final RoomsBloc _rBloc;
   StreamSubscription<List<ChatMessage>>? _sub;
 
   void _startWatching(String roomId) {

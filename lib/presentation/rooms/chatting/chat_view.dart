@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
+import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/user_avatar.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
 
 import 'bloc/chat_bloc.dart';
 
 class ChatArgs {
-  ChatArgs({required this.currentUserId});
+  ChatArgs({required this.currentUserId, required this.rBloc});
   final String currentUserId;
+  final RoomsBloc rBloc;
 }
 
 class ChatView extends StatefulWidget {
@@ -28,6 +30,8 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollCtrl = ScrollController();
+  int _prevMsgLen = 0;
 
   @override
   void initState() {
@@ -35,11 +39,44 @@ class _ChatViewState extends State<ChatView> {
     context.read<ChatBloc>().add(ChatEvent.load(widget.roomId));
   }
 
+  void _scrollToBottom({bool animated = true}) {
+    if (!_scrollCtrl.hasClients) return;
+    final offset = _scrollCtrl.position.maxScrollExtent;
+    if (animated) {
+      _scrollCtrl.animateTo(
+        offset,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
+    } else {
+      _scrollCtrl.jumpTo(offset);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
         final me = widget.currentUserId;
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final nowLen = state.messages.length;
+          bool initialLoaded =
+              (_prevMsgLen == 0 && nowLen > 0 && !state.loading);
+          bool appendedByMe = false;
+          if (nowLen > _prevMsgLen && nowLen > 0) {
+            final last = state.messages.last;
+            final lastSender = (last.sender as String?);
+            appendedByMe = lastSender == me;
+          }
+
+          if (initialLoaded || appendedByMe) {
+            _scrollToBottom(animated: true);
+          }
+
+          _prevMsgLen = nowLen;
+        });
+
         return Scaffold(
           appBar: AppBar(
             title: Text(state.room?.roomName ?? '채팅'),
@@ -59,11 +96,13 @@ class _ChatViewState extends State<ChatView> {
                         messages: state.messages,
                         me: me,
                         userById: state.userById,
+                        controller: _scrollCtrl,
                       ),
               ),
               _InputBar(
                 controller: _controller,
                 onSend: (text) {
+                  final roomBloc = context.read<RoomsBloc>();
                   context.read<ChatBloc>().add(ChatEvent.send(text, me));
                   _controller.clear();
                 },
@@ -319,14 +358,26 @@ class _GroupedChatList extends StatelessWidget {
     required this.messages,
     required this.me,
     required this.userById,
+    required this.controller,
   });
 
   final List<dynamic> messages;
   final String me;
   final Map<String, AppUser> userById;
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
+    if (messages.isEmpty) {
+      return Center(
+        child: Text(
+          "이전 대화를 불러올 수 없습니다.",
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+      );
+    }
     final groups = <String, List<dynamic>>{};
     for (final m in messages) {
       final day = _dayKey(m.timestamp);
@@ -336,6 +387,7 @@ class _GroupedChatList extends StatelessWidget {
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      controller: controller,
       itemCount: orderedDays.length,
       itemBuilder: (context, dayIndex) {
         final day = orderedDays[dayIndex];
