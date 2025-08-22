@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
@@ -32,6 +35,8 @@ class _ChatViewState extends State<ChatView> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
   int _prevMsgLen = 0;
+  double _prevInsets = 0.0;
+  bool _reverse = false;
 
   @override
   void initState() {
@@ -39,9 +44,15 @@ class _ChatViewState extends State<ChatView> {
     context.read<ChatBloc>().add(ChatEvent.load(widget.roomId));
   }
 
+  bool _isNearBottom([double threshold = 80]) {
+    if (!_scrollCtrl.hasClients) return true;
+    final pos = _scrollCtrl.position;
+    return (pos.maxScrollExtent - pos.pixels) <= threshold;
+  }
+
   void _scrollToBottom({bool animated = true}) {
     if (!_scrollCtrl.hasClients) return;
-    final offset = _scrollCtrl.position.maxScrollExtent;
+    final offset = _reverse ? 0.0 : _scrollCtrl.position.maxScrollExtent;
     if (animated) {
       _scrollCtrl.animateTo(
         offset,
@@ -55,62 +66,93 @@ class _ChatViewState extends State<ChatView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChatBloc, ChatState>(
-      builder: (context, state) {
-        final me = widget.currentUserId;
+    final kb = MediaQuery.viewInsetsOf(context).bottom;
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          final nowLen = state.messages.length;
-          bool initialLoaded =
-              (_prevMsgLen == 0 && nowLen > 0 && !state.loading);
-          bool appendedByMe = false;
-          if (nowLen > _prevMsgLen && nowLen > 0) {
-            final last = state.messages.last;
-            final lastSender = (last.sender as String?);
-            appendedByMe = lastSender == me;
-          }
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) return;
 
-          if (initialLoaded || appendedByMe) {
-            _scrollToBottom(animated: true);
-          }
+        final ack = Completer<void>();
+        context.read<ChatBloc>().add(ChatEvent.onExit(ack: ack));
+        await ack.future;
 
-          _prevMsgLen = nowLen;
-        });
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(state.room?.roomName ?? '채팅'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.group_outlined),
-                onPressed: () => _openDetailsSheet(context),
-              ),
-            ],
-          ),
-          body: Column(
-            children: [
-              Expanded(
-                child: state.loading
-                    ? const Center(child: CircularProgressIndicator())
-                    : _GroupedChatList(
-                        messages: state.messages,
-                        me: me,
-                        userById: state.userById,
-                        controller: _scrollCtrl,
-                      ),
-              ),
-              _InputBar(
-                controller: _controller,
-                onSend: (text) {
-                  final roomBloc = context.read<RoomsBloc>();
-                  context.read<ChatBloc>().add(ChatEvent.send(text, me));
-                  _controller.clear();
-                },
-              ),
-            ],
-          ),
-        );
+        if (!mounted) return;
+        if (mounted) context.pop();
       },
+      child: BlocBuilder<ChatBloc, ChatState>(
+        builder: (context, state) {
+          final me = widget.currentUserId;
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            final nowLen = state.messages.length;
+            bool initialLoaded =
+                (_prevMsgLen == 0 && nowLen > 0 && !state.loading);
+            bool appendedByMe = false;
+            if (nowLen > _prevMsgLen && nowLen > 0) {
+              final last = state.messages.last;
+              final lastSender = (last.sender as String?);
+              appendedByMe = lastSender == me;
+            }
+
+            if (_scrollCtrl.hasClients) {
+              final canScroll = _scrollCtrl.position.maxScrollExtent > 0;
+              if (canScroll != _reverse) {
+                setState(() => _reverse = canScroll);
+              }
+            }
+
+            if (initialLoaded || appendedByMe) {
+              _scrollToBottom(animated: true);
+            }
+
+            _prevMsgLen = nowLen;
+          });
+
+          if (kb != _prevInsets) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (_isNearBottom()) _scrollToBottom(animated: true);
+              _prevInsets = kb;
+            });
+          }
+
+          return Scaffold(
+            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+              title: Text(state.room?.roomName ?? '채팅'),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.group_outlined),
+                  onPressed: () => _openDetailsSheet(context),
+                ),
+              ],
+            ),
+            body: Column(
+              children: [
+                Expanded(
+                  child: state.loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : _GroupedChatList(
+                          messages: state.messages,
+                          me: me,
+                          userById: state.userById,
+                          controller: _scrollCtrl,
+                          reverse: _reverse,
+                        ),
+                ),
+                _InputBar(
+                  controller: _controller,
+                  onSend: (text) {
+                    final roomBloc = context.read<RoomsBloc>();
+                    context.read<ChatBloc>().add(ChatEvent.send(text, me));
+                    _controller.clear();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -359,12 +401,14 @@ class _GroupedChatList extends StatelessWidget {
     required this.me,
     required this.userById,
     required this.controller,
+    required this.reverse,
   });
 
   final List<dynamic> messages;
   final String me;
   final Map<String, AppUser> userById;
   final ScrollController controller;
+  final bool reverse;
 
   @override
   Widget build(BuildContext context) {
@@ -389,6 +433,7 @@ class _GroupedChatList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       controller: controller,
       itemCount: orderedDays.length,
+      reverse: reverse,
       itemBuilder: (context, dayIndex) {
         final day = orderedDays[dayIndex];
         final list = groups[day]!

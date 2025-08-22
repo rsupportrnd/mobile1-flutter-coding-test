@@ -6,4 +6,5 @@ class ChatEvent with _$ChatEvent {
   const factory ChatEvent.send(String content, String senderId) = _Send;
   const factory ChatEvent.messagesUpdated(List<ChatMessage> messages) =
       _MessagesUpdated;
+  const factory ChatEvent.onExit({Completer<void>? ack}) = _OnExit;
 }

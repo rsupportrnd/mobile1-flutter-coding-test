@@ -31,6 +31,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             await _roomRepo.load();
             await _msgRepo.load();
             await _ensureUsers();
+            await _msgRepo.markRead(
+              roomId: roomId,
+              userId: rBloc.state.currentUserId,
+              at: DateTime.now(),
+            );
+            rBloc.add(RoomsEvent.refreshUnreadOnly(roomId));
             final room = _roomRepo.getById(roomId);
             final initial = _msgRepo.messagesOf(roomId);
             emit(
@@ -38,6 +44,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 loading: false,
                 messages: initial,
                 room: room,
+                currentUserId: rBloc.state.currentUserId,
                 userById: _usersToMap(_userRepo.users),
               ),
             );
@@ -67,6 +74,21 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         },
         messagesUpdated: (messages) async {
           emit(state.copyWith(messages: messages));
+        },
+        onExit: (ack) async {
+          await _sub?.cancel();
+
+          final roomId = state.room?.roomId;
+          final me = state.currentUserId;
+          if (roomId != null && (me.isNotEmpty)) {
+            await _msgRepo.markRead(
+              roomId: roomId,
+              userId: me,
+              at: DateTime.now(),
+            );
+            rBloc.add(RoomsEvent.refreshUnreadOnly(roomId));
+          }
+          ack?.complete();
         },
       );
     });

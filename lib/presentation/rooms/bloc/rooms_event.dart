@@ -8,4 +8,7 @@ class RoomsEvent with _$RoomsEvent {
     String roomId,
     Map<String, dynamic> lastMessage,
   ) = _UpdateLastMessage;
+  const factory RoomsEvent.refreshUnread() = _RefreshUnread;
+  const factory RoomsEvent.refreshUnreadOnly(String roomId) =
+      _RefreshUnreadOnly;
 }

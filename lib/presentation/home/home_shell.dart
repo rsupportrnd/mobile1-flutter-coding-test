@@ -124,7 +124,7 @@ class _HomeShellView extends StatelessWidget {
                     color: Colors.black.withOpacity(0.03),
                     offset: const Offset(0, -2),
                     blurRadius: 8,
-                  )
+                  ),
                 ],
               ),
               child: NavigationBar(
@@ -132,18 +132,29 @@ class _HomeShellView extends StatelessWidget {
                 onDestinationSelected: (index) {
                   context.read<HomeBloc>().add(HomeEvent.move(index));
                 },
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                indicatorColor: Theme.of(context).colorScheme.primary.withOpacity(0.12),
-                destinations: const [
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+                indicatorColor: Theme.of(
+                  context,
+                ).colorScheme.primary.withOpacity(0.12),
+                destinations: [
                   NavigationDestination(
                     icon: Icon(Icons.person_outline),
                     selectedIcon: Icon(Icons.person),
                     label: '사용자',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.chat_bubble_outline),
-                    selectedIcon: Icon(Icons.chat_bubble),
-                    label: '채팅방',
+                    icon: BlocSelector<RoomsBloc, RoomsState, int>(
+                      selector: (state) => state.unReadCount,
+                      builder: (context, unread) =>
+                          _ChatIconBadge(selected: false, unread: unread),
+                    ),
+                    selectedIcon: BlocSelector<RoomsBloc, RoomsState, int>(
+                      selector: (state) => state.unReadCount,
+                      builder: (context, unread) =>
+                          _ChatIconBadge(selected: true, unread: unread),
+                    ),
+                    label: '회의',
                   ),
                 ],
               ),
@@ -152,5 +163,18 @@ class _HomeShellView extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class _ChatIconBadge extends StatelessWidget {
+  const _ChatIconBadge({required this.selected, required this.unread});
+  final bool selected;
+  final int unread;
+
+  @override
+  Widget build(BuildContext context) {
+    final base = Icon(selected ? Icons.chat_bubble : Icons.chat_bubble_outline);
+    if (unread <= 0) return base;
+    return Badge(label: Text(unread > 99 ? '99+' : '$unread'), child: base);
   }
 }

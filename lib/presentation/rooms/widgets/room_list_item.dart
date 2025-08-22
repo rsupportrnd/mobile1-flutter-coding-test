@@ -26,6 +26,7 @@ class RoomListItem extends StatelessWidget {
           context,
         ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
       ),
+      trailing: _buildUnreadBadge(context),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,6 +70,19 @@ class RoomListItem extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildUnreadBadge(BuildContext context) {
+    return BlocSelector<RoomsBloc, RoomsState, int>(
+      selector: (s) => s.unreadByRoom[room.roomId] ?? 0,
+      builder: (context, cnt) {
+        if (cnt <= 0) return const SizedBox.shrink();
+        return Badge(
+          label: Text(cnt > 99 ? '99+' : '$cnt'),
+          child: const SizedBox(width: 0, height: 0), // 배지만 표시
+        );
+      },
     );
   }
 

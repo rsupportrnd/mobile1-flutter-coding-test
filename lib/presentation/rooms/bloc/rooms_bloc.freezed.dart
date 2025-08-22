@@ -23,6 +23,8 @@ mixin _$RoomsEvent {
     required TResult Function(String userId) setCurrentUser,
     required TResult Function(String roomId, Map<String, dynamic> lastMessage)
     updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -30,6 +32,8 @@ mixin _$RoomsEvent {
     TResult? Function(String userId)? setCurrentUser,
     TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -37,6 +41,8 @@ mixin _$RoomsEvent {
     TResult Function(String userId)? setCurrentUser,
     TResult Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,18 +50,24 @@ mixin _$RoomsEvent {
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
     required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
     TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
     TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -127,6 +139,8 @@ class _$LoadImpl implements _Load {
     required TResult Function(String userId) setCurrentUser,
     required TResult Function(String roomId, Map<String, dynamic> lastMessage)
     updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
   }) {
     return load();
   }
@@ -138,6 +152,8 @@ class _$LoadImpl implements _Load {
     TResult? Function(String userId)? setCurrentUser,
     TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
   }) {
     return load?.call();
   }
@@ -149,6 +165,8 @@ class _$LoadImpl implements _Load {
     TResult Function(String userId)? setCurrentUser,
     TResult Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -163,6 +181,8 @@ class _$LoadImpl implements _Load {
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
     required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
   }) {
     return load(this);
   }
@@ -173,6 +193,8 @@ class _$LoadImpl implements _Load {
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
     TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
   }) {
     return load?.call(this);
   }
@@ -183,6 +205,8 @@ class _$LoadImpl implements _Load {
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
     TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -273,6 +297,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     required TResult Function(String userId) setCurrentUser,
     required TResult Function(String roomId, Map<String, dynamic> lastMessage)
     updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
   }) {
     return setCurrentUser(userId);
   }
@@ -284,6 +310,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     TResult? Function(String userId)? setCurrentUser,
     TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
   }) {
     return setCurrentUser?.call(userId);
   }
@@ -295,6 +323,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     TResult Function(String userId)? setCurrentUser,
     TResult Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (setCurrentUser != null) {
@@ -309,6 +339,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
     required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
   }) {
     return setCurrentUser(this);
   }
@@ -319,6 +351,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
     TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
   }) {
     return setCurrentUser?.call(this);
   }
@@ -329,6 +363,8 @@ class _$SetCurrentUserImpl implements _SetCurrentUser {
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
     TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (setCurrentUser != null) {
@@ -449,6 +485,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     required TResult Function(String userId) setCurrentUser,
     required TResult Function(String roomId, Map<String, dynamic> lastMessage)
     updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
   }) {
     return updateLastMessage(roomId, lastMessage);
   }
@@ -460,6 +498,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     TResult? Function(String userId)? setCurrentUser,
     TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
   }) {
     return updateLastMessage?.call(roomId, lastMessage);
   }
@@ -471,6 +511,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     TResult Function(String userId)? setCurrentUser,
     TResult Function(String roomId, Map<String, dynamic> lastMessage)?
     updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (updateLastMessage != null) {
@@ -485,6 +527,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     required TResult Function(_Load value) load,
     required TResult Function(_SetCurrentUser value) setCurrentUser,
     required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
   }) {
     return updateLastMessage(this);
   }
@@ -495,6 +539,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     TResult? Function(_Load value)? load,
     TResult? Function(_SetCurrentUser value)? setCurrentUser,
     TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
   }) {
     return updateLastMessage?.call(this);
   }
@@ -505,6 +551,8 @@ class _$UpdateLastMessageImpl implements _UpdateLastMessage {
     TResult Function(_Load value)? load,
     TResult Function(_SetCurrentUser value)? setCurrentUser,
     TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
     required TResult orElse(),
   }) {
     if (updateLastMessage != null) {
@@ -531,10 +579,307 @@ abstract class _UpdateLastMessage implements RoomsEvent {
 }
 
 /// @nodoc
+abstract class _$$RefreshUnreadImplCopyWith<$Res> {
+  factory _$$RefreshUnreadImplCopyWith(
+    _$RefreshUnreadImpl value,
+    $Res Function(_$RefreshUnreadImpl) then,
+  ) = __$$RefreshUnreadImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RefreshUnreadImplCopyWithImpl<$Res>
+    extends _$RoomsEventCopyWithImpl<$Res, _$RefreshUnreadImpl>
+    implements _$$RefreshUnreadImplCopyWith<$Res> {
+  __$$RefreshUnreadImplCopyWithImpl(
+    _$RefreshUnreadImpl _value,
+    $Res Function(_$RefreshUnreadImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RefreshUnreadImpl implements _RefreshUnread {
+  const _$RefreshUnreadImpl();
+
+  @override
+  String toString() {
+    return 'RoomsEvent.refreshUnread()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RefreshUnreadImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
+  }) {
+    return refreshUnread();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
+  }) {
+    return refreshUnread?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
+    required TResult orElse(),
+  }) {
+    if (refreshUnread != null) {
+      return refreshUnread();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
+  }) {
+    return refreshUnread(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Load value)? load,
+    TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
+  }) {
+    return refreshUnread?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
+    required TResult orElse(),
+  }) {
+    if (refreshUnread != null) {
+      return refreshUnread(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshUnread implements RoomsEvent {
+  const factory _RefreshUnread() = _$RefreshUnreadImpl;
+}
+
+/// @nodoc
+abstract class _$$RefreshUnreadOnlyImplCopyWith<$Res> {
+  factory _$$RefreshUnreadOnlyImplCopyWith(
+    _$RefreshUnreadOnlyImpl value,
+    $Res Function(_$RefreshUnreadOnlyImpl) then,
+  ) = __$$RefreshUnreadOnlyImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String roomId});
+}
+
+/// @nodoc
+class __$$RefreshUnreadOnlyImplCopyWithImpl<$Res>
+    extends _$RoomsEventCopyWithImpl<$Res, _$RefreshUnreadOnlyImpl>
+    implements _$$RefreshUnreadOnlyImplCopyWith<$Res> {
+  __$$RefreshUnreadOnlyImplCopyWithImpl(
+    _$RefreshUnreadOnlyImpl _value,
+    $Res Function(_$RefreshUnreadOnlyImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? roomId = null}) {
+    return _then(
+      _$RefreshUnreadOnlyImpl(
+        null == roomId
+            ? _value.roomId
+            : roomId // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$RefreshUnreadOnlyImpl implements _RefreshUnreadOnly {
+  const _$RefreshUnreadOnlyImpl(this.roomId);
+
+  @override
+  final String roomId;
+
+  @override
+  String toString() {
+    return 'RoomsEvent.refreshUnreadOnly(roomId: $roomId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RefreshUnreadOnlyImpl &&
+            (identical(other.roomId, roomId) || other.roomId == roomId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, roomId);
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RefreshUnreadOnlyImplCopyWith<_$RefreshUnreadOnlyImpl> get copyWith =>
+      __$$RefreshUnreadOnlyImplCopyWithImpl<_$RefreshUnreadOnlyImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String userId) setCurrentUser,
+    required TResult Function(String roomId, Map<String, dynamic> lastMessage)
+    updateLastMessage,
+    required TResult Function() refreshUnread,
+    required TResult Function(String roomId) refreshUnreadOnly,
+  }) {
+    return refreshUnreadOnly(roomId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String userId)? setCurrentUser,
+    TResult? Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+    TResult? Function()? refreshUnread,
+    TResult? Function(String roomId)? refreshUnreadOnly,
+  }) {
+    return refreshUnreadOnly?.call(roomId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String userId)? setCurrentUser,
+    TResult Function(String roomId, Map<String, dynamic> lastMessage)?
+    updateLastMessage,
+    TResult Function()? refreshUnread,
+    TResult Function(String roomId)? refreshUnreadOnly,
+    required TResult orElse(),
+  }) {
+    if (refreshUnreadOnly != null) {
+      return refreshUnreadOnly(roomId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_SetCurrentUser value) setCurrentUser,
+    required TResult Function(_UpdateLastMessage value) updateLastMessage,
+    required TResult Function(_RefreshUnread value) refreshUnread,
+    required TResult Function(_RefreshUnreadOnly value) refreshUnreadOnly,
+  }) {
+    return refreshUnreadOnly(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Load value)? load,
+    TResult? Function(_SetCurrentUser value)? setCurrentUser,
+    TResult? Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult? Function(_RefreshUnread value)? refreshUnread,
+    TResult? Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
+  }) {
+    return refreshUnreadOnly?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_SetCurrentUser value)? setCurrentUser,
+    TResult Function(_UpdateLastMessage value)? updateLastMessage,
+    TResult Function(_RefreshUnread value)? refreshUnread,
+    TResult Function(_RefreshUnreadOnly value)? refreshUnreadOnly,
+    required TResult orElse(),
+  }) {
+    if (refreshUnreadOnly != null) {
+      return refreshUnreadOnly(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshUnreadOnly implements RoomsEvent {
+  const factory _RefreshUnreadOnly(final String roomId) =
+      _$RefreshUnreadOnlyImpl;
+
+  String get roomId;
+
+  /// Create a copy of RoomsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RefreshUnreadOnlyImplCopyWith<_$RefreshUnreadOnlyImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$RoomsState {
   bool get loading => throw _privateConstructorUsedError;
   List<Room> get rooms => throw _privateConstructorUsedError;
   String get currentUserId => throw _privateConstructorUsedError;
+  Map<String, int> get unreadByRoom => throw _privateConstructorUsedError;
+  int get unReadCount => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of RoomsState
@@ -555,6 +900,8 @@ abstract class $RoomsStateCopyWith<$Res> {
     bool loading,
     List<Room> rooms,
     String currentUserId,
+    Map<String, int> unreadByRoom,
+    int unReadCount,
     String? error,
   });
 }
@@ -577,6 +924,8 @@ class _$RoomsStateCopyWithImpl<$Res, $Val extends RoomsState>
     Object? loading = null,
     Object? rooms = null,
     Object? currentUserId = null,
+    Object? unreadByRoom = null,
+    Object? unReadCount = null,
     Object? error = freezed,
   }) {
     return _then(
@@ -593,6 +942,14 @@ class _$RoomsStateCopyWithImpl<$Res, $Val extends RoomsState>
                 ? _value.currentUserId
                 : currentUserId // ignore: cast_nullable_to_non_nullable
                       as String,
+            unreadByRoom: null == unreadByRoom
+                ? _value.unreadByRoom
+                : unreadByRoom // ignore: cast_nullable_to_non_nullable
+                      as Map<String, int>,
+            unReadCount: null == unReadCount
+                ? _value.unReadCount
+                : unReadCount // ignore: cast_nullable_to_non_nullable
+                      as int,
             error: freezed == error
                 ? _value.error
                 : error // ignore: cast_nullable_to_non_nullable
@@ -616,6 +973,8 @@ abstract class _$$RoomsStateImplCopyWith<$Res>
     bool loading,
     List<Room> rooms,
     String currentUserId,
+    Map<String, int> unreadByRoom,
+    int unReadCount,
     String? error,
   });
 }
@@ -637,6 +996,8 @@ class __$$RoomsStateImplCopyWithImpl<$Res>
     Object? loading = null,
     Object? rooms = null,
     Object? currentUserId = null,
+    Object? unreadByRoom = null,
+    Object? unReadCount = null,
     Object? error = freezed,
   }) {
     return _then(
@@ -653,6 +1014,14 @@ class __$$RoomsStateImplCopyWithImpl<$Res>
             ? _value.currentUserId
             : currentUserId // ignore: cast_nullable_to_non_nullable
                   as String,
+        unreadByRoom: null == unreadByRoom
+            ? _value._unreadByRoom
+            : unreadByRoom // ignore: cast_nullable_to_non_nullable
+                  as Map<String, int>,
+        unReadCount: null == unReadCount
+            ? _value.unReadCount
+            : unReadCount // ignore: cast_nullable_to_non_nullable
+                  as int,
         error: freezed == error
             ? _value.error
             : error // ignore: cast_nullable_to_non_nullable
@@ -669,8 +1038,11 @@ class _$RoomsStateImpl implements _RoomsState {
     this.loading = false,
     final List<Room> rooms = const [],
     this.currentUserId = '',
+    final Map<String, int> unreadByRoom = const {},
+    this.unReadCount = 0,
     this.error,
-  }) : _rooms = rooms;
+  }) : _rooms = rooms,
+       _unreadByRoom = unreadByRoom;
 
   @override
   @JsonKey()
@@ -687,12 +1059,24 @@ class _$RoomsStateImpl implements _RoomsState {
   @override
   @JsonKey()
   final String currentUserId;
+  final Map<String, int> _unreadByRoom;
+  @override
+  @JsonKey()
+  Map<String, int> get unreadByRoom {
+    if (_unreadByRoom is EqualUnmodifiableMapView) return _unreadByRoom;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_unreadByRoom);
+  }
+
+  @override
+  @JsonKey()
+  final int unReadCount;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'RoomsState(loading: $loading, rooms: $rooms, currentUserId: $currentUserId, error: $error)';
+    return 'RoomsState(loading: $loading, rooms: $rooms, currentUserId: $currentUserId, unreadByRoom: $unreadByRoom, unReadCount: $unReadCount, error: $error)';
   }
 
   @override
@@ -704,6 +1088,12 @@ class _$RoomsStateImpl implements _RoomsState {
             const DeepCollectionEquality().equals(other._rooms, _rooms) &&
             (identical(other.currentUserId, currentUserId) ||
                 other.currentUserId == currentUserId) &&
+            const DeepCollectionEquality().equals(
+              other._unreadByRoom,
+              _unreadByRoom,
+            ) &&
+            (identical(other.unReadCount, unReadCount) ||
+                other.unReadCount == unReadCount) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -713,6 +1103,8 @@ class _$RoomsStateImpl implements _RoomsState {
     loading,
     const DeepCollectionEquality().hash(_rooms),
     currentUserId,
+    const DeepCollectionEquality().hash(_unreadByRoom),
+    unReadCount,
     error,
   );
 
@@ -730,6 +1122,8 @@ abstract class _RoomsState implements RoomsState {
     final bool loading,
     final List<Room> rooms,
     final String currentUserId,
+    final Map<String, int> unreadByRoom,
+    final int unReadCount,
     final String? error,
   }) = _$RoomsStateImpl;
 
@@ -739,6 +1133,10 @@ abstract class _RoomsState implements RoomsState {
   List<Room> get rooms;
   @override
   String get currentUserId;
+  @override
+  Map<String, int> get unreadByRoom;
+  @override
+  int get unReadCount;
   @override
   String? get error;
 

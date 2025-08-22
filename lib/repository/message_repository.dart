@@ -88,10 +88,27 @@ class MessageRepository {
       // roomMeta 갱신
       final last = arr.isNotEmpty ? arr.last : null;
       if (last != null) {
+        final lastTs = last['timestamp'] as String;
         await _storage.set(StorageKeys.roomMeta(roomId), {
           'lastMessageId': last['messageId'],
-          'lastMessageAt': last['timestamp'],
+          'lastMessageAt': lastTs,
         });
+
+        // 최초 로드시 전체 리드 처리
+        final roomRaw = (_storage.get(StorageKeys.room(roomId)) as Map?)?.map(
+          (k, v) => MapEntry(k.toString(), v),
+        );
+        final participants =
+            (roomRaw?['participants'] as List?)
+                ?.map((e) => e.toString())
+                .toList() ??
+            const <String>[];
+
+        for (final uid in participants) {
+          await _storage.set(StorageKeys.readReceipt(roomId, uid), {
+            'lastReadAt': lastTs,
+          });
+        }
       }
     }
   }
@@ -119,7 +136,9 @@ class MessageRepository {
 
     // 룸 객체의 lastMessage 필드 패치 (로컬 저장소 반영)
     final roomKey = StorageKeys.room(m.roomId);
-    final roomRaw = (_storage.get(roomKey) as Map?)?.cast<String, dynamic>() ?? <String, dynamic>{};
+    final roomRaw =
+        (_storage.get(roomKey) as Map?)?.cast<String, dynamic>() ??
+        <String, dynamic>{};
     roomRaw['lastMessage'] = {
       'sender': m.sender,
       'content': m.content,

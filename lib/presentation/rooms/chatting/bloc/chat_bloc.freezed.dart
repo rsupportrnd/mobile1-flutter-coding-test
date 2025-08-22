@@ -22,18 +22,21 @@ mixin _$ChatEvent {
     required TResult Function(String roomId) load,
     required TResult Function(String content, String senderId) send,
     required TResult Function(List<ChatMessage> messages) messagesUpdated,
+    required TResult Function(Completer<void>? ack) onExit,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String roomId)? load,
     TResult? Function(String content, String senderId)? send,
     TResult? Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult? Function(Completer<void>? ack)? onExit,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String roomId)? load,
     TResult Function(String content, String senderId)? send,
     TResult Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult Function(Completer<void>? ack)? onExit,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,18 +44,21 @@ mixin _$ChatEvent {
     required TResult Function(_Load value) load,
     required TResult Function(_Send value) send,
     required TResult Function(_MessagesUpdated value) messagesUpdated,
+    required TResult Function(_OnExit value) onExit,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
     TResult? Function(_Send value)? send,
     TResult? Function(_MessagesUpdated value)? messagesUpdated,
+    TResult? Function(_OnExit value)? onExit,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
     TResult Function(_Send value)? send,
     TResult Function(_MessagesUpdated value)? messagesUpdated,
+    TResult Function(_OnExit value)? onExit,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -148,6 +154,7 @@ class _$LoadImpl implements _Load {
     required TResult Function(String roomId) load,
     required TResult Function(String content, String senderId) send,
     required TResult Function(List<ChatMessage> messages) messagesUpdated,
+    required TResult Function(Completer<void>? ack) onExit,
   }) {
     return load(roomId);
   }
@@ -158,6 +165,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(String roomId)? load,
     TResult? Function(String content, String senderId)? send,
     TResult? Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult? Function(Completer<void>? ack)? onExit,
   }) {
     return load?.call(roomId);
   }
@@ -168,6 +176,7 @@ class _$LoadImpl implements _Load {
     TResult Function(String roomId)? load,
     TResult Function(String content, String senderId)? send,
     TResult Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult Function(Completer<void>? ack)? onExit,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -182,6 +191,7 @@ class _$LoadImpl implements _Load {
     required TResult Function(_Load value) load,
     required TResult Function(_Send value) send,
     required TResult Function(_MessagesUpdated value) messagesUpdated,
+    required TResult Function(_OnExit value) onExit,
   }) {
     return load(this);
   }
@@ -192,6 +202,7 @@ class _$LoadImpl implements _Load {
     TResult? Function(_Load value)? load,
     TResult? Function(_Send value)? send,
     TResult? Function(_MessagesUpdated value)? messagesUpdated,
+    TResult? Function(_OnExit value)? onExit,
   }) {
     return load?.call(this);
   }
@@ -202,6 +213,7 @@ class _$LoadImpl implements _Load {
     TResult Function(_Load value)? load,
     TResult Function(_Send value)? send,
     TResult Function(_MessagesUpdated value)? messagesUpdated,
+    TResult Function(_OnExit value)? onExit,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -302,6 +314,7 @@ class _$SendImpl implements _Send {
     required TResult Function(String roomId) load,
     required TResult Function(String content, String senderId) send,
     required TResult Function(List<ChatMessage> messages) messagesUpdated,
+    required TResult Function(Completer<void>? ack) onExit,
   }) {
     return send(content, senderId);
   }
@@ -312,6 +325,7 @@ class _$SendImpl implements _Send {
     TResult? Function(String roomId)? load,
     TResult? Function(String content, String senderId)? send,
     TResult? Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult? Function(Completer<void>? ack)? onExit,
   }) {
     return send?.call(content, senderId);
   }
@@ -322,6 +336,7 @@ class _$SendImpl implements _Send {
     TResult Function(String roomId)? load,
     TResult Function(String content, String senderId)? send,
     TResult Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult Function(Completer<void>? ack)? onExit,
     required TResult orElse(),
   }) {
     if (send != null) {
@@ -336,6 +351,7 @@ class _$SendImpl implements _Send {
     required TResult Function(_Load value) load,
     required TResult Function(_Send value) send,
     required TResult Function(_MessagesUpdated value) messagesUpdated,
+    required TResult Function(_OnExit value) onExit,
   }) {
     return send(this);
   }
@@ -346,6 +362,7 @@ class _$SendImpl implements _Send {
     TResult? Function(_Load value)? load,
     TResult? Function(_Send value)? send,
     TResult? Function(_MessagesUpdated value)? messagesUpdated,
+    TResult? Function(_OnExit value)? onExit,
   }) {
     return send?.call(this);
   }
@@ -356,6 +373,7 @@ class _$SendImpl implements _Send {
     TResult Function(_Load value)? load,
     TResult Function(_Send value)? send,
     TResult Function(_MessagesUpdated value)? messagesUpdated,
+    TResult Function(_OnExit value)? onExit,
     required TResult orElse(),
   }) {
     if (send != null) {
@@ -461,6 +479,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     required TResult Function(String roomId) load,
     required TResult Function(String content, String senderId) send,
     required TResult Function(List<ChatMessage> messages) messagesUpdated,
+    required TResult Function(Completer<void>? ack) onExit,
   }) {
     return messagesUpdated(messages);
   }
@@ -471,6 +490,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     TResult? Function(String roomId)? load,
     TResult? Function(String content, String senderId)? send,
     TResult? Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult? Function(Completer<void>? ack)? onExit,
   }) {
     return messagesUpdated?.call(messages);
   }
@@ -481,6 +501,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     TResult Function(String roomId)? load,
     TResult Function(String content, String senderId)? send,
     TResult Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult Function(Completer<void>? ack)? onExit,
     required TResult orElse(),
   }) {
     if (messagesUpdated != null) {
@@ -495,6 +516,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     required TResult Function(_Load value) load,
     required TResult Function(_Send value) send,
     required TResult Function(_MessagesUpdated value) messagesUpdated,
+    required TResult Function(_OnExit value) onExit,
   }) {
     return messagesUpdated(this);
   }
@@ -505,6 +527,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     TResult? Function(_Load value)? load,
     TResult? Function(_Send value)? send,
     TResult? Function(_MessagesUpdated value)? messagesUpdated,
+    TResult? Function(_OnExit value)? onExit,
   }) {
     return messagesUpdated?.call(this);
   }
@@ -515,6 +538,7 @@ class _$MessagesUpdatedImpl implements _MessagesUpdated {
     TResult Function(_Load value)? load,
     TResult Function(_Send value)? send,
     TResult Function(_MessagesUpdated value)? messagesUpdated,
+    TResult Function(_OnExit value)? onExit,
     required TResult orElse(),
   }) {
     if (messagesUpdated != null) {
@@ -538,10 +562,165 @@ abstract class _MessagesUpdated implements ChatEvent {
 }
 
 /// @nodoc
+abstract class _$$OnExitImplCopyWith<$Res> {
+  factory _$$OnExitImplCopyWith(
+    _$OnExitImpl value,
+    $Res Function(_$OnExitImpl) then,
+  ) = __$$OnExitImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Completer<void>? ack});
+}
+
+/// @nodoc
+class __$$OnExitImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$OnExitImpl>
+    implements _$$OnExitImplCopyWith<$Res> {
+  __$$OnExitImplCopyWithImpl(
+    _$OnExitImpl _value,
+    $Res Function(_$OnExitImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? ack = freezed}) {
+    return _then(
+      _$OnExitImpl(
+        ack: freezed == ack
+            ? _value.ack
+            : ack // ignore: cast_nullable_to_non_nullable
+                  as Completer<void>?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$OnExitImpl implements _OnExit {
+  const _$OnExitImpl({this.ack});
+
+  @override
+  final Completer<void>? ack;
+
+  @override
+  String toString() {
+    return 'ChatEvent.onExit(ack: $ack)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnExitImpl &&
+            (identical(other.ack, ack) || other.ack == ack));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, ack);
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnExitImplCopyWith<_$OnExitImpl> get copyWith =>
+      __$$OnExitImplCopyWithImpl<_$OnExitImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String roomId) load,
+    required TResult Function(String content, String senderId) send,
+    required TResult Function(List<ChatMessage> messages) messagesUpdated,
+    required TResult Function(Completer<void>? ack) onExit,
+  }) {
+    return onExit(ack);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String roomId)? load,
+    TResult? Function(String content, String senderId)? send,
+    TResult? Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult? Function(Completer<void>? ack)? onExit,
+  }) {
+    return onExit?.call(ack);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String roomId)? load,
+    TResult Function(String content, String senderId)? send,
+    TResult Function(List<ChatMessage> messages)? messagesUpdated,
+    TResult Function(Completer<void>? ack)? onExit,
+    required TResult orElse(),
+  }) {
+    if (onExit != null) {
+      return onExit(ack);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_Send value) send,
+    required TResult Function(_MessagesUpdated value) messagesUpdated,
+    required TResult Function(_OnExit value) onExit,
+  }) {
+    return onExit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Load value)? load,
+    TResult? Function(_Send value)? send,
+    TResult? Function(_MessagesUpdated value)? messagesUpdated,
+    TResult? Function(_OnExit value)? onExit,
+  }) {
+    return onExit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_Send value)? send,
+    TResult Function(_MessagesUpdated value)? messagesUpdated,
+    TResult Function(_OnExit value)? onExit,
+    required TResult orElse(),
+  }) {
+    if (onExit != null) {
+      return onExit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnExit implements ChatEvent {
+  const factory _OnExit({final Completer<void>? ack}) = _$OnExitImpl;
+
+  Completer<void>? get ack;
+
+  /// Create a copy of ChatEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnExitImplCopyWith<_$OnExitImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ChatState {
   bool get loading => throw _privateConstructorUsedError;
   List<ChatMessage> get messages => throw _privateConstructorUsedError;
   Room? get room => throw _privateConstructorUsedError;
+  String get currentUserId => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   Map<String, AppUser> get userById => throw _privateConstructorUsedError;
 
@@ -561,6 +740,7 @@ abstract class $ChatStateCopyWith<$Res> {
     bool loading,
     List<ChatMessage> messages,
     Room? room,
+    String currentUserId,
     String? error,
     Map<String, AppUser> userById,
   });
@@ -586,6 +766,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? loading = null,
     Object? messages = null,
     Object? room = freezed,
+    Object? currentUserId = null,
     Object? error = freezed,
     Object? userById = null,
   }) {
@@ -603,6 +784,10 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
                 ? _value.room
                 : room // ignore: cast_nullable_to_non_nullable
                       as Room?,
+            currentUserId: null == currentUserId
+                ? _value.currentUserId
+                : currentUserId // ignore: cast_nullable_to_non_nullable
+                      as String,
             error: freezed == error
                 ? _value.error
                 : error // ignore: cast_nullable_to_non_nullable
@@ -644,6 +829,7 @@ abstract class _$$ChatStateImplCopyWith<$Res>
     bool loading,
     List<ChatMessage> messages,
     Room? room,
+    String currentUserId,
     String? error,
     Map<String, AppUser> userById,
   });
@@ -669,6 +855,7 @@ class __$$ChatStateImplCopyWithImpl<$Res>
     Object? loading = null,
     Object? messages = null,
     Object? room = freezed,
+    Object? currentUserId = null,
     Object? error = freezed,
     Object? userById = null,
   }) {
@@ -686,6 +873,10 @@ class __$$ChatStateImplCopyWithImpl<$Res>
             ? _value.room
             : room // ignore: cast_nullable_to_non_nullable
                   as Room?,
+        currentUserId: null == currentUserId
+            ? _value.currentUserId
+            : currentUserId // ignore: cast_nullable_to_non_nullable
+                  as String,
         error: freezed == error
             ? _value.error
             : error // ignore: cast_nullable_to_non_nullable
@@ -706,6 +897,7 @@ class _$ChatStateImpl implements _ChatState {
     this.loading = false,
     final List<ChatMessage> messages = const [],
     this.room,
+    this.currentUserId = '',
     this.error,
     final Map<String, AppUser> userById = const {},
   }) : _messages = messages,
@@ -726,6 +918,9 @@ class _$ChatStateImpl implements _ChatState {
   @override
   final Room? room;
   @override
+  @JsonKey()
+  final String currentUserId;
+  @override
   final String? error;
   final Map<String, AppUser> _userById;
   @override
@@ -738,7 +933,7 @@ class _$ChatStateImpl implements _ChatState {
 
   @override
   String toString() {
-    return 'ChatState(loading: $loading, messages: $messages, room: $room, error: $error, userById: $userById)';
+    return 'ChatState(loading: $loading, messages: $messages, room: $room, currentUserId: $currentUserId, error: $error, userById: $userById)';
   }
 
   @override
@@ -749,6 +944,8 @@ class _$ChatStateImpl implements _ChatState {
             (identical(other.loading, loading) || other.loading == loading) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             (identical(other.room, room) || other.room == room) &&
+            (identical(other.currentUserId, currentUserId) ||
+                other.currentUserId == currentUserId) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality().equals(other._userById, _userById));
   }
@@ -759,6 +956,7 @@ class _$ChatStateImpl implements _ChatState {
     loading,
     const DeepCollectionEquality().hash(_messages),
     room,
+    currentUserId,
     error,
     const DeepCollectionEquality().hash(_userById),
   );
@@ -777,6 +975,7 @@ abstract class _ChatState implements ChatState {
     final bool loading,
     final List<ChatMessage> messages,
     final Room? room,
+    final String currentUserId,
     final String? error,
     final Map<String, AppUser> userById,
   }) = _$ChatStateImpl;
@@ -787,6 +986,8 @@ abstract class _ChatState implements ChatState {
   List<ChatMessage> get messages;
   @override
   Room? get room;
+  @override
+  String get currentUserId;
   @override
   String? get error;
   @override
