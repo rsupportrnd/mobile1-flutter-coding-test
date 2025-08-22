@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile1_flutter_coding_test/repository/room_repository.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
@@ -20,7 +21,7 @@ class StartupCubit extends Cubit<bool> {
 
       emit(true);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       emit(false);
     }
   }

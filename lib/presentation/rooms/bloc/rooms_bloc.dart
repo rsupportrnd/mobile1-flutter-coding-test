@@ -60,6 +60,7 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
           }
         },
         refreshUnread: () async {
+          // 읽음처리 용으로 만들었으나, 개별 카운트 처리로 대체 함.
           await _recomputeUnreadAll(emit);
         },
         refreshUnreadOnly: (roomId) async {

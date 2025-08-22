@@ -73,7 +73,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           );
         },
         messagesUpdated: (messages) async {
-          print(messages);
           emit(state.copyWith(messages: messages));
         },
         onExit: (ack) async {
