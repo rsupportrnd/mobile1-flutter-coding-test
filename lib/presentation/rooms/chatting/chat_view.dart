@@ -428,6 +428,7 @@ class _GroupedChatList extends StatelessWidget {
       groups.putIfAbsent(day, () => []).add(m);
     }
     final orderedDays = groups.keys.toList()..sort((a, b) => a.compareTo(b));
+    final days = reverse ? orderedDays.reversed.toList() : orderedDays;
 
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -435,7 +436,7 @@ class _GroupedChatList extends StatelessWidget {
       itemCount: orderedDays.length,
       reverse: reverse,
       itemBuilder: (context, dayIndex) {
-        final day = orderedDays[dayIndex];
+        final day = days[dayIndex];
         final list = groups[day]!
           ..sort((a, b) => a.timestamp.compareTo(b.timestamp));
         return Column(

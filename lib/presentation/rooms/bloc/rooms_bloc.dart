@@ -98,11 +98,7 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
 
     for (final r in rooms) {
       _roomSubs[r.roomId] = _msgRepo.watchByRoom(r.roomId).listen((_) async {
-        // 해당 방만 증분 계산
-        final c = await _msgRepo.unreadCount(roomId: r.roomId, userId: uid);
-        final map = Map<String, int>.from(state.unreadByRoom)..[r.roomId] = c;
-        final total = map.values.fold<int>(0, (a, b) => a + b);
-        emit(state.copyWith(unreadByRoom: map, unReadCount: total));
+        add(RoomsEvent.refreshUnreadOnly(r.roomId));
       });
     }
   }

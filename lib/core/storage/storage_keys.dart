@@ -3,7 +3,7 @@ class StorageKeys {
   static const String firstSeedDone = 'app:firstSeedDone';
   static const String lastUserId = 'app:lastUserId';
 
-  // 룸 마지막 메시지 관리
+  // 룸 마지막 메시지 관리 => 마지막 메시지를 빠르게 찾으려고 저장했으나, 방에도 같은 모델이 있어서 사용 x
   static String roomMeta(String roomId) =>
       'roomMeta:$roomId'; // {lastMessageId, lastMessageAt}
 
