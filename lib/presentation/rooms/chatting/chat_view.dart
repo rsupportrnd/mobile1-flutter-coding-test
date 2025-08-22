@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/presentation/rooms/bloc/rooms_bloc.dart';
+import 'package:mobile1_flutter_coding_test/presentation/users/widgets/profile_image_viewer.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/user_avatar.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
 
@@ -207,10 +208,16 @@ class _ChatViewState extends State<ChatView> {
                       final isHost = uid == room.creator;
                       final user = state.userById[uid];
                       return ListTile(
-                        leading: UserAvatar(
-                          url: user?.profilePicture ?? '',
-                          size: 40,
-                          iconSize: 20,
+                        leading: GestureDetector(
+                          onTap: () => ProfileImageViewer.show(
+                            context,
+                            imageUrl: user?.profilePicture,
+                          ),
+                          child: UserAvatar(
+                            url: user?.profilePicture ?? '',
+                            size: 40,
+                            iconSize: 20,
+                          ),
                         ),
                         title: Text(user?.name ?? uid),
                         subtitle: Text(user?.email ?? ''),

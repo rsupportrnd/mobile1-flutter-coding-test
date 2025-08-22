@@ -4,6 +4,7 @@ import 'package:mobile1_flutter_coding_test/core/routes.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/user_detail/user_detail_view.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/status_badge.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/user_avatar.dart';
+import 'package:mobile1_flutter_coding_test/presentation/users/widgets/profile_image_viewer.dart';
 
 class UserListItem extends StatelessWidget {
   const UserListItem({super.key, required this.user});
@@ -13,7 +14,13 @@ class UserListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: UserAvatar(url: user.profilePicture),
+      leading: GestureDetector(
+        onTap: () => ProfileImageViewer.show(
+          context,
+          imageUrl: user.profilePicture,
+        ),
+        child: UserAvatar(url: user.profilePicture),
+      ),
       title: Text(
         user.name,
         style: Theme.of(

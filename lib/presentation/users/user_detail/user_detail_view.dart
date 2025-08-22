@@ -4,6 +4,7 @@ import 'package:mobile1_flutter_coding_test/models/app_user.dart';
 import 'package:mobile1_flutter_coding_test/repository/user_repositoy.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/status_badge.dart';
 import 'package:mobile1_flutter_coding_test/presentation/users/widgets/user_avatar.dart';
+import 'package:mobile1_flutter_coding_test/presentation/users/widgets/profile_image_viewer.dart';
 
 class UserDetailArgs {
   UserDetailArgs({this.user, this.isMe = false});
@@ -12,7 +13,12 @@ class UserDetailArgs {
 }
 
 class UserDetailView extends StatelessWidget {
-  const UserDetailView({super.key, required this.userId, this.user, this.isMe = false});
+  const UserDetailView({
+    super.key,
+    required this.userId,
+    this.user,
+    this.isMe = false,
+  });
 
   final String userId;
   final AppUser? user;
@@ -40,7 +46,17 @@ class UserDetailView extends StatelessWidget {
           children: [
             Row(
               children: [
-                UserAvatar(url: u.profilePicture, size: 80, iconSize: 40),
+                GestureDetector(
+                  onTap: () => ProfileImageViewer.show(
+                    context,
+                    imageUrl: u!.profilePicture,
+                  ),
+                  child: UserAvatar(
+                    url: u.profilePicture,
+                    size: 80,
+                    iconSize: 40,
+                  ),
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -48,9 +64,7 @@ class UserDetailView extends StatelessWidget {
                     children: [
                       Text(
                         u.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
+                        style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 6),
@@ -68,10 +82,9 @@ class UserDetailView extends StatelessWidget {
               children: [
                 Text(
                   '상태',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const Spacer(),
                 StatusBadge(status: u.status, size: 18),
@@ -104,10 +117,9 @@ class _InfoTile extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
           ),
           const Spacer(),
           Text(value, style: Theme.of(context).textTheme.bodyMedium),
@@ -116,5 +128,3 @@ class _InfoTile extends StatelessWidget {
     );
   }
 }
-
-
