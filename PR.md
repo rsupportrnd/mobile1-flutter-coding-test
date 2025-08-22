@@ -7,33 +7,33 @@
 
 ### 홈/회의 목록 및 사용자 목록
 - 회의 목록
-![회의 목록](./screenshots/rooms_list.png)
+<img src="./screenshots/rooms_list.png" alt="회의 목록" width="380" />
 
 - 회의 목록 안읽은 알림
-![회의 목록](./screenshots/rooms_listrooms_list_notification.png)
+<img src="./screenshots/rooms_listrooms_list_notification.png" alt="회의 목록 알림" width="380" />
 
 - 사용자 목록
-![사용자 목록](./screenshots/users_list.png)
+<img src="./screenshots/users_list.png" alt="사용자 목록" width="380" />
 
 - 사용자 전환
-![사용자 전환](./screenshots/user_switch.png) 
+<img src="./screenshots/user_switch.png" alt="사용자 전환" width="380" />
 
 ### 채팅
 - 채팅 화면 (메시지 내역)
-![채팅 화면 - 메시지](./screenshots/chat_screen.png)
+<img src="./screenshots/chat_screen.png" alt="채팅 화면" width="380" />
 
 - 채팅 화면 (이전 대화 없음 표시)
-![채팅 화면 - 비어있음](./screenshots/chat_empty.png)
+<img src="./screenshots/chat_empty.png" alt="채팅 비어있음" width="380" />
 
 - 채팅 참여자 바텀시트
-![채팅 참여자](./screenshots/chat_participants.png)
+<img src="./screenshots/chat_participants.png" alt="채팅 참여자" width="380" />
 
 ### 사용자 상세 및 프로필 확대
 - 사용자 상세
-![사용자 상세](./screenshots/user_detail.png)
+<img src="./screenshots/user_detail.png" alt="사용자 상세" width="380" />
 
 - 프로필 이미지 확대
-![프로필 확대](./screenshots/profile_zoom.png)
+<img src="./screenshots/profile_zoom.png" alt="프로필 확대" width="380" />
 
 ## 개발 환경
 - Flutter: 3.35.1 (stable), Dart: 3.9.0, DevTools: 2.48.0
