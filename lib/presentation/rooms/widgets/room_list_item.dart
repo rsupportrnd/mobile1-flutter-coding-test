@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mobile1_flutter_coding_test/core/injector.dart';
 import 'package:mobile1_flutter_coding_test/core/routes.dart';
 import 'package:mobile1_flutter_coding_test/models/app_user.dart';
@@ -56,20 +57,46 @@ class RoomListItem extends StatelessWidget {
         width: 56,
         height: 56,
         decoration: BoxDecoration(color: Colors.grey[300]),
-        child: Image.network(
-          room.thumbnailImage ?? '',
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[400],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(Icons.chat_bubble, size: 24, color: Colors.grey[600]),
-            );
-          },
+        child: room.thumbnailImage != null && room.thumbnailImage!.isNotEmpty
+            ? CachedNetworkImage(
+                imageUrl: room.thumbnailImage!,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => _buildLoadingPlaceholder(),
+                errorWidget: (context, url, error) => _buildErrorPlaceholder(),
+                memCacheWidth: 112, // 56 * 2
+                memCacheHeight: 112, // 56 * 2
+              )
+            : _buildErrorPlaceholder(),
+      ),
+    );
+  }
+
+  Widget _buildLoadingPlaceholder() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey[600]!),
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildErrorPlaceholder() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[400],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Icon(Icons.chat_bubble, size: 24, color: Colors.grey[600]),
     );
   }
 

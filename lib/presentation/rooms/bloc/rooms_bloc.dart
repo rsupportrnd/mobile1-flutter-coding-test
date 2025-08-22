@@ -30,6 +30,7 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
           }
         },
         setCurrentUser: (userId) async {
+          await _roomRepo.load();
           final rooms = _filterAndSort(_roomRepo.rooms, userId);
           await _cancelAllSubs();
           emit(
@@ -60,7 +61,7 @@ class RoomsBloc extends Bloc<RoomsEvent, RoomsState> {
           }
         },
         refreshUnread: () async {
-          // 읽음처리 용으로 만들었으나, 개별 카운트 처리로 대체 함.
+          // 전체 카운트용으로 만들었으나, 메소드 처리로 대체.
           await _recomputeUnreadAll(emit);
         },
         refreshUnreadOnly: (roomId) async {
