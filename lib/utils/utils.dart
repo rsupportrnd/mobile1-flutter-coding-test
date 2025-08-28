@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/constants/enum.dart';
+import 'package:mobile1_flutter_coding_test/enums/enums.dart';
 
 DateTime dateTimeFromTimestamp(String val) {
   return DateTime.parse(val);

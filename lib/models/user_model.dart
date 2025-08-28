@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:mobile1_flutter_coding_test/constants/enum.dart';
-import 'package:mobile1_flutter_coding_test/util/util.dart';
+import 'package:mobile1_flutter_coding_test/enums/enums.dart';
+import 'package:mobile1_flutter_coding_test/utils/utils.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable()

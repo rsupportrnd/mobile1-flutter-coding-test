@@ -29,6 +29,7 @@ const _$UserStatusEnumMap = {
   UserStatus.offline: 'offline',
   UserStatus.online: 'online',
   UserStatus.doNotDisturb: 'doNotDisturb',
+  UserStatus.away: 'away',
 };
 
 const _$UserRoleEnumMap = {
