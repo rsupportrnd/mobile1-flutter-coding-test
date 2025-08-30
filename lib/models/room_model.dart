@@ -9,7 +9,7 @@ class RoomModel {
   final String roomName;
   final String creator;
   final List<String> participants;
-  @JsonKey(fromJson: dateTimeFromTimestamp)
+  @JsonKey(fromJson: dateTimeFromTimestamp, toJson: timestampToInt)
   final DateTime createdAt;
   final LastMessageModel lastMessage;
   final String thumbnailImage;
@@ -33,7 +33,7 @@ class RoomModel {
 class LastMessageModel {
   final String sender;
   final String content;
-  @JsonKey(fromJson: dateTimeFromTimestamp)
+  @JsonKey(fromJson: dateTimeFromTimestamp, toJson: timestampToInt)
   final DateTime timestamp;
 
   LastMessageModel({

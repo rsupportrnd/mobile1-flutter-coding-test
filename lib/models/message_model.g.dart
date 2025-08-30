@@ -11,7 +11,7 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       messageId: json['messageId'] as String,
       sender: json['sender'] as String,
       content: json['content'] as String,
-      timestamp: dateTimeFromTimestamp(json['timestamp'] as String),
+      timestamp: dateTimeFromTimestamp(json['timestamp']),
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -20,5 +20,5 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'messageId': instance.messageId,
       'sender': instance.sender,
       'content': instance.content,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'timestamp': timestampToInt(instance.timestamp),
     };

@@ -10,9 +10,9 @@ class UserModel {
   final String name;
   final String email;
   final String profilePicture;
-  @JsonKey(fromJson: userStatusFromString)
+  @JsonKey(fromJson: userStatusFromValue, toJson: userStatusToString)
   final UserStatus status;
-  @JsonKey(fromJson: userRoleFromString)
+  @JsonKey(fromJson: userRoleFromValue, toJson: userRoleToString)
   final UserRole role;
 
   UserModel({

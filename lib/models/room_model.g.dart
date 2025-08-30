@@ -13,7 +13,7 @@ RoomModel _$RoomModelFromJson(Map<String, dynamic> json) => RoomModel(
       participants: (json['participants'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      createdAt: dateTimeFromTimestamp(json['createdAt'] as String),
+      createdAt: dateTimeFromTimestamp(json['createdAt']),
       lastMessage: LastMessageModel.fromJson(
           json['lastMessage'] as Map<String, dynamic>),
       thumbnailImage: json['thumbnailImage'] as String,
@@ -24,7 +24,7 @@ Map<String, dynamic> _$RoomModelToJson(RoomModel instance) => <String, dynamic>{
       'roomName': instance.roomName,
       'creator': instance.creator,
       'participants': instance.participants,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': timestampToInt(instance.createdAt),
       'lastMessage': instance.lastMessage,
       'thumbnailImage': instance.thumbnailImage,
     };
@@ -33,12 +33,12 @@ LastMessageModel _$LastMessageModelFromJson(Map<String, dynamic> json) =>
     LastMessageModel(
       sender: json['sender'] as String,
       content: json['content'] as String,
-      timestamp: dateTimeFromTimestamp(json['timestamp'] as String),
+      timestamp: dateTimeFromTimestamp(json['timestamp']),
     );
 
 Map<String, dynamic> _$LastMessageModelToJson(LastMessageModel instance) =>
     <String, dynamic>{
       'sender': instance.sender,
       'content': instance.content,
-      'timestamp': instance.timestamp.toIso8601String(),
+      'timestamp': timestampToInt(instance.timestamp),
     };

@@ -9,7 +9,7 @@ class MessageModel {
   final String messageId;
   final String sender;
   final String content;
-  @JsonKey(fromJson: dateTimeFromTimestamp)
+  @JsonKey(fromJson: dateTimeFromTimestamp, toJson: timestampToInt)
   final DateTime timestamp;
 
   MessageModel({

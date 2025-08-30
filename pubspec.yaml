@@ -41,6 +41,7 @@ dependencies:
   get:
   dio:
   retrofit:
+  sqflite:
 
 dev_dependencies:
   flutter_test:
