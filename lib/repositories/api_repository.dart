@@ -11,7 +11,7 @@ import 'package:mobile1_flutter_coding_test/api/models/responses/messages_respon
 import 'package:mobile1_flutter_coding_test/api/models/responses/rooms_response_model.dart';
 import 'package:mobile1_flutter_coding_test/api/models/responses/users_response_model.dart';
 import 'package:mobile1_flutter_coding_test/api/server_api.dart';
-import 'package:mobile1_flutter_coding_test/constants/constants.dart';
+import 'package:mobile1_flutter_coding_test/commons/constants.dart';
 
 final Dio _dio = Dio(BaseOptions(headers: {}));
 

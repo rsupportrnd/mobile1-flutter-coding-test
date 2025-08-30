@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:mobile1_flutter_coding_test/enums/enums.dart';
+import 'package:mobile1_flutter_coding_test/commons/enums.dart';
 import 'package:mobile1_flutter_coding_test/utils/utils.dart';
 part 'user_model.g.dart';
 

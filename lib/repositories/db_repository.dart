@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:mobile1_flutter_coding_test/enums/enums.dart';
+import 'package:mobile1_flutter_coding_test/commons/enums.dart';
 import 'package:mobile1_flutter_coding_test/models/message_model.dart';
 import 'package:mobile1_flutter_coding_test/models/room_model.dart';
 import 'package:mobile1_flutter_coding_test/models/user_model.dart';
@@ -65,7 +65,7 @@ class DbRepository {
   Future<bool> insertMessage(MessageModel model) async {
     try {
       var jsonModel = model.toJson();
-      await db.insert('messages', jsonModel);
+      await db.insert('messages', jsonModel, conflictAlgorithm: ConflictAlgorithm.replace);
     } catch ( e ) {
       debugPrint ( e.toString());
       return false;
@@ -87,12 +87,12 @@ class DbRepository {
         }
         return MapEntry(key, value);
       });
-      await db.insert('rooms', modifiedJson);
+      await db.insert('rooms', modifiedJson, conflictAlgorithm: ConflictAlgorithm.replace);
 
       //lastMessage 넣음
       var lastMessageJson = model.lastMessage.toJson();
       lastMessageJson['roomId'] = modifiedJson['roomId'];
-      await db.insert('roomsLastMessage', lastMessageJson);
+      await db.insert('roomsLastMessage', lastMessageJson, conflictAlgorithm: ConflictAlgorithm.replace);
 
     } catch ( e ) {
       debugPrint ( e.toString());
@@ -115,7 +115,7 @@ class DbRepository {
 
         return MapEntry(key, value);
       });
-      await db.insert('users', modifiedJsonModel);
+      await db.insert('users', modifiedJsonModel, conflictAlgorithm: ConflictAlgorithm.replace);
     } catch ( e ) {
       debugPrint ( e.toString());
       return false;
@@ -124,10 +124,25 @@ class DbRepository {
     return true;
   }
 
-  Future<List<MessageModel>?> fetchMessage(String roomId) async {
-    List<MessageModel>? result;
+  Future<MessageModel?> fetchMessage(String roomId) async {
+    MessageModel? result;
     try {
       var queryResult = await db.query('messages', columns: null, where: '"roomId" = ?', whereArgs: [roomId]);
+      result = queryResult.map ( ( element ) {
+        return MessageModel.fromJson(element);
+      }).toList().firstOrNull;
+    } catch ( e ) {
+      debugPrint ( e.toString() );
+      return null;
+    }
+
+    return result;
+  }
+
+  Future<List<MessageModel>?> fetchMessagesAll() async {
+    List<MessageModel>? result;
+    try {
+      var queryResult = await db.query('messages');
       result = queryResult.map ( ( element ) {
         return MessageModel.fromJson(element);
       }).toList();
@@ -139,8 +154,8 @@ class DbRepository {
     return result;
   }
 
-  Future<List<RoomModel>?> fetchRoom(String roomId) async {
-    List<RoomModel>? result;
+  Future<RoomModel?> fetchRoom(String roomId) async {
+    RoomModel? result;
     try {
       String sql = '''
       select r.*, m.sender as lastSender, m.content as lastContent, m.timestamp as lastTimestamp
@@ -173,6 +188,48 @@ class DbRepository {
         modified.remove('lastTimestamp');
 
         return RoomModel.fromJson(modified);
+      }).toList().firstOrNull;
+    } catch ( e ) {
+      debugPrint ( e.toString() );
+      return null;
+    }
+
+    return result;
+  }
+
+  Future<List<RoomModel>?> fetchRoomsAll() async {
+    List<RoomModel>? result;
+    try {
+      String sql = '''
+      select r.*, m.sender as lastSender, m.content as lastContent, m.timestamp as lastTimestamp
+      from rooms r
+      left join roomsLastMessage m
+      on r.roomId = m.roomId
+      ''';
+
+      var queryResult = await db.rawQuery(sql);
+
+      result = queryResult.map((element) {
+        var modified = element.map((key, value) {
+          if (key == 'participants' && value is String) {
+            return MapEntry(key, jsonDecode(value));
+          }
+
+          return MapEntry(key, value);
+        });
+
+        modified['lastMessage'] = {
+          'sender': modified['lastSender'],
+          'content': modified['lastContent'],
+          'timestamp': modified['lastTimestamp'],
+        };
+
+        // 필요없는 컬럼 제거
+        modified.remove('lastSender');
+        modified.remove('lastContent');
+        modified.remove('lastTimestamp');
+
+        return RoomModel.fromJson(modified);
       }).toList();
     } catch ( e ) {
       debugPrint ( e.toString() );
@@ -182,10 +239,25 @@ class DbRepository {
     return result;
   }
 
-  Future<List<UserModel>?> fetchUser(String userId) async {
-    List<UserModel>? result;
+  Future<UserModel?> fetchUser(String userId) async {
+    UserModel? result;
     try {
       var queryResult = await db.query('users', columns: null, where: '"userId" = ?', whereArgs: [userId]);
+      result = queryResult.map ( ( element ) {
+        return UserModel.fromJson(element);
+      }).toList().firstOrNull;
+    } catch ( e ) {
+      debugPrint ( e.toString() );
+      return null;
+    }
+
+    return result;
+  }
+
+  Future<List<UserModel>?> fetchUsersAll() async {
+    List<UserModel>? result;
+    try {
+      var queryResult = await db.query('users');
       result = queryResult.map ( ( element ) {
         return UserModel.fromJson(element);
       }).toList();

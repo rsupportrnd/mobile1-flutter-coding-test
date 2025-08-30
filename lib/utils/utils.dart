@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mobile1_flutter_coding_test/enums/enums.dart';
+import 'package:mobile1_flutter_coding_test/commons/enums.dart';
 
 DateTime dateTimeFromTimestamp(dynamic val) {
   if ( val is String ) {
