@@ -39,6 +39,7 @@ dependencies:
   json_serializable:
   json_annotation:
   get:
+  get_storage:
   dio:
   retrofit:
   sqflite:
