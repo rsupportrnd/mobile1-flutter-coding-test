@@ -66,7 +66,9 @@ class ChatRoomViewModel extends BaseViewModel {
     messagesList.add(messageModel);
 
     if ( result == true ) {
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      0.5.delay ( () {
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      });
     }
 
     return result;

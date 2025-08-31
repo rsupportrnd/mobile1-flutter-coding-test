@@ -39,6 +39,7 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
     });
 
     final _overlay = Overlay.of(context);
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
 
       return BaseContentWidget(
           title: room.roomName,
@@ -68,7 +69,7 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
                             child: Column(
                               children: [
                                 SizedBox(height:30),
-                                Text ( '참여자 목록',
+                                Text ( '참여자 목록 (${usersList.length}명)',
                                     style: TextStyle( fontWeight: FontWeight.bold)),
                                 SizedBox(height:3),
                                 Expanded(
@@ -161,75 +162,83 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
               child: Column(
               children: [
                 Expanded(
-                  child: Obx ( () {
-                    final messagesList = controller.messagesList;
-                    return ListView.separated(
-                      controller: controller.scrollController,
-                      scrollDirection: Axis.vertical,
-                      itemCount: messagesList.length,
-                      shrinkWrap: true,
-                      separatorBuilder: (_, __) => const SizedBox(height: 10 ),
-                      itemBuilder: (context, index) {
-                        MessageModel message = messagesList[index];
-                        UserModel? user = controller.findUser(message.sender);
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Obx ( () {
+                      final messagesList = controller.messagesList;
+                      return ListView.separated(
+                        controller: controller.scrollController,
+                        scrollDirection: Axis.vertical,
+                        itemCount: messagesList.length,
+                        shrinkWrap: true,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10 ),
+                        itemBuilder: (context, index) {
+                          MessageModel message = messagesList[index];
+                          UserModel? user = controller.findUser(message.sender);
 
-                        return Container(
-                            // height: 75,
-                            child: Directionality(
-                              textDirection: user!.userId == MainModule.instance.currentUser.userId ? TextDirection.rtl: TextDirection.ltr,
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                      width: 75,
-                                      height: 75,
-                                      child: Center(
-                                        child: ( user != null && user.profilePicture != null && user.profilePicture.isNotEmpty) ?
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(UsersDetailView(user: user));
-                                          },
-                                          child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration:
-                                              BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                borderRadius: BorderRadius.circular(10.0),
-                                                color: Colors.transparent,
-                                                image: DecorationImage(
-                                                    image: CachedNetworkImageProvider(
-                                                        user.profilePicture,
-                                                        maxWidth: 50,
-                                                        maxHeight: 50,
-                                                        errorListener: (_) {
+                          return Container(
+                              // height: 75,
+                              child: Directionality(
+                                textDirection: user!.userId == MainModule.instance.currentUser.userId ? TextDirection.rtl: TextDirection.ltr,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                        width: 75,
+                                        height: 75,
+                                        child: Center(
+                                          child: ( user != null && user.profilePicture != null && user.profilePicture.isNotEmpty) ?
+                                          InkWell(
+                                            onTap: () {
+                                              Get.to(UsersDetailView(user: user));
+                                            },
+                                            child: Container(
+                                                width: 50,
+                                                height: 50,
+                                                decoration:
+                                                BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  borderRadius: BorderRadius.circular(10.0),
+                                                  color: Colors.transparent,
+                                                  image: DecorationImage(
+                                                      image: CachedNetworkImageProvider(
+                                                          user.profilePicture,
+                                                          maxWidth: 50,
+                                                          maxHeight: 50,
+                                                          errorListener: (_) {
 
-                                                        })),
-                                              )),
-                                        ) : Icon(Icons.account_circle, size: 50, color: Colors.grey),
-                                      )),
-                                  Expanded(child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      if ( user != null )
-                                        Text(user.name),
-                                        Bubble(
-                                          nip: user!.userId == MainModule.instance.currentUser.userId ? BubbleNip.rightTop: BubbleNip.leftTop,
-                                          color: user!.userId == MainModule.instance.currentUser.userId ? Colors.purple.shade100 : Colors.purple.shade50,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(message.content),
-                                              Text(message.timestamp.formatKorean())
-                                            ],
+                                                          })),
+                                                )),
+                                          ) : Icon(Icons.account_circle, size: 50, color: Colors.grey),
+                                        )),
+                                    Expanded(child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Directionality(
+                                            textDirection: TextDirection.ltr,
+                                            child: Text(user.name)),
+                                          SizedBox(height:5),
+                                          Bubble(
+                                            nip: user.userId == MainModule.instance.currentUser.userId ? BubbleNip.rightTop: BubbleNip.leftTop,
+                                            color: user.userId == MainModule.instance.currentUser.userId ? Colors.purple.shade100 : Colors.purple.shade50,
+                                            child: Directionality(
+                                              textDirection: TextDirection.ltr,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(message.content),
+                                                  Text(message.timestamp.formatKorean())
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                    ],
-                                  )),
-                                ],
-                              ),
-                            ));
-                      });}),
+                                      ],
+                                    )),
+                                  ],
+                                ),
+                              ));
+                        });}),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
