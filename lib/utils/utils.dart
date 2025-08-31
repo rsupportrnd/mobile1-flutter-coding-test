@@ -1,4 +1,5 @@
 import 'package:mobile1_flutter_coding_test/commons/enums.dart';
+import 'package:intl/intl.dart';
 
 DateTime dateTimeFromTimestamp(dynamic val) {
   if ( val is String ) {
@@ -48,4 +49,22 @@ String userStatusToString(UserStatus val) {
 
 String userRoleToString(UserRole val) {
   return val.value;
+}
+
+extension KoreanDateTimeFormat on DateTime {
+  String formatKorean({DateTime? now}) {
+    final DateTime _now = (now ?? DateTime.now()).toLocal();
+    final DateTime _dt  = this.toLocal();
+
+    final bool isToday =
+        _dt.year == _now.year && _dt.month == _now.month && _dt.day == _now.day;
+
+    if (isToday) {
+      return DateFormat('a hh:mm', 'ko').format(_dt);
+    } else {
+      return DateFormat('yyyy-MM-dd').format(_dt);
+    }
+
+    return toString();
+  }
 }

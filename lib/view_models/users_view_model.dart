@@ -17,5 +17,4 @@ class UsersViewModel extends BaseViewModel {
   }
 
   ScrollController scrollController = ScrollController();
-  get usersList => MainModule.instance.usersList;
 }

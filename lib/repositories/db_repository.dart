@@ -88,14 +88,23 @@ class DbRepository {
         return MapEntry(key, value);
       });
       await db.insert('rooms', modifiedJson, conflictAlgorithm: ConflictAlgorithm.replace);
-
-      //lastMessage 넣음
-      var lastMessageJson = model.lastMessage.toJson();
-      lastMessageJson['roomId'] = modifiedJson['roomId'];
-      await db.insert('roomsLastMessage', lastMessageJson, conflictAlgorithm: ConflictAlgorithm.replace);
+      await insertLastMessage(modifiedJson['roomId'], model.lastMessage);
 
     } catch ( e ) {
       debugPrint ( e.toString());
+      return false;
+    }
+
+    return true;
+  }
+
+  Future<bool> insertLastMessage(String roomId, LastMessageModel lastMessage, {bool replace = false}) async {
+    try {
+      var lastMessageJson = lastMessage.toJson();
+      lastMessageJson['roomId'] = roomId;
+      await db.insert('roomsLastMessage', lastMessageJson, conflictAlgorithm: (replace == true) ? ConflictAlgorithm.replace : ConflictAlgorithm.ignore);
+    } catch ( e ) {
+      debugPrint(e.toString());
       return false;
     }
 
@@ -142,7 +151,7 @@ class DbRepository {
   Future<List<MessageModel>?> fetchMessagesAll() async {
     List<MessageModel>? result;
     try {
-      var queryResult = await db.query('messages');
+      var queryResult = await db.query('messages', orderBy: 'timestamp asc');
       result = queryResult.map ( ( element ) {
         return MessageModel.fromJson(element);
       }).toList();
@@ -205,6 +214,7 @@ class DbRepository {
       from rooms r
       left join roomsLastMessage m
       on r.roomId = m.roomId
+      order by m.timestamp desc
       ''';
 
       var queryResult = await db.rawQuery(sql);
@@ -233,6 +243,22 @@ class DbRepository {
       }).toList();
     } catch ( e ) {
       debugPrint ( e.toString() );
+      return null;
+    }
+
+    return result;
+  }
+
+  Future<LastMessageModel?> fetchLastMessage(String roomId) async {
+    LastMessageModel? result;
+    try {
+     var queryResult = await db.query('roomsLastMessage',  where: '"roomId" = ?', whereArgs: [roomId]);
+     result = queryResult.map ( ( element ) {
+       return LastMessageModel.fromJson(element);
+     }).toList().firstOrNull;
+
+    } catch ( e ) {
+      debugPrint ( e.toString());
       return null;
     }
 

@@ -43,6 +43,9 @@ dependencies:
   dio:
   retrofit:
   sqflite:
+  cached_network_image:
+  intl:
+  bubble:
 
 dev_dependencies:
   flutter_test:

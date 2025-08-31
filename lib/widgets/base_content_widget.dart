@@ -6,33 +6,37 @@ class BaseContentWidget extends StatelessWidget {
     super.key,
     this.title,
     required this.child,
+    this.bottomNavigationBar,
+    this.useBackButton = true,
+    this.action,
   });
   final dynamic title;
   final Widget child;
+  final Widget? bottomNavigationBar;
+  final bool useBackButton;
+  final List<Widget>? action;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _key,
 
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Color(0xFFF6F6F6),
       appBar:AppBar(
-      scrolledUnderElevation: 0,
-      leading: Opacity(
-          opacity: 1.0,
-          child: IconButton(
+        scrolledUnderElevation: 0,
+        leading: useBackButton == true ? IconButton(
             icon: _backButton(),
             onPressed: () {Get.back();}
-          ),
-        ),
+        ) : null,
         automaticallyImplyLeading: true,
         title: title is String
             ? Text(
           title,
           style: TextStyle(
-              fontSize: 21,
-              height:1.0,),
+            fontSize: 21,
+            height:1.0,),
           strutStyle: StrutStyle(
             fontSize: 21,
             height: 1.0,
@@ -42,10 +46,14 @@ class BaseContentWidget extends StatelessWidget {
             ? title
             : null,
         elevation: 0,
+        actions: action
       ),
       body: SafeArea(
+        top: true,    // 상단 상태바 영역 보호
+        bottom: true, // 하단 네비게이션바 영역 보호
         child: child,
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/commons/main_module.dart';
 import 'package:mobile1_flutter_coding_test/view_models/base_view_model.dart';
+import 'package:intl/intl.dart';
 
 class RoomsViewModel extends BaseViewModel {
 
