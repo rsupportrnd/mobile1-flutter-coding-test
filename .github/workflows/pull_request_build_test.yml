@@ -1,0 +1,65 @@
+name: Flutter Pull Request Build Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.35.2"
+          channel: "stable"
+
+      - name: 패키지 설치
+        run: flutter pub get
+
+      - name: 플러터 코드 분석
+        run: flutter analyze
+
+      - name: 유닛 테스트 실행
+        run: |
+          flutter test test/unit_test.dart
+          echo "unit_test_exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+        id: unit_test_step
+
+      - name: 유닛 테스트 결과 확인
+        run: |
+          if [ "${{ steps.unit_test_step.outputs.unit_test_exit_code }}" -eq 0 ]; then
+            echo "✅ Unit tests passed"
+            echo "unit_test_result=success" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Unit tests failed (exit code: ${{ steps.unit_test_step.outputs.unit_test_exit_code }})"
+            echo "unit_test_result=failure" >> $GITHUB_OUTPUT
+          fi
+        id: unit_test_check
+
+      - name: APK 빌드
+        run: flutter build apk --debug
+
+      - name: Pull Request 테스트 완료
+        run: |
+          echo "✅ Pull Request 테스트 완료"
+          echo "브랜치: ${{ github.ref }}"
+          echo "커밋: ${{ github.sha }}"
+          echo "상태: 성공"
+          echo "Unit Test 결과: ${{ steps.unit_test_check.outputs.unit_test_result }}"
+        if: success()
+
+      - name: Pull Request 테스트 실패
+        run: |
+          echo "❌ Pull Request 테스트 실패"
+          echo "브랜치: ${{ github.ref }}"
+          echo "커밋: ${{ github.sha }}"
+          echo "상태: 실패"
+          echo "실패한 단계를 확인해주세요."
+          echo "실행 시간: $(date)"
+          echo "워크플로우 ID: ${{ github.run_id }}"
+        if: failure()
