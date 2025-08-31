@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: cirrusci/flutter:latest
+      image: instrumentisto/flutter:3.35.2
     steps:
       - uses: actions/checkout@v4
 
