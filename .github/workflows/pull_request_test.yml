@@ -1,0 +1,31 @@
+name: Flutter Test
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.35.2"
+          cache: "true"
+          channel: "stable"
+
+      - name: 패키지 설치
+        run: flutter pub get
+
+      - name: 플러터 코드 분석
+        run: flutter analyze
+
+      - name: 유닛 테스트 실행
+        run: |
+          flutter test test/unit_test.dart
