@@ -152,7 +152,7 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
                                         width: 75,
                                         height: 75,
                                         child: Center(
-                                          child: ( user != null && user.profilePicture != null && user.profilePicture.isNotEmpty) ?
+                                          child: ( user.profilePicture != null && user.profilePicture!.isNotEmpty) ?
                                           InkWell(
                                             onTap: () {
                                               Get.to(UsersDetailView(user: user));
@@ -167,7 +167,7 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
                                                   color: Colors.transparent,
                                                   image: DecorationImage(
                                                       image: CachedNetworkImageProvider(
-                                                          user.profilePicture,
+                                                          user.profilePicture!,
                                                           maxWidth: 50,
                                                           maxHeight: 50,
                                                           errorListener: (_) {

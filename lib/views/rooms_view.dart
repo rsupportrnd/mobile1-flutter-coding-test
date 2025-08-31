@@ -47,7 +47,7 @@ class RoomsView extends BaseView<RoomsViewModel> {
                             width: 85,
                             height: 85,
                             child: Center(
-                              child: (room.thumbnailImage != null && room.thumbnailImage.isNotEmpty) ?
+                              child: (room.thumbnailImage != null && room.thumbnailImage!.isNotEmpty) ?
                               Container(
                                   width: 50,
                                   height: 50,
@@ -58,7 +58,7 @@ class RoomsView extends BaseView<RoomsViewModel> {
                                     color: Colors.transparent,
                                     image: DecorationImage(
                                         image: CachedNetworkImageProvider(
-                                            room.thumbnailImage,
+                                            room.thumbnailImage!,
                                             maxWidth: 50,
                                             maxHeight: 50,
                                             errorListener: (_) {

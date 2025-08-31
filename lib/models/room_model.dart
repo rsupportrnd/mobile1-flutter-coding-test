@@ -12,7 +12,7 @@ class RoomModel {
   @JsonKey(fromJson: dateTimeFromTimestamp, toJson: timestampToInt)
   final DateTime createdAt;
   final LastMessageModel lastMessage;
-  final String thumbnailImage;
+  final String? thumbnailImage;
 
   RoomModel({
     required this.roomId,
@@ -21,7 +21,7 @@ class RoomModel {
     required this.participants,
     required this.createdAt,
     required this.lastMessage,
-    required this.thumbnailImage,
+    this.thumbnailImage,
   });
 
   factory RoomModel.fromJson(Map<String, dynamic> json) =>

@@ -39,7 +39,7 @@ class UsersDetailView extends BaseView<UsersDetailViewModel> {
                 child: SizedBox(
                     width: 125,
                     height: 125,
-                    child: (user.profilePicture != null && user.profilePicture.isNotEmpty) ?
+                    child: (user.profilePicture != null && user.profilePicture!.isNotEmpty) ?
                     Container(
                         width: 125,
                         height: 125,
@@ -50,7 +50,7 @@ class UsersDetailView extends BaseView<UsersDetailViewModel> {
                           color: Colors.transparent,
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  user.profilePicture,
+                                  user.profilePicture!,
                                   maxWidth: 125,
                                   maxHeight: 125,
                                   errorListener: (_) {

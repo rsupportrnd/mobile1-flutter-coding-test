@@ -9,7 +9,7 @@ class UserModel {
   final String userId;
   final String name;
   final String email;
-  final String profilePicture;
+  final String? profilePicture;
   @JsonKey(fromJson: userStatusFromValue, toJson: userStatusToString)
   final UserStatus status;
   @JsonKey(fromJson: userRoleFromValue, toJson: userRoleToString)
@@ -19,7 +19,7 @@ class UserModel {
     required this.userId,
     required this.name,
     required this.email,
-    required this.profilePicture,
+    this.profilePicture,
     required this.status,
     required this.role,
   });
