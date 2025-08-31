@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mobile1_flutter_coding_test/commons/enums.dart';
 import 'package:mobile1_flutter_coding_test/models/user_model.dart';
 import 'package:mobile1_flutter_coding_test/view_models/users_detail_view_model.dart';
 import 'package:mobile1_flutter_coding_test/views/base_view.dart';
 import 'package:mobile1_flutter_coding_test/widgets/base_content_widget.dart';
+import 'package:mobile1_flutter_coding_test/widgets/user_role_widget.dart';
+import 'package:mobile1_flutter_coding_test/widgets/user_status_widget.dart';
 
 class UsersDetailView extends BaseView<UsersDetailViewModel> {
   const UsersDetailView({super.key, required this.user});
@@ -76,8 +77,7 @@ class UsersDetailView extends BaseView<UsersDetailViewModel> {
                         Text (
                           '유저 타입: ${user.role == UserRole.admin ? '관리자' : user.role == UserRole.member ? '일반유저' : '오류'}'
                         ),
-                        if ( user.role == UserRole.admin)
-                          Icon(Icons.handyman, color: Colors.blueGrey),
+                        UserRoleWidget(userRole:user.role)
                       ],
                     ),
                     SizedBox(height: 10),
@@ -88,14 +88,7 @@ class UsersDetailView extends BaseView<UsersDetailViewModel> {
                                 : user.status == UserStatus.online ? '온라인'
                                 : user.status == UserStatus.doNotDisturb ? '방해금지'
                                 : user.status == UserStatus.away ? '이탈' : '오류'}'),
-                        if ( user.status == UserStatus.offline)
-                          Icon(Icons.offline_bolt_outlined, color: Colors.grey),
-                        if ( user.status == UserStatus.online)
-                          Icon(Icons.offline_bolt_outlined, color: Colors.green),
-                        if ( user.status == UserStatus.doNotDisturb)
-                          Icon(Icons.do_not_disturb_on, color: Colors.red),
-                        if ( user.status == UserStatus.away)
-                          Icon(Icons.leave_bags_at_home, color: Colors.grey),
+                        UserStatusWidget(userStatus: user.status)
                       ],
                     ),
                   ],

@@ -2,7 +2,6 @@ import 'package:bubble/bubble.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobile1_flutter_coding_test/commons/enums.dart';
 import 'package:mobile1_flutter_coding_test/commons/main_module.dart';
 import 'package:mobile1_flutter_coding_test/models/message_model.dart';
 import 'package:mobile1_flutter_coding_test/models/room_model.dart';
@@ -12,7 +11,10 @@ import 'package:mobile1_flutter_coding_test/view_models/chat_room_view_model.dar
 import 'package:mobile1_flutter_coding_test/views/base_view.dart';
 import 'package:mobile1_flutter_coding_test/views/users_detail_view.dart';
 import 'package:mobile1_flutter_coding_test/widgets/base_content_widget.dart';
+import 'package:mobile1_flutter_coding_test/widgets/base_tile_widget.dart';
 import 'package:mobile1_flutter_coding_test/widgets/chat_input_bar_widget.dart';
+import 'package:mobile1_flutter_coding_test/widgets/user_role_widget.dart';
+import 'package:mobile1_flutter_coding_test/widgets/user_status_widget.dart';
 
 class ChatRoomView extends BaseView<ChatRoomViewModel> {
   ChatRoomView({super.key, required this.room});
@@ -82,66 +84,30 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
                                       itemBuilder: (context, index) {
                                         UserModel user = usersList[index];
 
-                                        return InkWell(
+                                        return BaseTileWidget(
                                             onTap: () async {
                                               _overlayEntry!.remove();
                                               Get.to(UsersDetailView(user: user));
                                             },
-                                            child: Container(
-                                                height: 75,
-                                                child: Row(
+                                            thumbnailPath: user.profilePicture,
+                                            content: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    SizedBox(
-                                                        width: 75,
-                                                        height: 75,
-                                                        child: Center(
-                                                          child: (user.profilePicture != null && user.profilePicture.isNotEmpty) ?
-                                                          Container(
-                                                              width: 50,
-                                                              height: 50,
-                                                              decoration:
-                                                              BoxDecoration(
-                                                                shape: BoxShape.rectangle,
-                                                                borderRadius: BorderRadius.circular(10.0),
-                                                                color: Colors.transparent,
-                                                                image: DecorationImage(
-                                                                    image: CachedNetworkImageProvider(
-                                                                        user.profilePicture,
-                                                                        maxWidth: 50,
-                                                                        maxHeight: 50,
-                                                                        errorListener: (_) {
-
-                                                                        })),
-                                                              )) : Icon(Icons.account_circle, size: 50, color: Colors.grey),
-                                                        )),
-                                                    Expanded(child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(user.name + (user.userId == MainModule.instance.currentUser.userId ? ' (나)' : '' )),
-                                                            Row(
-                                                              children: [
-                                                                if ( user.role == UserRole.admin)
-                                                                  Icon(Icons.handyman, color: Colors.blueGrey),
-                                                                if ( user.status == UserStatus.offline)
-                                                                  Icon(Icons.offline_bolt_outlined, color: Colors.grey),
-                                                                if ( user.status == UserStatus.online)
-                                                                  Icon(Icons.offline_bolt_outlined, color: Colors.green),
-                                                                if ( user.status == UserStatus.doNotDisturb)
-                                                                  Icon(Icons.do_not_disturb_on, color: Colors.red),
-                                                                if ( user.status == UserStatus.away)
-                                                                  Icon(Icons.leave_bags_at_home, color: Colors.grey),
-                                                              ]
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    )),
+                                                    Text(user.name + (user.userId == MainModule.instance.currentUser.userId ? ' (나)' : '' )),
+                                                    Row(
+                                                        children: [
+                                                          UserRoleWidget(userRole: user.role),
+                                                          UserStatusWidget(userStatus: user.status)
+                                                        ]
+                                                    )
                                                   ],
-                                                )));
+                                                ),
+                                              ],
+                                            ));
                                       })
                                 ),
                               ],
