@@ -1,0 +1,32 @@
+name: Flutter Android CI
+
+on:
+  push:
+    branches: [ "release" ]   # main 브랜치에 push 시 실행
+  pull_request:
+    branches: [ "release" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.2'   # 원하는 Flutter 버전 지정
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Debug APK
+        run: flutter build apk --debug
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: flutter-app-debug
+          path: build/app/outputs/flutter-apk/app-debug.apk
