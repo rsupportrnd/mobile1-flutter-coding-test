@@ -18,7 +18,8 @@ final Dio _dio = Dio(BaseOptions(headers: {}));
 class ApiRepository {
 
   final ServerApi serverApi = ServerApi(_dio);
-  ApiRepository();
+  ApiRepository({required this.localMode});
+  final bool localMode;
 
   ApiResult<T?> handleResponse<T>(T? data, Exception? exception) {
 
@@ -37,7 +38,7 @@ class ApiRepository {
   /// 메시지 목록 호출
   Future<ApiResult<MessagesResponseModel?>> getMessages(MessagesRequestModel body) async {
     try {
-      var responseData = Constants.localMode == true
+      var responseData = localMode
           ? await rootBundle.loadString('api/messages.json')
           : await serverApi.getMessages(body);
 
@@ -52,7 +53,7 @@ class ApiRepository {
   /// 회의 목록 호출
   Future<ApiResult<RoomsResponseModel?>> getRooms(RoomsRequestModel body) async {
     try {
-      var responseData = Constants.localMode == true
+      var responseData = localMode
           ? await rootBundle.loadString('api/rooms.json')
           : await serverApi.getRooms(body);
 
@@ -67,7 +68,7 @@ class ApiRepository {
   /// 사용자 목록 호출
   Future<ApiResult<UsersResponseModel?>> getUsers(UsersRequestModel body) async {
     try {
-      var responseData = Constants.localMode == true
+      var responseData = localMode
           ? await rootBundle.loadString('api/users.json')
           : await serverApi.getUsers(body);
 

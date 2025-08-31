@@ -10,6 +10,7 @@ import 'package:mobile1_flutter_coding_test/api/models/requests/users_request_mo
 import 'package:mobile1_flutter_coding_test/api/models/responses/messages_response_model.dart';
 import 'package:mobile1_flutter_coding_test/api/models/responses/rooms_response_model.dart';
 import 'package:mobile1_flutter_coding_test/api/models/responses/users_response_model.dart';
+import 'package:mobile1_flutter_coding_test/commons/constants.dart';
 import 'package:mobile1_flutter_coding_test/models/message_model.dart';
 import 'package:mobile1_flutter_coding_test/models/room_model.dart';
 import 'package:mobile1_flutter_coding_test/models/user_model.dart';
@@ -27,7 +28,7 @@ class MainModule {
   StorageRepository get storageRepository => _storageRepository;
   final DbRepository _dbRepository = DbRepository();
   DbRepository get dbRepository => _dbRepository;
-  final ApiRepository _apiRepository = ApiRepository();
+  final ApiRepository _apiRepository = ApiRepository(localMode: Constants.localMode);
   ApiRepository get apiRepository => _apiRepository;
 
   final RxList<MessageModel> messagesList = <MessageModel>[].obs;
