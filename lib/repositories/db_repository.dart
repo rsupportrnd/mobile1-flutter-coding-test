@@ -11,6 +11,7 @@ class DbRepository {
 
   late Database db;
 
+  /// DB 초기화
   Future open(String path) async {
     db = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
@@ -62,6 +63,8 @@ class DbRepository {
         });
   }
 
+  /// 메시지 추가
+  /// model: 추가할 메시지
   Future<bool> insertMessage(MessageModel model) async {
     try {
       var jsonModel = model.toJson();
@@ -74,6 +77,8 @@ class DbRepository {
     return true;
   }
 
+  /// 회의실 추가
+  /// model: 추가할 회의실
   Future<bool> insertRoom(RoomModel model) async {
     try {
       var jsonModel = model.toJson();
@@ -98,6 +103,10 @@ class DbRepository {
     return true;
   }
 
+  /// 마지막 메시지 추가
+  /// roomId: 마지막 메시지를 입력시킬 회의실
+  /// lastMessage: 입력시킬 마지막 메시지
+  /// replace (기본값 false): true이면 입력값(lastMessage)으로 덮어쓴다.
   Future<bool> insertLastMessage(String roomId, LastMessageModel lastMessage, {bool replace = false}) async {
     try {
       var lastMessageJson = lastMessage.toJson();
@@ -111,6 +120,8 @@ class DbRepository {
     return true;
   }
 
+  /// 사용자 추가
+  /// model: 추가할 사용자
   Future<bool> insertUser(UserModel model) async {
     try {
       var jsonModel = model.toJson();
@@ -133,6 +144,8 @@ class DbRepository {
     return true;
   }
 
+  /// 메시지 1건 가져오기
+  /// roomId: 조회할 회의실 ID
   Future<MessageModel?> fetchMessage(String roomId) async {
     MessageModel? result;
     try {
@@ -148,6 +161,7 @@ class DbRepository {
     return result;
   }
 
+  /// 전체 메시지 가져오기
   Future<List<MessageModel>?> fetchMessagesAll() async {
     List<MessageModel>? result;
     try {
@@ -163,6 +177,8 @@ class DbRepository {
     return result;
   }
 
+  /// 회의실 1건 가져오기
+  /// roomId: 조회할 회의실 ID
   Future<RoomModel?> fetchRoom(String roomId) async {
     RoomModel? result;
     try {
@@ -206,6 +222,7 @@ class DbRepository {
     return result;
   }
 
+  /// 회의실 전체 가져오기
   Future<List<RoomModel>?> fetchRoomsAll() async {
     List<RoomModel>? result;
     try {
@@ -249,6 +266,8 @@ class DbRepository {
     return result;
   }
 
+  /// 회의실의 마지막 메시지 가져오기
+  /// roomId: 조회할 회의실 ID
   Future<LastMessageModel?> fetchLastMessage(String roomId) async {
     LastMessageModel? result;
     try {
@@ -265,6 +284,8 @@ class DbRepository {
     return result;
   }
 
+  /// 사용자 1건 가져오기
+  /// userId: 조회할 사용자
   Future<UserModel?> fetchUser(String userId) async {
     UserModel? result;
     try {
@@ -280,6 +301,7 @@ class DbRepository {
     return result;
   }
 
+  /// 전체 사용자 가져오기
   Future<List<UserModel>?> fetchUsersAll() async {
     List<UserModel>? result;
     try {
