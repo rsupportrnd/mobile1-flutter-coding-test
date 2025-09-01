@@ -180,9 +180,14 @@ class ChatRoomView extends BaseView<ChatRoomViewModel> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Directionality(
-                                            textDirection: TextDirection.ltr,
-                                            child: Text(user.name)),
+                                        Row(
+                                          children: [
+                                            Directionality(
+                                                textDirection: TextDirection.ltr,
+                                                child: Text(user.name)),
+                                            UserRoleWidget(userRole: user.role),
+                                          ],
+                                        ),
                                           SizedBox(height:5),
                                           Bubble(
                                             nip: user.userId == MainModule.instance.currentUser.userId ? BubbleNip.rightTop: BubbleNip.leftTop,
