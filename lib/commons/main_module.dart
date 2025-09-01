@@ -42,7 +42,7 @@ class MainModule {
 
 
     await _storageRepository.init();
-    await _dbRepository.open('database.db');
+    await _dbRepository.open(Constants.dbPath);
 
     await _getDataFromApi();
     await _registerTestUser();

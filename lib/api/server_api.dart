@@ -16,13 +16,13 @@ part 'server_api.g.dart';
 abstract class ServerApi {
   factory ServerApi(Dio dio, {String? baseUrl}) = _ServerApi;
   
-  @GET('/messages.json')
+  @GET(Constants.serverMessagesJsonUrl)
   Future<String> getMessages(@Body() MessagesRequestModel body);
 
-  @GET('/rooms.json')
+  @GET(Constants.serverRoomsJsonUrl)
   Future<String> getRooms(@Body() RoomsRequestModel body);
 
-  @GET('/users.json')
+  @GET(Constants.serverUsersJsonUrl)
   Future<String> getUsers(@Body() UsersRequestModel body);
 
 }

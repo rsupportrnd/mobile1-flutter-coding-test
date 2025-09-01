@@ -39,7 +39,7 @@ class ApiRepository {
   Future<ApiResult<MessagesResponseModel?>> getMessages(MessagesRequestModel body) async {
     try {
       var responseData = localMode
-          ? await rootBundle.loadString('api/messages.json')
+          ? await rootBundle.loadString(Constants.localMessagesJsonPath)
           : await serverApi.getMessages(body);
 
       return handleResponse(MessagesResponseModel.fromJson(jsonDecode(responseData)), null);
@@ -54,7 +54,7 @@ class ApiRepository {
   Future<ApiResult<RoomsResponseModel?>> getRooms(RoomsRequestModel body) async {
     try {
       var responseData = localMode
-          ? await rootBundle.loadString('api/rooms.json')
+          ? await rootBundle.loadString(Constants.localRoomsJsonPath)
           : await serverApi.getRooms(body);
 
       return handleResponse(RoomsResponseModel.fromJson(jsonDecode(responseData)), null);
@@ -69,7 +69,7 @@ class ApiRepository {
   Future<ApiResult<UsersResponseModel?>> getUsers(UsersRequestModel body) async {
     try {
       var responseData = localMode
-          ? await rootBundle.loadString('api/users.json')
+          ? await rootBundle.loadString(Constants.localUsersJsonPath)
           : await serverApi.getUsers(body);
 
       return handleResponse(UsersResponseModel.fromJson(jsonDecode(responseData)), null);
