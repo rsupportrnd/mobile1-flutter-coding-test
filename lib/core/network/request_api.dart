@@ -1,4 +1,4 @@
-import 'package:mobile1_flutter_coding_test/communication/response/response_result.dart';
+import 'package:mobile1_flutter_coding_test/data/model/response_result.dart';
 import 'package:dio/dio.dart';
 
 class RequestApi {
@@ -6,8 +6,7 @@ class RequestApi {
       {required T Function(Map<String, dynamic>) fromJson}) async {
     final response = await Dio().get(url);
     return ResponseResult(
-      isSuccess: response.statusCode == 200,
-      message: response.statusMessage ?? 'Unknown error',
+      code: response.statusCode ?? 0,
       data: fromJson(response.data),
     );
   }
