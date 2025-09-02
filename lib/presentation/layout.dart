@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile1_flutter_coding_test/core/router/routes.dart';
+import 'package:mobile1_flutter_coding_test/core/router/router.dart';
 
 class Layout extends ConsumerStatefulWidget {
   const Layout(this.chiid, {super.key});
