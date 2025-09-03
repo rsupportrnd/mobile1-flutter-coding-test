@@ -10,8 +10,6 @@ class UserDatasource {
   }
 
   Future<UserListModel> getUsersByLocal() async {
-    final response = await RequestApi.request(ApiEndpoints.users,
-        fromJson: UserListModel.fromJson);
-    return response.data;
+    throw UnimplementedError();
   }
 }
