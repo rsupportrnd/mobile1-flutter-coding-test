@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile1_flutter_coding_test/shared/enum/role_type.dart';
 import 'package:mobile1_flutter_coding_test/shared/enum/user_status.dart';
 
 class Tag extends StatelessWidget {
@@ -19,14 +20,22 @@ class Tag extends StatelessWidget {
     );
   }
 
+  factory Tag.fromRoleType(RoleType role) {
+    return Tag(
+      text: role.displayText,
+      color: role.color.withValues(alpha: 0.1),
+      textStyle: TextStyle(color: role.color),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.3),
-        border: Border.all(color: color),
-        borderRadius: BorderRadius.circular(16),
+        color: color.withValues(alpha: 0.1),
+        border: Border.all(color: color, width: 1),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Text(text, style: textStyle),
     );
