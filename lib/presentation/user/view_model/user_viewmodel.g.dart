@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_view_model.dart';
+part of 'user_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatViewModelHash() => r'bc9be9398410083abf1584f168a02e0f46f725fe';
+String _$userViewModelHash() => r'60fca862954e10cce3fc77792de3b7653f781eb2';
 
-/// See also [ChatViewModel].
-@ProviderFor(ChatViewModel)
-final chatViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<ChatViewModel, RoomMessageState>.internal(
-  ChatViewModel.new,
-  name: r'chatViewModelProvider',
+/// See also [UserViewModel].
+@ProviderFor(UserViewModel)
+final userViewModelProvider =
+    AsyncNotifierProvider<UserViewModel, UserState>.internal(
+  UserViewModel.new,
+  name: r'userViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$chatViewModelHash,
+      : _$userViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ChatViewModel = AutoDisposeAsyncNotifier<RoomMessageState>;
+typedef _$UserViewModel = AsyncNotifier<UserState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
