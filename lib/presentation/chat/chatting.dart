@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/chat_room.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/state/room_message_state.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_view_model.dart';
-import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/user/view_model/user_view_model.dart';
 import 'package:mobile1_flutter_coding_test/shared/extension/datetime_formatting.dart';
 import 'package:uuid/uuid.dart';
 

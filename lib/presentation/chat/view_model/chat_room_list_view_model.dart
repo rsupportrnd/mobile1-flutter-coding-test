@@ -3,7 +3,7 @@ import 'package:mobile1_flutter_coding_test/data/repository/chat_room_repository
 import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
 import 'package:mobile1_flutter_coding_test/domain/repository/chat_room_repository.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/state/chat_room_state.dart';
-import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/user/view_model/user_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_room_list_view_model.g.dart';

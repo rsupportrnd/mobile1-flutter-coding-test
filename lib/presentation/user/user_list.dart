@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile1_flutter_coding_test/presentation/user/component/user_card.dart';
-import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/user/view_model/user_view_model.dart';
 
 class UserList extends ConsumerWidget {
   const UserList({super.key});
