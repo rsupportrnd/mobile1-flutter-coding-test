@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mobile1_flutter_coding_test/core/network/response_codes.dart';
 import 'package:dio/dio.dart';
 import 'package:mobile1_flutter_coding_test/core/network/response_result.dart';
@@ -9,9 +11,10 @@ class RequestApi {
       final response = await Dio().get(url);
 
       if (response.statusCode == 200) {
+        Map<String, dynamic> json = jsonDecode(response.data);
         return ResponseResult(
           code: ResponseCodes.success,
-          data: fromJson(response.data),
+          data: fromJson(json),
         );
       }
       return ResponseResult(
