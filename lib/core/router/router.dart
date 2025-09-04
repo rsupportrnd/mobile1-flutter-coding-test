@@ -25,10 +25,16 @@ final router = GoRouter(
         GoRoute(
           path: Routes.userList.path,
           builder: (context, state) => const UserList(),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: UserList(),
+          ),
         ),
         GoRoute(
           path: Routes.chatList.path,
           builder: (context, state) => const ChatRoomList(),
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: ChatRoomList(),
+          ),
         ),
       ],
     ),
