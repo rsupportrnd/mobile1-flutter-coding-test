@@ -26,7 +26,8 @@ class UserRepositoryImpl implements UserRepository {
         code: response.code, data: _convertToEntity(response.data));
   }
 
-  List<User> _convertToEntity(UserListModel userList) {
+  List<User> _convertToEntity(UserListModel? userList) {
+    if (userList == null) return [];
     return userList.users
         .map((user) => User(
             userId: user.userId,

@@ -1,9 +1,9 @@
+import 'package:mobile1_flutter_coding_test/core/network/response_codes.dart';
+
 class ResponseResult<T> {
-  final String code;
+  final ResponseCodes code;
 
-  final T data;
+  final T? data;
 
-  ResponseResult({required this.code, required this.data});
-
-  bool get isSuccess => code == "200";
+  ResponseResult({required this.code, this.data});
 }
