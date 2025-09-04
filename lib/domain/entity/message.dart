@@ -16,11 +16,19 @@ class Message {
     required this.timestamp,
   });
 
-  factory Message.fromModel(MessageModel model) => Message(
-        roomId: model.roomId,
-        messageId: model.messageId,
-        sender: model.sender,
-        content: model.content,
-        timestamp: model.timestamp,
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
+        roomId: json['roomId'],
+        messageId: json['messageId'],
+        sender: json['sender'],
+        content: json['content'],
+        timestamp: json['timestamp'],
       );
+
+  toJson() => {
+        'roomId': roomId,
+        'messageId': messageId,
+        'sender': sender,
+        'content': content,
+        'timestamp': timestamp,
+      };
 }

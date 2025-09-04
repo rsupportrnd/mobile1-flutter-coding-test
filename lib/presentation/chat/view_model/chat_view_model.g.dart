@@ -1,0 +1,26 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'chat_view_model.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$chatViewModelHash() => r'06c10bd04940fcdaabafea842f0873f62abb6eda';
+
+/// See also [ChatViewModel].
+@ProviderFor(ChatViewModel)
+final chatViewModelProvider =
+    AutoDisposeAsyncNotifierProvider<ChatViewModel, RoomMessageState>.internal(
+  ChatViewModel.new,
+  name: r'chatViewModelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$chatViewModelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ChatViewModel = AutoDisposeAsyncNotifier<RoomMessageState>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

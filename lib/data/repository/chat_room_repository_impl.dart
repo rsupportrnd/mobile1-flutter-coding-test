@@ -40,11 +40,16 @@ class ChatRoomRepositoryImpl implements ChatRoomRepository {
               creator: chatRoom.creator,
               participants: chatRoom.participants,
               createdAt: chatRoom.createdAt,
-              lastMessage: chatRoom.lastMessage != null
-                  ? Message.fromModel(chatRoom.lastMessage!)
-                  : null,
+              lastMessage: _convertToEntityMessage(chatRoom.lastMessage),
               thumbnailImage: chatRoom.thumbnailImage,
             ))
         .toList();
+  }
+
+  Message _convertToEntityMessage(Map<String, dynamic> lastMessage) {
+    return Message(
+        sender: lastMessage['sender'],
+        content: lastMessage['content'],
+        timestamp: lastMessage['timestamp']);
   }
 }

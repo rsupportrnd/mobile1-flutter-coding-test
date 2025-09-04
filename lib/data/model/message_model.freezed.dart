@@ -14,14 +14,172 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MessageListModel _$MessageListModelFromJson(Map<String, dynamic> json) {
+  return _MessageListModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MessageListModel {
+  List<MessageModel> get messages => throw _privateConstructorUsedError;
+
+  /// Serializes this MessageListModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of MessageListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $MessageListModelCopyWith<MessageListModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MessageListModelCopyWith<$Res> {
+  factory $MessageListModelCopyWith(
+          MessageListModel value, $Res Function(MessageListModel) then) =
+      _$MessageListModelCopyWithImpl<$Res, MessageListModel>;
+  @useResult
+  $Res call({List<MessageModel> messages});
+}
+
+/// @nodoc
+class _$MessageListModelCopyWithImpl<$Res, $Val extends MessageListModel>
+    implements $MessageListModelCopyWith<$Res> {
+  _$MessageListModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of MessageListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+  }) {
+    return _then(_value.copyWith(
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MessageListModelImplCopyWith<$Res>
+    implements $MessageListModelCopyWith<$Res> {
+  factory _$$MessageListModelImplCopyWith(_$MessageListModelImpl value,
+          $Res Function(_$MessageListModelImpl) then) =
+      __$$MessageListModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<MessageModel> messages});
+}
+
+/// @nodoc
+class __$$MessageListModelImplCopyWithImpl<$Res>
+    extends _$MessageListModelCopyWithImpl<$Res, _$MessageListModelImpl>
+    implements _$$MessageListModelImplCopyWith<$Res> {
+  __$$MessageListModelImplCopyWithImpl(_$MessageListModelImpl _value,
+      $Res Function(_$MessageListModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MessageListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messages = null,
+  }) {
+    return _then(_$MessageListModelImpl(
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<MessageModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MessageListModelImpl implements _MessageListModel {
+  _$MessageListModelImpl({required final List<MessageModel> messages})
+      : _messages = messages;
+
+  factory _$MessageListModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageListModelImplFromJson(json);
+
+  final List<MessageModel> _messages;
+  @override
+  List<MessageModel> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
+
+  @override
+  String toString() {
+    return 'MessageListModel(messages: $messages)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MessageListModelImpl &&
+            const DeepCollectionEquality().equals(other._messages, _messages));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_messages));
+
+  /// Create a copy of MessageListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MessageListModelImplCopyWith<_$MessageListModelImpl> get copyWith =>
+      __$$MessageListModelImplCopyWithImpl<_$MessageListModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageListModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MessageListModel implements MessageListModel {
+  factory _MessageListModel({required final List<MessageModel> messages}) =
+      _$MessageListModelImpl;
+
+  factory _MessageListModel.fromJson(Map<String, dynamic> json) =
+      _$MessageListModelImpl.fromJson;
+
+  @override
+  List<MessageModel> get messages;
+
+  /// Create a copy of MessageListModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MessageListModelImplCopyWith<_$MessageListModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 MessageModel _$MessageModelFromJson(Map<String, dynamic> json) {
   return _MessageModel.fromJson(json);
 }
 
 /// @nodoc
 mixin _$MessageModel {
-  String? get roomId => throw _privateConstructorUsedError;
-  String? get messageId => throw _privateConstructorUsedError;
+  String get roomId => throw _privateConstructorUsedError;
+  String get messageId => throw _privateConstructorUsedError;
   String get sender => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get timestamp => throw _privateConstructorUsedError;
@@ -43,8 +201,8 @@ abstract class $MessageModelCopyWith<$Res> {
       _$MessageModelCopyWithImpl<$Res, MessageModel>;
   @useResult
   $Res call(
-      {String? roomId,
-      String? messageId,
+      {String roomId,
+      String messageId,
       String sender,
       String content,
       String timestamp});
@@ -65,21 +223,21 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roomId = freezed,
-    Object? messageId = freezed,
+    Object? roomId = null,
+    Object? messageId = null,
     Object? sender = null,
     Object? content = null,
     Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
-      roomId: freezed == roomId
+      roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      messageId: freezed == messageId
+              as String,
+      messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       sender: null == sender
           ? _value.sender
           : sender // ignore: cast_nullable_to_non_nullable
@@ -105,8 +263,8 @@ abstract class _$$MessageModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? roomId,
-      String? messageId,
+      {String roomId,
+      String messageId,
       String sender,
       String content,
       String timestamp});
@@ -125,21 +283,21 @@ class __$$MessageModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roomId = freezed,
-    Object? messageId = freezed,
+    Object? roomId = null,
+    Object? messageId = null,
     Object? sender = null,
     Object? content = null,
     Object? timestamp = null,
   }) {
     return _then(_$MessageModelImpl(
-      roomId: freezed == roomId
+      roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      messageId: freezed == messageId
+              as String,
+      messageId: null == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       sender: null == sender
           ? _value.sender
           : sender // ignore: cast_nullable_to_non_nullable
@@ -160,8 +318,8 @@ class __$$MessageModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MessageModelImpl implements _MessageModel {
   _$MessageModelImpl(
-      {this.roomId,
-      this.messageId,
+      {required this.roomId,
+      required this.messageId,
       required this.sender,
       required this.content,
       required this.timestamp});
@@ -170,9 +328,9 @@ class _$MessageModelImpl implements _MessageModel {
       _$$MessageModelImplFromJson(json);
 
   @override
-  final String? roomId;
+  final String roomId;
   @override
-  final String? messageId;
+  final String messageId;
   @override
   final String sender;
   @override
@@ -222,8 +380,8 @@ class _$MessageModelImpl implements _MessageModel {
 
 abstract class _MessageModel implements MessageModel {
   factory _MessageModel(
-      {final String? roomId,
-      final String? messageId,
+      {required final String roomId,
+      required final String messageId,
       required final String sender,
       required final String content,
       required final String timestamp}) = _$MessageModelImpl;
@@ -232,9 +390,9 @@ abstract class _MessageModel implements MessageModel {
       _$MessageModelImpl.fromJson;
 
   @override
-  String? get roomId;
+  String get roomId;
   @override
-  String? get messageId;
+  String get messageId;
   @override
   String get sender;
   @override

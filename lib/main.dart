@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mobile1_flutter_coding_test/core/router/router.dart';
+import 'package:mobile1_flutter_coding_test/core/storage/hive_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // 한국어 로케일 데이터 초기화
   await initializeDateFormatting('ko', null);
+
+  // Hive 스토리지 초기화
+  await HiveStorage.instance.init();
 
   runApp(const ProviderScope(child: MyApp()));
 }

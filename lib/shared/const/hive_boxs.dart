@@ -1,3 +1,4 @@
 class HiveBoxKey {
-  static String roomMeesageList(String roomId) => "messageList:$roomId";
+  static const String messageList = "messageList";
+  static const String hasMessages = "hasMessages";
 }
