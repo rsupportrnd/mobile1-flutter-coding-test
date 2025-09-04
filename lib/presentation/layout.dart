@@ -30,6 +30,13 @@ class _LayoutState extends ConsumerState<Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mobile1 Flutter Coding Test'),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+      ),
+      backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -39,9 +46,6 @@ class _LayoutState extends ConsumerState<Layout> {
           });
         },
         items: items,
-      ),
-      appBar: AppBar(
-        title: const Text('Mobile1 Flutter Coding Test'),
       ),
       body: widget.chiid,
     );

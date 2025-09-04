@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/main.dart';
 import 'package:mobile1_flutter_coding_test/presentation/layout.dart';
+import 'package:mobile1_flutter_coding_test/presentation/user/user_list.dart';
 
 enum Routes {
   userList(path: '/user-list'),
@@ -20,7 +21,7 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: Routes.userList.path,
-          builder: (context, state) => const MyHomePage(title: 'User List'),
+          builder: (context, state) => const UserList(),
         ),
         GoRoute(
           path: Routes.chatList.path,
