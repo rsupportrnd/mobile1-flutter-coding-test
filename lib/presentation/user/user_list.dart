@@ -28,17 +28,16 @@ class UserList extends ConsumerWidget {
             ),
           ),
           Expanded(
-            child: ListView.separated(
+            child: ListView.builder(
               itemCount: data.users.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: horizontalPadding),
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: horizontalPadding,
+                    vertical: 8,
+                  ),
                   child: UserCard(user: data.users[index]),
                 );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Gap(8);
               },
             ),
           ),
