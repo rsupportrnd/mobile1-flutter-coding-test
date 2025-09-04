@@ -24,8 +24,8 @@ class _UserListState extends ConsumerState<ConsumerStatefulWidget> {
       children: [
         Container(
           color: Colors.white,
-          padding: EdgeInsets.all(16.0),
-          child: Text(
+          padding: const EdgeInsets.all(16.0),
+          child: const Text(
             "사용자",
             style: TextStyle(
               fontSize: 18,

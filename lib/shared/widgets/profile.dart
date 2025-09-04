@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Profile extends ConsumerWidget {
   const Profile({super.key, required this.imageUrl, this.radius = 20});
@@ -11,27 +12,21 @@ class Profile extends ConsumerWidget {
       radius: radius,
       backgroundColor: Colors.grey,
       child: ClipOval(
-        child: Image.network(
+        child: CachedNetworkImage(
           width: radius * 2,
           height: radius * 2,
-          imageUrl,
+          imageUrl: imageUrl,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return const Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 20,
-            );
-          },
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) return child;
-            return const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 1,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            );
-          },
+          placeholder: (context, url) => Icon(
+            Icons.person,
+            color: Colors.white,
+            size: radius * 0.8,
+          ),
+          errorWidget: (context, url, error) => Icon(
+            Icons.person,
+            color: Colors.white,
+            size: radius * 0.8,
+          ),
         ),
       ),
     );

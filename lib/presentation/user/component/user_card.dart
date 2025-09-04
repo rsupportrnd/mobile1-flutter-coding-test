@@ -23,15 +23,10 @@ class UserCard extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            // Profile Image
-            CircleAvatar(
-              child: Profile(
-                imageUrl: user.profilePicture,
-              ),
+            Profile(
+              imageUrl: user.profilePicture,
             ),
             const SizedBox(width: 16),
-
-            // User Info
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,14 +35,12 @@ class UserCard extends ConsumerWidget {
                     user.name,
                   ),
                   const SizedBox(height: 4),
-                  Text(
+                  const Text(
                     "ws5260@naver.com",
                   ),
                 ],
               ),
             ),
-
-            // Status and Role Tags
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
