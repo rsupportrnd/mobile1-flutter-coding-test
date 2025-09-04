@@ -7,8 +7,12 @@ import 'package:mobile1_flutter_coding_test/shared/widgets/profile.dart';
 import 'package:mobile1_flutter_coding_test/shared/widgets/tag.dart';
 
 class UserCard extends ConsumerWidget {
-  const UserCard({super.key, required this.user});
+  const UserCard({super.key, required this.user, this.isSummary = false});
   final User user;
+  final bool isSummary;
+  factory UserCard.summary({required User user}) {
+    return UserCard(user: user, isSummary: true);
+  }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomCard(
@@ -28,10 +32,12 @@ class UserCard extends ConsumerWidget {
                   Text(
                     user.name,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    user.email,
-                  ),
+                  if (!isSummary) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      user.email,
+                    ),
+                  ]
                 ],
               ),
             ),
@@ -40,8 +46,10 @@ class UserCard extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Tag.fromUserStatus(user.status),
-                const SizedBox(height: 2),
-                Tag.fromRoleType(user.role),
+                if (!isSummary) ...[
+                  const SizedBox(height: 2),
+                  Tag.fromRoleType(user.role),
+                ]
               ],
             ),
           ],

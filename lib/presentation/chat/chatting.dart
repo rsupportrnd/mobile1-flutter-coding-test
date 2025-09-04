@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile1_flutter_coding_test/core/provider/current_user_provider.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/chat_room.dart';
-import 'package:mobile1_flutter_coding_test/presentation/chat/state/room_message_state.dart';
+import 'package:mobile1_flutter_coding_test/presentation/chat/component/room_participants_list.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_view_model.dart';
 import 'package:mobile1_flutter_coding_test/presentation/user/view_model/user_view_model.dart';
 import 'package:mobile1_flutter_coding_test/shared/extension/datetime_formatting.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../shared/widgets/chat_toolkit/chat/message/elements/text_message_element.dart';
 import '../../shared/widgets/chat_toolkit/chat_toolkit.dart';
 
 class Chatting extends ConsumerStatefulWidget {
@@ -35,38 +34,51 @@ class _ChattingState extends ConsumerState<Chatting> {
     super.dispose();
   }
 
+  Widget _buildBubble(BuildContext context, Widget child, bool isSender) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isSender ? Colors.indigo[100] : Colors.grey[100],
+      ),
+      child: child,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final asyncMessages = ref.watch(chatViewModelProvider);
+    final notifier = ref.watch(chatViewModelProvider.notifier);
     final userList = ref.watch(userViewModelProvider).value?.users ?? [];
 
     return Scaffold(
       endDrawer: Drawer(
-        child: Column(
-          children: [
-            Text('Chatting'),
-          ],
-        ),
+        child: RoomParticipantsList(participants: widget.chatRoom.participants),
       ),
       appBar: AppBar(
-        title: const Text('Chatting'),
+        title: Text(widget.chatRoom.roomName),
         backgroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     Scaffold.of(context).openDrawer();
-          //   },
-          //   icon: const Icon(Icons.menu),
-          // ),
+          Container(
+            margin: const EdgeInsets.only(right: 20),
+            child: Builder(
+              builder: (context) => GestureDetector(
+                onTap: () async {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                child: const Icon(Icons.people),
+              ),
+            ),
+          )
         ],
       ),
       body: asyncMessages.when(
         data: (data) {
           // 메시지가 로드되면 채팅 컨트롤러에 추가
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            _loadMessagesToController(data, userList);
+            notifier.loadMessagesToController(
+                data, userList, chatController, widget.chatRoom.roomId);
           });
 
           return Chat(
@@ -74,6 +86,12 @@ class _ChattingState extends ConsumerState<Chatting> {
             configuration: ChatConfiguration(
                 customInputField: _customInputField,
                 bubbleConfiguration: BubbleConfiguration(
+                  senderBubbleBuilder: (context, child) {
+                    return _buildBubble(context, child, true);
+                  },
+                  receiverBubbleBuilder: (context, child) {
+                    return _buildBubble(context, child, false);
+                  },
                   timeBuilder: (context, timestamp) {
                     return Text(DateTime.parse(timestamp).chatDisplayTime);
                   },
@@ -86,28 +104,6 @@ class _ChattingState extends ConsumerState<Chatting> {
         ),
       ),
     );
-  }
-
-  void _loadMessagesToController(
-      RoomMessageState data, List<dynamic> userList) {
-    final messages = data.getMessages(widget.chatRoom.roomId);
-    List<Message> messageList = [];
-    for (var message in messages) {
-      final userName =
-          userList.firstWhere((user) => user.userId == message.sender).name;
-      messageList.add(SenderMessage(
-        timestamp: message.timestamp,
-        name: userName,
-        id: message.messageId ?? const Uuid().v4(),
-        elements: [TextMessageElement(text: message.content)],
-      ));
-    }
-    chatController.setMessages(messageList);
-    chatController.scrollToBottom();
-
-    Future.delayed(const Duration(milliseconds: 50), () {
-      chatController.scrollToBottom();
-    });
   }
 
   Widget _customInputField(BuildContext context, ChatController controller) {
@@ -141,10 +137,12 @@ class _ChattingState extends ConsumerState<Chatting> {
           GestureDetector(
             onTap: () {
               if (_textEditingController.text.isNotEmpty) {
+                final currentUser = ref.read(currentUserProvider);
                 ref.read(chatViewModelProvider.notifier).sendMessage(
                     _textEditingController.text,
                     chatController,
-                    widget.chatRoom.roomId);
+                    widget.chatRoom.roomId,
+                    currentUser);
                 _textEditingController.clear();
               }
             },
