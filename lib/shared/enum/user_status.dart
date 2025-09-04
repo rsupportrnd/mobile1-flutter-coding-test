@@ -30,7 +30,7 @@ enum UserStatus {
       case UserStatus.offline:
         return Colors.grey;
       case UserStatus.away:
-        return Colors.yellow;
+        return Colors.orange;
       case UserStatus.doNotDisturb:
         return Colors.red;
     }
