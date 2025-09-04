@@ -1,7 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile1_flutter_coding_test/core/network/response_result.dart';
+import 'package:mobile1_flutter_coding_test/core/network/response_codes.dart';
 import 'package:mobile1_flutter_coding_test/data/repository/user_repository_impl.dart';
-import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
 import 'package:mobile1_flutter_coding_test/domain/repository/user_repository.dart';
 import 'package:mobile1_flutter_coding_test/presentation/user/state/user_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -23,9 +21,9 @@ class UserViewModel extends _$UserViewModel {
     // state = state.copyWith(isLoading: true);
 
     final response = await userRepository.getUsers();
-    if (!response.isSuccess) {
+    if (response.code != ResponseCodes.success) {
       throw Exception('Failed to load users: ${response.code}');
     }
-    return UserState(users: response.data);
+    return UserState(users: response.data ?? []);
   }
 }
