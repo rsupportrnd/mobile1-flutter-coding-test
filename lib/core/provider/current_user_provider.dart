@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'current_user_provider.g.dart';
 
 @riverpod
-class CurrentUserProvider extends _$CurrentUserProvider {
+class CurrentUser extends _$CurrentUser {
   /// 로그인한 사용자는 Alice Kim이라고 정의
   @override
   User build() {
