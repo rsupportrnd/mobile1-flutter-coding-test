@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:mobile1_flutter_coding_test/main.dart';
+import 'package:mobile1_flutter_coding_test/presentation/chat/chat_room_list.dart';
 import 'package:mobile1_flutter_coding_test/presentation/layout.dart';
 import 'package:mobile1_flutter_coding_test/presentation/user/user_list.dart';
 
@@ -25,7 +25,7 @@ final router = GoRouter(
         ),
         GoRoute(
           path: Routes.chatList.path,
-          builder: (context, state) => const MyHomePage(title: 'Chat List'),
+          builder: (context, state) => const ChatRoomList(),
         ),
       ],
     ),

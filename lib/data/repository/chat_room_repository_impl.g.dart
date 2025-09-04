@@ -1,26 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_viewmodel.dart';
+part of 'chat_room_repository_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userViewModelHash() => r'60fca862954e10cce3fc77792de3b7653f781eb2';
+String _$chatRoomRepositoryHash() =>
+    r'91f3fced1af66e65c7c073d88e965db71a108931';
 
-/// See also [UserViewModel].
-@ProviderFor(UserViewModel)
-final userViewModelProvider =
-    AsyncNotifierProvider<UserViewModel, UserState>.internal(
-  UserViewModel.new,
-  name: r'userViewModelProvider',
+/// See also [chatRoomRepository].
+@ProviderFor(chatRoomRepository)
+final chatRoomRepositoryProvider =
+    AutoDisposeProvider<ChatRoomRepository>.internal(
+  chatRoomRepository,
+  name: r'chatRoomRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$userViewModelHash,
+      : _$chatRoomRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UserViewModel = AsyncNotifier<UserState>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ChatRoomRepositoryRef = AutoDisposeProviderRef<ChatRoomRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

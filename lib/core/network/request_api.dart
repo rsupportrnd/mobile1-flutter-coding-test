@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:mobile1_flutter_coding_test/core/network/response_codes.dart';
 import 'package:dio/dio.dart';
 import 'package:mobile1_flutter_coding_test/core/network/response_result.dart';
+export 'package:mobile1_flutter_coding_test/core/network/response_result.dart';
 
 class RequestApi {
   static const baseUrl =

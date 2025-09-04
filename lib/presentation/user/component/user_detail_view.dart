@@ -26,7 +26,7 @@ class UserDetailView extends ConsumerWidget {
       actions: [
         TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: Color(0xFFDEEAE7),
+              backgroundColor: const Color(0xFFDEEAE7),
             ),
             onPressed: () => context.pop(context),
             child: const Text('닫기')),

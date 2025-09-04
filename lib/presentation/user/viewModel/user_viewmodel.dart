@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_viewmodel.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UserViewModel extends _$UserViewModel {
   late final UserRepository userRepository;
 
