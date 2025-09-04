@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile1_flutter_coding_test/core/network/response_result.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:mobile1_flutter_coding_test/data/datasource/user_datasource.dart';
@@ -19,19 +20,10 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.userDatasource});
 
   @override
-  Future<List<User>> getUsers() async {
-    return getUsersByNetwork();
-  }
-
-  @override
-  Future<List<User>> getUsersByLocal() async {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<User>> getUsersByNetwork() async {
-    final response = await userDatasource.getUsersByNetwork();
-    return _convertToEntity(response);
+  Future<ResponseResult<List<User>>> getUsers() async {
+    final response = await userDatasource.getUsers();
+    return ResponseResult(
+        code: response.code, data: _convertToEntity(response.data));
   }
 
   List<User> _convertToEntity(UserListModel userList) {
