@@ -1,7 +1,9 @@
 import 'package:mobile1_flutter_coding_test/core/network/response_codes.dart';
 import 'package:mobile1_flutter_coding_test/data/repository/chat_room_repository_impl.dart';
+import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
 import 'package:mobile1_flutter_coding_test/domain/repository/chat_room_repository.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/state/chat_room_state.dart';
+import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_room_view_model.g.dart';
@@ -13,7 +15,6 @@ class ChatRoomViewModel extends _$ChatRoomViewModel {
   @override
   Future<ChatRoomState> build() async {
     chatRoomRepository = ref.read(chatRoomRepositoryProvider);
-
     return await _loadChatRooms();
   }
 
@@ -22,6 +23,16 @@ class ChatRoomViewModel extends _$ChatRoomViewModel {
     if (response.code != ResponseCodes.success) {
       throw Exception('실패 에러 코드 : ${response.code}');
     }
-    return ChatRoomState(chatRooms: response.data ?? []);
+    final userList = ref.read(userViewModelProvider).value?.users ?? [];
+
+    return ChatRoomState(
+        chatRooms: response.data ?? [], participantUsers: userList);
+  }
+
+  List<User> getParticipants(
+      {required List<String> participants, required List<User> userList}) {
+    return participants
+        .map((e) => userList.firstWhere((user) => user.userId == e))
+        .toList();
   }
 }
