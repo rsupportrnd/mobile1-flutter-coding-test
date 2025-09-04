@@ -22,6 +22,8 @@ class RoomMessageRepositoryImpl implements RoomMessageRepository {
   RoomMessageRepositoryImpl({required this.roomMessageDatasource});
 
   @override
+
+  /// 채팅방 메세지 조회
   Future<ResponseResult<Map<String, List<Message>>>> getRoomMessages() async {
     final hasMessages = await roomMessageDatasource.hasMessages();
     if (hasMessages) {
@@ -56,16 +58,21 @@ class RoomMessageRepositoryImpl implements RoomMessageRepository {
   }
 
   @override
+
+  /// 여러 메세지 추가(로컬)
   Future<void> saveRoomMessagesToStorage(
       Map<String, List<Map<String, dynamic>>> messages) {
     return roomMessageDatasource.saveRoomMeesagesToStorage(messages);
   }
 
   @override
+
+  /// 하나의 메세지 추가(로컬)
   Future<void> addMessageToStorage(String roomId, Message message) {
     return roomMessageDatasource.addMessageToStorage(roomId, message);
   }
 
+  /// 메세지 엔티티 변환
   Map<String, List<Message>> _convertToEntity(
       Map<String, List<Map<String, dynamic>>> messages) {
     return messages.map((key, value) =>
