@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:mobile1_flutter_coding_test/shared/enum/role_type.dart';
 import 'package:mobile1_flutter_coding_test/shared/enum/user_status.dart';
 
