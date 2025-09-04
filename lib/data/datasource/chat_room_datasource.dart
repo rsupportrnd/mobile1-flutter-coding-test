@@ -4,6 +4,7 @@ import 'package:mobile1_flutter_coding_test/data/model/chat_room_model.dart';
 import 'package:mobile1_flutter_coding_test/shared/const/api_endpoints.dart';
 
 class ChatRoomDatasource {
+  /// 채팅방 목록 조회
   Future<ResponseResult<ChatRoomListModel>> getChatRooms() async {
     final response = await RequestApi.request(ApiEndpoints.rooms,
         fromJson: ChatRoomListModel.fromJson);

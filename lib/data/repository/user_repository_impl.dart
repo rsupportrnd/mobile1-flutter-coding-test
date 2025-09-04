@@ -20,12 +20,15 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.userDatasource});
 
   @override
+
+  /// 유저 목록 조회
   Future<ResponseResult<List<User>>> getUsers() async {
     final response = await userDatasource.getUsers();
     return ResponseResult(
         code: response.code, data: _convertToEntity(response.data));
   }
 
+  /// 유저 엔티티 변환
   List<User> _convertToEntity(UserListModel? userList) {
     if (userList == null) return [];
     return userList.users

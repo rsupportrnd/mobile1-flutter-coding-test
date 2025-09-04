@@ -31,6 +31,7 @@ class ChatRoomRepositoryImpl implements ChatRoomRepository {
         code: response.code, data: _convertToEntity(response.data));
   }
 
+  /// 채팅방 엔티티 변환
   List<ChatRoom> _convertToEntity(ChatRoomListModel? chatRoomList) {
     if (chatRoomList == null) return [];
     return chatRoomList.chatRooms
@@ -46,6 +47,7 @@ class ChatRoomRepositoryImpl implements ChatRoomRepository {
         .toList();
   }
 
+  /// 메세지 엔티티 변환
   Message _convertToEntityMessage(Map<String, dynamic> lastMessage) {
     return Message(
         sender: lastMessage['sender'],
