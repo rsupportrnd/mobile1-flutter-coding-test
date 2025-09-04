@@ -7,9 +7,10 @@ class RequestApi {
   static Future<ResponseResult<T>> request<T>(String endPoint,
       {required T Function(Map<String, dynamic>) fromJson}) async {
     final dio = Dio();
+
     final response = await dio.get("$baseUrl$endPoint");
     return ResponseResult(
-      code: response.statusCode ?? 0,
+      code: response.statusCode?.toString() ?? "0",
       data: fromJson(response.data),
     );
   }
