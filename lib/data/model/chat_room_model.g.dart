@@ -29,9 +29,7 @@ _$ChatRoomModelImpl _$$ChatRoomModelImplFromJson(Map<String, dynamic> json) =>
           .map((e) => e as String)
           .toList(),
       createdAt: json['createdAt'] as String,
-      lastMessage: json['lastMessage'] == null
-          ? null
-          : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
+      lastMessage: json['lastMessage'] as Map<String, dynamic>,
       thumbnailImage: json['thumbnailImage'] as String,
     );
 

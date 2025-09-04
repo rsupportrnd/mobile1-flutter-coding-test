@@ -184,7 +184,7 @@ mixin _$ChatRoomModel {
   String get creator => throw _privateConstructorUsedError;
   List<String> get participants => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  MessageModel? get lastMessage => throw _privateConstructorUsedError;
+  Map<String, dynamic> get lastMessage => throw _privateConstructorUsedError;
   String get thumbnailImage => throw _privateConstructorUsedError;
 
   /// Serializes this ChatRoomModel to a JSON map.
@@ -209,10 +209,8 @@ abstract class $ChatRoomModelCopyWith<$Res> {
       String creator,
       List<String> participants,
       String createdAt,
-      MessageModel? lastMessage,
+      Map<String, dynamic> lastMessage,
       String thumbnailImage});
-
-  $MessageModelCopyWith<$Res>? get lastMessage;
 }
 
 /// @nodoc
@@ -235,7 +233,7 @@ class _$ChatRoomModelCopyWithImpl<$Res, $Val extends ChatRoomModel>
     Object? creator = null,
     Object? participants = null,
     Object? createdAt = null,
-    Object? lastMessage = freezed,
+    Object? lastMessage = null,
     Object? thumbnailImage = null,
   }) {
     return _then(_value.copyWith(
@@ -259,29 +257,15 @@ class _$ChatRoomModelCopyWithImpl<$Res, $Val extends ChatRoomModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      lastMessage: freezed == lastMessage
+      lastMessage: null == lastMessage
           ? _value.lastMessage
           : lastMessage // ignore: cast_nullable_to_non_nullable
-              as MessageModel?,
+              as Map<String, dynamic>,
       thumbnailImage: null == thumbnailImage
           ? _value.thumbnailImage
           : thumbnailImage // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  /// Create a copy of ChatRoomModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MessageModelCopyWith<$Res>? get lastMessage {
-    if (_value.lastMessage == null) {
-      return null;
-    }
-
-    return $MessageModelCopyWith<$Res>(_value.lastMessage!, (value) {
-      return _then(_value.copyWith(lastMessage: value) as $Val);
-    });
   }
 }
 
@@ -299,11 +283,8 @@ abstract class _$$ChatRoomModelImplCopyWith<$Res>
       String creator,
       List<String> participants,
       String createdAt,
-      MessageModel? lastMessage,
+      Map<String, dynamic> lastMessage,
       String thumbnailImage});
-
-  @override
-  $MessageModelCopyWith<$Res>? get lastMessage;
 }
 
 /// @nodoc
@@ -324,7 +305,7 @@ class __$$ChatRoomModelImplCopyWithImpl<$Res>
     Object? creator = null,
     Object? participants = null,
     Object? createdAt = null,
-    Object? lastMessage = freezed,
+    Object? lastMessage = null,
     Object? thumbnailImage = null,
   }) {
     return _then(_$ChatRoomModelImpl(
@@ -348,10 +329,10 @@ class __$$ChatRoomModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      lastMessage: freezed == lastMessage
-          ? _value.lastMessage
+      lastMessage: null == lastMessage
+          ? _value._lastMessage
           : lastMessage // ignore: cast_nullable_to_non_nullable
-              as MessageModel?,
+              as Map<String, dynamic>,
       thumbnailImage: null == thumbnailImage
           ? _value.thumbnailImage
           : thumbnailImage // ignore: cast_nullable_to_non_nullable
@@ -369,9 +350,10 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
       required this.creator,
       required final List<String> participants,
       required this.createdAt,
-      this.lastMessage,
+      required final Map<String, dynamic> lastMessage,
       required this.thumbnailImage})
-      : _participants = participants;
+      : _participants = participants,
+        _lastMessage = lastMessage;
 
   factory _$ChatRoomModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatRoomModelImplFromJson(json);
@@ -392,8 +374,14 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
 
   @override
   final String createdAt;
+  final Map<String, dynamic> _lastMessage;
   @override
-  final MessageModel? lastMessage;
+  Map<String, dynamic> get lastMessage {
+    if (_lastMessage is EqualUnmodifiableMapView) return _lastMessage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_lastMessage);
+  }
+
   @override
   final String thumbnailImage;
 
@@ -415,8 +403,8 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
                 .equals(other._participants, _participants) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.lastMessage, lastMessage) ||
-                other.lastMessage == lastMessage) &&
+            const DeepCollectionEquality()
+                .equals(other._lastMessage, _lastMessage) &&
             (identical(other.thumbnailImage, thumbnailImage) ||
                 other.thumbnailImage == thumbnailImage));
   }
@@ -430,7 +418,7 @@ class _$ChatRoomModelImpl implements _ChatRoomModel {
       creator,
       const DeepCollectionEquality().hash(_participants),
       createdAt,
-      lastMessage,
+      const DeepCollectionEquality().hash(_lastMessage),
       thumbnailImage);
 
   /// Create a copy of ChatRoomModel
@@ -456,7 +444,7 @@ abstract class _ChatRoomModel implements ChatRoomModel {
       required final String creator,
       required final List<String> participants,
       required final String createdAt,
-      final MessageModel? lastMessage,
+      required final Map<String, dynamic> lastMessage,
       required final String thumbnailImage}) = _$ChatRoomModelImpl;
 
   factory _ChatRoomModel.fromJson(Map<String, dynamic> json) =
@@ -473,7 +461,7 @@ abstract class _ChatRoomModel implements ChatRoomModel {
   @override
   String get createdAt;
   @override
-  MessageModel? get lastMessage;
+  Map<String, dynamic> get lastMessage;
   @override
   String get thumbnailImage;
 

@@ -22,7 +22,7 @@ class ChatRoomModel with _$ChatRoomModel {
     required String creator,
     required List<String> participants,
     required String createdAt,
-    MessageModel? lastMessage,
+    required Map<String, dynamic> lastMessage,
     required String thumbnailImage,
   }) = _ChatRoomModel;
 
