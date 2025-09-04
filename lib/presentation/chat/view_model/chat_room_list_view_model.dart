@@ -6,10 +6,10 @@ import 'package:mobile1_flutter_coding_test/presentation/chat/state/chat_room_st
 import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'chat_room_view_model.g.dart';
+part 'chat_room_list_view_model.g.dart';
 
 @riverpod
-class ChatRoomViewModel extends _$ChatRoomViewModel {
+class ChatRoomListViewModel extends _$ChatRoomListViewModel {
   late final ChatRoomRepository chatRoomRepository;
 
   @override

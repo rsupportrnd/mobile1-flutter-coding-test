@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile1_flutter_coding_test/core/router/router.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/chat_room.dart';
 import 'package:mobile1_flutter_coding_test/domain/entity/user.dart';
-import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_room_view_model.dart';
+import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_room_list_view_model.dart';
 import 'package:mobile1_flutter_coding_test/shared/extension/datetime_formatting.dart';
 import 'package:mobile1_flutter_coding_test/shared/widgets/custom_card.dart';
 import 'package:mobile1_flutter_coding_test/shared/widgets/profile.dart';
@@ -15,9 +17,11 @@ class ChatRoomCard extends ConsumerWidget {
   final List<User> participantUsers;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(chatRoomViewModelProvider.notifier);
+    final notifier = ref.watch(chatRoomListViewModelProvider.notifier);
     return CustomCard(
-      onTap: () {},
+      onTap: () {
+        context.push(Routes.chatting.path, extra: chatRoom);
+      },
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(

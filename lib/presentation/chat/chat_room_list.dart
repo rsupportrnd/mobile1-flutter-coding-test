@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile1_flutter_coding_test/presentation/chat/component/chat_room_card.dart';
-import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_room_view_model.dart';
-import 'package:mobile1_flutter_coding_test/presentation/user/viewModel/user_viewmodel.dart';
+import 'package:mobile1_flutter_coding_test/presentation/chat/view_model/chat_room_list_view_model.dart';
 
 class ChatRoomList extends ConsumerWidget {
   const ChatRoomList({super.key});
@@ -10,7 +9,7 @@ class ChatRoomList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const horizontalPadding = 16.0;
-    final state = ref.watch(chatRoomViewModelProvider);
+    final state = ref.watch(chatRoomListViewModelProvider);
     return state.when(data: (data) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

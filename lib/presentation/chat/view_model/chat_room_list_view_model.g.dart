@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_room_view_model.dart';
+part of 'chat_room_list_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatRoomViewModelHash() => r'823919cd1517b6773ed6484d82cdd4bcf019c845';
+String _$chatRoomListViewModelHash() =>
+    r'bf1c5353fb6244a0cc855c6c864f55c2f539bed9';
 
-/// See also [ChatRoomViewModel].
-@ProviderFor(ChatRoomViewModel)
-final chatRoomViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<ChatRoomViewModel, ChatRoomState>.internal(
-  ChatRoomViewModel.new,
-  name: r'chatRoomViewModelProvider',
+/// See also [ChatRoomListViewModel].
+@ProviderFor(ChatRoomListViewModel)
+final chatRoomListViewModelProvider = AutoDisposeAsyncNotifierProvider<
+    ChatRoomListViewModel, ChatRoomState>.internal(
+  ChatRoomListViewModel.new,
+  name: r'chatRoomListViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$chatRoomViewModelHash,
+      : _$chatRoomListViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ChatRoomViewModel = AutoDisposeAsyncNotifier<ChatRoomState>;
+typedef _$ChatRoomListViewModel = AutoDisposeAsyncNotifier<ChatRoomState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
