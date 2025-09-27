@@ -8,7 +8,6 @@ part 'app_dio_client.g.dart';
 Dio dioClient(Ref ref) {
   final dio = Dio();
 
-  // 기본 설정 TODO 환경 변수로 업데이트 
   dio.options.baseUrl = dotenv.env['API_BASE_URL']!;
   dio.options.connectTimeout = const Duration(seconds: 15);
   dio.options.receiveTimeout = const Duration(seconds: 15);
