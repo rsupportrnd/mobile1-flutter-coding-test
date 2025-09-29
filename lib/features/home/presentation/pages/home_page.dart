@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile1_flutter_coding_test/features/user/presentation/pages/user_list_page.dart';
+import 'package:mobile1_flutter_coding_test/features/chat/presentation/pages/chat_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,48 +40,6 @@ class _HomePageState extends State<HomePage> {
             label: '채팅목록',
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ChatListPage extends StatelessWidget {
-  const ChatListPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('채팅목록'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.chat_bubble_outline,
-              size: 64,
-              color: Colors.grey,
-            ),
-            SizedBox(height: 16),
-            Text(
-              '채팅 기능',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '준비중입니다',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
