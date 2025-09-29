@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/presentation/controllers/chat_list_provider.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room.dart';
 import 'package:intl/intl.dart';
@@ -158,13 +159,8 @@ class ChatRoomTile extends StatelessWidget {
           ],
         ),
         onTap: () {
-          // TODO: 채팅방 상세 화면으로 이동
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('${chatRoom.roomName} 채팅방 입장'),
-              duration: const Duration(seconds: 1),
-            ),
-          );
+          // 채팅방으로 네비게이션 (push 방식으로 이전 상태 유지)
+          context.push('/chat/${chatRoom.roomId}?roomName=${Uri.encodeQueryComponent(chatRoom.roomName)}');
         },
       ),
     );
