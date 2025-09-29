@@ -24,73 +24,90 @@ class ChatListPage extends ConsumerWidget {
         ],
       ),
       body: chatRoomsAsync.when(
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
+        loading: () => buildLoadingState(),
         error: (error, stackTrace) {
-          print(error);
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  '데이터를 불러오는 중 오류가 발생했습니다',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  error.toString(),
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () => ref.refresh(chatListControllerProvider),
-                  child: const Text('다시 시도'),
-                ),
-              ],
-            ),
-          );
+          return buildErrorState(context, error, ref);
         },
-        data: (chatRooms) => chatRooms.isEmpty
-            ? const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.chat_bubble_outline,
-                      size: 64,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      '생성된 채팅방이 없습니다',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : RefreshIndicator(
-                onRefresh: () async {
-                  await ref.read(chatListControllerProvider.notifier).refresh();
-                },
-                child: ListView.builder(
-                  itemCount: chatRooms.length,
-                  itemBuilder: (context, index) {
-                    final chatRoom = chatRooms[index];
-                    return ChatRoomTile(chatRoom: chatRoom);
-                  },
-                ),
-              ),
+        data: (chatRooms) => buildDataState(chatRooms, ref),
+      ),
+    );
+  }
+
+  Widget buildEmptyState() {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.chat_bubble_outline,
+            size: 64,
+            color: Colors.grey,
+          ),
+          SizedBox(height: 16),
+          Text(
+            '생성된 채팅방이 없습니다',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildErrorState(BuildContext context, Object error, WidgetRef ref) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 64,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            '데이터를 불러오는 중 오류가 발생했습니다',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            error.toString(),
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () => ref.refresh(chatListControllerProvider),
+            child: const Text('다시 시도'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLoadingState() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget buildDataState(List<ChatRoom> chatRooms, WidgetRef ref) {
+    if (chatRooms.isEmpty) {
+      return buildEmptyState();
+    }
+
+    return RefreshIndicator(
+      onRefresh: () async {
+        await ref.read(chatListControllerProvider.notifier).refresh();
+      },
+      child: ListView.builder(
+        itemCount: chatRooms.length,
+        itemBuilder: (context, index) {
+          final chatRoom = chatRooms[index];
+          return ChatRoomTile(chatRoom: chatRoom);
+        },
       ),
     );
   }
