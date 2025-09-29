@@ -5,6 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_message.dart'
+    as _i5;
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room.dart'
     as _i4;
 import 'package:mobile1_flutter_coding_test/features/chat/domain/repositories/chat_repository.dart'
@@ -40,4 +42,14 @@ class MockChatRepository extends _i1.Mock implements _i2.ChatRepository {
             returnValue: _i3.Future<List<_i4.ChatRoom>>.value(<_i4.ChatRoom>[]),
           )
           as _i3.Future<List<_i4.ChatRoom>>);
+
+  @override
+  _i3.Future<List<_i5.ChatMessage>> getMessagesForRoom(String? roomId) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMessagesForRoom, [roomId]),
+            returnValue: _i3.Future<List<_i5.ChatMessage>>.value(
+              <_i5.ChatMessage>[],
+            ),
+          )
+          as _i3.Future<List<_i5.ChatMessage>>);
 }

@@ -3,12 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_messages_response.dart'
+    as _i3;
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room_list_response.dart'
     as _i2;
 import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_api_service.dart'
-    as _i3;
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -31,24 +33,43 @@ class _FakeChatRoomListResponse_0 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeChatMessagesResponse_1 extends _i1.SmartFake
+    implements _i3.ChatMessagesResponse {
+  _FakeChatMessagesResponse_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ChatApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatApiService extends _i1.Mock implements _i3.ChatApiService {
+class MockChatApiService extends _i1.Mock implements _i4.ChatApiService {
   MockChatApiService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.ChatRoomListResponse> getChatRooms() =>
+  _i5.Future<_i2.ChatRoomListResponse> getChatRooms() =>
       (super.noSuchMethod(
             Invocation.method(#getChatRooms, []),
-            returnValue: _i4.Future<_i2.ChatRoomListResponse>.value(
+            returnValue: _i5.Future<_i2.ChatRoomListResponse>.value(
               _FakeChatRoomListResponse_0(
                 this,
                 Invocation.method(#getChatRooms, []),
               ),
             ),
           )
-          as _i4.Future<_i2.ChatRoomListResponse>);
+          as _i5.Future<_i2.ChatRoomListResponse>);
+
+  @override
+  _i5.Future<_i3.ChatMessagesResponse> getMessages() =>
+      (super.noSuchMethod(
+            Invocation.method(#getMessages, []),
+            returnValue: _i5.Future<_i3.ChatMessagesResponse>.value(
+              _FakeChatMessagesResponse_1(
+                this,
+                Invocation.method(#getMessages, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.ChatMessagesResponse>);
 }
