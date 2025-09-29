@@ -9,8 +9,9 @@ part 'user_repository.g.dart';
 
 @Riverpod(keepAlive: true)
 UserRepository userRepository(Ref ref) {
-  final apiService = UserApiService(ref.read(dioClientProvider));
-  return UserRepositoryImpl(apiService);
+  final dio = ref.read(dioClientProvider);
+  final apiService = UserApiService(dio);
+  return UserRepositoryImpl(apiService, dio);
 }
 abstract class UserRepository {
   Future<List<User>> getUsers();
