@@ -8,12 +8,24 @@ part 'app_dio_client.g.dart';
 Dio dioClient(Ref ref) {
   final dio = Dio();
 
-  dio.options.baseUrl = dotenv.env['API_BASE_URL']!;
+  // 환경변수에서 API_BASE_URL 가져오기 (fallback URL 포함)
+  final baseUrl = dotenv.env['API_BASE_URL'] ??
+      'https://raw.githubusercontent.com/rsupportrnd/mobile1-flutter-coding-test/refs/heads/main/api';
+
+  dio.options.baseUrl = baseUrl;
   dio.options.connectTimeout = const Duration(seconds: 15);
   dio.options.receiveTimeout = const Duration(seconds: 15);
 
-  // 인터셉터 추가
-  dio.interceptors.add(LogInterceptor());
+  // 환경변수에 따른 로깅 설정
+  final debugMode = dotenv.env['DEBUG_MODE'] == 'true';
+  if (debugMode) {
+    dio.interceptors.add(LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+      requestHeader: true,
+      responseHeader: true,
+    ));
+  }
 
   return dio;
 }
