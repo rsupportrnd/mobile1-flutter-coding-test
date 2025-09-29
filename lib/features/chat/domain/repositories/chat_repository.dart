@@ -4,6 +4,7 @@ import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_api_
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/models/chat_room.dart';
+import '../../data/models/chat_message.dart';
 
 part 'chat_repository.g.dart';
 
@@ -16,4 +17,5 @@ ChatRepository chatRepository(Ref ref) {
 
 abstract class ChatRepository {
   Future<List<ChatRoom>> getChatRooms();
+  Future<List<ChatMessage>> getMessagesForRoom(String roomId);
 }
