@@ -3,15 +3,22 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i8;
 
+import 'package:drift/drift.dart' as _i5;
+import 'package:drift/src/runtime/executor/stream_queries.dart' as _i6;
+import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_message.dart'
+    as _i7;
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_messages_response.dart'
     as _i3;
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room_list_response.dart'
     as _i2;
 import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_api_service.dart'
+    as _i9;
+import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_local_service.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -39,37 +46,890 @@ class _FakeChatMessagesResponse_1 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _Fake$ChatMessagesTable_2 extends _i1.SmartFake
+    implements _i4.$ChatMessagesTable {
+  _Fake$ChatMessagesTable_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _Fake$ChatLocalServiceManager_3 extends _i1.SmartFake
+    implements _i4.$ChatLocalServiceManager {
+  _Fake$ChatLocalServiceManager_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeGeneratedDatabase_4 extends _i1.SmartFake
+    implements _i5.GeneratedDatabase {
+  _FakeGeneratedDatabase_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeDriftDatabaseOptions_5 extends _i1.SmartFake
+    implements _i5.DriftDatabaseOptions {
+  _FakeDriftDatabaseOptions_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeMigrationStrategy_6 extends _i1.SmartFake
+    implements _i5.MigrationStrategy {
+  _FakeMigrationStrategy_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeStreamQueryUpdateRules_7 extends _i1.SmartFake
+    implements _i5.StreamQueryUpdateRules {
+  _FakeStreamQueryUpdateRules_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeDatabaseConnection_8 extends _i1.SmartFake
+    implements _i5.DatabaseConnection {
+  _FakeDatabaseConnection_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeQueryExecutor_9 extends _i1.SmartFake implements _i5.QueryExecutor {
+  _FakeQueryExecutor_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeStreamQueryStore_10 extends _i1.SmartFake
+    implements _i6.StreamQueryStore {
+  _FakeStreamQueryStore_10(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeDatabaseConnectionUser_11 extends _i1.SmartFake
+    implements _i5.DatabaseConnectionUser {
+  _FakeDatabaseConnectionUser_11(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeChatMessage_12 extends _i1.SmartFake implements _i7.ChatMessage {
+  _FakeChatMessage_12(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeMigrator_13 extends _i1.SmartFake implements _i5.Migrator {
+  _FakeMigrator_13(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeFuture_14<T1> extends _i1.SmartFake implements _i8.Future<T1> {
+  _FakeFuture_14(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeInsertStatement_15<T1 extends _i5.Table, D1> extends _i1.SmartFake
+    implements _i5.InsertStatement<T1, D1> {
+  _FakeInsertStatement_15(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeUpdateStatement_16<T extends _i5.Table, D> extends _i1.SmartFake
+    implements _i5.UpdateStatement<T, D> {
+  _FakeUpdateStatement_16(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeSimpleSelectStatement_17<T1 extends _i5.HasResultSet, D>
+    extends _i1.SmartFake
+    implements _i5.SimpleSelectStatement<T1, D> {
+  _FakeSimpleSelectStatement_17(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeJoinedSelectStatement_18<FirstT extends _i5.HasResultSet, FirstD>
+    extends _i1.SmartFake
+    implements _i5.JoinedSelectStatement<FirstT, FirstD> {
+  _FakeJoinedSelectStatement_18(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeBaseSelectStatement_19<Row> extends _i1.SmartFake
+    implements _i5.BaseSelectStatement<Row> {
+  _FakeBaseSelectStatement_19(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeDeleteStatement_20<T1 extends _i5.Table, D1> extends _i1.SmartFake
+    implements _i5.DeleteStatement<T1, D1> {
+  _FakeDeleteStatement_20(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeSelectable_21<T> extends _i1.SmartFake implements _i5.Selectable<T> {
+  _FakeSelectable_21(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeGenerationContext_22 extends _i1.SmartFake
+    implements _i5.GenerationContext {
+  _FakeGenerationContext_22(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ChatApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatApiService extends _i1.Mock implements _i4.ChatApiService {
+class MockChatApiService extends _i1.Mock implements _i9.ChatApiService {
   MockChatApiService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.ChatRoomListResponse> getChatRooms() =>
+  _i8.Future<_i2.ChatRoomListResponse> getChatRooms() =>
       (super.noSuchMethod(
             Invocation.method(#getChatRooms, []),
-            returnValue: _i5.Future<_i2.ChatRoomListResponse>.value(
+            returnValue: _i8.Future<_i2.ChatRoomListResponse>.value(
               _FakeChatRoomListResponse_0(
                 this,
                 Invocation.method(#getChatRooms, []),
               ),
             ),
           )
-          as _i5.Future<_i2.ChatRoomListResponse>);
+          as _i8.Future<_i2.ChatRoomListResponse>);
 
   @override
-  _i5.Future<_i3.ChatMessagesResponse> getMessages() =>
+  _i8.Future<_i3.ChatMessagesResponse> getMessages() =>
       (super.noSuchMethod(
             Invocation.method(#getMessages, []),
-            returnValue: _i5.Future<_i3.ChatMessagesResponse>.value(
+            returnValue: _i8.Future<_i3.ChatMessagesResponse>.value(
               _FakeChatMessagesResponse_1(
                 this,
                 Invocation.method(#getMessages, []),
               ),
             ),
           )
-          as _i5.Future<_i3.ChatMessagesResponse>);
+          as _i8.Future<_i3.ChatMessagesResponse>);
+}
+
+/// A class which mocks [ChatLocalService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockChatLocalService extends _i1.Mock implements _i4.ChatLocalService {
+  MockChatLocalService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  int get schemaVersion =>
+      (super.noSuchMethod(Invocation.getter(#schemaVersion), returnValue: 0)
+          as int);
+
+  @override
+  _i4.$ChatMessagesTable get chatMessages =>
+      (super.noSuchMethod(
+            Invocation.getter(#chatMessages),
+            returnValue: _Fake$ChatMessagesTable_2(
+              this,
+              Invocation.getter(#chatMessages),
+            ),
+          )
+          as _i4.$ChatMessagesTable);
+
+  @override
+  _i4.$ChatLocalServiceManager get managers =>
+      (super.noSuchMethod(
+            Invocation.getter(#managers),
+            returnValue: _Fake$ChatLocalServiceManager_3(
+              this,
+              Invocation.getter(#managers),
+            ),
+          )
+          as _i4.$ChatLocalServiceManager);
+
+  @override
+  Iterable<_i5.TableInfo<_i5.Table, Object?>> get allTables =>
+      (super.noSuchMethod(
+            Invocation.getter(#allTables),
+            returnValue: <_i5.TableInfo<_i5.Table, Object?>>[],
+          )
+          as Iterable<_i5.TableInfo<_i5.Table, Object?>>);
+
+  @override
+  List<_i5.DatabaseSchemaEntity> get allSchemaEntities =>
+      (super.noSuchMethod(
+            Invocation.getter(#allSchemaEntities),
+            returnValue: <_i5.DatabaseSchemaEntity>[],
+          )
+          as List<_i5.DatabaseSchemaEntity>);
+
+  @override
+  _i5.GeneratedDatabase get attachedDatabase =>
+      (super.noSuchMethod(
+            Invocation.getter(#attachedDatabase),
+            returnValue: _FakeGeneratedDatabase_4(
+              this,
+              Invocation.getter(#attachedDatabase),
+            ),
+          )
+          as _i5.GeneratedDatabase);
+
+  @override
+  _i5.DriftDatabaseOptions get options =>
+      (super.noSuchMethod(
+            Invocation.getter(#options),
+            returnValue: _FakeDriftDatabaseOptions_5(
+              this,
+              Invocation.getter(#options),
+            ),
+          )
+          as _i5.DriftDatabaseOptions);
+
+  @override
+  _i5.MigrationStrategy get migration =>
+      (super.noSuchMethod(
+            Invocation.getter(#migration),
+            returnValue: _FakeMigrationStrategy_6(
+              this,
+              Invocation.getter(#migration),
+            ),
+          )
+          as _i5.MigrationStrategy);
+
+  @override
+  _i5.StreamQueryUpdateRules get streamUpdateRules =>
+      (super.noSuchMethod(
+            Invocation.getter(#streamUpdateRules),
+            returnValue: _FakeStreamQueryUpdateRules_7(
+              this,
+              Invocation.getter(#streamUpdateRules),
+            ),
+          )
+          as _i5.StreamQueryUpdateRules);
+
+  @override
+  _i5.DatabaseConnection get connection =>
+      (super.noSuchMethod(
+            Invocation.getter(#connection),
+            returnValue: _FakeDatabaseConnection_8(
+              this,
+              Invocation.getter(#connection),
+            ),
+          )
+          as _i5.DatabaseConnection);
+
+  @override
+  _i5.SqlTypes get typeMapping =>
+      (super.noSuchMethod(
+            Invocation.getter(#typeMapping),
+            returnValue: _i10.dummyValue<_i5.SqlTypes>(
+              this,
+              Invocation.getter(#typeMapping),
+            ),
+          )
+          as _i5.SqlTypes);
+
+  @override
+  _i5.QueryExecutor get executor =>
+      (super.noSuchMethod(
+            Invocation.getter(#executor),
+            returnValue: _FakeQueryExecutor_9(
+              this,
+              Invocation.getter(#executor),
+            ),
+          )
+          as _i5.QueryExecutor);
+
+  @override
+  _i6.StreamQueryStore get streamQueries =>
+      (super.noSuchMethod(
+            Invocation.getter(#streamQueries),
+            returnValue: _FakeStreamQueryStore_10(
+              this,
+              Invocation.getter(#streamQueries),
+            ),
+          )
+          as _i6.StreamQueryStore);
+
+  @override
+  _i5.DatabaseConnectionUser get resolvedEngine =>
+      (super.noSuchMethod(
+            Invocation.getter(#resolvedEngine),
+            returnValue: _FakeDatabaseConnectionUser_11(
+              this,
+              Invocation.getter(#resolvedEngine),
+            ),
+          )
+          as _i5.DatabaseConnectionUser);
+
+  @override
+  _i8.Future<int> insertMessage(_i7.ChatMessage? message) =>
+      (super.noSuchMethod(
+            Invocation.method(#insertMessage, [message]),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<String> generateNextMessageId() =>
+      (super.noSuchMethod(
+            Invocation.method(#generateNextMessageId, []),
+            returnValue: _i8.Future<String>.value(
+              _i10.dummyValue<String>(
+                this,
+                Invocation.method(#generateNextMessageId, []),
+              ),
+            ),
+          )
+          as _i8.Future<String>);
+
+  @override
+  _i8.Future<_i7.ChatMessage> insertUserMessage({
+    required String? roomId,
+    required String? sender,
+    required String? content,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#insertUserMessage, [], {
+              #roomId: roomId,
+              #sender: sender,
+              #content: content,
+            }),
+            returnValue: _i8.Future<_i7.ChatMessage>.value(
+              _FakeChatMessage_12(
+                this,
+                Invocation.method(#insertUserMessage, [], {
+                  #roomId: roomId,
+                  #sender: sender,
+                  #content: content,
+                }),
+              ),
+            ),
+          )
+          as _i8.Future<_i7.ChatMessage>);
+
+  @override
+  _i8.Future<void> insertMessages(List<_i7.ChatMessage>? messages) =>
+      (super.noSuchMethod(
+            Invocation.method(#insertMessages, [messages]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<List<_i4.ChatMessageData>> getMessagesForRoom(String? roomId) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMessagesForRoom, [roomId]),
+            returnValue: _i8.Future<List<_i4.ChatMessageData>>.value(
+              <_i4.ChatMessageData>[],
+            ),
+          )
+          as _i8.Future<List<_i4.ChatMessageData>>);
+
+  @override
+  _i8.Stream<List<_i4.ChatMessageData>> watchMessagesForRoom(String? roomId) =>
+      (super.noSuchMethod(
+            Invocation.method(#watchMessagesForRoom, [roomId]),
+            returnValue: _i8.Stream<List<_i4.ChatMessageData>>.empty(),
+          )
+          as _i8.Stream<List<_i4.ChatMessageData>>);
+
+  @override
+  _i8.Future<List<_i4.ChatMessageData>> searchMessages(String? query) =>
+      (super.noSuchMethod(
+            Invocation.method(#searchMessages, [query]),
+            returnValue: _i8.Future<List<_i4.ChatMessageData>>.value(
+              <_i4.ChatMessageData>[],
+            ),
+          )
+          as _i8.Future<List<_i4.ChatMessageData>>);
+
+  @override
+  _i8.Future<int> getMessageCountForRoom(String? roomId) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMessageCountForRoom, [roomId]),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<int> deleteOldMessages(int? daysToKeep) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteOldMessages, [daysToKeep]),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<int> deleteMessagesForRoom(String? roomId) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteMessagesForRoom, [roomId]),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<int> deleteAllMessages() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteAllMessages, []),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i7.ChatMessage convertToModel(_i4.ChatMessageData? data) =>
+      (super.noSuchMethod(
+            Invocation.method(#convertToModel, [data]),
+            returnValue: _FakeChatMessage_12(
+              this,
+              Invocation.method(#convertToModel, [data]),
+            ),
+          )
+          as _i7.ChatMessage);
+
+  @override
+  List<_i7.ChatMessage> convertToModelList(
+    List<_i4.ChatMessageData>? dataList,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#convertToModelList, [dataList]),
+            returnValue: <_i7.ChatMessage>[],
+          )
+          as List<_i7.ChatMessage>);
+
+  @override
+  _i5.Migrator createMigrator() =>
+      (super.noSuchMethod(
+            Invocation.method(#createMigrator, []),
+            returnValue: _FakeMigrator_13(
+              this,
+              Invocation.method(#createMigrator, []),
+            ),
+          )
+          as _i5.Migrator);
+
+  @override
+  _i8.Future<void> beforeOpen(
+    _i5.QueryExecutor? executor,
+    _i5.OpeningDetails? details,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#beforeOpen, [executor, details]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Stream<T> createStream<T extends Object>(
+    _i6.QueryStreamFetcher<T>? stmt,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#createStream, [stmt]),
+            returnValue: _i8.Stream<T>.empty(),
+          )
+          as _i8.Stream<T>);
+
+  @override
+  T alias<T, D>(_i5.ResultSetImplementation<T, D>? table, String? alias) =>
+      (super.noSuchMethod(
+            Invocation.method(#alias, [table, alias]),
+            returnValue: _i10.dummyValue<T>(
+              this,
+              Invocation.method(#alias, [table, alias]),
+            ),
+          )
+          as T);
+
+  @override
+  void markTablesUpdated(Iterable<_i5.TableInfo<_i5.Table, dynamic>>? tables) =>
+      super.noSuchMethod(
+        Invocation.method(#markTablesUpdated, [tables]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyUpdates(Set<_i5.TableUpdate>? updates) => super.noSuchMethod(
+    Invocation.method(#notifyUpdates, [updates]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i8.Stream<Set<_i5.TableUpdate>> tableUpdates([
+    _i5.TableUpdateQuery? query = const _i5.TableUpdateQuery.any(),
+  ]) =>
+      (super.noSuchMethod(
+            Invocation.method(#tableUpdates, [query]),
+            returnValue: _i8.Stream<Set<_i5.TableUpdate>>.empty(),
+          )
+          as _i8.Stream<Set<_i5.TableUpdate>>);
+
+  @override
+  _i8.Future<T> doWhenOpened<T>(
+    _i8.FutureOr<T> Function(_i5.QueryExecutor)? fn,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#doWhenOpened, [fn]),
+            returnValue:
+                _i10.ifNotNull(
+                  _i10.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(#doWhenOpened, [fn]),
+                  ),
+                  (T v) => _i8.Future<T>.value(v),
+                ) ??
+                _FakeFuture_14<T>(this, Invocation.method(#doWhenOpened, [fn])),
+          )
+          as _i8.Future<T>);
+
+  @override
+  _i5.InsertStatement<T, D> into<T extends _i5.Table, D>(
+    _i5.TableInfo<T, D>? table,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#into, [table]),
+            returnValue: _FakeInsertStatement_15<T, D>(
+              this,
+              Invocation.method(#into, [table]),
+            ),
+          )
+          as _i5.InsertStatement<T, D>);
+
+  @override
+  _i5.UpdateStatement<Tbl, R> update<Tbl extends _i5.Table, R>(
+    _i5.TableInfo<Tbl, R>? table,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#update, [table]),
+            returnValue: _FakeUpdateStatement_16<Tbl, R>(
+              this,
+              Invocation.method(#update, [table]),
+            ),
+          )
+          as _i5.UpdateStatement<Tbl, R>);
+
+  @override
+  _i5.SimpleSelectStatement<T, R> select<T extends _i5.HasResultSet, R>(
+    _i5.ResultSetImplementation<T, R>? table, {
+    bool? distinct = false,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#select, [table], {#distinct: distinct}),
+            returnValue: _FakeSimpleSelectStatement_17<T, R>(
+              this,
+              Invocation.method(#select, [table], {#distinct: distinct}),
+            ),
+          )
+          as _i5.SimpleSelectStatement<T, R>);
+
+  @override
+  _i5.JoinedSelectStatement<T, R> selectOnly<T extends _i5.HasResultSet, R>(
+    _i5.ResultSetImplementation<T, R>? table, {
+    bool? distinct = false,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#selectOnly, [table], {#distinct: distinct}),
+            returnValue: _FakeJoinedSelectStatement_18<T, R>(
+              this,
+              Invocation.method(#selectOnly, [table], {#distinct: distinct}),
+            ),
+          )
+          as _i5.JoinedSelectStatement<T, R>);
+
+  @override
+  _i5.BaseSelectStatement<_i5.TypedResult> selectExpressions(
+    Iterable<_i5.Expression<Object>>? columns,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#selectExpressions, [columns]),
+            returnValue: _FakeBaseSelectStatement_19<_i5.TypedResult>(
+              this,
+              Invocation.method(#selectExpressions, [columns]),
+            ),
+          )
+          as _i5.BaseSelectStatement<_i5.TypedResult>);
+
+  @override
+  _i5.DeleteStatement<T, D> delete<T extends _i5.Table, D>(
+    _i5.TableInfo<T, D>? table,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [table]),
+            returnValue: _FakeDeleteStatement_20<T, D>(
+              this,
+              Invocation.method(#delete, [table]),
+            ),
+          )
+          as _i5.DeleteStatement<T, D>);
+
+  @override
+  _i8.Future<int> customUpdate(
+    String? query, {
+    List<_i5.Variable<Object>>? variables = const [],
+    Set<_i5.ResultSetImplementation<dynamic, dynamic>>? updates,
+    _i5.UpdateKind? updateKind,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #customUpdate,
+              [query],
+              {
+                #variables: variables,
+                #updates: updates,
+                #updateKind: updateKind,
+              },
+            ),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<int> customInsert(
+    String? query, {
+    List<_i5.Variable<Object>>? variables = const [],
+    Set<_i5.ResultSetImplementation<dynamic, dynamic>>? updates,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #customInsert,
+              [query],
+              {#variables: variables, #updates: updates},
+            ),
+            returnValue: _i8.Future<int>.value(0),
+          )
+          as _i8.Future<int>);
+
+  @override
+  _i8.Future<List<_i5.QueryRow>> customWriteReturning(
+    String? query, {
+    List<_i5.Variable<Object>>? variables = const [],
+    Set<_i5.ResultSetImplementation<dynamic, dynamic>>? updates,
+    _i5.UpdateKind? updateKind,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #customWriteReturning,
+              [query],
+              {
+                #variables: variables,
+                #updates: updates,
+                #updateKind: updateKind,
+              },
+            ),
+            returnValue: _i8.Future<List<_i5.QueryRow>>.value(<_i5.QueryRow>[]),
+          )
+          as _i8.Future<List<_i5.QueryRow>>);
+
+  @override
+  _i5.Selectable<_i5.QueryRow> customSelect(
+    String? query, {
+    List<_i5.Variable<Object>>? variables = const [],
+    Set<_i5.ResultSetImplementation<dynamic, dynamic>>? readsFrom = const {},
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #customSelect,
+              [query],
+              {#variables: variables, #readsFrom: readsFrom},
+            ),
+            returnValue: _FakeSelectable_21<_i5.QueryRow>(
+              this,
+              Invocation.method(
+                #customSelect,
+                [query],
+                {#variables: variables, #readsFrom: readsFrom},
+              ),
+            ),
+          )
+          as _i5.Selectable<_i5.QueryRow>);
+
+  @override
+  _i5.Selectable<_i5.QueryRow> customSelectQuery(
+    String? query, {
+    List<_i5.Variable<Object>>? variables = const [],
+    Set<_i5.ResultSetImplementation<dynamic, dynamic>>? readsFrom = const {},
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #customSelectQuery,
+              [query],
+              {#variables: variables, #readsFrom: readsFrom},
+            ),
+            returnValue: _FakeSelectable_21<_i5.QueryRow>(
+              this,
+              Invocation.method(
+                #customSelectQuery,
+                [query],
+                {#variables: variables, #readsFrom: readsFrom},
+              ),
+            ),
+          )
+          as _i5.Selectable<_i5.QueryRow>);
+
+  @override
+  _i8.Future<void> customStatement(String? statement, [List<dynamic>? args]) =>
+      (super.noSuchMethod(
+            Invocation.method(#customStatement, [statement, args]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<T> transaction<T>(
+    _i8.Future<T> Function()? action, {
+    bool? requireNew = false,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #transaction,
+              [action],
+              {#requireNew: requireNew},
+            ),
+            returnValue:
+                _i10.ifNotNull(
+                  _i10.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(
+                      #transaction,
+                      [action],
+                      {#requireNew: requireNew},
+                    ),
+                  ),
+                  (T v) => _i8.Future<T>.value(v),
+                ) ??
+                _FakeFuture_14<T>(
+                  this,
+                  Invocation.method(
+                    #transaction,
+                    [action],
+                    {#requireNew: requireNew},
+                  ),
+                ),
+          )
+          as _i8.Future<T>);
+
+  @override
+  _i8.Future<T> exclusively<T>(_i8.Future<T> Function()? action) =>
+      (super.noSuchMethod(
+            Invocation.method(#exclusively, [action]),
+            returnValue:
+                _i10.ifNotNull(
+                  _i10.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(#exclusively, [action]),
+                  ),
+                  (T v) => _i8.Future<T>.value(v),
+                ) ??
+                _FakeFuture_14<T>(
+                  this,
+                  Invocation.method(#exclusively, [action]),
+                ),
+          )
+          as _i8.Future<T>);
+
+  @override
+  _i8.Future<void> batch(_i8.FutureOr<void> Function(_i5.Batch)? runInBatch) =>
+      (super.noSuchMethod(
+            Invocation.method(#batch, [runInBatch]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<T> runWithInterceptor<T>(
+    _i8.Future<T> Function()? action, {
+    required _i5.QueryInterceptor? interceptor,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #runWithInterceptor,
+              [action],
+              {#interceptor: interceptor},
+            ),
+            returnValue:
+                _i10.ifNotNull(
+                  _i10.dummyValueOrNull<T>(
+                    this,
+                    Invocation.method(
+                      #runWithInterceptor,
+                      [action],
+                      {#interceptor: interceptor},
+                    ),
+                  ),
+                  (T v) => _i8.Future<T>.value(v),
+                ) ??
+                _FakeFuture_14<T>(
+                  this,
+                  Invocation.method(
+                    #runWithInterceptor,
+                    [action],
+                    {#interceptor: interceptor},
+                  ),
+                ),
+          )
+          as _i8.Future<T>);
+
+  @override
+  _i5.GenerationContext $write(
+    _i5.Component? component, {
+    bool? hasMultipleTables,
+    int? startIndex,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #$write,
+              [component],
+              {#hasMultipleTables: hasMultipleTables, #startIndex: startIndex},
+            ),
+            returnValue: _FakeGenerationContext_22(
+              this,
+              Invocation.method(
+                #$write,
+                [component],
+                {
+                  #hasMultipleTables: hasMultipleTables,
+                  #startIndex: startIndex,
+                },
+              ),
+            ),
+          )
+          as _i5.GenerationContext);
+
+  @override
+  _i5.GenerationContext $writeInsertable(
+    _i5.TableInfo<_i5.Table, dynamic>? table,
+    _i5.Insertable<dynamic>? insertable, {
+    int? startIndex,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(
+              #$writeInsertable,
+              [table, insertable],
+              {#startIndex: startIndex},
+            ),
+            returnValue: _FakeGenerationContext_22(
+              this,
+              Invocation.method(
+                #$writeInsertable,
+                [table, insertable],
+                {#startIndex: startIndex},
+              ),
+            ),
+          )
+          as _i5.GenerationContext);
+
+  @override
+  String $expandVar(int? start, int? amount) =>
+      (super.noSuchMethod(
+            Invocation.method(#$expandVar, [start, amount]),
+            returnValue: _i10.dummyValue<String>(
+              this,
+              Invocation.method(#$expandVar, [start, amount]),
+            ),
+          )
+          as String);
 }

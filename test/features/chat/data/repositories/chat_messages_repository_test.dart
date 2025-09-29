@@ -1,27 +1,30 @@
 import 'dart:convert';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:dio/dio.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_api_service.dart';
+import 'package:mobile1_flutter_coding_test/features/chat/data/sources/chat_local_service.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_message.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_messages_response.dart';
 
 import 'chat_messages_repository_test.mocks.dart';
 
 /// 채팅 메시지 Repository 테스트
-@GenerateMocks([ChatApiService])
+@GenerateMocks([ChatApiService, ChatLocalService])
 void main() {
   group('ChatRepositoryImpl - Messages Tests', () {
     late ChatRepositoryImpl repository;
     late MockChatApiService mockApiService;
+    late MockChatLocalService mockLocalService;
     late Dio mockDio;
 
     setUp(() {
       mockApiService = MockChatApiService();
+      mockLocalService = MockChatLocalService();
       mockDio = Dio();
-      repository = ChatRepositoryImpl(mockApiService, mockDio);
+      repository = ChatRepositoryImpl(mockApiService, mockLocalService, mockDio);
     });
 
     group('getMessagesForRoom', () {
@@ -65,9 +68,16 @@ void main() {
           ),
         ];
 
+        // 로컬 DB 조회 결과 설정 (빈 결과로 설정)
+        when(mockLocalService.getMessagesForRoom('room1'))
+            .thenAnswer((_) async => []);
+        when(mockLocalService.convertToModelList([]))
+            .thenReturn([]);
         when(mockApiService.getMessages()).thenAnswer(
           (_) async => ChatMessagesResponse(messages: allMessages),
         );
+        when(mockLocalService.insertMessages(any))
+            .thenAnswer((_) async {});
 
         // When - room1의 메시지만 요청
         final result = await repository.getMessagesForRoom('room1');
@@ -115,9 +125,16 @@ void main() {
           ),
         ];
 
+        // 로컬 DB 조회 결과 설정
+        when(mockLocalService.getMessagesForRoom('room2'))
+            .thenAnswer((_) async => []);
+        when(mockLocalService.convertToModelList([]))
+            .thenReturn([]);
         when(mockApiService.getMessages()).thenAnswer(
           (_) async => ChatMessagesResponse(messages: allMessages),
         );
+        when(mockLocalService.insertMessages(any))
+            .thenAnswer((_) async {});
 
         // When - room2의 메시지만 요청
         final result = await repository.getMessagesForRoom('room2');
@@ -149,9 +166,16 @@ void main() {
           ),
         ];
 
+        // 로컬 DB 조회 결과 설정
+        when(mockLocalService.getMessagesForRoom('nonexistent_room'))
+            .thenAnswer((_) async => []);
+        when(mockLocalService.convertToModelList([]))
+            .thenReturn([]);
         when(mockApiService.getMessages()).thenAnswer(
           (_) async => ChatMessagesResponse(messages: allMessages),
         );
+        when(mockLocalService.insertMessages(any))
+            .thenAnswer((_) async {});
 
         // When - 존재하지 않는 방의 메시지 요청
         final result = await repository.getMessagesForRoom('nonexistent_room');
@@ -163,6 +187,10 @@ void main() {
 
       test('exception, throw exception', () async {
         // Given
+        when(mockLocalService.getMessagesForRoom('room1'))
+            .thenAnswer((_) async => []);
+        when(mockLocalService.convertToModelList([]))
+            .thenReturn([]);
         when(mockApiService.getMessages()).thenThrow(Exception('Network error'));
 
         // When & Then
@@ -175,9 +203,15 @@ void main() {
 
       test('empty messages list, return empty list', () async {
         // Given
+        when(mockLocalService.getMessagesForRoom('room1'))
+            .thenAnswer((_) async => []);
+        when(mockLocalService.convertToModelList([]))
+            .thenReturn([]);
         when(mockApiService.getMessages()).thenAnswer(
           (_) async => const ChatMessagesResponse(messages: []),
         );
+        when(mockLocalService.insertMessages(any))
+            .thenAnswer((_) async {});
 
         // When
         final result = await repository.getMessagesForRoom('room1');
