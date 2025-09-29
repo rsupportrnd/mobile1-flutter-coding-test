@@ -18,10 +18,12 @@ void main() {
   group('UserRepositoryImpl Tests', () {
     late UserRepositoryImpl repository;
     late MockUserApiService mockApiService;
+    late Dio mockDio;
 
     setUp(() {
       mockApiService = MockUserApiService();
-      repository = UserRepositoryImpl(mockApiService);
+      mockDio = Dio();
+      repository = UserRepositoryImpl(mockApiService, mockDio);
     });
 
     group('getUsers', () {
