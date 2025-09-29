@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/presentation/controllers/chat_messages_provider.dart';
+import 'package:mobile1_flutter_coding_test/features/chat/domain/repositories/chat_repository.dart';
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_message.dart';
+import 'package:mobile1_flutter_coding_test/features/user/presentation/controllers/user_list_provider.dart';
+import 'package:mobile1_flutter_coding_test/features/user/data/models/user_model.dart';
+import 'package:mobile1_flutter_coding_test/features/user/presentation/widgets/user_detail_modal.dart';
 import 'package:intl/intl.dart';
 
 class ChatRoomPage extends ConsumerStatefulWidget {
@@ -45,21 +49,64 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
     });
   }
 
-  void _sendMessage() {
+  Future<void> _sendMessage() async {
     final messageText = _messageController.text.trim();
     if (messageText.isEmpty) return;
 
-    // TODO: 실제로 메시지 전송 로직 구현 필요
-    print('Send message: $messageText to room: ${widget.roomId}');
+    try {
+      // 메시지 전송
+      await ref.read(chatRepositoryProvider).sendMessage(
+        roomId: widget.roomId,
+        sender: _currentUserId,
+        content: messageText,
+      );
 
-    _messageController.clear();
-    // 메시지 전송 후 스크롤을 하단으로 이동
-    _scrollToBottom();
+      _messageController.clear();
+
+      // 메시지 전송 후 채팅 목록 새로고침
+      ref.invalidate(chatMessagesControllerProvider(widget.roomId));
+
+      // 메시지 전송 후 스크롤을 하단으로 이동
+      _scrollToBottom();
+    } catch (e) {
+      // 에러 처리
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('메시지 전송에 실패했습니다: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  // userId로 사용자 정보 조회하는 헬퍼 메서드
+  User? _getUserById(String userId, List<User>? users) {
+    if (users == null) return null;
+    try {
+      return users.firstWhere((user) => user.userId == userId);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // userId로 사용자 이름 조회
+  String _getUserNameById(String userId, List<User>? users) {
+    final user = _getUserById(userId, users);
+    return user?.name ?? userId; // 사용자 정보가 없으면 userId 반환
+  }
+
+  // userId로 프로필 이미지 조회
+  String? _getProfilePictureById(String userId, List<User>? users) {
+    final user = _getUserById(userId, users);
+    return user?.profilePicture;
   }
 
   @override
   Widget build(BuildContext context) {
     final messagesAsync = ref.watch(chatMessagesControllerProvider(widget.roomId));
+    final usersAsync = ref.watch(userListControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -136,19 +183,65 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
                   _scrollToBottom();
                 });
 
-                return ListView.builder(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(16),
-                  itemCount: sortedMessages.length,
-                  itemBuilder: (context, index) {
-                    final message = sortedMessages[index];
-                    final isMyMessage = message.sender == _currentUserId;
+                return usersAsync.when(
+                  loading: () => ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(16),
+                    itemCount: sortedMessages.length,
+                    itemBuilder: (context, index) {
+                      final message = sortedMessages[index];
+                      final isMyMessage = message.sender == _currentUserId;
 
-                    return MessageBubble(
-                      message: message,
-                      isMyMessage: isMyMessage,
-                    );
-                  },
+                      return MessageBubble(
+                        message: message,
+                        isMyMessage: isMyMessage,
+                        senderName: message.sender, // 로딩 중에는 userId 표시
+                        profilePicture: null,
+                        onProfileTap: null, // 로딩 중에는 클릭 비활성화
+                      );
+                    },
+                  ),
+                  error: (error, stackTrace) => ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(16),
+                    itemCount: sortedMessages.length,
+                    itemBuilder: (context, index) {
+                      final message = sortedMessages[index];
+                      final isMyMessage = message.sender == _currentUserId;
+
+                      return MessageBubble(
+                        message: message,
+                        isMyMessage: isMyMessage,
+                        senderName: message.sender, // 에러 시에도 userId 표시
+                        profilePicture: null,
+                        onProfileTap: null, // 에러 시에는 클릭 비활성화
+                      );
+                    },
+                  ),
+                  data: (users) => ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(16),
+                    itemCount: sortedMessages.length,
+                    itemBuilder: (context, index) {
+                      final message = sortedMessages[index];
+                      final isMyMessage = message.sender == _currentUserId;
+                      final senderName = _getUserNameById(message.sender, users);
+                      final profilePicture = _getProfilePictureById(message.sender, users);
+
+                      return MessageBubble(
+                        message: message,
+                        isMyMessage: isMyMessage,
+                        senderName: senderName,
+                        profilePicture: profilePicture,
+                        onProfileTap: () {
+                          final user = _getUserById(message.sender, users);
+                          if (user != null) {
+                            UserDetailModal.show(context, user);
+                          }
+                        },
+                      );
+                    },
+                  ),
                 );
               },
             ),
@@ -167,11 +260,17 @@ class _ChatRoomPageState extends ConsumerState<ChatRoomPage> {
 class MessageBubble extends StatelessWidget {
   final ChatMessage message;
   final bool isMyMessage;
+  final String senderName;
+  final String? profilePicture;
+  final VoidCallback? onProfileTap;
 
   const MessageBubble({
     super.key,
     required this.message,
     required this.isMyMessage,
+    required this.senderName,
+    this.profilePicture,
+    this.onProfileTap,
   });
 
   @override
@@ -183,15 +282,23 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isMyMessage) ...[
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.grey[300],
-              child: Text(
-                message.sender.substring(0, 1).toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+            GestureDetector(
+              onTap: onProfileTap,
+              child: CircleAvatar(
+                radius: 16,
+                backgroundColor: Colors.grey[300],
+                backgroundImage: profilePicture != null
+                  ? NetworkImage(profilePicture!)
+                  : null,
+                child: profilePicture == null
+                  ? Text(
+                      senderName.substring(0, 1).toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : null,
               ),
             ),
             const SizedBox(width: 8),
@@ -204,7 +311,7 @@ class MessageBubble extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8, bottom: 4),
                     child: Text(
-                      message.sender,
+                      senderName,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[600],
@@ -249,13 +356,21 @@ class MessageBubble extends StatelessWidget {
           ),
           if (isMyMessage) ...[
             const SizedBox(width: 8),
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              child: const Icon(
-                Icons.person,
-                size: 16,
-                color: Colors.white,
+            GestureDetector(
+              onTap: onProfileTap,
+              child: CircleAvatar(
+                radius: 16,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundImage: profilePicture != null
+                  ? NetworkImage(profilePicture!)
+                  : null,
+                child: profilePicture == null
+                  ? const Icon(
+                      Icons.person,
+                      size: 16,
+                      color: Colors.white,
+                    )
+                  : null,
               ),
             ),
           ],
