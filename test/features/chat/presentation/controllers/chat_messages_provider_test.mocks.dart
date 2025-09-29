@@ -3,14 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_message.dart'
-    as _i5;
-import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room.dart'
-    as _i4;
-import 'package:mobile1_flutter_coding_test/features/chat/domain/repositories/chat_repository.dart'
     as _i2;
+import 'package:mobile1_flutter_coding_test/features/chat/data/models/chat_room.dart'
+    as _i5;
+import 'package:mobile1_flutter_coding_test/features/chat/domain/repositories/chat_repository.dart'
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -27,29 +27,59 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeChatMessage_0 extends _i1.SmartFake implements _i2.ChatMessage {
+  _FakeChatMessage_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ChatRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChatRepository extends _i1.Mock implements _i2.ChatRepository {
+class MockChatRepository extends _i1.Mock implements _i3.ChatRepository {
   MockChatRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<List<_i4.ChatRoom>> getChatRooms() =>
+  _i4.Future<List<_i5.ChatRoom>> getChatRooms() =>
       (super.noSuchMethod(
             Invocation.method(#getChatRooms, []),
-            returnValue: _i3.Future<List<_i4.ChatRoom>>.value(<_i4.ChatRoom>[]),
+            returnValue: _i4.Future<List<_i5.ChatRoom>>.value(<_i5.ChatRoom>[]),
           )
-          as _i3.Future<List<_i4.ChatRoom>>);
+          as _i4.Future<List<_i5.ChatRoom>>);
 
   @override
-  _i3.Future<List<_i5.ChatMessage>> getMessagesForRoom(String? roomId) =>
+  _i4.Future<List<_i2.ChatMessage>> getMessagesForRoom(String? roomId) =>
       (super.noSuchMethod(
             Invocation.method(#getMessagesForRoom, [roomId]),
-            returnValue: _i3.Future<List<_i5.ChatMessage>>.value(
-              <_i5.ChatMessage>[],
+            returnValue: _i4.Future<List<_i2.ChatMessage>>.value(
+              <_i2.ChatMessage>[],
             ),
           )
-          as _i3.Future<List<_i5.ChatMessage>>);
+          as _i4.Future<List<_i2.ChatMessage>>);
+
+  @override
+  _i4.Future<_i2.ChatMessage> sendMessage({
+    required String? roomId,
+    required String? sender,
+    required String? content,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#sendMessage, [], {
+              #roomId: roomId,
+              #sender: sender,
+              #content: content,
+            }),
+            returnValue: _i4.Future<_i2.ChatMessage>.value(
+              _FakeChatMessage_0(
+                this,
+                Invocation.method(#sendMessage, [], {
+                  #roomId: roomId,
+                  #sender: sender,
+                  #content: content,
+                }),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.ChatMessage>);
 }
