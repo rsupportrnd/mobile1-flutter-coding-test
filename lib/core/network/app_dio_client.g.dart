@@ -15,15 +15,15 @@ const dioClientProvider = DioClientProvider._();
 final class DioClientProvider extends $FunctionalProvider<Dio, Dio, Dio>
     with $Provider<Dio> {
   const DioClientProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'dioClientProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dioClientProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$dioClientHash();
@@ -47,4 +47,4 @@ final class DioClientProvider extends $FunctionalProvider<Dio, Dio, Dio>
   }
 }
 
-String _$dioClientHash() => r'ccac59a3a22841e464e93adc2c95ac718f370e47';
+String _$dioClientHash() => r'24e059032a5c6e61c50fe43485c17405bcfefb5d';
