@@ -45,6 +45,6 @@ app.*.map.json
 pubspec.lock
 
 # Environment files
-.env
-.env.dev
-.env.prod
+# .env
+# .env.dev
+# .env.prod
